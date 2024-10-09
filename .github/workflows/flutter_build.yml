@@ -1,0 +1,100 @@
+name: Flutter CI/CD
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  test_and_build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.24.3'
+        channel: 'stable'
+
+    - name: Setup Java
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'zulu'
+        java-version: '17'
+        cache: 'gradle'
+        check-latest: true  
+    
+    - name: enable web
+      run: flutter config --enable-web
+
+    - name: Get dependencies
+      run: flutter pub get
+
+    - name: Run tests
+      run: flutter test
+
+#    - id: read-version
+#      uses: NiklasLehnfeld/flutter-version-number-action@v1
+#      with:
+#        file-path: pubspec.yaml
+#    - uses: nick-invision/assert-action@v1
+#      with:
+#        expected: 0.5.1+1
+#        actual: ${{ steps.read-version.outputs.version-number }}
+  
+
+    - name: Build Web App
+      run: flutter build web
+
+    - name: Build Android App
+#      run: flutter build apk --verbose
+      run: flutter build apk
+
+#    - name: Deploy to repo fr0gsite/viewer
+#      uses: tagus/git-deploy@v0.5.0
+#      with:
+#        changes: build/web
+#        repository: git@github.com:fr0gsite/viewer.git
+#        ssh_key: ${{ secrets.REPO_DEPLOY_KEY }}
+#        name: ansieger
+#        email: ansieger@mailbox.org
+#        clean_repo: true
+
+    - name: rename apk
+      run: mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/fr0gsite.apk
+    
+#    - name: Deploy to repo fr0gsite/android
+#      uses: tagus/git-deploy@v0.5.0
+#      with:
+#        changes: build/app/outputs/flutter-apk
+#        repository: git@github.com:fr0gsite/android.git
+#        ssh_key: ${{ secrets.REPO_DEPLOY_KEY_ANDROID }}
+#        name: ansieger
+#        email: ansieger@mailbox.org
+#        clean_repo: true
+
+    - name: Deploy to Webserver
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.SERVER_HOST }}
+        username: ${{ secrets.SERVER_USER }}
+        password: ${{ secrets.SERVER_PASSWORD }}
+        port: ${{ secrets.SERVER_PORT }}
+        rm: true
+        source: "build/web/*"
+        target: "/home/deploy/webserver/html"
+    - name: Start docker-compose
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.SERVER_HOST }}
+        username: ${{ secrets.SERVER_USER }}
+        password: ${{ secrets.SERVER_PASSWORD }}
+        port: ${{ secrets.SERVER_PORT }}
+        script: |
+          cd /home/deploy/webserver/html
+          mv build/web/* .
+          cd /home/deploy/webserver
+          docker-compose down
+          docker-compose up -d
