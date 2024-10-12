@@ -112,7 +112,7 @@ class AppConfig {
 
   static List<Blockchainnode> blockchainnodeurls = [
     Blockchainnode(
-        1, "Genesis Node", "testnet.cubebased.com", "8443", "https", "v1"),
+        1, "Genesis Node", "testnet.fr0g.site", "8443", "https", "v1"),
   ];
 
   static List<Reportnode> reportnodes = [
