@@ -102,21 +102,22 @@ class _GlobalDisclaimerState extends State<GlobalDisclaimer>
                       centerTitle: true,
                     ),
                     floatingActionButton: FloatingActionButton(
-                        onPressed: () {
-                          showDialog(
-                              context: context,
-                              builder: (_) => const SetLanguageView());
-                        },
-                        child: Wrap(
-                          children: [
-                            const Icon(Icons.translate, size: 25),
-                            CountryFlag.fromCountryCode(
-                              AppLocalizations.of(context)!.countrycode,
-                              width: 25,
-                              height: 25,
-                            ),
-                          ],
-                        )),
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (_) => const SetLanguageView());
+                      },
+                      child: Wrap(
+                        children: [
+                          const Icon(Icons.translate, size: 25),
+                          CountryFlag.fromCountryCode(
+                            AppLocalizations.of(context)!.countrycode,
+                            width: 25,
+                            height: 25,
+                          ),
+                        ],
+                      ),
+                    ),
                     body: Padding(
                       padding: const EdgeInsets.all(32.0),
                       child: ListView(

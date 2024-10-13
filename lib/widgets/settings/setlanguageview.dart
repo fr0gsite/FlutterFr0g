@@ -42,7 +42,9 @@ class SetLanguageView extends StatelessWidget {
                     children: [
                       //Icon flag
                       CountryFlag.fromCountryCode(
-                        L10n.all[index].countryCode ?? 'US',
+                        L10n.all[index].countryCode! == "cs"
+                            ? "cz"
+                            : L10n.all[index].countryCode!,
                       ),
                       const SizedBox(width: 20),
                       Text(
