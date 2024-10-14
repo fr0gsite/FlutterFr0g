@@ -52,15 +52,17 @@ class NetworkStatus extends ChangeNotifier {
       if (chainnode.name == currentblockchainnode.name) {
         setConnectionStatusChain(ConnectionStatus.connected);
       }
-      blockchainnodes
-          .firstWhere((element) => element.name == chainnode.name)
-          .newrequest(true, difference);
+      try {
+        blockchainnodes
+            .firstWhere((element) => element.name == chainnode.name)
+            .newrequest(true, difference);
+      } catch (e) {
+        debugPrint("Node not found in current list");
+        return difference;
+      }
       return difference;
     } catch (e) {
       debugPrint("Check connection (Chain) Error, ${chainnode.url} Error: $e");
-      blockchainnodes
-          .firstWhere((element) => element.name == chainnode.name)
-          .newrequest(false, 0);
       return -1;
     }
   }

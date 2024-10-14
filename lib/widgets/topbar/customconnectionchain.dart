@@ -250,6 +250,7 @@ class _CustomConnectionChainState extends State<CustomConnectionChain> {
                             choosenprotocoll!.name,
                             choosenapi!.name);
                         // Add Node to List
+                        networkstatus.setBlockchainNode(node);
                         Navigator.of(context).pop();
                       }
                     },
