@@ -66,7 +66,7 @@ class NetworkStatus extends ChangeNotifier {
   }
 
   Future<int> checkConnectionIPFS(IPFSNode node) async {
-    debugPrint("Check connection (IPFS): ${node.address}");
+    debugPrint("Check connection (IPFS): ${node.fullurl}");
     try {
       late http.Response response;
       DateTime start = DateTime.now();
@@ -77,9 +77,17 @@ class NetworkStatus extends ChangeNotifier {
       DateTime end = DateTime.now();
       int difference = end.difference(start).inMilliseconds;
       if (response.statusCode == 200) {
-        ipfsnodes
-            .firstWhere((element) => element.name == node.name)
-            .newrequest(true, difference);
+        if (node.name == currentipfsnode.name) {
+          setConnectionStatusIPFS(ConnectionStatus.connected);
+        }
+        try {
+          ipfsnodes
+              .firstWhere((element) => element.name == node.name)
+              .newrequest(true, difference);
+        } catch (e) {
+          debugPrint("Node not found in current list");
+          return difference;
+        }
         return difference;
       } else {
         ipfsnodes

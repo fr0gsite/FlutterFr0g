@@ -4,6 +4,8 @@ import 'package:fr0gsite/datatypes/ipfsnode.dart';
 import 'package:fr0gsite/datatypes/networkstatus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fr0gsite/widgets/topbar/customconnectionchain.dart';
+import 'package:fr0gsite/widgets/topbar/customconnectionipfs.dart';
 import 'package:provider/provider.dart';
 
 class ConnectionOverview extends StatefulWidget {
@@ -174,13 +176,20 @@ class _ConnectionOverviewState extends State<ConnectionOverview> {
                           ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 16,
                     ),
                     OverflowBar(
                       children: [
                         ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return const CustomConnectionIPFS();
+                              },
+                            );
+                          },
                           style: ButtonStyle(
                               backgroundColor:
                                   WidgetStateProperty.all<Color>(Colors.blue),
@@ -288,13 +297,20 @@ class _ConnectionOverviewState extends State<ConnectionOverview> {
                           ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 16,
                     ),
                     OverflowBar(
                       children: [
                         ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return const CustomConnectionChain();
+                              },
+                            );
+                          },
                           style: ButtonStyle(
                               backgroundColor:
                                   WidgetStateProperty.all<Color>(Colors.blue),

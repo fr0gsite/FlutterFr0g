@@ -1,1 +1,122 @@
-{}
+{
+  "ar": [
+    "connectionname",
+    "connectionport",
+    "connectionprotokoll",
+    "connectionaddress",
+    "connectionpath",
+    "connectionmethode",
+    "connectionsuccessfull",
+    "connectionfailed"
+  ],
+
+  "cs": [
+    "connectionname",
+    "connectionport",
+    "connectionprotokoll",
+    "connectionaddress",
+    "connectionpath",
+    "connectionmethode",
+    "connectionsuccessfull",
+    "connectionfailed"
+  ],
+
+  "es": [
+    "connectionname",
+    "connectionport",
+    "connectionprotokoll",
+    "connectionaddress",
+    "connectionpath",
+    "connectionmethode",
+    "connectionsuccessfull",
+    "connectionfailed"
+  ],
+
+  "fr": [
+    "connectionname",
+    "connectionport",
+    "connectionprotokoll",
+    "connectionaddress",
+    "connectionpath",
+    "connectionmethode",
+    "connectionsuccessfull",
+    "connectionfailed"
+  ],
+
+  "hi": [
+    "connectionname",
+    "connectionport",
+    "connectionprotokoll",
+    "connectionaddress",
+    "connectionpath",
+    "connectionmethode",
+    "connectionsuccessfull",
+    "connectionfailed"
+  ],
+
+  "it": [
+    "connectionname",
+    "connectionport",
+    "connectionprotokoll",
+    "connectionaddress",
+    "connectionpath",
+    "connectionmethode",
+    "connectionsuccessfull",
+    "connectionfailed"
+  ],
+
+  "ja": [
+    "connectionname",
+    "connectionport",
+    "connectionprotokoll",
+    "connectionaddress",
+    "connectionpath",
+    "connectionmethode",
+    "connectionsuccessfull",
+    "connectionfailed"
+  ],
+
+  "pt": [
+    "connectionname",
+    "connectionport",
+    "connectionprotokoll",
+    "connectionaddress",
+    "connectionpath",
+    "connectionmethode",
+    "connectionsuccessfull",
+    "connectionfailed"
+  ],
+
+  "ru": [
+    "connectionname",
+    "connectionport",
+    "connectionprotokoll",
+    "connectionaddress",
+    "connectionpath",
+    "connectionmethode",
+    "connectionsuccessfull",
+    "connectionfailed"
+  ],
+
+  "uk": [
+    "connectionname",
+    "connectionport",
+    "connectionprotokoll",
+    "connectionaddress",
+    "connectionpath",
+    "connectionmethode",
+    "connectionsuccessfull",
+    "connectionfailed"
+  ],
+
+  "zh": [
+    "connectionname",
+    "connectionport",
+    "connectionprotokoll",
+    "connectionaddress",
+    "connectionpath",
+    "connectionmethode",
+    "connectionsuccessfull",
+    "connectionfailed"
+  ]
+}

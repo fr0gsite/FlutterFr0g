@@ -340,5 +340,14 @@
     "selectrule":"Select rule",
     "automaticchooseipfsnode":"Choose automatic best IPFS Nodes",
     "automaticchooseblockchainnode":"Choose automatic best Blockchain Nodes",
-    "automatic":"Auto"
+    "automatic":"Auto",
+
+    "connectionname":"Name",
+    "connectionport":"Port",
+    "connectionprotokoll":"Protocol",
+    "connectionaddress":"Address",
+    "connectionpath":"Path",
+    "connectionmethode":"Method",
+    "connectionsuccessfull":"Connection successfull",
+    "connectionfailed":"Connection failed"
 }
