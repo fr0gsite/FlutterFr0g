@@ -174,6 +174,9 @@ class _ConnectionOverviewState extends State<ConnectionOverview> {
                           ),
                       ],
                     ),
+                    SizedBox(
+                      height: 16,
+                    ),
                     OverflowBar(
                       children: [
                         ElevatedButton(
@@ -284,6 +287,9 @@ class _ConnectionOverviewState extends State<ConnectionOverview> {
                             ),
                           ),
                       ],
+                    ),
+                    SizedBox(
+                      height: 16,
                     ),
                     OverflowBar(
                       children: [

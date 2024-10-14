@@ -32,11 +32,11 @@ class IPFSActions {
     //Choose IPFS Node
     const int timeoutinseconds = 20;
     IPFSNode choosenIPFSnode =
-        Provider.of<NetworkStatus>(context, listen: false).getcurrentIPFSNode();
+        Provider.of<NetworkStatus>(context, listen: false).chooseIPFSNode();
     int numoftries = 0;
     while (numoftries < 5) {
-      choosenIPFSnode = Provider.of<NetworkStatus>(context, listen: false)
-          .getcurrentIPFSNode();
+      choosenIPFSnode =
+          Provider.of<NetworkStatus>(context, listen: false).chooseIPFSNode();
       late http.Response response;
       DateTime start = DateTime.now();
       if (choosenIPFSnode.methode == "GET") {
@@ -60,7 +60,7 @@ class IPFSActions {
           //Choose next IPFS Node and try again
           numoftries++;
           choosenIPFSnode = Provider.of<NetworkStatus>(context, listen: false)
-              .getcurrentIPFSNode();
+              .chooseIPFSNode();
           continue;
         }
       }

@@ -38,46 +38,6 @@ class NetworkStatus extends ChangeNotifier {
     });
   }
 
-  IPFSNode getcurrentIPFSNode() {
-    return chooseIPFSNode();
-  }
-
-  void setConnectionStatusChain(ConnectionStatus status) {
-    connectionStatusChain = status;
-    notifyListeners();
-  }
-
-  void setConnectionStatusIPFS(ConnectionStatus status) {
-    connectionstatusIPFS = status;
-    notifyListeners();
-  }
-
-  void setIPFSNode(IPFSNode nodes) {
-    //delete old node
-    ipfsnodes.removeWhere((element) => element.name == nodes.name);
-    currentipfsnode = nodes;
-    ipfsnodes.add(nodes);
-    notifyListeners();
-  }
-
-  void setBlockchainNode(Blockchainnode nodes) {
-    //delete old node
-    blockchainnodes.removeWhere((element) => element.name == nodes.name);
-    currentblockchainnode = nodes;
-    blockchainnodes.add(nodes);
-    notifyListeners();
-  }
-
-  void setAutomaticIPFSNode(bool value) {
-    automaticipfsnode = value;
-    notifyListeners();
-  }
-
-  void setAutomaticBlockchainNode(bool value) {
-    automaticblockchainnode = value;
-    notifyListeners();
-  }
-
   Future<int> checkConnectionChain(Blockchainnode chainnode) async {
     debugPrint("Check connection (Chain): ${chainnode.url}");
     try {
@@ -133,6 +93,42 @@ class NetworkStatus extends ChangeNotifier {
     }
   }
 
+  void setConnectionStatusChain(ConnectionStatus status) {
+    connectionStatusChain = status;
+    notifyListeners();
+  }
+
+  void setConnectionStatusIPFS(ConnectionStatus status) {
+    connectionstatusIPFS = status;
+    notifyListeners();
+  }
+
+  void setBlockchainNode(Blockchainnode nodes) {
+    //delete old node
+    blockchainnodes.removeWhere((element) => element.name == nodes.name);
+    currentblockchainnode = nodes;
+    blockchainnodes.add(nodes);
+    notifyListeners();
+  }
+
+  void setIPFSNode(IPFSNode nodes) {
+    //delete old node
+    ipfsnodes.removeWhere((element) => element.name == nodes.name);
+    currentipfsnode = nodes;
+    ipfsnodes.add(nodes);
+    notifyListeners();
+  }
+
+  void setAutomaticIPFSNode(bool value) {
+    automaticipfsnode = value;
+    notifyListeners();
+  }
+
+  void setAutomaticBlockchainNode(bool value) {
+    automaticblockchainnode = value;
+    notifyListeners();
+  }
+
   Future<bool> testallIPFSNodes() async {
     for (IPFSNode node in ipfsnodes) {
       checkConnectionIPFS(node);
@@ -170,6 +166,7 @@ class NetworkStatus extends ChangeNotifier {
   IPFSNode chooseIPFSNode() {
     if (automaticipfsnode) {
       currentipfsnode = getbestIPFSNode();
+
       return currentipfsnode;
     }
     return currentipfsnode;
@@ -201,6 +198,12 @@ class NetworkStatus extends ChangeNotifier {
         .where((element) => element.name == node.name)
         .first
         .newrequest(success, time);
+
+    if (success) {
+      setConnectionStatusIPFS(ConnectionStatus.connected);
+    } else {
+      setConnectionStatusIPFS(ConnectionStatus.disconnected);
+    }
   }
 
   void requestfromBlockchain(Blockchainnode node, bool success, DateTime time) {
