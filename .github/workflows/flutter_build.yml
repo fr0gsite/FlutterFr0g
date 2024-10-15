@@ -38,7 +38,7 @@ jobs:
     - name: Build Web App
       run: flutter build web
 
-    - name: Build Android App
+#    - name: Build Android App
 #      run: flutter build apk --verbose
 #      run: flutter build apk
 
