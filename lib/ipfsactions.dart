@@ -30,7 +30,7 @@ class IPFSActions {
     }
 
     //Choose IPFS Node
-    const int timeoutinseconds = 20;
+    const int timeoutinseconds = 10;
     IPFSNode choosenIPFSnode =
         Provider.of<NetworkStatus>(context, listen: false).chooseIPFSNode();
     int numoftries = 0;
@@ -52,7 +52,8 @@ class IPFSActions {
             //Choose next IPFS Node
             Provider.of<NetworkStatus>(context, listen: false).requestfromIPFS(
                 choosenIPFSnode, false, timeoutinseconds * 1000);
-            return http.Response("Timeout", 408);
+            //return http.Response("Timeout", 408);
+            throw Exception("Timeout");
           });
         } catch (e) {
           Provider.of<NetworkStatus>(context, listen: false)

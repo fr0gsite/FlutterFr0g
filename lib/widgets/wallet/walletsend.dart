@@ -24,7 +24,6 @@ class _WalletSendState extends State<WalletSend> {
   Account currentaccount = Account("user1", 0);
   TextEditingController sendtotextcontroller = TextEditingController();
   TextEditingController amounttextcontroller = TextEditingController();
-
   Barcode? result;
   QRViewController? controller;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
@@ -180,7 +179,18 @@ class _WalletSendState extends State<WalletSend> {
                   child: TextField(
                     controller: amounttextcontroller,
                     inputFormatters: [
-                      FilteringTextInputFormatter.allow(RegExp(r"[0-9.]")),
+                      TextInputFormatter.withFunction(
+                        (oldValue, newValue) {
+                          final text = newValue.text;
+                          final regExp = RegExp(r'^\d*(\.?\d{0,' +
+                              AppConfig.systemtokendecimalafterdot.toString() +
+                              r'})?$');
+                          if (regExp.hasMatch(text)) {
+                            return newValue;
+                          }
+                          return oldValue;
+                        },
+                      ),
                     ],
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
