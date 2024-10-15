@@ -24,7 +24,9 @@ class _Root extends State<Root> {
             .localuserconfig
             .accepteddisclaimer) {
           showDialog(
-              context: context, builder: (context) => const GlobalDisclaimer());
+              context: context,
+              barrierDismissible: false,
+              builder: (context) => const GlobalDisclaimer());
         }
       });
     });
