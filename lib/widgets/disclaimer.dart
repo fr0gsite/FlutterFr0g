@@ -34,6 +34,10 @@ class _GlobalDisclaimerState extends State<GlobalDisclaimer>
   static double fontsizebutton = 15;
   static double iconsize = 30;
 
+  String animationpath = 'assets/frog/27.json';
+  String animationpath01 = 'assets/frog/27.json';
+  String animationpath02 = 'assets/frog/39.json';
+
   @override
   void initState() {
     super.initState();
@@ -123,13 +127,33 @@ class _GlobalDisclaimerState extends State<GlobalDisclaimer>
                       child: ListView(
                         children: [
                           Center(
-                            child: Padding(
-                              padding: const EdgeInsets.all(16.0),
-                              child: Lottie.asset(
-                                'assets/frog/27.json',
-                                height: 150,
-                                width: 150,
-                                controller: greetingAnimationController,
+                            child: MouseRegion(
+                              onEnter: (_) {
+                                setState(() {
+                                  animationpath = animationpath02;
+                                  greetingAnimationController.reset();
+                                  greetingAnimationController.forward();
+                                });
+                              },
+                              onExit: (_) {
+                                setState(() {
+                                  animationpath = animationpath01;
+                                  greetingAnimationController.reset();
+                                  greetingAnimationController.forward();
+                                });
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: Lottie.asset(
+                                  animationpath,
+                                  height: 150,
+                                  width: 150,
+                                  controller: greetingAnimationController,
+                                  onLoaded: (composition) {
+                                    greetingAnimationController.duration =
+                                        composition.duration;
+                                  },
+                                ),
                               ),
                             ),
                           ),

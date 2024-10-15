@@ -42,6 +42,11 @@ jobs:
 #      run: flutter build apk --verbose
 #      run: flutter build apk
 
+    - id: read-version
+      uses: NiklasLehnfeld/flutter-version-number-action@v1
+      with:
+        file-path: pubspec.yaml
+
     - name: Create Container for web (latest)
       run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/flutterfr0g:latest .
 
