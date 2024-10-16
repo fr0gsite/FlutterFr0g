@@ -43,7 +43,7 @@ class _SearchState extends State<Search> {
                   child: SearchField(
                       suggestionStyle: const TextStyle(color: Colors.white),
                       maxSuggestionsInViewPort: 5,
-                      searchInputDecoration: InputDecoration(
+                      searchInputDecoration: SearchInputDecoration(
                         hintText: "Search",
                         enabledBorder: OutlineInputBorder(
                           borderSide:
