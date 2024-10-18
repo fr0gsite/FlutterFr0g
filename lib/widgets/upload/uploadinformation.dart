@@ -203,7 +203,7 @@ class _UploadinformationState extends State<Uploadinformation> {
                       style: const TextStyle(color: Colors.white),
                       items: AppConfig.applanguage.map((e) {
                         return DropdownMenuItem(
-                          value: e,
+                          value: e.languagename,
                           child: Text(e.languagename),
                         );
                       }).toList(),

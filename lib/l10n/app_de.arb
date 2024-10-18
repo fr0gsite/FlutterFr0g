@@ -19,7 +19,6 @@
     "delete":"Löschen",
     "save":"Speichern",
     "loginnamekey":"Name/Key",
-    "file":"File",
     "qrcode":"OR-Code",
     "loginfile":"Datei",
     "loginqrcode":"OR-Code",
@@ -167,8 +166,8 @@
     "numoffavorites":"Anzahl von Favoriten",
     "uploadipfshash":"Upload IPFS Hash",
     "uploadipfshashfiletyp":"Dateityp von Upload",
-    "thumbipfshash":"Thumb IPFS Hash",
-    "thumbipfshashfiletyp":"Dateityp von Thumb",
+    "thumbipfshash":"Vorschau IPFS Hash",
+    "thumbipfshashfiletyp":"Dateityp von Vorschau",
 
     "selectedlanguage":"Ausgewählte Sprache",
     "selecteduploadfiletype":"Ausgewähler Dateityp für Upload",
@@ -184,7 +183,7 @@
 
     "max15MBfilesize" : "Maximal 15 MB Dateigröße",
     "uploadresolution" : "Upload Auflösung min. 0,09 Megapixel",
-    "thumbresolution" : "Vorschaubild / Thumb Auflösung 128x128px",
+    "thumbresolution" : "Vorschaubild in Auflösung 128x128px",
     "validfileformatupload" : "Gültige Dateiformate für Upload:",
     "validfileformatthumb" : "Gültige Dateiformate für Vorschau",
     "checkRequirements" :"Anforderungen Überprüfen",
@@ -346,7 +345,15 @@
     "connectionpath":"Pfad",
     "connectionmethode":"Methode",
     "connectionsuccessfull":"Verbindung erfolgreich",
-    "connectionfailed":"Verbindung fehlgeschlagen"
+    "connectionfailed":"Verbindung fehlgeschlagen",
+
+    "choosenfile":"Ausgewählter Upload",
+    "selectfile":"Upload auswählen",
+    "selectthumb":"Vorschau auswählen",
+    "nofileselected":"Kein Upload ausgewählt",
+    "thumb":"Vorschau",
+    "thumbexplain":"Ein kleines Vorschaubild für dein Bild oder Video.",
+    "file":"Upload"
 
 
 

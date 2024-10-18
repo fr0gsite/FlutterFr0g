@@ -1,5 +1,6 @@
 import 'package:fr0gsite/datatypes/game.dart';
 import 'package:fr0gsite/datatypes/ipfsnode.dart';
+import 'package:fr0gsite/datatypes/ipfsuploadnode.dart';
 import 'package:fr0gsite/datatypes/reportnode.dart';
 import 'package:fr0gsite/datatypes/rewardtoken.dart';
 import 'package:fr0gsite/datatypes/blockchainnode.dart';
@@ -116,6 +117,11 @@ class AppConfig {
         1, "Genesis Node", "testnet.fr0g.site", "8443", "https", "v1"),
   ];
 
+  static List<IPFSUploadNode> ipfsuploadnodes = [
+    IPFSUploadNode(
+        "upload.fr0g.site", "https", "upload.fr0g.site", 443, "tacotoken"),
+  ];
+
   static List<Reportnode> reportnodes = [
     Reportnode(
         "Genesis Report Node", "report.fr0gsite.com", "8443", "https", "/api"),
@@ -160,13 +166,14 @@ class AppConfig {
     RewardToken("TRUST", 362175353428, Colors.red),
   ];
 
-  static const List<String> imagefiletypes = ["jpg", "png", "gif"];
+  static const List<String> imagefiletypes = ["jpg", "jpeg", "png", "gif"];
   static const List<String> videofiletypes = ["mp4"];
   static const List<String> alloweduploadfiletypes = [
-    "jpg",
-    "png",
-    "gif",
-    "mp4"
+    'jpg',
+    'jpeg',
+    'png',
+    'gif',
+    'mp4'
   ];
   static const List<String> allowedthumbfiletypes = imagefiletypes;
 

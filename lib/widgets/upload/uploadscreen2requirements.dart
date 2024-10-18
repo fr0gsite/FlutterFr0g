@@ -1,4 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:fr0gsite/config.dart';
 import 'package:fr0gsite/datatypes/uploadstatus.dart';
 import 'package:flutter/material.dart';
@@ -8,8 +7,8 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class UploadRequirements extends StatelessWidget {
-  const UploadRequirements({super.key});
+class UploadScreen2requirements extends StatelessWidget {
+  const UploadScreen2requirements({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +17,8 @@ class UploadRequirements extends StatelessWidget {
       AppLocalizations.of(context)!.uploadresolution,
       AppLocalizations.of(context)!.thumbresolution,
     ];
+
+    double textsize = 16;
 
     return Column(
       children: [
@@ -48,7 +49,9 @@ class UploadRequirements extends StatelessWidget {
                       padding: EdgeInsets.all(8.0),
                       child: Icon(Icons.check, color: Colors.green),
                     ),
-                    AutoSizeText(text),
+                    Text(text,
+                        style:
+                            TextStyle(fontSize: textsize, color: Colors.white)),
                   ],
                 ),
               );
@@ -74,46 +77,51 @@ class UploadRequirements extends StatelessWidget {
                             child: Text(
                                 AppLocalizations.of(context)!
                                     .alinewithRuleswithlink,
-                                style: const TextStyle(color: Colors.orange))),
+                                style: TextStyle(
+                                    color: Colors.orange,
+                                    decoration: TextDecoration.underline,
+                                    fontSize: textsize))),
                       )
                     ],
                   ),
                 ),
-              )
-              ..add(Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  LikeButton(
-                    size: 50,
-                    circleColor: const CircleColor(
-                      start: Colors.green,
-                      end: Colors.green,
-                    ),
-                    isLiked: Provider.of<Uploadstatus>(context, listen: false)
-                        .acceptedsecond,
-                    bubblesColor: const BubblesColor(
-                      dotPrimaryColor: Colors.green,
-                      dotSecondaryColor: Colors.green,
-                    ),
-                    likeBuilder: (bool isLiked) {
-                      return Icon(
-                        Icons.check_box,
-                        color: isLiked ? Colors.green : Colors.grey,
-                        size: 50,
-                      );
-                    },
-                    onTap: (bool isLiked) async {
-                      debugPrint(isLiked.toString());
-                      Provider.of<Uploadstatus>(context, listen: false)
-                          .changeonacceptedsecond(!isLiked);
-                      return !isLiked;
-                    },
-                  ),
-                  Text(AppLocalizations.of(context)!.okiunderstood),
-                ],
-              )),
+              ),
           ),
         ),
+        const Spacer(),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            LikeButton(
+              size: 50,
+              circleColor: const CircleColor(
+                start: Colors.green,
+                end: Colors.green,
+              ),
+              isLiked: Provider.of<Uploadstatus>(context, listen: false)
+                  .acceptedsecond,
+              bubblesColor: const BubblesColor(
+                dotPrimaryColor: Colors.green,
+                dotSecondaryColor: Colors.green,
+              ),
+              likeBuilder: (bool isLiked) {
+                return Icon(
+                  Icons.check_box,
+                  color: isLiked ? Colors.green : Colors.grey,
+                  size: 50,
+                );
+              },
+              onTap: (bool isLiked) async {
+                debugPrint(isLiked.toString());
+                Provider.of<Uploadstatus>(context, listen: false)
+                    .changeonacceptedsecond(!isLiked);
+                return !isLiked;
+              },
+            ),
+            Text(AppLocalizations.of(context)!.okiunderstood),
+          ],
+        ),
+        const SizedBox(height: 25),
       ],
     );
   }

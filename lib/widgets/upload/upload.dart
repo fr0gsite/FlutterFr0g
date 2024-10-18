@@ -1,10 +1,10 @@
 import 'package:fr0gsite/config.dart';
 import 'package:fr0gsite/datatypes/uploadstatus.dart';
 import 'package:fr0gsite/widgets/upload/uploadconfirm.dart';
-import 'package:fr0gsite/widgets/upload/uploadinfo.dart';
+import 'package:fr0gsite/widgets/upload/uploadscreen1.dart';
 import 'package:fr0gsite/widgets/upload/uploadinformation.dart';
-import 'package:fr0gsite/widgets/upload/uploadprovider.dart';
-import 'package:fr0gsite/widgets/upload/uploadrequirements.dart';
+import 'package:fr0gsite/widgets/upload/uploadscreen3provider.dart';
+import 'package:fr0gsite/widgets/upload/uploadscreen2requirements.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_stepper/easy_stepper.dart';
 import 'package:provider/provider.dart';
@@ -20,9 +20,9 @@ class Upload extends StatefulWidget {
 class _UploadState extends State<Upload> {
   int activeStep = 0;
   List<Widget> stepper = <Widget>[
-    const Expanded(child: Uploadinfo()),
-    const Expanded(child: UploadRequirements()),
-    const Expanded(child: Uploadprovider()),
+    const Expanded(child: UploadScreen1()),
+    const Expanded(child: UploadScreen2requirements()),
+    const Expanded(child: Uploadscreen3provider()),
     const Expanded(child: Uploadinformation()),
     const Expanded(child: Uploadconfirm()),
   ];
@@ -55,9 +55,9 @@ class _UploadState extends State<Upload> {
                             borderRadius:
                                 BorderRadius.all(Radius.circular(20.0)),
                             side: BorderSide(
-                                color: Colors.white,
-                                width: 6,
-                                strokeAlign: 4.0)),
+                              color: Colors.white,
+                              width: 6,
+                            )),
                         child: Scaffold(
                           backgroundColor: Colors.transparent,
                           resizeToAvoidBottomInset: true,
@@ -98,40 +98,32 @@ class _UploadState extends State<Upload> {
                                                         .previousStep();
                                                   },
                                                   child: Container(
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10),
-                                                      color: Colors.red
-                                                          .withOpacity(0.3),
-                                                    ),
-                                                    child: Column(
-                                                      children: [
-                                                        const Icon(
-                                                            Icons
-                                                                .navigate_before,
-                                                            color:
-                                                                Colors.white),
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .only(
-                                                                  top: 8.0,
-                                                                  bottom: 8.0,
-                                                                  left: 32.0,
-                                                                  right: 32.0),
-                                                          child: Text(
-                                                              AppLocalizations.of(
-                                                                      context)!
-                                                                  .back,
-                                                              style: const TextStyle(
-                                                                  fontSize: 20,
-                                                                  color: Colors
-                                                                      .white)),
-                                                        )
-                                                      ],
-                                                    ),
-                                                  ),
+                                                      decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10),
+                                                        color: Colors.red
+                                                            .withOpacity(0.3),
+                                                      ),
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .only(
+                                                                top: 8.0,
+                                                                bottom: 8.0,
+                                                                left: 32.0,
+                                                                right: 32.0),
+                                                        child: Text(
+                                                            AppLocalizations.of(
+                                                                    context)!
+                                                                .back,
+                                                            style:
+                                                                const TextStyle(
+                                                                    fontSize:
+                                                                        20,
+                                                                    color: Colors
+                                                                        .white)),
+                                                      )),
                                                 ),
                                               ),
                                         Padding(
@@ -143,35 +135,26 @@ class _UploadState extends State<Upload> {
                                                   .nextStep(context);
                                             },
                                             child: Container(
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                color: Colors.green,
-                                              ),
-                                              child: Column(
-                                                children: [
-                                                  const Icon(
-                                                      Icons.navigate_next,
-                                                      color: Colors.white),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            top: 8.0,
-                                                            bottom: 8.0,
-                                                            left: 32.0,
-                                                            right: 32.0),
-                                                    child: Text(
-                                                        AppLocalizations.of(
-                                                                context)!
-                                                            .next,
-                                                        style: const TextStyle(
-                                                            fontSize: 20,
-                                                            color:
-                                                                Colors.white)),
-                                                  )
-                                                ],
-                                              ),
-                                            ),
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  color: Colors.green,
+                                                ),
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 8.0,
+                                                          bottom: 8.0,
+                                                          left: 32.0,
+                                                          right: 32.0),
+                                                  child: Text(
+                                                      AppLocalizations.of(
+                                                              context)!
+                                                          .next,
+                                                      style: const TextStyle(
+                                                          fontSize: 20,
+                                                          color: Colors.white)),
+                                                )),
                                           ),
                                         ),
                                       ]),
@@ -183,6 +166,14 @@ class _UploadState extends State<Upload> {
                                                 listen: false)
                                             .currentStep,
                                         activeStepTextColor: Colors.white,
+                                        finishedStepBackgroundColor:
+                                            Colors.transparent,
+                                        finishedStepBorderColor:
+                                            Colors.transparent,
+                                        finishedStepIconColor:
+                                            Colors.transparent,
+                                        activeStepBackgroundColor:
+                                            Colors.green.withOpacity(0.5),
                                         finishedStepTextColor: Colors.white,
                                         lineStyle: const LineStyle(
                                             lineType: LineType.dashed,

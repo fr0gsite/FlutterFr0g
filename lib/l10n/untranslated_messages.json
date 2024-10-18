@@ -7,7 +7,13 @@
     "connectionpath",
     "connectionmethode",
     "connectionsuccessfull",
-    "connectionfailed"
+    "connectionfailed",
+    "choosenfile",
+    "selectfile",
+    "selectthumb",
+    "nofileselected",
+    "thumb",
+    "thumbexplain"
   ],
 
   "cs": [
@@ -18,7 +24,13 @@
     "connectionpath",
     "connectionmethode",
     "connectionsuccessfull",
-    "connectionfailed"
+    "connectionfailed",
+    "choosenfile",
+    "selectfile",
+    "selectthumb",
+    "nofileselected",
+    "thumb",
+    "thumbexplain"
   ],
 
   "es": [
@@ -29,7 +41,13 @@
     "connectionpath",
     "connectionmethode",
     "connectionsuccessfull",
-    "connectionfailed"
+    "connectionfailed",
+    "choosenfile",
+    "selectfile",
+    "selectthumb",
+    "nofileselected",
+    "thumb",
+    "thumbexplain"
   ],
 
   "fr": [
@@ -40,7 +58,13 @@
     "connectionpath",
     "connectionmethode",
     "connectionsuccessfull",
-    "connectionfailed"
+    "connectionfailed",
+    "choosenfile",
+    "selectfile",
+    "selectthumb",
+    "nofileselected",
+    "thumb",
+    "thumbexplain"
   ],
 
   "hi": [
@@ -51,7 +75,13 @@
     "connectionpath",
     "connectionmethode",
     "connectionsuccessfull",
-    "connectionfailed"
+    "connectionfailed",
+    "choosenfile",
+    "selectfile",
+    "selectthumb",
+    "nofileselected",
+    "thumb",
+    "thumbexplain"
   ],
 
   "it": [
@@ -62,7 +92,13 @@
     "connectionpath",
     "connectionmethode",
     "connectionsuccessfull",
-    "connectionfailed"
+    "connectionfailed",
+    "choosenfile",
+    "selectfile",
+    "selectthumb",
+    "nofileselected",
+    "thumb",
+    "thumbexplain"
   ],
 
   "ja": [
@@ -73,7 +109,13 @@
     "connectionpath",
     "connectionmethode",
     "connectionsuccessfull",
-    "connectionfailed"
+    "connectionfailed",
+    "choosenfile",
+    "selectfile",
+    "selectthumb",
+    "nofileselected",
+    "thumb",
+    "thumbexplain"
   ],
 
   "pt": [
@@ -84,7 +126,13 @@
     "connectionpath",
     "connectionmethode",
     "connectionsuccessfull",
-    "connectionfailed"
+    "connectionfailed",
+    "choosenfile",
+    "selectfile",
+    "selectthumb",
+    "nofileselected",
+    "thumb",
+    "thumbexplain"
   ],
 
   "ru": [
@@ -95,7 +143,13 @@
     "connectionpath",
     "connectionmethode",
     "connectionsuccessfull",
-    "connectionfailed"
+    "connectionfailed",
+    "choosenfile",
+    "selectfile",
+    "selectthumb",
+    "nofileselected",
+    "thumb",
+    "thumbexplain"
   ],
 
   "uk": [
@@ -106,7 +160,13 @@
     "connectionpath",
     "connectionmethode",
     "connectionsuccessfull",
-    "connectionfailed"
+    "connectionfailed",
+    "choosenfile",
+    "selectfile",
+    "selectthumb",
+    "nofileselected",
+    "thumb",
+    "thumbexplain"
   ],
 
   "zh": [
@@ -117,6 +177,12 @@
     "connectionpath",
     "connectionmethode",
     "connectionsuccessfull",
-    "connectionfailed"
+    "connectionfailed",
+    "choosenfile",
+    "selectfile",
+    "selectthumb",
+    "nofileselected",
+    "thumb",
+    "thumbexplain"
   ]
 }

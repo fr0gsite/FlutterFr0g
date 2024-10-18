@@ -29,7 +29,7 @@ class NetworkStatus extends ChangeNotifier {
     chooseIPFSNode();
     choooseBlockchainNode();
 
-    testcurrentipfsconnection();
+    testallIPFSNodes();
     testcurrentchainconnection();
     Timer.periodic(const Duration(seconds: 5), (timer) {
       //Check Connection
@@ -151,16 +151,6 @@ class NetworkStatus extends ChangeNotifier {
       checkConnectionChain(node);
     }
     return true;
-  }
-
-  void testcurrentipfsconnection() {
-    checkConnectionIPFS(currentipfsnode).then((value) {
-      if (value > 0) {
-        setConnectionStatusIPFS(ConnectionStatus.connected);
-      } else {
-        setConnectionStatusIPFS(ConnectionStatus.disconnected);
-      }
-    });
   }
 
   void testcurrentchainconnection() {

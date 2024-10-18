@@ -349,5 +349,13 @@
     "connectionpath":"Path",
     "connectionmethode":"Method",
     "connectionsuccessfull":"Connection successfull",
-    "connectionfailed":"Connection failed"
+    "connectionfailed":"Connection failed",
+
+    "choosenfile":"Choosen File",
+    "selectfile":"Select File",
+    "selectthumb":"Select Thumb",
+    "nofileselected":"No File selected",
+    "thumb":"Thumb",
+    "thumbexplain":"A “thumb” (short for thumbnail) is a small preview image of an image or video",
+    "file":"File"
 }
