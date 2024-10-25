@@ -7,7 +7,14 @@
     "connectionpath",
     "connectionmethode",
     "connectionsuccessfull",
-    "connectionfailed"
+    "connectionfailed",
+    "whitepaper",
+    "linktodocumentation",
+    "linktoupdown",
+    "linksocialmedia",
+    "information",
+    "links",
+    "rules"
   ],
 
   "cs": [
@@ -18,7 +25,24 @@
     "connectionpath",
     "connectionmethode",
     "connectionsuccessfull",
-    "connectionfailed"
+    "connectionfailed",
+    "whitepaper",
+    "linktodocumentation",
+    "linktoupdown",
+    "linksocialmedia",
+    "information",
+    "links",
+    "rules"
+  ],
+
+  "de": [
+    "whitepaper",
+    "linktodocumentation",
+    "linktoupdown",
+    "linksocialmedia",
+    "information",
+    "links",
+    "rules"
   ],
 
   "es": [
@@ -29,7 +53,14 @@
     "connectionpath",
     "connectionmethode",
     "connectionsuccessfull",
-    "connectionfailed"
+    "connectionfailed",
+    "whitepaper",
+    "linktodocumentation",
+    "linktoupdown",
+    "linksocialmedia",
+    "information",
+    "links",
+    "rules"
   ],
 
   "fr": [
@@ -40,7 +71,14 @@
     "connectionpath",
     "connectionmethode",
     "connectionsuccessfull",
-    "connectionfailed"
+    "connectionfailed",
+    "whitepaper",
+    "linktodocumentation",
+    "linktoupdown",
+    "linksocialmedia",
+    "information",
+    "links",
+    "rules"
   ],
 
   "hi": [
@@ -62,7 +100,14 @@
     "connectionpath",
     "connectionmethode",
     "connectionsuccessfull",
-    "connectionfailed"
+    "connectionfailed",
+    "whitepaper",
+    "linktodocumentation",
+    "linktoupdown",
+    "linksocialmedia",
+    "information",
+    "links",
+    "rules"
   ],
 
   "ja": [
@@ -73,7 +118,14 @@
     "connectionpath",
     "connectionmethode",
     "connectionsuccessfull",
-    "connectionfailed"
+    "connectionfailed",
+    "whitepaper",
+    "linktodocumentation",
+    "linktoupdown",
+    "linksocialmedia",
+    "information",
+    "links",
+    "rules"
   ],
 
   "pt": [
@@ -84,7 +136,14 @@
     "connectionpath",
     "connectionmethode",
     "connectionsuccessfull",
-    "connectionfailed"
+    "connectionfailed",
+    "whitepaper",
+    "linktodocumentation",
+    "linktoupdown",
+    "linksocialmedia",
+    "information",
+    "links",
+    "rules"
   ],
 
   "ru": [
@@ -95,7 +154,14 @@
     "connectionpath",
     "connectionmethode",
     "connectionsuccessfull",
-    "connectionfailed"
+    "connectionfailed",
+    "whitepaper",
+    "linktodocumentation",
+    "linktoupdown",
+    "linksocialmedia",
+    "information",
+    "links",
+    "rules"
   ],
 
   "uk": [
@@ -106,7 +172,14 @@
     "connectionpath",
     "connectionmethode",
     "connectionsuccessfull",
-    "connectionfailed"
+    "connectionfailed",
+    "whitepaper",
+    "linktodocumentation",
+    "linktoupdown",
+    "linksocialmedia",
+    "information",
+    "links",
+    "rules"
   ],
 
   "zh": [
@@ -117,6 +190,13 @@
     "connectionpath",
     "connectionmethode",
     "connectionsuccessfull",
-    "connectionfailed"
+    "connectionfailed",
+    "whitepaper",
+    "linktodocumentation",
+    "linktoupdown",
+    "linksocialmedia",
+    "information",
+    "links",
+    "rules"
   ]
 }
