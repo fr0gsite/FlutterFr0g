@@ -110,6 +110,29 @@ class _WalletSendState extends State<WalletSend> {
               ),
               IconButton(
                 onPressed: () async {
+
+                  try {
+                    await Chainactions()
+                        .geteosclient()
+                        .getAccount(sendtotextcontroller.text);
+                    debugPrint("Account exists");
+                    if (context.mounted) {
+
+                      Navigator.pushNamed(context,
+                          "/profile?username=${sendtotextcontroller.text}",
+                          arguments: sendtotextcontroller.text);
+                    }
+                  } catch (e) {
+                    if (context.mounted) {
+                      debugPrint(e.toString());
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(AppLocalizations.of(context)!.usernotfound),
+                        ),
+                      );
+                    }
+                  }
+
                   await controller?.toggleFlash();
                   setState(() {});
                 },

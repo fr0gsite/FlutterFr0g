@@ -268,6 +268,8 @@ class _ProfileState extends State<Profile> {
                         ..unfollowuser(account.accountName).then((value) {
                           //If successfull, toggle the button
                           if (value) {
+
+                            currentuserconfig.numoffollowers--;
                             setfollowbutton(!followbutton);
                           }
                         });
@@ -277,6 +279,7 @@ class _ProfileState extends State<Profile> {
                         ..followuser(account.accountName).then((value) {
                           //If successfull, toggle the button
                           if (value) {
+                            currentuserconfig.numoffollowers++;
                             setfollowbutton(!followbutton);
                           }
                         });

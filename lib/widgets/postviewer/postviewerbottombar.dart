@@ -22,13 +22,17 @@ class _PostViewerBottomParState extends State<PostViewerBottomBar> {
     super.initState();
   }
 
+  double up = 0.0;
+  double down = 0.0;
+  double favorite = 0.0;
+
   @override
   Widget build(BuildContext context) {
     return Consumer<PostviewerStatus>(
         builder: (context, postviewerstatus, child) {
       Upload currentupload = postviewerstatus.getcurrentupload();
-      double up = double.parse(currentupload.up.toString());
-      double down = double.parse(currentupload.down.toString());
+      up = double.parse(currentupload.up.toString());
+      down = double.parse(currentupload.down.toString());
       double favorite = double.parse(currentupload.numoffavorites.toString());
       double percentageofupdown = percentageof(up, up + down);
 
@@ -149,6 +153,7 @@ class _PostViewerBottomParState extends State<PostViewerBottomBar> {
   }
 
   bool toogle = false;
+
   Future<bool> buttonpressfavorite(bool value) async {
     if (Provider.of<GlobalStatus>(context, listen: false).isLoggedin) {
       debugPrint("favorite");
@@ -189,6 +194,9 @@ class _PostViewerBottomParState extends State<PostViewerBottomBar> {
                       .uploadid,
                   1)
               .then((value) {
+            setState(() {
+              up = up + 1;
+            });
             if (value) {
               Provider.of<PostviewerStatus>(context, listen: false)
                   .uploadlist

@@ -212,10 +212,16 @@ class _FollowState extends State<Follow> with TickerProviderStateMixin {
     debugPrint("followlistitemcallback: $username $isselected");
     debugPrint("active list: ${listitems.toString()}");
     if (delete) {
+
+      debugPrint("active list: delete ${delete}");
       //Delete from list
       int index =
           listitems.indexWhere((element) => element.username == username);
+
+      debugPrint("active list:  index ${index}");
       if (index != -1) {
+
+        debugPrint("active list:  _listKey.currentState  ${_listKey.currentState}");
         _listKey.currentState!.removeItem(
           index,
           (context, animation) => SlideTransition(
@@ -226,7 +232,12 @@ class _FollowState extends State<Follow> with TickerProviderStateMixin {
           ),
         );
         setState(() {
+
+          debugPrint("active list:  listitems b4  ${listitems.length}");
+
           listitems.removeAt(index);
+
+          debugPrint("active list:  listitems  ${listitems.length}");
         });
       }
     } else {
