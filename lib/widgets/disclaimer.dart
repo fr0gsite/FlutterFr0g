@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:country_flags/country_flags.dart';
 import 'package:fr0gsite/config.dart';
@@ -37,14 +38,15 @@ class _GlobalDisclaimerState extends State<GlobalDisclaimer>
   String animationpath = 'assets/frog/27.json';
   String animationpath01 = 'assets/frog/27.json';
   String animationpath02 = 'assets/frog/39.json';
+  Duration defaultduration = const Duration(milliseconds: 3000);
 
   @override
   void initState() {
     super.initState();
     greetingAnimationController = AnimationController(vsync: this);
     pressAnimationController = AnimationController(vsync: this);
-    greetingAnimationController.duration = const Duration(milliseconds: 3000);
-    pressAnimationController.duration = const Duration(milliseconds: 3000);
+    greetingAnimationController.duration = defaultduration;
+    pressAnimationController.duration = defaultduration;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       greetingAnimationController.forward();
       pressAnimationController.forward();
@@ -132,27 +134,51 @@ class _GlobalDisclaimerState extends State<GlobalDisclaimer>
                                 setState(() {
                                   animationpath = animationpath02;
                                   greetingAnimationController.reset();
-                                  greetingAnimationController.forward();
+                                  //greetingAnimationController.forward();
                                 });
                               },
                               onExit: (_) {
                                 setState(() {
                                   animationpath = animationpath01;
                                   greetingAnimationController.reset();
+                                  greetingAnimationController.duration =
+                                      defaultduration;
                                   greetingAnimationController.forward();
                                 });
                               },
-                              child: Padding(
-                                padding: const EdgeInsets.all(16.0),
-                                child: Lottie.asset(
-                                  animationpath,
-                                  height: 150,
-                                  width: 150,
-                                  controller: greetingAnimationController,
-                                  onLoaded: (composition) {
+                              child: GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    if (Provider.of<GlobalStatus>(context,
+                                            listen: false)
+                                        .audionotifications) {
+                                      AudioPlayer audioPlayer = AudioPlayer();
+                                      audioPlayer.play(
+                                          DeviceFileSource(
+                                              "assets/sounds/boing.mp3"),
+                                          volume: 0.5,
+                                          mode: PlayerMode.lowLatency);
+                                    }
+
+                                    animationpath = animationpath02;
+                                    greetingAnimationController.reset();
                                     greetingAnimationController.duration =
-                                        composition.duration;
-                                  },
+                                        const Duration(milliseconds: 500);
+                                    greetingAnimationController.forward();
+                                  });
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: Lottie.asset(
+                                    animationpath,
+                                    height: 150,
+                                    width: 150,
+                                    controller: greetingAnimationController,
+                                    onLoaded: (composition) {
+                                      greetingAnimationController.duration =
+                                          composition.duration;
+                                    },
+                                  ),
                                 ),
                               ),
                             ),

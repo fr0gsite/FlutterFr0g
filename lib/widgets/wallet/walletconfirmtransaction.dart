@@ -6,17 +6,21 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:fr0gsite/chainactions/chainactions.dart';
 import 'package:fr0gsite/config.dart';
 import 'package:fr0gsite/datatypes/globalstatus.dart';
-import 'package:fr0gsite/datatypes/walletstatus.dart';
-import 'package:eosdart/eosdart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 class WalletConfirmTransaction extends StatefulWidget {
   const WalletConfirmTransaction(
-      {super.key, required this.callback, required this.sendtoaccount});
+      {super.key,
+      required this.callback,
+      required this.sendtoaccount,
+      required this.amount,
+      required this.memo});
   final Function callback;
-  final Account sendtoaccount;
+  final String sendtoaccount;
+  final String amount;
+  final String memo;
 
   @override
   State<WalletConfirmTransaction> createState() =>
@@ -49,7 +53,18 @@ class _WalletConfirmTransactionState extends State<WalletConfirmTransaction> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: AutoSizeText(
-                    "${Provider.of<WalletStatus>(context, listen: false).amount} ${AppConfig.systemtoken} -> ${widget.sendtoaccount.accountName}",
+                    "${widget.amount} ${AppConfig.systemtoken} -> ${widget.sendtoaccount}",
+                    style: const TextStyle(
+                      color: Colors.white,
+                    ),
+                    minFontSize: 20,
+                  ),
+                ),
+                //Memo
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: AutoSizeText(
+                    widget.memo,
                     style: const TextStyle(
                       color: Colors.white,
                     ),
@@ -67,9 +82,7 @@ class _WalletConfirmTransactionState extends State<WalletConfirmTransaction> {
                     action: (controller) async {
                       controller.loading();
 
-                      double parsedamount = double.parse(
-                          Provider.of<WalletStatus>(context, listen: false)
-                              .amount);
+                      double parsedamount = double.parse(widget.amount);
 
                       String amountinformat =
                           "${parsedamount.toStringAsFixed(4)} ${AppConfig.systemtoken}";
@@ -84,12 +97,9 @@ class _WalletConfirmTransactionState extends State<WalletConfirmTransaction> {
                                 Provider.of<GlobalStatus>(context,
                                         listen: false)
                                     .username,
-                                Provider.of<WalletStatus>(context,
-                                        listen: false)
-                                    .sendtoaccount
-                                    .accountName,
+                                widget.sendtoaccount,
                                 amountinformat,
-                                "Test")
+                                widget.memo)
                             .then((value) {
                           if (value) {
                             if (Provider.of<GlobalStatus>(context,

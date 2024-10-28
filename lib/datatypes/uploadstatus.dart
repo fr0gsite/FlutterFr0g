@@ -12,6 +12,7 @@ class Uploadstatus extends ChangeNotifier {
 
   bool acceptedfirst = false;
   bool acceptedsecond = false;
+  bool selectedprovider = false;
 
   int get currentStep => _currentStep;
 
@@ -42,7 +43,9 @@ class Uploadstatus extends ChangeNotifier {
           }
           break;
         case 2:
-          _currentStep++;
+          if (selectedprovider) {
+            _currentStep++;
+          }
           break;
         case 3:
           _currentStep++;
@@ -78,6 +81,11 @@ class Uploadstatus extends ChangeNotifier {
 
   void changeonacceptedsecond(bool bool) {
     acceptedsecond = bool;
+    notifyListeners();
+  }
+
+  void changeonselectedprovider(bool bool) {
+    selectedprovider = bool;
     notifyListeners();
   }
 
@@ -144,7 +152,8 @@ class Uploadstatus extends ChangeNotifier {
   }
 
   static getlanguage(String language) {
-    switch (language) {
+    String languagelowercase = language.toLowerCase();
+    switch (languagelowercase) {
       case "international/none":
         return "ii";
       case "german":

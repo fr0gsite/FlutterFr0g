@@ -24,6 +24,7 @@ class _WalletSendState extends State<WalletSend> {
   Account currentaccount = Account("user1", 0);
   TextEditingController sendtotextcontroller = TextEditingController();
   TextEditingController amounttextcontroller = TextEditingController();
+  TextEditingController memotextcontroller = TextEditingController();
   Barcode? result;
   QRViewController? controller;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
@@ -32,6 +33,12 @@ class _WalletSendState extends State<WalletSend> {
   void initState() {
     super.initState();
     getaccount = getAccount();
+    sendtotextcontroller.text =
+        Provider.of<WalletStatus>(context, listen: false).sendtoaccountname;
+    amounttextcontroller.text =
+        Provider.of<WalletStatus>(context, listen: false).amount;
+    memotextcontroller.text =
+        Provider.of<WalletStatus>(context, listen: false).memo;
   }
 
   void updatebalance() {
@@ -56,7 +63,7 @@ class _WalletSendState extends State<WalletSend> {
             alignment: WrapAlignment.center,
             children: [
               AutoSizeText(
-                "${AppLocalizations.of(context)!.accountbalance}: ",
+                "${AppLocalizations.of(context)!.liquid}: ",
                 style:
                     const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
@@ -103,6 +110,10 @@ class _WalletSendState extends State<WalletSend> {
                     fillColor: Colors.blueGrey,
                   ),
                   onSubmitted: (value) {
+                    Provider.of<WalletStatus>(context, listen: false)
+                        .sendtoaccountname = value;
+                  },
+                  onChanged: (value) {
                     Provider.of<WalletStatus>(context, listen: false)
                         .sendtoaccountname = value;
                   },
@@ -170,48 +181,87 @@ class _WalletSendState extends State<WalletSend> {
           ),
         ),
         Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Wrap(
-              alignment: WrapAlignment.center,
-              children: [
-                ConstrainedBox(
-                  constraints: const BoxConstraints(maxWidth: 500),
-                  child: TextField(
-                    controller: amounttextcontroller,
-                    inputFormatters: [
-                      TextInputFormatter.withFunction(
-                        (oldValue, newValue) {
-                          final text = newValue.text;
-                          final regExp = RegExp(r'^\d*(\.?\d{0,' +
-                              AppConfig.systemtokendecimalafterdot.toString() +
-                              r'})?$');
-                          if (regExp.hasMatch(text)) {
-                            return newValue;
-                          }
-                          return oldValue;
-                        },
+          padding: const EdgeInsets.all(16.0),
+          child: Wrap(
+            alignment: WrapAlignment.center,
+            children: [
+              ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 500),
+                child: TextField(
+                  controller: amounttextcontroller,
+                  inputFormatters: [
+                    TextInputFormatter.withFunction(
+                      (oldValue, newValue) {
+                        final text = newValue.text;
+                        final regExp = RegExp(r'^\d*(\.?\d{0,' +
+                            AppConfig.systemtokendecimalafterdot.toString() +
+                            r'})?$');
+                        if (regExp.hasMatch(text)) {
+                          return newValue;
+                        }
+                        return oldValue;
+                      },
+                    ),
+                  ],
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                      labelText: AppLocalizations.of(context)!.amount,
+                      suffixText: AppConfig.systemtoken,
+                      hintText:
+                          "${AppLocalizations.of(context)!.forexample} 6.9420",
+                      labelStyle: const TextStyle(color: Colors.white),
+                      focusedBorder: const OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white, width: 3),
                       ),
-                    ],
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                        labelText: AppLocalizations.of(context)!.amount,
-                        suffixText: AppConfig.systemtoken,
-                        hintText:
-                            "${AppLocalizations.of(context)!.forexample} 6.9420",
-                        labelStyle: const TextStyle(color: Colors.white),
-                        focusedBorder: const OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white, width: 3),
-                        ),
-                        filled: true,
-                        fillColor: Colors.blueGrey),
-                    onSubmitted: (value) {
-                      Provider.of<WalletStatus>(context, listen: false).amount =
-                          value;
-                    },
-                  ),
+                      filled: true,
+                      fillColor: Colors.blueGrey),
+                  onSubmitted: (value) {
+                    Provider.of<WalletStatus>(context, listen: false).amount =
+                        value;
+                  },
+                  onChanged: (value) {
+                    Provider.of<WalletStatus>(context, listen: false).amount =
+                        value;
+                  },
                 ),
-              ],
-            )),
+              ),
+            ],
+          ),
+        ),
+        //Memo field max 256 characters
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Wrap(
+            alignment: WrapAlignment.center,
+            children: [
+              ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 500),
+                child: TextField(
+                  controller: memotextcontroller,
+                  decoration: InputDecoration(
+                      labelText: AppLocalizations.of(context)!.memo,
+                      labelStyle: const TextStyle(color: Colors.white),
+                      focusedBorder: const OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white, width: 3),
+                      ),
+                      filled: true,
+                      fillColor: Colors.blueGrey),
+                  onSubmitted: (value) {
+                    Provider.of<WalletStatus>(context, listen: false).memo =
+                        value;
+                  },
+                  onChanged: (value) {
+                    Provider.of<WalletStatus>(context, listen: false).memo =
+                        value;
+                  },
+                  maxLength: 256,
+                  maxLines: 3,
+                ),
+              ),
+            ],
+          ),
+        ),
+
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: TextButton(
@@ -264,14 +314,22 @@ class _WalletSendState extends State<WalletSend> {
                       amounttextcontroller.text;
 
                   showDialog(
-                      context: context,
-                      builder: (context) {
-                        return WalletConfirmTransaction(
-                            callback: transactioncallback,
-                            sendtoaccount: Provider.of<WalletStatus>(context,
-                                    listen: false)
-                                .sendtoaccount);
-                      });
+                    context: context,
+                    builder: (context) {
+                      return WalletConfirmTransaction(
+                          callback: transactioncallback,
+                          sendtoaccount:
+                              Provider.of<WalletStatus>(context, listen: false)
+                                  .sendtoaccount
+                                  .accountName,
+                          amount:
+                              Provider.of<WalletStatus>(context, listen: false)
+                                  .amount,
+                          memo:
+                              Provider.of<WalletStatus>(context, listen: false)
+                                  .memo);
+                    },
+                  );
                 }
               }
             },

@@ -1,6 +1,5 @@
 import 'package:fr0gsite/widgets/topbar/connectionoverviewtopbar.dart';
 import 'package:fr0gsite/widgets/topbar/searchbutton.dart';
-import 'package:fr0gsite/widgets/topbar/setflag.dart';
 import 'package:fr0gsite/widgets/topbar/trustertool.dart';
 import 'package:fr0gsite/widgets/topbar/uploadbutton.dart';
 import 'package:fr0gsite/widgets/topbar/loginbutton.dart';
@@ -24,7 +23,7 @@ class TopbarState extends State<Topbar> {
     return const Row(
       children: [
         ConnectionOverviewtopbar(),
-        SetFlag(),
+        //SetFlag(),
         TrusterTool(),
         SearchButton(),
         UploadButton(),

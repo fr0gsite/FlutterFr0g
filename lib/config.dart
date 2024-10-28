@@ -71,11 +71,11 @@ const iconsize = 55.0;
 const textsize = 30.0;
 const minimumscreenwidthforcommentsidebar = 1200.0;
 
-const selfurl = "https://fr0gsite.com";
+const selfurl = "https://fr0g.site";
 const postviewerurl = "$selfurl/postviewer";
 const githuburl = "https://github.com/fr0gsite";
 const signupurl = "https://create.fr0g.site";
-const whitepaperurl = "https://doc.fr0gsite.com/whitepaper";
+const whitepaperurl = "https://doc.fr0g.site/whitepaper";
 const serverstatus = "https://updown.io/p/03mru";
 const telegramurl = "https://t.me/fr0gsite";
 const urltoandroidapp = "https://github.com/fr0gsite/android";
@@ -83,12 +83,12 @@ const urltoiosapp = "https://github.com/fr0gsite";
 const urltowindowsapp = "https://github.com/fr0gsite";
 
 class Documentation {
-  static const String url = "https://doc.fr0gsite.com/";
-  static const String rules = "https://doc.fr0gsite.com/rules";
+  static const String url = "https://doc.fr0g.site/";
+  static const String rules = "https://doc.fr0g.site/rules";
   static const String whereisthekeystored =
-      "https://doc.fr0gsite.com/faq/#where-is-the-private-key-stored";
+      "https://doc.fr0g.site/faq/#where-is-the-private-key-stored";
   static const String activeownerpermission =
-      "https://doc.fr0gsite.com/faq/#what-is-the-difference-between-active-and-owner-permission";
+      "https://doc.fr0g.site/faq/#what-is-the-difference-between-active-and-owner-permission";
 }
 
 class AppConfig {
@@ -119,7 +119,7 @@ class AppConfig {
 
   static List<IPFSUploadNode> ipfsuploadnodes = [
     IPFSUploadNode(
-        "upload.fr0g.site", "https", "upload.fr0g.site", 443, "tacotoken"),
+        "upload.fr0g.site", "upload.fr0g.site", "https", 2053, "tacotoken"),
   ];
 
   static List<Reportnode> reportnodes = [

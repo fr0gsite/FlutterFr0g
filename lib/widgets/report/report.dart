@@ -24,7 +24,6 @@ class _ReportState extends State<Report> with TickerProviderStateMixin {
     vsync: this,
   )..repeat(reverse: true);
 
-  int activeStep = 0;
   List<Widget> stepper = <Widget>[
     const Report1(),
     const Report2(),

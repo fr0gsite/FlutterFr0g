@@ -24,6 +24,8 @@ class _SetFlagState extends State<SetFlag> {
       return ElevatedButton(
         style: ButtonStyle(
           backgroundColor: WidgetStateProperty.all<Color>(Colors.transparent),
+          padding: WidgetStateProperty.all<EdgeInsetsGeometry>(
+              const EdgeInsets.all(0.0)),
         ),
         onPressed: overlaycontroller.toggle,
         child: OverlayPortal(

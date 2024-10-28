@@ -126,6 +126,7 @@ class _UploadinformationState extends State<Uploadinformation> {
                       onSubmitted: (value) {
                         uploadstatus.textfieldipfsthumb.text = value;
                       },
+                      style: const TextStyle(fontSize: 20),
                       decoration: InputDecoration(
                           border: const OutlineInputBorder(),
                           labelText:

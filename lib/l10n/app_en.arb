@@ -302,7 +302,7 @@
             }
         }
     },
-    "disclaimer5":"More information is available in the documentation.",
+    "disclaimer5":"This page has no association with Matt Furie or his creation Pepe the Frog.",
     "lastclaimed":"Last claimed",
     "reservesthisamountofresources":"Reserves this amount of resources",
     "permanentexclusion":"Permanent exclusion",
@@ -352,10 +352,22 @@
     "connectionfailed":"Connection failed",
 
     "choosenfile":"Choosen File",
+    "choosefiles":"Choose Files",
     "selectfile":"Select File",
     "selectthumb":"Select Thumb",
     "nofileselected":"No File selected",
     "thumb":"Thumb",
     "thumbexplain":"A “thumb” (short for thumbnail) is a small preview image of an image or video",
-    "file":"File"
+    "file":"File",
+
+    "searchingnodes":"Searching Nodes",
+    "checkquota":"Checking Quota",
+    "offerproviders":"Select Provider",
+    "preparing":"Preparing",
+    "uploading":"Uploading",
+    "cancel":"Cancel",
+    "providerlistuserslots":"Your Slots",
+    "providerlistoffersfreeslots":"Free Slots",
+    "memo":"Memo",
+    "wallettemplate":"Template"
 }

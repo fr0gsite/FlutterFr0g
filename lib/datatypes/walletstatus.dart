@@ -6,4 +6,5 @@ class WalletStatus extends ChangeNotifier {
   late Account sendtoaccount;
   String amount = "";
   int balance = 0;
+  String memo = ""; // Max 256 characters
 }

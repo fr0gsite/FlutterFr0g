@@ -6,6 +6,7 @@ import 'package:fr0gsite/datatypes/cbasedtoken.dart';
 import 'package:fr0gsite/datatypes/favoritecomment.dart';
 import 'package:fr0gsite/datatypes/favoritetag.dart';
 import 'package:fr0gsite/datatypes/globaltags.dart';
+import 'package:fr0gsite/datatypes/ipfsuploadnode.dart';
 import 'package:fr0gsite/datatypes/producerinfo.dart';
 import 'package:fr0gsite/datatypes/report.dart';
 import 'package:fr0gsite/datatypes/reportstatus.dart';
@@ -142,7 +143,11 @@ class Chainactions {
     debugPrint("Requesting userconfig of user $username, aka. $nameasnumber");
     var userconfig = await geteosclient().getTableRows(
         AppConfig.maincontract, AppConfig.maincontract, 'userconfig',
-        limit: 1, reverse: true, json: true, upper: nameasnumber);
+        limit: 1,
+        reverse: true,
+        json: true,
+        upper: nameasnumber,
+        lower: nameasnumber);
     return UserConfig.fromJson(userconfig[0]);
   }
 
@@ -1062,6 +1067,53 @@ class Chainactions {
       producerinfo = [];
     }
     return producerinfo;
+  }
+
+  //-----------------IPFS Community Node -----------------#
+
+  Future<bool> getslot(String contractname, String pubkey) async {
+    actionsbeforetransaction();
+    List<Action> actions = [
+      Action()
+        ..account = contractname
+        ..name = "getslot"
+        ..authorization = getauth()
+        ..data = {
+          "accountname": username,
+          "pubkey": pubkey,
+        }
+    ];
+    return transactionHandler(actions);
+  }
+
+  Future<bool> setsec(String contractname, String pubkey) async {
+    actionsbeforetransaction();
+    List<Action> actions = [
+      Action()
+        ..account = contractname
+        ..name = "setsec"
+        ..authorization = getauth()
+        ..data = {
+          "accountname": username,
+          "pubkey": pubkey,
+        }
+    ];
+    return transactionHandler(actions);
+  }
+
+  Future<int> getslotprice(IPFSUploadNode node) async {
+    //Request Table
+    var response = await geteosclient().getTableRows(
+        node.accountname, node.accountname, 'configs',
+        json: true);
+    // find value with id 10
+    int priceforslot = 0;
+    for (var element in response) {
+      if (element['id'].toString() == "10") {
+        priceforslot = int.parse(element['intvalue'].toString());
+      }
+    }
+    return priceforslot;
   }
 }
 

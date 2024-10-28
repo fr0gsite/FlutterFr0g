@@ -138,65 +138,51 @@ class _CommentWidgetState extends State<CommentWidget> {
             ),
             child: Row(
               children: [
-                SizedBox(
-                  height: 30,
-                  child: FloatingActionButton.extended(
-                    heroTag: null,
-                    onPressed: () {
-                      if (Provider.of<GlobalStatus>(context, listen: false)
-                          .isLoggedin) {
-                        debugPrint("Create replay to ${widget.comment.author}");
-                        writecomment(context, widget.comment);
-                      } else {
-                        {
-                          showDialog(
-                              context: context,
-                              builder: ((context) {
-                                return const Login();
-                              }));
-                        }
-                      }
-                    },
-                    hoverColor: Colors.blue,
-                    backgroundColor: Colors.blue.withOpacity(0.3),
-                    label: Text(AppLocalizations.of(context)!.reply,
-                        style: const TextStyle(color: Colors.white)),
-                    icon: const Icon(Icons.reply, color: Colors.white),
-                    shape: ShapeBorder.lerp(
+                IconButton(
+                  tooltip: AppLocalizations.of(context)!.reply,
+                  style: ButtonStyle(
+                    backgroundColor: WidgetStateProperty.all<Color>(
+                        Colors.blue.withOpacity(0.5)),
+                    shape: WidgetStateProperty.all<OutlinedBorder>(
                         RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10)),
-                        RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10)),
-                        0.5),
+                            borderRadius: BorderRadius.circular(10))),
                   ),
-                ),
-                SizedBox(
-                  height: 30,
-                  child: FloatingActionButton.extended(
-                    heroTag: null,
-                    onPressed: () {
-                      debugPrint(
-                          "Report comment from ${widget.comment.author}");
+                  onPressed: () {
+                    if (Provider.of<GlobalStatus>(context, listen: false)
+                        .isLoggedin) {
+                      debugPrint("Create reply to ${widget.comment.author}");
+                      writecomment(context, widget.comment);
+                    } else {
                       showDialog(
                         context: context,
-                        builder: ((context) => Report(
-                              mode: "comment",
-                              id: widget.comment.commentId.toInt(),
-                            )),
+                        builder: (context) {
+                          return const Login();
+                        },
                       );
-                    },
-                    hoverColor: Colors.red,
-                    backgroundColor: Colors.red.withOpacity(0.3),
-                    label: Text(AppLocalizations.of(context)!.report,
-                        style: const TextStyle(color: Colors.white)),
-                    icon: const Icon(Icons.report, color: Colors.white),
-                    shape: ShapeBorder.lerp(
+                    }
+                  },
+                  icon: const Icon(Icons.reply, color: Colors.white),
+                ),
+                IconButton(
+                  style: ButtonStyle(
+                    backgroundColor: WidgetStateProperty.all<Color>(
+                        Colors.red.withOpacity(0.5)),
+                    shape: WidgetStateProperty.all<OutlinedBorder>(
                         RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10)),
-                        RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10)),
-                        0.5),
+                            borderRadius: BorderRadius.circular(10))),
                   ),
+                  tooltip: AppLocalizations.of(context)!.report,
+                  onPressed: () {
+                    debugPrint("Report comment from ${widget.comment.author}");
+                    showDialog(
+                      context: context,
+                      builder: ((context) => Report(
+                            mode: "comment",
+                            id: widget.comment.commentId.toInt(),
+                          )),
+                    );
+                  },
+                  icon: const Icon(Icons.report, color: Colors.white),
                 ),
                 const Spacer(),
                 subComments.isNotEmpty

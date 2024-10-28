@@ -77,14 +77,6 @@ class _WalletState extends State<Wallet> {
                                         borderRadius: BorderRadius.circular(10),
                                         border: Border.all(color: Colors.grey)),
                                     child: const Pleaselogin()),
-                                Container(
-                                    decoration: BoxDecoration(
-                                        color: AppColor.niceblack,
-                                        borderRadius: BorderRadius.circular(10),
-                                        border: Border.all(
-                                            color: Colors.grey[400]!)),
-                                    child: Container() //Wallet example Video,
-                                    ),
                               ],
                             ),
                           ),

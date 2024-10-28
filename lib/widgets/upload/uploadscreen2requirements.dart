@@ -20,26 +20,26 @@ class UploadScreen2requirements extends StatelessWidget {
 
     double textsize = 16;
 
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Lottie.asset(
-              "assets/lottie/checklist.json",
-              height: 125,
-              width: 125,
-              repeat: false,
-            ),
-            Text(
-              AppLocalizations.of(context)!.checkRequirements,
-              style: const TextStyle(fontSize: 25, color: Colors.white),
-            ),
-          ],
-        ),
-        Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Lottie.asset(
+                "assets/lottie/checklist.json",
+                height: 125,
+                width: 125,
+                repeat: false,
+              ),
+              Text(
+                AppLocalizations.of(context)!.checkRequirements,
+                style: const TextStyle(fontSize: 25, color: Colors.white),
+              ),
+            ],
+          ),
+          Column(
             children: requirements.map<Widget>((text) {
               return Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -68,61 +68,57 @@ class UploadScreen2requirements extends StatelessWidget {
                           color: Colors.green,
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: TextButton(
-                            onPressed: () {
-                              launchUrl(Uri.parse(Documentation.rules));
-                            },
-                            child: Text(
-                                AppLocalizations.of(context)!
-                                    .alinewithRuleswithlink,
-                                style: TextStyle(
-                                    color: Colors.orange,
-                                    decoration: TextDecoration.underline,
-                                    fontSize: textsize))),
-                      )
+                      TextButton(
+                          onPressed: () {
+                            launchUrl(Uri.parse(Documentation.rules));
+                          },
+                          child: Text(
+                              AppLocalizations.of(context)!
+                                  .alinewithRuleswithlink,
+                              style: TextStyle(
+                                  color: Colors.orange,
+                                  decoration: TextDecoration.underline,
+                                  fontSize: textsize)))
                     ],
                   ),
                 ),
               ),
           ),
-        ),
-        const Spacer(),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            LikeButton(
-              size: 50,
-              circleColor: const CircleColor(
-                start: Colors.green,
-                end: Colors.green,
+          const Spacer(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              LikeButton(
+                size: 50,
+                circleColor: const CircleColor(
+                  start: Colors.green,
+                  end: Colors.green,
+                ),
+                isLiked: Provider.of<Uploadstatus>(context, listen: false)
+                    .acceptedsecond,
+                bubblesColor: const BubblesColor(
+                  dotPrimaryColor: Colors.green,
+                  dotSecondaryColor: Colors.green,
+                ),
+                likeBuilder: (bool isLiked) {
+                  return Icon(
+                    Icons.check_box,
+                    color: isLiked ? Colors.green : Colors.grey,
+                    size: 50,
+                  );
+                },
+                onTap: (bool isLiked) async {
+                  debugPrint(isLiked.toString());
+                  Provider.of<Uploadstatus>(context, listen: false)
+                      .changeonacceptedsecond(!isLiked);
+                  return !isLiked;
+                },
               ),
-              isLiked: Provider.of<Uploadstatus>(context, listen: false)
-                  .acceptedsecond,
-              bubblesColor: const BubblesColor(
-                dotPrimaryColor: Colors.green,
-                dotSecondaryColor: Colors.green,
-              ),
-              likeBuilder: (bool isLiked) {
-                return Icon(
-                  Icons.check_box,
-                  color: isLiked ? Colors.green : Colors.grey,
-                  size: 50,
-                );
-              },
-              onTap: (bool isLiked) async {
-                debugPrint(isLiked.toString());
-                Provider.of<Uploadstatus>(context, listen: false)
-                    .changeonacceptedsecond(!isLiked);
-                return !isLiked;
-              },
-            ),
-            Text(AppLocalizations.of(context)!.okiunderstood),
-          ],
-        ),
-        const SizedBox(height: 25),
-      ],
+              Text(AppLocalizations.of(context)!.okiunderstood),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

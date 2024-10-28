@@ -24,6 +24,8 @@ class _ConnectionOverviewtopbarState extends State<ConnectionOverviewtopbar> {
       return ElevatedButton(
         style: ButtonStyle(
           backgroundColor: WidgetStateProperty.all<Color>(Colors.transparent),
+          padding: WidgetStateProperty.all<EdgeInsetsGeometry>(
+              const EdgeInsets.all(0.0)),
         ),
         onPressed: () {
           debugPrint("Open ConnectionOverview");

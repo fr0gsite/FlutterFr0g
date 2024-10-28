@@ -122,6 +122,8 @@ class _Uploadscreen3providerState extends State<Uploadscreen3provider> {
               style: TextStyle(color: Colors.white),
             ),
             onTap: () {
+              Provider.of<Uploadstatus>(context, listen: false)
+                  .changeonselectedprovider(true);
               showDialog(
                   context: context,
                   builder: (context) => UploadScreencommunitynode(
@@ -130,21 +132,24 @@ class _Uploadscreen3providerState extends State<Uploadscreen3provider> {
             }),
         for (int i = 0; i < providerList.length; i++)
           ListTile(
-              leading: Icon(
-                providerList[i][1] as IconData?,
-                color: Colors.white,
-              ),
-              title: AutoSizeText(
-                providerList[i][0] as String,
-                style: const TextStyle(color: Colors.white),
-              ),
-              subtitle: AutoSizeText(
-                providerList[i][3] as String,
-                style: const TextStyle(color: Colors.white),
-              ),
-              onTap: () {
-                launchUrl(Uri.parse(providerList[i][2] as String));
-              }),
+            leading: Icon(
+              providerList[i][1] as IconData?,
+              color: Colors.white,
+            ),
+            title: AutoSizeText(
+              providerList[i][0] as String,
+              style: const TextStyle(color: Colors.white),
+            ),
+            subtitle: AutoSizeText(
+              providerList[i][3] as String,
+              style: const TextStyle(color: Colors.white),
+            ),
+            onTap: () {
+              Provider.of<Uploadstatus>(context, listen: false)
+                  .changeonselectedprovider(true);
+              launchUrl(Uri.parse(providerList[i][2] as String));
+            },
+          ),
       ],
     );
   }
