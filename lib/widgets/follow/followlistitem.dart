@@ -18,7 +18,7 @@ class Followlistitem extends StatefulWidget {
 
 class _FollowlistitemState extends State<Followlistitem> {
   Future? getnumoffollowerfuture;
-  int follower = 0;
+  int follower = 1;
   double textwidth = 60;
   Color textcolor = AppColor.nicewhite;
 
@@ -90,23 +90,29 @@ class _FollowlistitemState extends State<Followlistitem> {
                             ..setusernameandpermission(username, permission)
                             ..unfollowuser(widget.username).then(
                               (value) {
-                                if (value) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(
-                                          "${AppLocalizations.of(context)!.unfollowuser}: ${widget.username}"),
-                                    ),
-                                  );
-                                  widget.callback(
-                                      widget.username, widget.isselected, true);
-                                } else {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(
-                                          AppLocalizations.of(context)!.error),
-                                    ),
-                                  );
-                                }
+
+                                print("setusernameandpermission ==> $value");
+                                setState(() {
+                                  if (value) {
+
+                                    print("setusernameandpermission 11 ==> $value");
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                            "${AppLocalizations.of(context)!.unfollowuser}: ${widget.username}"),
+                                      ),
+                                    );
+                                    widget.callback(
+                                        widget.username, widget.isselected, true);
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                            AppLocalizations.of(context)!.error),
+                                      ),
+                                    );
+                                  }
+                                });
                               },
                             );
                         },

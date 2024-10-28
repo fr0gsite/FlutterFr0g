@@ -337,5 +337,13 @@
     "selectrule":"नियम चुनें",
     "automaticchooseipfsnode":"स्वचालित रूप से सबसे अच्छा IPFS नोड चुनें",
     "automaticchooseblockchainnode":"स्वचालित रूप से सबसे अच्छा ब्लॉकचेन नोड चुनें",
-    "automatic":"स्वचालित"
+    "automatic":"स्वचालित",
+
+    "whitepaper": "सफेद कागज",
+    "information": "जानकारी",
+    "links": "लिंक",
+    "rules": "नियम",
+    "linktodocumentation": "प्रलेखन",
+    "linktoupdown": "updown.io Status Page",
+    "linksocialmedia": "Social Media Accounts (Telegram & X.com)"
 }

@@ -7,6 +7,7 @@ import 'package:fr0gsite/datatypes/locationandlanguage.dart';
 import 'package:fr0gsite/datatypes/networkstatus.dart';
 import 'package:fr0gsite/datatypes/walletstatus.dart';
 import 'package:fr0gsite/localstorage.dart';
+import 'package:fr0gsite/widgets/infoscreens/Informations.dart';
 import 'package:fr0gsite/widgets/status/status.dart';
 import 'package:fr0gsite/widgets/resources/resourceviewer.dart';
 import 'package:fr0gsite/widgets/home/home.dart';
@@ -123,7 +124,9 @@ class _MyAppState extends State<App> {
 
 class fr0gsiteApp extends StatefulWidget {
   final String? page;
+
   const fr0gsiteApp({super.key, this.page});
+
   @override
   State<fr0gsiteApp> createState() => StartPoint();
 }
@@ -140,6 +143,7 @@ class StartPoint extends State<fr0gsiteApp> {
     "games",
     "status",
     "resource",
+    "information",
     "profile"
   ];
 
@@ -152,6 +156,7 @@ class StartPoint extends State<fr0gsiteApp> {
     Icons.sports_esports,
     Icons.area_chart,
     Icons.network_check_rounded,
+    Icons.info_outline,
     Icons.person
   ];
 
@@ -164,6 +169,7 @@ class StartPoint extends State<fr0gsiteApp> {
     const Games(),
     const Status(),
     const ResourceViewer(),
+    Informations(),
     const Profile(),
   ];
 
@@ -309,10 +315,15 @@ class StartPoint extends State<fr0gsiteApp> {
                                     trailing: Column(
                                       children: [
                                         IconButton(
-                                          icon: const Icon(Icons.info_outline,
-                                              color: Colors.grey),
+                                          icon: _selectedIndex == 8
+                                              ? Icon(Icons.info_outline,
+                                                  color: Colors.amber[800])
+                                              : Icon(Icons.info_outline,
+                                                  color: Colors.grey),
                                           onPressed: () {
-                                            launchUrl(Uri.parse(serverstatus));
+                                            _selectedIndex = 8;
+                                            Navigator.pushReplacementNamed(
+                                                context, '/information');
                                           },
                                         ),
                                         IconButton(

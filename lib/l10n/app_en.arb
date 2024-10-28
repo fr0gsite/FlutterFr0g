@@ -349,5 +349,13 @@
     "connectionpath":"Path",
     "connectionmethode":"Method",
     "connectionsuccessfull":"Connection successfull",
-    "connectionfailed":"Connection failed"
+    "connectionfailed":"Connection failed",
+
+    "whitepaper": "WhitePaper",
+    "linktodocumentation": "Documentation",
+    "linktoupdown": "updown.io Status Page",
+    "linksocialmedia": "Social Media Accounts (Telegram & X.com)",
+    "information": "Information",
+    "links": "Links",
+    "rules": "Rules"
 }

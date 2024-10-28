@@ -1,4 +1,5 @@
 import 'package:fr0gsite/widgets/globaltag/globaltag.dart';
+import 'package:fr0gsite/widgets/infoscreens/Informations.dart';
 import 'package:fr0gsite/widgets/infoscreens/notfoundpage.dart';
 import 'package:fr0gsite/widgets/postviewer/postviewer.dart';
 import 'package:fr0gsite/widgets/root.dart';
@@ -25,6 +26,10 @@ class Mainrouter {
   static final Handler _notfoundpage = Handler(
       handlerFunc: (context, Map<String, dynamic> params) =>
           const NotFoundPage());
+
+  static final Handler _informationPage = Handler(
+      handlerFunc: (context, Map<String, dynamic> params) =>
+      Informations());
   static final Handler _loadingpleasewaitscreen = Handler(
       handlerFunc: (context, Map<String, dynamic> params) =>
           const Loadingpleasewaitscreen());
@@ -45,6 +50,6 @@ class Mainrouter {
 
     router.define('loadingpleasewaitscreen', handler: _loadingpleasewaitscreen);
 
-    //router.define('/notfound', handler: _notfoundpage);
+    router.define('/informations', handler: _informationPage);
   }
 }
