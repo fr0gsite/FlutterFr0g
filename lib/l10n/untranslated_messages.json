@@ -9,11 +9,22 @@
     "connectionsuccessfull",
     "connectionfailed",
     "choosenfile",
+    "choosefiles",
     "selectfile",
     "selectthumb",
     "nofileselected",
     "thumb",
-    "thumbexplain"
+    "thumbexplain",
+    "searchingnodes",
+    "checkquota",
+    "offerproviders",
+    "preparing",
+    "uploading",
+    "cancel",
+    "providerlistuserslots",
+    "providerlistoffersfreeslots",
+    "memo",
+    "wallettemplate"
   ],
 
   "cs": [
@@ -26,11 +37,36 @@
     "connectionsuccessfull",
     "connectionfailed",
     "choosenfile",
+    "choosefiles",
     "selectfile",
     "selectthumb",
     "nofileselected",
     "thumb",
-    "thumbexplain"
+    "thumbexplain",
+    "searchingnodes",
+    "checkquota",
+    "offerproviders",
+    "preparing",
+    "uploading",
+    "cancel",
+    "providerlistuserslots",
+    "providerlistoffersfreeslots",
+    "memo",
+    "wallettemplate"
+  ],
+
+  "de": [
+    "choosefiles",
+    "searchingnodes",
+    "checkquota",
+    "offerproviders",
+    "preparing",
+    "uploading",
+    "cancel",
+    "providerlistuserslots",
+    "providerlistoffersfreeslots",
+    "memo",
+    "wallettemplate"
   ],
 
   "es": [
@@ -43,11 +79,22 @@
     "connectionsuccessfull",
     "connectionfailed",
     "choosenfile",
+    "choosefiles",
     "selectfile",
     "selectthumb",
     "nofileselected",
     "thumb",
-    "thumbexplain"
+    "thumbexplain",
+    "searchingnodes",
+    "checkquota",
+    "offerproviders",
+    "preparing",
+    "uploading",
+    "cancel",
+    "providerlistuserslots",
+    "providerlistoffersfreeslots",
+    "memo",
+    "wallettemplate"
   ],
 
   "fr": [
@@ -60,11 +107,22 @@
     "connectionsuccessfull",
     "connectionfailed",
     "choosenfile",
+    "choosefiles",
     "selectfile",
     "selectthumb",
     "nofileselected",
     "thumb",
-    "thumbexplain"
+    "thumbexplain",
+    "searchingnodes",
+    "checkquota",
+    "offerproviders",
+    "preparing",
+    "uploading",
+    "cancel",
+    "providerlistuserslots",
+    "providerlistoffersfreeslots",
+    "memo",
+    "wallettemplate"
   ],
 
   "hi": [
@@ -77,11 +135,22 @@
     "connectionsuccessfull",
     "connectionfailed",
     "choosenfile",
+    "choosefiles",
     "selectfile",
     "selectthumb",
     "nofileselected",
     "thumb",
-    "thumbexplain"
+    "thumbexplain",
+    "searchingnodes",
+    "checkquota",
+    "offerproviders",
+    "preparing",
+    "uploading",
+    "cancel",
+    "providerlistuserslots",
+    "providerlistoffersfreeslots",
+    "memo",
+    "wallettemplate"
   ],
 
   "it": [
@@ -94,11 +163,22 @@
     "connectionsuccessfull",
     "connectionfailed",
     "choosenfile",
+    "choosefiles",
     "selectfile",
     "selectthumb",
     "nofileselected",
     "thumb",
-    "thumbexplain"
+    "thumbexplain",
+    "searchingnodes",
+    "checkquota",
+    "offerproviders",
+    "preparing",
+    "uploading",
+    "cancel",
+    "providerlistuserslots",
+    "providerlistoffersfreeslots",
+    "memo",
+    "wallettemplate"
   ],
 
   "ja": [
@@ -111,11 +191,22 @@
     "connectionsuccessfull",
     "connectionfailed",
     "choosenfile",
+    "choosefiles",
     "selectfile",
     "selectthumb",
     "nofileselected",
     "thumb",
-    "thumbexplain"
+    "thumbexplain",
+    "searchingnodes",
+    "checkquota",
+    "offerproviders",
+    "preparing",
+    "uploading",
+    "cancel",
+    "providerlistuserslots",
+    "providerlistoffersfreeslots",
+    "memo",
+    "wallettemplate"
   ],
 
   "pt": [
@@ -128,11 +219,22 @@
     "connectionsuccessfull",
     "connectionfailed",
     "choosenfile",
+    "choosefiles",
     "selectfile",
     "selectthumb",
     "nofileselected",
     "thumb",
-    "thumbexplain"
+    "thumbexplain",
+    "searchingnodes",
+    "checkquota",
+    "offerproviders",
+    "preparing",
+    "uploading",
+    "cancel",
+    "providerlistuserslots",
+    "providerlistoffersfreeslots",
+    "memo",
+    "wallettemplate"
   ],
 
   "ru": [
@@ -145,11 +247,22 @@
     "connectionsuccessfull",
     "connectionfailed",
     "choosenfile",
+    "choosefiles",
     "selectfile",
     "selectthumb",
     "nofileselected",
     "thumb",
-    "thumbexplain"
+    "thumbexplain",
+    "searchingnodes",
+    "checkquota",
+    "offerproviders",
+    "preparing",
+    "uploading",
+    "cancel",
+    "providerlistuserslots",
+    "providerlistoffersfreeslots",
+    "memo",
+    "wallettemplate"
   ],
 
   "uk": [
@@ -162,11 +275,22 @@
     "connectionsuccessfull",
     "connectionfailed",
     "choosenfile",
+    "choosefiles",
     "selectfile",
     "selectthumb",
     "nofileselected",
     "thumb",
-    "thumbexplain"
+    "thumbexplain",
+    "searchingnodes",
+    "checkquota",
+    "offerproviders",
+    "preparing",
+    "uploading",
+    "cancel",
+    "providerlistuserslots",
+    "providerlistoffersfreeslots",
+    "memo",
+    "wallettemplate"
   ],
 
   "zh": [
@@ -179,10 +303,21 @@
     "connectionsuccessfull",
     "connectionfailed",
     "choosenfile",
+    "choosefiles",
     "selectfile",
     "selectthumb",
     "nofileselected",
     "thumb",
-    "thumbexplain"
+    "thumbexplain",
+    "searchingnodes",
+    "checkquota",
+    "offerproviders",
+    "preparing",
+    "uploading",
+    "cancel",
+    "providerlistuserslots",
+    "providerlistoffersfreeslots",
+    "memo",
+    "wallettemplate"
   ]
 }
