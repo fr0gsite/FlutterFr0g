@@ -1,8 +1,10 @@
+import 'package:fr0gsite/config.dart';
 import 'package:fr0gsite/datatypes/gridstatus.dart';
 import 'package:fr0gsite/datatypes/uploadordertemplate.dart';
 import 'package:fr0gsite/serachmodes/searchuseruploads.dart';
 import 'package:fr0gsite/widgets/grid/creategrid.dart';
 import 'package:fr0gsite/widgets/grid/gridfilderbutton.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -63,10 +65,11 @@ class _UserUploadViewState extends State<UserUploadView> {
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
                     if (uploadorder.currentviewuploadlist.isEmpty) {
-                      return const Column(
+                      return Column(
                         children: [
                           Center(
-                            child: Text("No uploads found"),
+                            child: Text(AppLocalizations.of(context)!.nouploadsfound,
+                                style: const TextStyle(color: AppColor.nicewhite)),
                           ),
                         ],
                       );
@@ -93,7 +96,6 @@ class _UserUploadViewState extends State<UserUploadView> {
   }
 
   Future<bool> loadmorecallback() async {
-    debugPrint("loadmorecallback");
     await uploadorder.searchnext();
     setState(() {});
     return true;

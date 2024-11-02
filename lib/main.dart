@@ -144,7 +144,6 @@ class StartPoint extends State<fr0gsiteApp> {
     "status",
     "resource",
     "information",
-    "profile"
   ];
 
   List<IconData> pageicons = [
@@ -157,7 +156,6 @@ class StartPoint extends State<fr0gsiteApp> {
     Icons.area_chart,
     Icons.network_check_rounded,
     Icons.info_outline,
-    Icons.person
   ];
 
   final List<Widget> screens = [
@@ -170,7 +168,6 @@ class StartPoint extends State<fr0gsiteApp> {
     const Status(),
     const ResourceViewer(),
     Informations(),
-    const Profile(),
   ];
 
   void _onItemTapped(int index) {

@@ -89,7 +89,7 @@ class _ProfileState extends State<Profile> {
     setState(() {
       account = Account(usernametosearch, 0);
       html.window.history
-          .pushState({}, '', '/profile?username=$usernametosearch');
+          .pushState({}, '', '/profile/$usernametosearch');
       Chainactions()
           .getaccountinfo(account.accountName)
           .then((value) => setaccountinfo(value));
@@ -107,7 +107,7 @@ class _ProfileState extends State<Profile> {
 
     //Check if user to custom search
 
-    return Container(
+    return Material(
       color: AppColor.nicegrey,
       child: Consumer<GlobalStatus>(
         builder: (context, userstatus, child) {

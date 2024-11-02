@@ -66,7 +66,7 @@ class _FollowlistitemState extends State<Followlistitem> {
                     child: IconButton(
                         onPressed: () => {
                               Navigator.pushNamed(context,
-                                  "/profile?username=${widget.username}",
+                                  "/profile/${widget.username}",
                                   arguments: widget.username)
                             },
                         icon: const Icon(

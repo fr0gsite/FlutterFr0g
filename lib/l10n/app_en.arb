@@ -375,5 +375,6 @@
     "linksocialmedia": "Social Media Accounts (Telegram & X.com)",
     "information": "Information",
     "links": "Links",
-    "rules": "Rules"
+    "rules": "Rules",
+    "nouploadsfound":"No uploads found"
 }

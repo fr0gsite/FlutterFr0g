@@ -2,6 +2,7 @@ import 'package:fr0gsite/widgets/globaltag/globaltag.dart';
 import 'package:fr0gsite/widgets/infoscreens/Informations.dart';
 import 'package:fr0gsite/widgets/infoscreens/notfoundpage.dart';
 import 'package:fr0gsite/widgets/postviewer/postviewer.dart';
+import 'package:fr0gsite/widgets/profile/profile.dart';
 import 'package:fr0gsite/widgets/root.dart';
 import 'package:fluro/fluro.dart';
 
@@ -34,6 +35,11 @@ class Mainrouter {
       handlerFunc: (context, Map<String, dynamic> params) =>
           const Loadingpleasewaitscreen());
 
+  static final Handler _profile = Handler(
+      handlerFunc: (context, Map<String, dynamic> params) =>
+          Profile(accountname: params['username'][0])
+          );
+
   static void setupRouter() {
     router.define('/postviewer/:id',
         handler: _handlerpostview, transitionType: TransitionType.fadeIn);
@@ -51,5 +57,8 @@ class Mainrouter {
     router.define('loadingpleasewaitscreen', handler: _loadingpleasewaitscreen);
 
     router.define('/informations', handler: _informationPage);
+
+    router.define('/profile/:username',
+        handler: _profile, transitionType: TransitionType.none);
   }
 }

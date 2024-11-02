@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:fr0gsite/config.dart';
 import 'package:fr0gsite/datatypes/globalstatus.dart';
 import 'package:fr0gsite/globalnotifications.dart';
@@ -26,7 +27,7 @@ class _LoginButtonState extends State<LoginButton> {
                       WidgetStateProperty.all<Color>(AppColor.nicewhite),
                 ),
                 onPressed: () {
-                  Navigator.pushNamed(context, "/profile");
+                    Navigator.pushNamed(context, "/profile/${userstatus.username}");
                 },
                 child: Text(userstatus.username)),
             //ResourceViewerTopBar(cpu: true, ram: false, net: true, act: true),

@@ -35,7 +35,7 @@ class Settings extends StatelessWidget {
                 onPressed: (BuildContext context) {
                   if (userstatus.isLoggedin) {
                     Navigator.pushNamed(
-                        context, '/profile?username=${userstatus.username}');
+                        context, '/profile/${userstatus.username}');
                   } else {
                     showDialog(
                       context: context,

@@ -72,43 +72,7 @@ class _AccountBalanceState extends State<AccountBalance> {
                 inside: BorderSide(width: 2, color: Colors.black)),
             children: [
               TableRow(
-                //decoration: const BoxDecoration(color: AppColor.niceblack),
-                children: [
-                  TableCell(
-                    child: Tooltip(
-                      message: "",
-                      child: Row(
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.all(iconpadding),
-                            child: Icon(
-                              Icons.account_balance_wallet_rounded,
-                              color: iconcolour,
-                              size: tableiconsize,
-                            ),
-                          ),
-                          AutoSizeText(
-                            AppLocalizations.of(context)!.total,
-                            minFontSize: mintextsize,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  TableCell(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: AutoSizeText(
-                        "$totalbalance ${AppConfig.systemtoken}",
-                        textAlign: TextAlign.right,
-                        minFontSize: mintextsize,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              TableRow(
-                //decoration: const BoxDecoration(color: AppColor.nicegrey),
+                decoration: BoxDecoration(color: Colors.grey.withOpacity(0.3)),
                 children: [
                   TableCell(
                     child: Tooltip(
@@ -143,7 +107,7 @@ class _AccountBalanceState extends State<AccountBalance> {
                 ],
               ),
               TableRow(
-                //decoration: const BoxDecoration(color: AppColor.niceblack),
+                decoration: BoxDecoration(color: Colors.grey.withOpacity(0.3)),
                 children: [
                   TableCell(
                     child: Tooltip(
@@ -178,7 +142,7 @@ class _AccountBalanceState extends State<AccountBalance> {
                 ],
               ),
               TableRow(
-                //decoration: const BoxDecoration(color: AppColor.nicegrey),
+                decoration: BoxDecoration(color: Colors.grey.withOpacity(0.3)),
                 children: [
                   TableCell(
                     child: Tooltip(
@@ -210,6 +174,42 @@ class _AccountBalanceState extends State<AccountBalance> {
                           "$refundbalance ${AppConfig.systemtoken}",
                           textAlign: TextAlign.right,
                           minFontSize: mintextsize),
+                    ),
+                  ),
+                ],
+              ),
+              TableRow(
+                decoration: const BoxDecoration(color: AppColor.niceblack),
+                children: [
+                  TableCell(
+                    child: Tooltip(
+                      message: "",
+                      child: Row(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.all(iconpadding),
+                            child: Icon(
+                              Icons.account_balance_wallet_rounded,
+                              color: iconcolour,
+                              size: tableiconsize,
+                            ),
+                          ),
+                          AutoSizeText(
+                            AppLocalizations.of(context)!.total,
+                            minFontSize: mintextsize,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  TableCell(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: AutoSizeText(
+                        "$totalbalance ${AppConfig.systemtoken}",
+                        textAlign: TextAlign.right,
+                        minFontSize: mintextsize,
+                      ),
                     ),
                   ),
                 ],

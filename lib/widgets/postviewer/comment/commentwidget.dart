@@ -111,7 +111,7 @@ class _CommentWidgetState extends State<CommentWidget> {
                       onPressed: () {
                         //Open user profile
                         Navigator.pushReplacementNamed(context,
-                            '/profile?username=${widget.comment.author}',
+                            '/profile/${widget.comment.author}',
                             arguments: {'accountname': widget.comment.author});
                       },
                     ),

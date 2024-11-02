@@ -28,9 +28,17 @@ class SearchUserUploads extends UploadOrderTemplate {
 
   @override
   Future<List<Upload>> searchnext() async {
+    if(reachedend){
+      return [];
+    }
     try {
       List<Upload> response = await chainactions.getuploadsfromuserupperthan(
           username, 60, lastlowerid.toString());
+      if(response.isEmpty){
+        reachedend = true;
+        debugPrint("Upperthan reached end");
+        return [];
+      }
       adduploadlist(response);
       sortcurrentview();
       removeduplicates();

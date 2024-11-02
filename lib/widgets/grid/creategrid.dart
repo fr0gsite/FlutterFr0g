@@ -17,7 +17,7 @@ class CreateGrid extends StatefulWidget {
 
 class _CreateGridState extends State<CreateGrid> {
   List<Widget> items = [];
-  int minRow = 6;
+  int minRow = 1;
   final ScrollController _scrollController = ScrollController();
 
   @override
@@ -37,19 +37,17 @@ class _CreateGridState extends State<CreateGrid> {
     int crossAxisCount = resize();
     int numberOfRows = (items.length / crossAxisCount).ceil();
     if (numberOfRows < minRow) {
-      debugPrint("Grid has less than $minRow rows, loading more");
       widget.loadmorecallback();
     }
   }
 
   void _scrollListenerLoadMore() {
     var buffer = 400;
-    if ((_scrollController.position.maxScrollExtent - buffer) <=
-            _scrollController.position.pixels &&
-        (_scrollController.position.pixels - buffer) <=
-            _scrollController.position.maxScrollExtent) {
-      debugPrint("load more");
-      widget.loadmorecallback();
+    if ((_scrollController.position.maxScrollExtent - buffer) <=_scrollController.position.pixels &&
+        (_scrollController.position.pixels - buffer)          <= _scrollController.position.maxScrollExtent) {
+            if(items.isNotEmpty){
+                widget.loadmorecallback();
+            }
     }
   }
 

@@ -108,8 +108,6 @@ class AppConfig {
   static List<IPFSNode> ipfsnodes = [
     //IPFSNode("https://ipfs.io/ipfs/", "GET")
     IPFSNode("ipfs.fr0g.site", "https", "ipfs.fr0g.site", 443, "/ipfs/", "GET"),
-    IPFSNode("ipfs.aufdeinnacken.com", "https", "ipfs.aufdeinnacken.com", 443,
-        "/ipfs/", "GET"),
   ];
 
   static List<Blockchainnode> blockchainnodeurls = [

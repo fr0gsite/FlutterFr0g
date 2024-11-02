@@ -16,6 +16,8 @@ abstract class UploadOrderTemplate {
   bool showpicture = true;
   bool showvideo = true;
 
+  bool reachedend = false;
+
   void addupload(Upload upload) {
     completeuploadlist.add(upload);
     if (showpicture && showvideo) {
