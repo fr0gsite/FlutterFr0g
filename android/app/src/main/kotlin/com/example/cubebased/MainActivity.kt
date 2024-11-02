@@ -1,4 +1,4 @@
-package com.example.cubebased
+package com.fr0gsite
 
 import io.flutter.embedding.android.FlutterActivity
 
