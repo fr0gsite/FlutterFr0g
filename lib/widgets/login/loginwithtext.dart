@@ -28,6 +28,8 @@ class _LoginwithtextState extends State<Loginwithtext> {
   var fillcolorusername = Colors.blueGrey;
   var fillcolorprivatekey = Colors.blueGrey;
 
+  String permission = "active";
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -107,7 +109,11 @@ class _LoginwithtextState extends State<Loginwithtext> {
                   [Colors.red]
                 ],
                 onToggle: (index) {
-                  debugPrint('switched to: $index');
+                  if (index == 0) {
+                    permission = "active";
+                  } else {
+                    permission = "owner";
+                  }
                 },
               ),
             ),
@@ -218,7 +224,7 @@ class _LoginwithtextState extends State<Loginwithtext> {
       if (usernamevalid && privatekeyvalid) {
         try {
           var isprivatekeyvalid = await Chainactions().checkusercredentials(
-              usernameController.text, privatekeyController.text, "active");
+              usernameController.text, privatekeyController.text, permission);
           if (isprivatekeyvalid) {
             const secstorage = FlutterSecureStorage();
             await secstorage.write(
@@ -227,7 +233,7 @@ class _LoginwithtextState extends State<Loginwithtext> {
                 key: "username", value: usernameController.text);
             if (mounted) {
               Provider.of<GlobalStatus>(context, listen: false)
-                  .login(usernameController.text, "active");
+                  .login(usernameController.text, permission);
               TextInput.finishAutofillContext();
               Globalnotifications.shownotification(
                   context,
@@ -239,13 +245,12 @@ class _LoginwithtextState extends State<Loginwithtext> {
           }
         } catch (error) {
           if (mounted) {
-            showDialog(
-                context: context,
-                builder: (_) => AlertDialog(
-                      backgroundColor: AppColor.niceblack,
-                      title: const Center(child: Text("Error")),
-                      content: Text(error.toString()),
-                    ));
+            widget.feedback("wrongprivatekey");
+            Globalnotifications.shownotification(
+              context,
+              AppLocalizations.of(context)!.error,
+              "${AppLocalizations.of(context)!.wrongprivatekey} / ${AppLocalizations.of(context)!.wrongusername}",
+              "error");
             debugPrint("Login Error: $error");
           }
         }
