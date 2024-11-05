@@ -45,7 +45,7 @@ class GlobalStatus extends ChangeNotifier {
   DateTime lastrequest = DateTime.now();
 
   bool expandedpostviewer = false;
-  bool expandedtagview = false;
+  bool expandedtagview = true;
   bool expandhomenavigationbar = true;
 
   bool audionotifications = true;
