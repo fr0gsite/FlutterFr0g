@@ -35,7 +35,6 @@ This is the interface to **Fr0g**. Single codebase to web, android, ios.
 
 On Web you can visit this currenlty hosted Fr0g instances:
 - [Fr0g.site](https://fr0g.site) 
-- [Fr0g.page](https://fr0g.page)
 
 If you want to build by yourself, just install flutter and clone this repo.
 
@@ -52,9 +51,4 @@ Feel free to translate parts of the application in your language.
 > The language files are here: **lib\l10n**
 
 If you find an bug you can report [here]()
-
-
-<p align="center">
-<img src="assets/frog/29.gif" alt="drawing" width="200"/>
-</p>
 
