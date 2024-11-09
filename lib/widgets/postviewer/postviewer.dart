@@ -18,6 +18,7 @@ import 'package:universal_html/html.dart' as html;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:video_player/video_player.dart';
 
 import '../../chainactions/chainactions.dart';
 import '../../datatypes/postviewerstatus.dart';
@@ -39,6 +40,7 @@ class PostviewerState extends State<Postviewer> {
   int contentdatauppersurplus = 2;
   int contentdatalowersurplus = 2;
 
+  var videocontroller = VideoPlayerController.network('');
   PageController pagecontroller = PageController();
 
   List<SwipeItem> swipeItemList = [];
@@ -155,6 +157,15 @@ class PostviewerState extends State<Postviewer> {
                                     child: expandButton(() {
                                       double currentwidth =
                                           MediaQuery.of(context).size.width;
+                                      setState(() {
+
+                                        print(videocontroller.value.isPlaying);
+                                        if(videocontroller.value.isPlaying) {
+                                          videocontroller.pause();
+                                        }else {
+                                          videocontroller.play();
+                                        }
+                                      });
                                       if (currentwidth < 1200) {
                                         Provider.of<GlobalStatus>(context,
                                                 listen: false)
@@ -194,6 +205,15 @@ class PostviewerState extends State<Postviewer> {
                                       Provider.of<GlobalStatus>(context,
                                               listen: false)
                                           .toggleexpandedtagview();
+
+                                      setState(() {
+                                        print(videocontroller.value.isPlaying);
+                                        if(videocontroller.value.isPlaying) {
+                                          videocontroller.pause();
+                                        }else {
+                                          videocontroller.play();
+                                        }
+                                      });
                                     },
                                         Provider.of<PostviewerStatus>(context,
                                                 listen: true)
@@ -284,7 +304,7 @@ class PostviewerState extends State<Postviewer> {
         Provider.of<PostviewerStatus>(context, listen: false)
             .uploadlist
             .forEach((element) {
-          swipeItemList.add(SwipeItem(upload: element));
+          swipeItemList.add(SwipeItem(upload: element,videocontroller: videocontroller,));
         });
 
         debugPrint("Postviewer: Set current upload");
