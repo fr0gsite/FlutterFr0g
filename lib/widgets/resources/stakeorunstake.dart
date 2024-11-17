@@ -14,6 +14,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class StakeorUnstake extends StatefulWidget {
   final String action;
   final Account account;
+
   const StakeorUnstake(
       {super.key, required this.action, required this.account});
 
@@ -81,6 +82,14 @@ class _StakeorUnstakeState extends State<StakeorUnstake> {
     refundcpu = widget.account.refundRequest?.cpuAmount?.amount ?? 0.0;
     refundnet = widget.account.refundRequest?.netAmount?.amount ?? 0.0;
 
+    print("liquid ===> $liquid");
+    print("totalcpu ===> $totalcpu");
+    print("totalnet ===> $totalnet");
+    print("cpuLimitmax ===> $cpuLimitmax");
+    print("netLimitmax ===> $netLimitmax");
+    print("refundcpu ===> $refundcpu");
+    print("refundnet ===> $refundnet");
+
     switch (widget.action) {
       case "Stake":
         activeColor = Colors.green;
@@ -102,6 +111,8 @@ class _StakeorUnstakeState extends State<StakeorUnstake> {
     value = (value * 10000).round() / 10000;
 
     setState(() {
+
+      print("updatevalues =====> $value");
       switch (typ) {
         case "CPU":
           value = value > slidercpumax ? slidercpumax : value;
@@ -280,6 +291,20 @@ class _StakeorUnstakeState extends State<StakeorUnstake> {
                     ]),
                   ],
                 ),
+
+                liquid == 0.0
+                    ? Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Text(
+                          "No coins can be staked. \nPlease fund your account with coins",
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        ),
+                      )
+                    : Container(),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(

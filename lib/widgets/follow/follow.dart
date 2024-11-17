@@ -254,11 +254,16 @@ class _FollowState extends State<Follow> with TickerProviderStateMixin {
   Future<bool> getfollower(String pUsername) async {
     List<Usersubscription> subscription =
         await Chainactions().getusersubscriptions(pUsername);
-    for (var item in subscription) {
+    for (var i = 0; i < subscription.length; i++) {
       listitems.add(Followlistitem(
-        username: item.username,
+        username: subscription[i].username,
         callback: followlistitemcallback,
       ));
+
+      // Set the first follower as selected by default
+      if (i == 0) {
+        listitems[i].isselected = true;
+      }
     }
 
     //List<Future> futures = [];
