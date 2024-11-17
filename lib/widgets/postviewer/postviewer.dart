@@ -22,6 +22,7 @@ import 'package:video_player/video_player.dart';
 
 import '../../chainactions/chainactions.dart';
 import '../../datatypes/postviewerstatus.dart';
+import '../../ipfsactions.dart';
 import 'postviewerbottombar.dart';
 
 /// Stateful widget to fetch and then display video content.
@@ -170,7 +171,7 @@ class PostviewerState extends State<Postviewer> {
                                         Provider.of<GlobalStatus>(context,
                                                 listen: false)
                                             .expandedpostviewer = false;
-                                        setState(() {});
+                                        // setState(() {});
                                         showModalBottomSheet(
                                           context: context,
                                           isScrollControlled: true,
@@ -349,11 +350,33 @@ class PostviewerState extends State<Postviewer> {
   void nextindex(int value) {
     Provider.of<PostviewerStatus>(context, listen: false)
         .setcurrentupload(swipeItemList[value].upload);
+
+    // Preload videos
+    preloadVideos(value);
+
     //Update URL
     if (kIsWeb) {
       html.window.history.pushState(null, "Postviewer",
           "/postviewer/${swipeItemList[value].upload.uploadid}");
     }
+  }
+
+  void preloadVideos(int currentIndex) async {
+    int preloadRange = 2; // Number of videos to preload before and after
+    for (int i = currentIndex - preloadRange; i <= currentIndex + preloadRange; i++) {
+      if (i >= 0 && i < swipeItemList.length) {
+        final item = swipeItemList[i];
+        // if (!item.videocontroller.value.isInitialized) {
+          final upload = item.upload;
+          final data = await fetchUploadData(upload.uploadipfshash); // Fetch video data
+          await item.initializePlayer(data); // Preload video
+        // }
+      }
+    }
+  }
+
+  Future<Uint8List> fetchUploadData(String hash) async {
+    return await IPFSActions.fetchipfsdata(context, hash);
   }
 }
 
