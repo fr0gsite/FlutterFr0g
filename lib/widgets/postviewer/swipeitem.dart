@@ -19,6 +19,23 @@ class SwipeItem extends StatefulWidget {
   VideoPlayerController videocontroller;
   SwipeItem({super.key, required this.upload,required this.videocontroller});
 
+  // Move the method here
+  Future<bool> initializePlayer(Uint8List data) async {
+    try {
+      videocontroller = VideoPlayerController.networkUrl(
+        Uri.parse('data:video/mp4;base64,${base64Encode(data)}'),
+      );
+
+      await videocontroller.setLooping(true);
+      await videocontroller.initialize();
+      await videocontroller.setVolume(0.5); // Adjust as needed
+      return true;
+    } catch (e) {
+      debugPrint("initializePlayer Error: $e");
+      return false;
+    }
+  }
+
   @override
   State<SwipeItem> createState() => _SwipeItemState();
 }
