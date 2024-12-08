@@ -52,6 +52,7 @@ class GlobalStatus extends ChangeNotifier {
 
   GlobalStatus() {
     debugPrint("GlobalStatus: init");
+    getUserTimezone();
   }
 
   void setPlatform(Platformdetectionstatus platform) {
@@ -273,6 +274,16 @@ class GlobalStatus extends ChangeNotifier {
       return favoritetags;
     }
     return [];
+  }
+
+  Duration getUserTimezone() {
+    final now = DateTime.now();
+    final timezone = now.timeZoneName;
+    final timezoneOffset = now.timeZoneOffset;
+
+    return timezoneOffset;
+    print('Usertime $timezone');
+    print('Usertime Offset $timezoneOffset');
   }
 
   bool addfavoritetag(FavoriteTag tag) {

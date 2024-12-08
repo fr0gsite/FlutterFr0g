@@ -139,7 +139,7 @@ class _GlobalTagTopBarState extends State<GlobalTagTopBar> {
                               ),
                             ),
                             Text(
-                              "${AppLocalizations.of(context)!.createdon}: ${DateFormat.yMMMMd(Localizations.localeOf(context).toString()).add_jm().format(globaltag.creationtime)}",
+                              "${AppLocalizations.of(context)!.createdon}: ${DateFormat.yMMMMd(Localizations.localeOf(context).toString()).add_jm().format(globaltag.creationtime.add(Duration(seconds: globaltag.creationtime.timeZoneOffset.inSeconds)))}",
                               style: const TextStyle(
                                   color: Colors.white, fontSize: 15),
                             ),

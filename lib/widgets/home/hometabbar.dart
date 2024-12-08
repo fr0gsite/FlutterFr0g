@@ -69,78 +69,83 @@ class _HomeTabBarState extends State<HomeTabBar> with TickerProviderStateMixin {
           indicatorSize: TabBarIndicatorSize.tab,
           padding: const EdgeInsets.all(5),
           tabs: [
-            Stack(
-              alignment: Alignment.topCenter,
+            Column(
+              // alignment: Alignment.topCenter,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                showanimation
+                    ? Lottie.asset(
+                  'assets/lottie/mixer.json',
+                  controller: _controller,
+                  width: 40,
+                  height: 40,
+                  fit: BoxFit.cover,
+                  repeat: false,
+                )
+                    : Container(),
                 Tab(
                   text: AppLocalizations.of(context)!.categorymixed,
-                  icon: const Icon(null),
                 ),
-                showanimation
-                    ? Lottie.asset(
-                        'assets/lottie/mixer.json',
-                        controller: _controller,
-                        width: 40,
-                        height: 40,
-                        fit: BoxFit.cover,
-                        repeat: false,
-                      )
-                    : Container(),
               ],
             ),
-            Stack(
-              alignment: Alignment.topCenter,
+            Column(
+              // alignment: Alignment.topCenter,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                showanimation
+                    ? Lottie.asset(
+                  'assets/lottie/trophy.json',
+                  controller: _controller,
+                  width: 45,
+                  height: 45,
+                  fit: BoxFit.cover,
+                  repeat: false,
+                )
+                    : Container(),
                 Tab(
                   text: AppLocalizations.of(context)!.categorypopular,
-                  icon: const Icon(null),
                 ),
-                showanimation
-                    ? Lottie.asset(
-                        'assets/lottie/trophy.json',
-                        controller: _controller,
-                        width: 45,
-                        height: 45,
-                        fit: BoxFit.cover,
-                        repeat: false,
-                      )
-                    : Container()
               ],
             ),
-            Stack(
-              alignment: Alignment.topCenter,
+            Column(
+              // alignment: Alignment.topCenter,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                showanimation
+                    ? Lottie.asset(
+                  'assets/lottie/up.json',
+                  controller: _controller,
+                  width: 40,
+                  height: 40,
+                  fit: BoxFit.cover,
+                  repeat: false,
+                )
+                    : Container(),
                 Tab(
                   text: AppLocalizations.of(context)!.trends,
-                  icon: const Icon(null),
                 ),
-                showanimation
-                    ? Lottie.asset(
-                        'assets/lottie/up.json',
-                        controller: _controller,
-                        width: 40,
-                        height: 40,
-                        fit: BoxFit.cover,
-                        repeat: false,
-                      )
-                    : Container()
               ],
             ),
-            Stack(
-              alignment: Alignment.topCenter,
+            Column(
+              // alignment: Alignment.topCenter,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Tab(
-                  text: AppLocalizations.of(context)!.categorynew,
-                  icon: const Icon(null),
-                ),
                 showanimation
                     ? Lottie.asset(
-                        'assets/lottie/cat.json',
-                        controller: _controller,
-                        height: 60,
-                        repeat: false,
-                      )
-                    : Container()
+                  'assets/lottie/cat.json',
+                  controller: _controller,
+                  height: 40,
+                  width: 40,
+                  repeat: false,
+                )
+                    : Container(),
+                Tab(
+                  text: AppLocalizations.of(context)!.categorynew,
+                ),
               ],
             ),
           ],

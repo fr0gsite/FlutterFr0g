@@ -73,18 +73,22 @@ class _HomeState extends State<Home> {
       color: AppColor.niceblack,
       child: Column(
         children: [
-          Container(
-            color: AppColor.nicegrey,
-            child: HomeTabBar(
-                initialindex: currenttabindex, callback: tabbarPressed),
+          Expanded(
+            child: Container(
+              color: AppColor.nicegrey,
+              child: HomeTabBar(
+                  initialindex: currenttabindex, callback: tabbarPressed),
+            ),
           ),
           const SizedBox(
             height: 10,
           ),
-          Container(
-            color: AppColor.nicegrey,
-            child: Populartags(
-              currenttabindex: currenttabindex,
+          Expanded(
+            child: Container(
+              color: AppColor.nicegrey,
+              child: Populartags(
+                currenttabindex: currenttabindex,
+              ),
             ),
           ),
         ],
