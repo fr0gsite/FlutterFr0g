@@ -159,11 +159,10 @@ class PostviewerState extends State<Postviewer> {
                                       double currentwidth =
                                           MediaQuery.of(context).size.width;
                                       setState(() {
-
                                         print(videocontroller.value.isPlaying);
-                                        if(videocontroller.value.isPlaying) {
+                                        if (videocontroller.value.isPlaying) {
                                           videocontroller.pause();
-                                        }else {
+                                        } else {
                                           videocontroller.play();
                                         }
                                       });
@@ -207,14 +206,23 @@ class PostviewerState extends State<Postviewer> {
                                               listen: false)
                                           .toggleexpandedtagview();
 
-                                      setState(() {
-                                        print(videocontroller.value.isPlaying);
-                                        if(videocontroller.value.isPlaying) {
-                                          videocontroller.pause();
-                                        }else {
-                                          videocontroller.play();
-                                        }
-                                      });
+                                      // setState(() {
+                                      var playStatus =
+                                          Provider.of<PostviewerStatus>(context,
+                                              listen: false);
+                                      print(
+                                          videocontroller.value.isInitialized);
+                                      print(videocontroller.value.isPlaying);
+                                      if (playStatus.isPlaying) {
+                                        Provider.of<PostviewerStatus>(context,
+                                                listen: false)
+                                            .pause();
+                                      } else {
+                                        Provider.of<PostviewerStatus>(context,
+                                                listen: false)
+                                            .resume();
+                                      }
+                                      // });
                                     },
                                         Provider.of<PostviewerStatus>(context,
                                                 listen: true)
@@ -305,7 +313,10 @@ class PostviewerState extends State<Postviewer> {
         Provider.of<PostviewerStatus>(context, listen: false)
             .uploadlist
             .forEach((element) {
-          swipeItemList.add(SwipeItem(upload: element,videocontroller: videocontroller,));
+          swipeItemList.add(SwipeItem(
+            upload: element,
+            videocontroller: videocontroller,
+          ));
         });
 
         debugPrint("Postviewer: Set current upload");
@@ -347,30 +358,56 @@ class PostviewerState extends State<Postviewer> {
     //inform Swipe Controller
   }
 
+  // void nextindex(int value) {
+  //   Provider.of<PostviewerStatus>(context, listen: false)
+  //       .setcurrentupload(swipeItemList[value].upload);
+  //
+  //   // Preload videos
+  //   preloadVideos(value);
+  //
+  //   //Update URL
+  //   if (kIsWeb) {
+  //     html.window.history.pushState(null, "Postviewer",
+  //         "/postviewer/${swipeItemList[value].upload.uploadid}");
+  //   }
+  // }
   void nextindex(int value) {
     Provider.of<PostviewerStatus>(context, listen: false)
         .setcurrentupload(swipeItemList[value].upload);
 
-    // Preload videos
+    // Preload videos next and previous to the current video
     preloadVideos(value);
 
-    //Update URL
+    // Directly play the video when it is ready
+    playVideoWhenReady(value);
+
+    // Update the URL for web
     if (kIsWeb) {
       html.window.history.pushState(null, "Postviewer",
           "/postviewer/${swipeItemList[value].upload.uploadid}");
     }
   }
 
+  void playVideoWhenReady(int index) {
+    final controller = swipeItemList[index].videocontroller;
+    if (controller.value.isInitialized && !controller.value.isPlaying) {
+      controller.play();
+    }
+  }
+
   void preloadVideos(int currentIndex) async {
     int preloadRange = 2; // Number of videos to preload before and after
-    for (int i = currentIndex - preloadRange; i <= currentIndex + preloadRange; i++) {
+    for (int i = currentIndex - preloadRange;
+        i <= currentIndex + preloadRange;
+        i++) {
       if (i >= 0 && i < swipeItemList.length) {
         final item = swipeItemList[i];
-        // if (!item.videocontroller.value.isInitialized) {
+        if (!item.videocontroller.value.isInitialized) {
           final upload = item.upload;
-          final data = await fetchUploadData(upload.uploadipfshash); // Fetch video data
+          final data =
+              await fetchUploadData(upload.uploadipfshash); // Fetch video data
           await item.initializePlayer(data); // Preload video
-        // }
+        }
       }
     }
   }

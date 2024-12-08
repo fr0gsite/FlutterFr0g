@@ -278,7 +278,7 @@ class _ResourceViewerState extends State<ResourceViewer> {
                               Padding(
                                 padding: const EdgeInsets.all(8),
                                 child: AutoSizeText(
-                                  "${AppLocalizations.of(context)!.lastclaimed}: ${DateFormat.yMMMMd(Localizations.localeOf(context).toString()).add_jm().format(userconfig.lastclaimtime)}",
+                                  "${AppLocalizations.of(context)!.lastclaimed}: ${DateFormat.yMMMMd(Localizations.localeOf(context).toString()).add_jm().format(userconfig.lastclaimtime.add(Duration(seconds: userconfig.lastclaimtime.timeZoneOffset.inSeconds)))}",
                                   style: const TextStyle(color: Colors.white),
                                   maxLines: 2,
                                 ),

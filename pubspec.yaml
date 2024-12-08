@@ -23,7 +23,7 @@ dependencies:
   google_fonts: ^6.2.1
   share_plus: ^10.0.0
   cupertino_icons: ^1.0.2
-  url_launcher: ^6.0.12
+  url_launcher: ^6.3.1
   qr_code_scanner: ^1.0.1
   #font_awesome_flutter: ^9.1.0
   #share_plus: ^7.0.2 #Share content to other apps

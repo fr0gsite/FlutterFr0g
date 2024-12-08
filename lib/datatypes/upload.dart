@@ -1,6 +1,9 @@
+import 'dart:convert';
 import 'dart:typed_data';
 
+import 'package:flutter/material.dart';
 import 'package:fr0gsite/datatypes/tag.dart';
+import 'package:video_player/video_player.dart';
 
 class Upload {
   final int uploadid;
@@ -25,6 +28,7 @@ class Upload {
   bool buttonupliked = false;
   bool buttondownliked = false;
   bool buttonfavoriteliked = false;
+  // VideoPlayerController videoPlayerController = VideoPlayerController.networkUrl(Uri.parse('uri'));
 
   //Tag
   List<Tag> taglist = [];
@@ -104,6 +108,22 @@ class Upload {
   void downvote() {
     down = down + 1;
   }
+
+  // Future<bool> setVideoControllerData(Uint8List data) async {
+  //   try {
+  //     videoPlayerController = VideoPlayerController.networkUrl(
+  //         Uri.parse('data:video/mp4;base64,${base64Encode(data)}'));
+  //
+  //     await videoPlayerController.setLooping(true);
+  //     await videoPlayerController.initialize();
+  //
+  //     debugPrint(" 111  Videoplayer initialized");
+  //     return true;
+  //   } catch (e) {
+  //     debugPrint("initializePlayer Error: $e");
+  //     return false;
+  //   }
+  // }
 
   Uint8List setdata(Uint8List data) {
     //requsteddata = true;

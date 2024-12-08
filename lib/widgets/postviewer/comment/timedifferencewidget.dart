@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
+
+import '../../../datatypes/globalstatus.dart';
 
 class TimeDifferenceWidget extends StatefulWidget {
   final String dateTimeString;
@@ -13,18 +16,19 @@ class TimeDifferenceWidget extends StatefulWidget {
 
 class TimeDifferenceWidgetState extends State<TimeDifferenceWidget> {
   late DateTime inputDateTime;
+  late DateTime dateTime;
   String difference = '';
 
   @override
   void initState() {
     super.initState();
-    inputDateTime = DateTime.parse(widget.dateTimeString);
+    inputDateTime = DateTime.parse(widget.dateTimeString).toLocal();
   }
 
   calculateTimeDifference() {
-    final currentDateTime = DateTime.now();
+    final currentDateTime = DateTime.now().toLocal();
     final differenceInSeconds =
-        currentDateTime.difference(inputDateTime).inSeconds;
+        currentDateTime.difference(dateTime).inSeconds;
     setState(() {
       if (differenceInSeconds < 60) {
         difference =
@@ -44,11 +48,12 @@ class TimeDifferenceWidgetState extends State<TimeDifferenceWidget> {
 
   @override
   Widget build(BuildContext context) {
+    dateTime = inputDateTime.add(Duration(seconds: inputDateTime.timeZoneOffset.inSeconds));
     calculateTimeDifference();
     return MouseRegion(
       onEnter: (_) => calculateTimeDifference(),
       child: Tooltip(
-        message: DateFormat('yyyy-MM-dd HH:mm:ss').format(inputDateTime),
+        message: DateFormat('yyyy-MM-dd HH:mm:ss').format(dateTime),
         child: Text(difference,
             style: const TextStyle(fontSize: 12, color: Colors.white)),
       ),

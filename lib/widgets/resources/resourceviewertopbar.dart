@@ -152,7 +152,7 @@ class _ResourceViewerTopBarState extends State<ResourceViewerTopBar> {
                 ? Container()
                 : Container(
                     color: Colors.black.withOpacity(0.5),
-                    width: width + 50,
+                    width: width + 22,
                     child: Center(
                       child: TextButton(
                         onPressed: () {
