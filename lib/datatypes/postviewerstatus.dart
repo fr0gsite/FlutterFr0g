@@ -13,6 +13,21 @@ class PostviewerStatus extends ChangeNotifier {
   List<Comment> commentlist = [];
   bool updatecommentbar = false;
   bool commentFold = true;
+  bool isLoading = true;
+
+  bool _isPlaying = true;
+
+  bool get isPlaying => _isPlaying;
+
+  void pause() {
+    _isPlaying = false;
+    notifyListeners();
+  }
+
+  void resume() {
+    _isPlaying = true;
+    notifyListeners();
+  }
 
   void showedpostviewerfirsttime() {
     showpostviewerfirsttime = false;
@@ -57,6 +72,11 @@ class PostviewerStatus extends ChangeNotifier {
     uploadlist
         .firstWhere((element) => element.uploadid == uploadid)
         .setdata(data);
+
+    // uploadlist
+    //     .firstWhere((element) => element.uploadid == uploadid)
+    //     .setVideoControllerData(data);
+
     notifyListeners();
   }
 

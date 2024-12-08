@@ -17,7 +17,8 @@ import 'package:video_player/video_player.dart';
 class SwipeItem extends StatefulWidget {
   final Upload upload;
   VideoPlayerController videocontroller;
-  SwipeItem({super.key, required this.upload,required this.videocontroller});
+
+  SwipeItem({super.key, required this.upload, required this.videocontroller});
 
   // Move the method here
   Future<bool> initializePlayer(Uint8List data) async {
@@ -45,11 +46,20 @@ class _SwipeItemState extends State<SwipeItem> {
   void initState() {
     super.initState();
   }
+
   Future initvideoplayer = Future.value(false);
   final videoStateNotifier = ValueNotifier<bool>(false);
 
   @override
   Widget build(BuildContext context) {
+    final videoState = Provider.of<PostviewerStatus>(context);
+
+    if (videoState.isPlaying && widget.videocontroller.value.isInitialized) {
+      widget.videocontroller.play();
+    } else {
+      widget.videocontroller.pause();
+    }
+
     return Container(
       color: AppColor.nicegrey,
       child: Stack(children: [
@@ -88,19 +98,23 @@ class _SwipeItemState extends State<SwipeItem> {
                               return ValueListenableBuilder<bool>(
                                   valueListenable: videoStateNotifier,
                                   builder: (context, isPlaying, child) {
-                                    return widget.videocontroller.value.isInitialized
+                                    return widget
+                                            .videocontroller.value.isInitialized
                                         ? Stack(
                                             children: [
                                               Center(
                                                 child: AspectRatio(
-                                                  aspectRatio: widget.videocontroller
-                                                      .value.aspectRatio,
+                                                  aspectRatio: widget
+                                                      .videocontroller
+                                                      .value
+                                                      .aspectRatio,
                                                   child: VideoPlayer(
                                                       widget.videocontroller),
                                                 ),
                                               ),
                                               OverlayWidgetVideo(
-                                                controller: widget.videocontroller,
+                                                controller:
+                                                    widget.videocontroller,
                                               )
                                             ],
                                           )
@@ -181,26 +195,19 @@ class _SwipeItemState extends State<SwipeItem> {
     }
   }
 
-  Future<bool> initializePlayer(data) async {
-    debugPrint("initializePlayer");
+  Future<bool> initializePlayer(Uint8List data) async {
+    if (widget.videocontroller.value.isInitialized) {
+      return true; // Skip if already initialized
+    }
 
     try {
       widget.videocontroller = VideoPlayerController.networkUrl(
-          Uri.parse('data:video/mp4;base64,${base64Encode(data)}'));
+        Uri.parse('data:video/mp4;base64,${base64Encode(data)}'),
+      );
 
       await widget.videocontroller.setLooping(true);
       await widget.videocontroller.initialize();
-      try {
-        if (mounted) {
-          await widget.videocontroller.setVolume(
-              Provider.of<PostviewerStatus>(context, listen: false)
-                  .soundvolume);
-        }
-        await widget.videocontroller.play();
-      } catch (e) {
-        debugPrint("Video Play Error: $e");
-      }
-      debugPrint("Videoplayer initialized");
+      await widget.videocontroller.setVolume(0.5); // Adjust volume as needed
       videoStateNotifier.value = true;
       return true;
     } catch (e) {

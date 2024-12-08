@@ -24,6 +24,7 @@ import 'package:url_strategy/url_strategy.dart';
 
 import 'config.dart';
 import 'datatypes/postviewerstatus.dart';
+import 'datatypes/videonotifier.dart';
 import 'l10n/l10n.dart';
 import 'widgets/favorite/favorite.dart';
 import 'widgets/follow/follow.dart';
@@ -40,6 +41,7 @@ void main() {
   runApp(
     MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (_) => VideoControllerProvider()),
         ChangeNotifierProvider<GlobalStatus>(
             create: (context) => GlobalStatus()),
         ChangeNotifierProvider<LocationandLanguage>(
