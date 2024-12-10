@@ -872,6 +872,15 @@ class Chainactions {
     for (var index = 0; index < response.length; index++) {
       taglist.add(FavoriteTag.fromJson(response[index]));
     }
+
+    List<Future> futures = [];
+    for (int i = 0; i < taglist.length; i++) {
+      var future = getglobaltagbyid(taglist[i].globaltagid.toString())
+          .then((value) => taglist[i].globaltagname = value.text);
+      futures.add(future);
+    }
+
+    await Future.wait(futures);
     return taglist;
   }
 

@@ -1,5 +1,6 @@
 class FavoriteTag {
   final BigInt globaltagid;
+  String globaltagname = "";
 
   FavoriteTag({
     required this.globaltagid,
@@ -9,5 +10,9 @@ class FavoriteTag {
     return FavoriteTag(
       globaltagid: BigInt.parse(json['globaltagid'].toString()),
     );
+  }
+
+  set setTagName(String globaltagname) {
+    this.globaltagname = globaltagname;
   }
 }
