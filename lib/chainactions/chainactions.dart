@@ -5,6 +5,7 @@ import 'package:fr0gsite/config.dart';
 import 'package:fr0gsite/datatypes/cbasedtoken.dart';
 import 'package:fr0gsite/datatypes/favoritecomment.dart';
 import 'package:fr0gsite/datatypes/favoritetag.dart';
+import 'package:fr0gsite/datatypes/globalcomment.dart';
 import 'package:fr0gsite/datatypes/globaltags.dart';
 import 'package:fr0gsite/datatypes/ipfsuploadnode.dart';
 import 'package:fr0gsite/datatypes/producerinfo.dart';
@@ -848,7 +849,6 @@ class Chainactions {
     return uploadlist;
   }
 
-  //Not tested
   Future<List<FavoriteComment>> getfavoritecommentsofuser(
       String username) async {
     debugPrint("Requesting favorite comments of user $username");
@@ -859,10 +859,19 @@ class Chainactions {
     for (var index = 0; index < response.length; index++) {
       commentlist.add(FavoriteComment.fromJson(response[index]));
     }
+
+    List<Future> futures = [];
+    for (int i = 0; i < commentlist.length; i++) {
+      var future = getcommentbyglobalid(commentlist[i].commentid.toString())
+          .then((value) => commentlist[i].commenttext = value.commentText);
+      futures.add(future);
+    }
+
+    await Future.wait(futures);
+
     return commentlist;
   }
 
-  // Not tested
   Future<List<FavoriteTag>> getfavoritetagsofuser(String username) async {
     debugPrint("Requesting favorite tags of user $username");
     var response = await geteosclient().getTableRows(
@@ -1164,4 +1173,17 @@ Future<List<Comment>> fetchComments(String uploadid) async {
   }
 
   return completecommentlist;
+}
+
+Future<Comment> getcommentbyglobalid(String commentid) async {
+  var globcommentsresponse = await Chainactions().geteosclient().getTableRows(
+      AppConfig.maincontract, AppConfig.maincontract, 'globcomments',
+      limit: 1, json: true, lower: commentid);
+    GlobalComments globalcomment = GlobalComments.fromJson(globcommentsresponse[0]);
+    //get comment from upload
+    var commentsresponse = await Chainactions().geteosclient().getTableRows(
+        AppConfig.maincontract, globalcomment.uploadid, 'comments',
+        limit: 1, json: true, lower: commentid);
+    Comment comment = Comment.fromJson(commentsresponse[0]);
+    return comment;
 }

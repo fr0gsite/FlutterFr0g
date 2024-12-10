@@ -1,6 +1,7 @@
 class FavoriteComment {
   final BigInt commentid;
   final DateTime creationtime;
+  String commenttext = "";
 
   FavoriteComment({
     required this.commentid,
@@ -12,5 +13,9 @@ class FavoriteComment {
       commentid: BigInt.parse(json['commentid'].toString()),
       creationtime: DateTime.parse(json['creationtime']),
     );
+  }
+
+  setCommentText(String text) {
+    commenttext = text;
   }
 }
