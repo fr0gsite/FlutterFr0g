@@ -117,12 +117,12 @@ class _StakeorUnstakeState extends State<StakeorUnstake> {
         case "CPU":
           value = value > slidercpumax ? slidercpumax : value;
           slidervaluecpu = value;
-          textEditingControllercpu.text = slidervaluecpu.toStringAsFixed(4);
+          textEditingControllercpu.text = slidervaluecpu.toStringAsFixed(AppConfig.systemtokendecimalafterdot);
           break;
         case "NET":
           value = value > slidernetmax ? slidernetmax : value;
           slidervaluenet = value;
-          textEditingControllernet.text = slidervaluenet.toStringAsFixed(4);
+          textEditingControllernet.text = slidervaluenet.toStringAsFixed(AppConfig.systemtokendecimalafterdot);
           break;
       }
     });
@@ -237,7 +237,7 @@ class _StakeorUnstakeState extends State<StakeorUnstake> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          "${cpurow1.toStringAsFixed(4)} ${AppConfig.systemtoken}",
+                          "${cpurow1.toStringAsFixed(AppConfig.systemtokendecimalafterdot)} ${AppConfig.systemtoken}",
                           style: const TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
@@ -247,7 +247,7 @@ class _StakeorUnstakeState extends State<StakeorUnstake> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          "${netrow1.toStringAsFixed(4)} ${AppConfig.systemtoken}",
+                          "${netrow1.toStringAsFixed(AppConfig.systemtokendecimalafterdot)} ${AppConfig.systemtoken}",
                           style: const TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
@@ -271,7 +271,7 @@ class _StakeorUnstakeState extends State<StakeorUnstake> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          "${cpurow2.toStringAsFixed(4)} ${AppConfig.systemtoken}",
+                          "${cpurow2.toStringAsFixed(AppConfig.systemtokendecimalafterdot)} ${AppConfig.systemtoken}",
                           style: const TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
@@ -281,7 +281,7 @@ class _StakeorUnstakeState extends State<StakeorUnstake> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          "${ramrow2.toStringAsFixed(4)} ${AppConfig.systemtoken}",
+                          "${ramrow2.toStringAsFixed(AppConfig.systemtokendecimalafterdot)} ${AppConfig.systemtoken}",
                           style: const TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
@@ -292,11 +292,24 @@ class _StakeorUnstakeState extends State<StakeorUnstake> {
                   ],
                 ),
 
-                liquid == 0.0
+                (liquid + refundcpu ) == 0.0
                     ? const Padding(
                         padding: EdgeInsets.all(20.0),
                         child: Text(
-                          "No coins can be staked. \nPlease fund your account with coins",
+                          "No CPU can be staked.",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        ),
+                      )
+                    : Container(),
+                (liquid + refundnet ) == 0.0
+                    ? const Padding(
+                        padding: EdgeInsets.all(20.0),
+                        child: Text(
+                          "No NET can be staked",
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               fontSize: 15,
@@ -327,7 +340,7 @@ class _StakeorUnstakeState extends State<StakeorUnstake> {
                                 inactiveColor: inactiveColor,
                                 value: slidervaluecpu,
                                 min: 0,
-                                max: slidercpumax,
+                                max: slidercpumax < 0 ? 0 : slidercpumax,
                                 divisions: 100,
                                 onChanged: (double value) {
                                   updatevalues(value, "CPU");

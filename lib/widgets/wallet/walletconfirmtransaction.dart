@@ -85,7 +85,7 @@ class _WalletConfirmTransactionState extends State<WalletConfirmTransaction> {
                       double parsedamount = double.parse(widget.amount);
 
                       String amountinformat =
-                          "${parsedamount.toStringAsFixed(4)} ${AppConfig.systemtoken}";
+                          "${parsedamount.toStringAsFixed(AppConfig.systemtokendecimalafterdot)} ${AppConfig.systemtoken}";
 
                       Chainactions()
                         ..setusernameandpermission(

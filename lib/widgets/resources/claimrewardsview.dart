@@ -97,7 +97,7 @@ class _ClaimRewardsViewState extends State<ClaimRewardsView> {
                     alignment: Alignment.centerRight,
                     child: Text(rewardinfo == null
                         ? "0"
-                        : "${rewardinfo!.getreward(AppConfig.rewardtoken[i].symbol).toStringAsFixed(4)} ${AppConfig.systemtoken}"),
+                        : "${rewardinfo!.getreward(AppConfig.rewardtoken[i].symbol).toStringAsFixed(AppConfig.systemtokendecimalafterdot)} ${AppConfig.systemtoken}"),
                   ),
                 ),
                 TextButton(

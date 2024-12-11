@@ -411,8 +411,8 @@ class Chainactions {
 
   Future<bool> stake(String from, String to, double cpu, double net) async {
     await actionsbeforetransaction();
-    String stringCPU = cpu == 0 ? "0.0000" : cpu.toStringAsFixed(4);
-    String stringNET = net == 0 ? "0.0000" : net.toStringAsFixed(4);
+    String stringCPU = cpu == 0 ? "0.0000" : cpu.toStringAsFixed(AppConfig.systemtokendecimalafterdot);
+    String stringNET = net == 0 ? "0.0000" : net.toStringAsFixed(AppConfig.systemtokendecimalafterdot);
     debugPrint("Staking $stringCPU CPU and $stringNET NET");
     List<Action> actions =
         stakeressources(from, to, stringCPU, stringNET, getauth());
@@ -421,8 +421,8 @@ class Chainactions {
 
   Future<bool> unstake(String from, String to, double cpu, double net) {
     actionsbeforetransaction();
-    String stringCPU = cpu == 0 ? "0.0000" : cpu.toStringAsFixed(4);
-    String stringNET = net == 0 ? "0.0000" : net.toStringAsFixed(4);
+    String stringCPU = cpu == 0 ? "0.0000" : cpu.toStringAsFixed(AppConfig.systemtokendecimalafterdot);
+    String stringNET = net == 0 ? "0.0000" : net.toStringAsFixed(AppConfig.systemtokendecimalafterdot);
     debugPrint("Unstaking $stringCPU CPU and $stringNET NET");
     List<Action> actions =
         unstakeressources(from, to, stringCPU, stringNET, getauth());
