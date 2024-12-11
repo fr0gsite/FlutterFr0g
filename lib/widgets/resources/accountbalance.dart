@@ -206,7 +206,7 @@ class _AccountBalanceState extends State<AccountBalance> {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: AutoSizeText(
-                        "$totalbalance ${AppConfig.systemtoken}",
+                        "${totalbalance.toStringAsFixed(AppConfig.systemtokendecimalafterdot)} ${AppConfig.systemtoken}",
                         textAlign: TextAlign.right,
                         minFontSize: mintextsize,
                       ),
