@@ -293,12 +293,12 @@ class _StakeorUnstakeState extends State<StakeorUnstake> {
                 ),
 
                 liquid == 0.0
-                    ? Padding(
-                        padding: const EdgeInsets.all(20.0),
+                    ? const Padding(
+                        padding: EdgeInsets.all(20.0),
                         child: Text(
                           "No coins can be staked. \nPlease fund your account with coins",
                           textAlign: TextAlign.center,
-                          style: const TextStyle(
+                          style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
                               color: Colors.white),

@@ -85,6 +85,9 @@ dependencies:
   #geolocator 9.0.2 #Get user location for language selection
 
 
+  convert: any
+  http_parser: any
+  image: any
 dev_dependencies:
   flutter_test:
     sdk: flutter

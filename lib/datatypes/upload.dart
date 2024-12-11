@@ -1,9 +1,6 @@
-import 'dart:convert';
 import 'dart:typed_data';
 
-import 'package:flutter/material.dart';
 import 'package:fr0gsite/datatypes/tag.dart';
-import 'package:video_player/video_player.dart';
 
 class Upload {
   final int uploadid;

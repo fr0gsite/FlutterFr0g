@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:fr0gsite/config.dart';
 import 'package:fr0gsite/datatypes/globalstatus.dart';
 import 'package:fr0gsite/globalnotifications.dart';

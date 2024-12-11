@@ -41,7 +41,9 @@ class VideoControllerProvider extends ChangeNotifier {
 
   @override
   void dispose() {
-    videoControllers.values.forEach((controller) => controller.dispose());
+    for (var controller in videoControllers.values) {
+      controller.dispose();
+    }
     videoControllers.clear();
     super.dispose();
   }

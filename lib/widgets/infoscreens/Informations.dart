@@ -9,19 +9,19 @@ import '../../datatypes/globalstatus.dart';
 class Informations extends StatelessWidget {
   Informations({super.key});
 
-  TextStyle ruleTitleStyle = TextStyle(
+  TextStyle ruleTitleStyle = const TextStyle(
     color: Colors.black,
     fontWeight: FontWeight.w500,
     fontSize: 17,
   );
 
-  TextStyle subtitleStyle = TextStyle(
+  TextStyle subtitleStyle = const TextStyle(
     color: Colors.red,
     fontSize: 16,
     fontWeight: FontWeight.w500
   );
 
-  TextStyle ruleTagStyle = TextStyle(
+  TextStyle ruleTagStyle = const TextStyle(
       color: Colors.red,
       fontSize: 16,
       fontWeight: FontWeight.w600

@@ -11,7 +11,6 @@ import 'package:fr0gsite/widgets/infoscreens/Informations.dart';
 import 'package:fr0gsite/widgets/status/status.dart';
 import 'package:fr0gsite/widgets/resources/resourceviewer.dart';
 import 'package:fr0gsite/widgets/home/home.dart';
-import 'package:fr0gsite/widgets/profile/profile.dart';
 import 'package:fr0gsite/widgets/topbar/topbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -317,7 +316,7 @@ class StartPoint extends State<fr0gsiteApp> {
                                           icon: _selectedIndex == 8
                                               ? Icon(Icons.info_outline,
                                                   color: Colors.amber[800])
-                                              : Icon(Icons.info_outline,
+                                              : const Icon(Icons.info_outline,
                                                   color: Colors.grey),
                                           onPressed: () {
                                             _selectedIndex = 8;
