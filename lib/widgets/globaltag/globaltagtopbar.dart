@@ -21,11 +21,13 @@ class GlobalTagTopBar extends StatefulWidget {
 class _GlobalTagTopBarState extends State<GlobalTagTopBar> {
   GlobalTags globaltag = GlobalTags.dummy();
   Future<bool>? futuregetglobaltag;
+  bool istagfavorited = false;
 
   @override
   void initState() {
     super.initState();
     futuregetglobaltag = getglobaltag();
+    checkifuserhasfavoritedtag();
   }
 
   @override
@@ -71,7 +73,49 @@ class _GlobalTagTopBarState extends State<GlobalTagTopBar> {
                         Tooltip(
                             message:
                                 AppLocalizations.of(context)!.addtofavorite,
-                            child: favoritebutton()),
+                            child: LikeButton(
+                            size: 30,
+                            isLiked: istagfavorited,
+                            circleColor: const CircleColor(start: Colors.red, end: Colors.red),
+                            bubblesColor: const BubblesColor(
+                              dotPrimaryColor: Colors.red,
+                              dotSecondaryColor: Colors.red,
+                            ),
+                            likeBuilder: (bool istagfavorited) {
+                              return Icon(
+                                Icons.favorite,
+                                color: istagfavorited ? Colors.red : Colors.grey,
+                                size: 30,
+                              );
+                            },
+                            onTap: (bool istagfavorited) async {
+                              bool isLoggedin =
+                                  Provider.of<GlobalStatus>(context, listen: false).isLoggedin;
+                              if (isLoggedin) {
+                                String username =
+                                    Provider.of<GlobalStatus>(context, listen: false).username;
+                                String permission =
+                                    Provider.of<GlobalStatus>(context, listen: false).permission;
+                                Chainactions tempChainactions = Chainactions();
+                                tempChainactions.setusernameandpermission(username, permission);
+                                if (istagfavorited) {
+                                  await tempChainactions
+                                      .deletefavoritetag(widget.globaltagid.toString());
+                                } else {
+                                  await tempChainactions
+                                      .addfavoritetag(widget.globaltagid.toString());
+                                }
+                              } else {
+                                showDialog(
+                                    context: context,
+                                    builder: ((context) {
+                                      return const Login();
+                                    }));
+                                return false;
+                              }
+                              return !istagfavorited;
+                            },
+                          )),
                       ],
                     ),
                     Wrap(
@@ -192,70 +236,22 @@ class _GlobalTagTopBarState extends State<GlobalTagTopBar> {
     );
   }
 
-  Widget favoritebutton() {
-    return LikeButton(
-      size: 30,
-      circleColor: const CircleColor(start: Colors.red, end: Colors.red),
-      bubblesColor: const BubblesColor(
-        dotPrimaryColor: Colors.red,
-        dotSecondaryColor: Colors.red,
-      ),
-      likeBuilder: (bool isLiked) {
-        return Icon(
-          Icons.favorite,
-          color: isLiked ? Colors.red : Colors.grey,
-          size: 30,
-        );
-      },
-      onTap: (bool isLiked) async {
-        bool isLoggedin =
-            Provider.of<GlobalStatus>(context, listen: false).isLoggedin;
-        if (isLoggedin) {
-          String username =
-              Provider.of<GlobalStatus>(context, listen: false).username;
-          String permission =
-              Provider.of<GlobalStatus>(context, listen: false).permission;
-          Chainactions tempChainactions = Chainactions();
-          tempChainactions.setusernameandpermission(username, permission);
-          if (isLiked) {
-            await tempChainactions
-                .deletefavoritetag(widget.globaltagid.toString());
-          } else {
-            await tempChainactions
-                .addfavoritetag(widget.globaltagid.toString());
-          }
-        } else {
-          showDialog(
-              context: context,
-              builder: ((context) {
-                return const Login();
-              }));
-          return false;
+  Future<void> checkifuserhasfavoritedtag() async {
+bool isLoggedin =
+        Provider.of<GlobalStatus>(context, listen: false).isLoggedin;
+    if (isLoggedin) {
+      String username =
+          Provider.of<GlobalStatus>(context, listen: false).username;
+        bool isfavorited = await Chainactions()
+            .isglobaltagfavorite(username, widget.globaltagid.toString());
+        if (isfavorited && mounted && !istagfavorited) {
+          setState(() {
+            debugPrint("User has favorited this tag");
+            istagfavorited = true;
+          });
         }
-        return !isLiked;
-      },
-    );
-  }
-
-  Widget dislikebutton() {
-    return LikeButton(
-      size: 30,
-      circleColor: const CircleColor(start: Colors.red, end: Colors.red),
-      bubblesColor: const BubblesColor(
-        dotPrimaryColor: Colors.red,
-        dotSecondaryColor: Colors.red,
-      ),
-      likeBuilder: (bool isLiked) {
-        return Icon(
-          Icons.heart_broken_outlined,
-          color: isLiked ? Colors.red : Colors.grey,
-          size: 30,
-        );
-      },
-      onTap: (bool isLiked) async {
-        return !isLiked;
-      },
-    );
+      
+    }
   }
 
   Widget textfortagmetadata(String title, String data) {

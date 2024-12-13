@@ -648,7 +648,7 @@ class Chainactions {
   Future<bool> addfavoritecomment(String commentid) async {
     actionsbeforetransaction();
     List<Action> actions = [
-      Action()
+      Action() 
         ..account = AppConfig.maincontract
         ..name = "addfavocom"
         ..authorization = getauth()
@@ -891,6 +891,24 @@ class Chainactions {
 
     await Future.wait(futures);
     return taglist;
+  }
+
+  Future<bool> isglobaltagfavorite(String username, String globaltagid) async {
+    debugPrint("Requesting if global tag $globaltagid is favorite of $username");
+    var response = await geteosclient().getTableRows(
+        AppConfig.maincontract, username, 'userfavotags',
+        limit: 1, reverse: true, json: true, lower: globaltagid);
+    if (response.isEmpty) {
+      return false;
+    } else {
+      //Compare id, conert to big int first
+      if (BigInt.parse(response[0]['globaltagid']) ==
+          BigInt.parse(globaltagid)) {
+        return true;
+      } else {
+        return false;
+      }
+    }
   }
 
   Future<List<Upload>> getuploadsfromuser(String username, int limit) async {
