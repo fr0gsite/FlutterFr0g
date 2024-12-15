@@ -159,7 +159,6 @@ class PostviewerState extends State<Postviewer> {
                                       double currentwidth =
                                           MediaQuery.of(context).size.width;
                                       setState(() {
-                                        print(videocontroller.value.isPlaying);
                                         if (videocontroller.value.isPlaying) {
                                           videocontroller.pause();
                                         } else {
@@ -210,9 +209,6 @@ class PostviewerState extends State<Postviewer> {
                                       var playStatus =
                                           Provider.of<PostviewerStatus>(context,
                                               listen: false);
-                                      print(
-                                          videocontroller.value.isInitialized);
-                                      print(videocontroller.value.isPlaying);
                                       if (playStatus.isPlaying) {
                                         Provider.of<PostviewerStatus>(context,
                                                 listen: false)

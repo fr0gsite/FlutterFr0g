@@ -90,12 +90,8 @@ class _FollowlistitemState extends State<Followlistitem> {
                             ..setusernameandpermission(username, permission)
                             ..unfollowuser(widget.username).then(
                               (value) {
-
-                                print("setusernameandpermission ==> $value");
                                 setState(() {
                                   if (value) {
-
-                                    print("setusernameandpermission 11 ==> $value");
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
                                         content: Text(

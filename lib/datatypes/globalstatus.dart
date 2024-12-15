@@ -281,9 +281,9 @@ class GlobalStatus extends ChangeNotifier {
     final timezone = now.timeZoneName;
     final timezoneOffset = now.timeZoneOffset;
 
+    debugPrint('Usertime $timezone');
+    debugPrint('Usertime Offset $timezoneOffset');
     return timezoneOffset;
-    print('Usertime $timezone');
-    print('Usertime Offset $timezoneOffset');
   }
 
   bool addfavoritetag(FavoriteTag tag) {

@@ -22,7 +22,7 @@ class _OverlayWidgetVideoState extends State<OverlayWidgetVideo> {
 
   @override
   Widget build(BuildContext context) {
-    print("widget.controller.value.isPlaying >>> ${widget.controller.value.isPlaying}");
+    debugPrint("widget.controller.value.isPlaying >>> ${widget.controller.value.isPlaying}");
     return GestureDetector(
         behavior: HitTestBehavior.translucent,
         onTap: () {

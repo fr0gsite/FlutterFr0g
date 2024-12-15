@@ -15,7 +15,7 @@ dependencies:
     sdk: flutter
 
   #Storage
-  shared_preferences: ^2.0.17
+  shared_preferences: ^2.3.3
   flutter_secure_storage: ^9.0.0
   path_provider: ^2.0.11 #No Web support
 
