@@ -138,9 +138,11 @@ class _FollowState extends State<Follow> with TickerProviderStateMixin {
                                     ));
                                   } else {
                                     return AnimatedList(
+
                                       key: _listKey,
                                       initialItemCount: listitems.length,
                                       itemBuilder: (context, index, animation) {
+
                                         return SlideTransition(
                                           position: Tween<Offset>(
                                             begin: const Offset(1, 0),

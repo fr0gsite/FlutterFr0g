@@ -83,10 +83,12 @@ class _FavoriteUploadViewState extends State<FavoriteUploadView> {
   }
 
   Future<bool> getfavoritesofuser() async {
+
     var response = await Provider.of<GlobalStatus>(context, listen: false)
         .getfavoriteuploads();
     for (var item in response) {
       favoriteuploads.add(item);
+
     }
     List<Future> futures = [];
     for (int i = 0; i < favoriteuploads.length; i++) {

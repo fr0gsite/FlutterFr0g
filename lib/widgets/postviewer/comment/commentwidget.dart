@@ -39,11 +39,13 @@ class _CommentWidgetState extends State<CommentWidget> {
   bool expansionState = true;
   bool initiallyExpanded = true;
 
+  List<Comment> subComments = [];
+
   @override
   Widget build(BuildContext context) {
     expansionState =
         Provider.of<CommentBarStatus>(context, listen: true).commentFold;
-    List<Comment> subComments = widget.comments
+    subComments = widget.comments
         .where((comment) =>
             comment.parentCommentId == widget.comment.commentId.toInt())
         .toList();
@@ -81,25 +83,7 @@ class _CommentWidgetState extends State<CommentWidget> {
                   children: [
                     commentandtagbutton(
                         widget.comment.commentId.toString(),
-                        Icons.add_circle_outline_sharp,
-                        "Upvote",
-                        upvotecomment,
-                        false,
-                        0,
-                        Colors.green,
-                        Colors.orange),
-                    commentandtagbutton(
-                        widget.comment.commentId.toString(),
-                        Icons.do_not_disturb_on_outlined,
-                        "Downvote",
-                        downvotecomment,
-                        false,
-                        0,
-                        Colors.red,
-                        Colors.orange),
-                    commentandtagbutton(
-                        widget.comment.commentId.toString(),
-                        Icons.star,
+                        Icons.favorite,
                         "Favorite",
                         favoritecomment,
                         false,
@@ -127,12 +111,7 @@ class _CommentWidgetState extends State<CommentWidget> {
               ),
               SelectionArea(
                   child: buildRichTextWithAutoSize(widget.comment
-                      .commentText) /*AutoSizeText(
-                widget.comment.commentText,
-                minFontSize: 12,
-                maxFontSize: 14,
-                style: const TextStyle(color: Colors.white),
-              )*/
+                      .commentText)
                   ),
             ],
           ),
@@ -333,6 +312,9 @@ class _CommentWidgetState extends State<CommentWidget> {
       bool result = false;
       await temp.votecomment(commentid, 1).then((value) {
         result = value;
+        setState(() {
+
+        });
       });
       if (!result) {
         //Show error message
@@ -357,6 +339,9 @@ class _CommentWidgetState extends State<CommentWidget> {
       bool result = false;
       await temp.votecomment(commentid, 0).then((value) {
         result = value;
+        setState(() {
+
+        });
       });
       if (!result) {
         //Show error message
@@ -381,6 +366,7 @@ class _CommentWidgetState extends State<CommentWidget> {
       bool result = false;
       await temp.addfavoritecomment(commentid).then((value) {
         result = value;
+        setState(() {});
       });
       if (!result) {
         //Show error message

@@ -104,6 +104,7 @@ class _HomeTabBarState extends State<HomeTabBar> with TickerProviderStateMixin {
                   repeat: false,
                 )
                     : Container(),
+
                 Tab(
                   text: AppLocalizations.of(context)!.categorypopular,
                 ),
