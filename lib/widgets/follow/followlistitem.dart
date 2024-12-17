@@ -89,6 +89,7 @@ class _FollowlistitemState extends State<Followlistitem> {
                           Chainactions()
                             ..setusernameandpermission(username, permission)
                             ..unfollowuser(widget.username).then(
+
                               (value) {
 
                                 print("setusernameandpermission ==> $value");
@@ -103,7 +104,9 @@ class _FollowlistitemState extends State<Followlistitem> {
                                       ),
                                     );
                                     widget.callback(
+
                                         widget.username, widget.isselected, true);
+
                                   } else {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(

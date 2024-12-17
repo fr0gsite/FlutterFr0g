@@ -42,6 +42,7 @@ class _FollowCubeListState extends State<FollowCubeList> {
       uploadList = [];
       for (String username in widget.userlist) {
         uploadList.add(UserUploads(username: username, uploads: []));
+
       }
       uploadorder = SearchGroup(uploadList);
       futureuploadorder = inituploadorder();
@@ -105,7 +106,9 @@ class _FollowCubeListState extends State<FollowCubeList> {
   }
 
   Future<bool> inituploadorder() async {
+
     await uploadorder.initsearch();
+
     setState(() {});
     return true;
   }
