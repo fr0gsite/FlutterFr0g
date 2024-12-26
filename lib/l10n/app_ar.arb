@@ -333,7 +333,44 @@
     "selectrule":"اختر القاعدة",
     "automaticchooseipfsnode":"يختار تلقائيًا أفضل عقدة IPFS",
     "automaticchooseblockchainnode":"يختار تلقائيًا أفضل عقدة بلوكشين",
-    "automatic":"تلقائي"
+    "automatic":"تلقائي",
+
+    "connectionname":"الاسم",
+    "connectionport":"المنفذ",
+    "connectionprotokoll":"البروتوكول",
+    "connectionaddress":"العنوان",
+    "connectionpath":"المسار",
+    "connectionmethode":"الطريقة",
+    "connectionsuccessfull":"تم الاتصال بنجاح",
+    "connectionfailed":"فشل الاتصال",
+
+    "choosenfile":"الملف المختار",
+    "choosefiles":"اختر الملفات",
+    "selectfile":"اختر ملفًا",
+    "selectthumb":"اختر صورة مصغرة",
+    "nofileselected":"لم يتم اختيار أي ملف",
+    "thumb":"صورة مصغرة",
+    "thumbexplain":"الـ \"صورة المصغرة\" هي صورة معاينة صغيرة لصور أو مقاطع فيديو",
+    "file":"ملف",
+
+    "searchingnodes":"جارٍ البحث في العقد",
+    "checkquota":"جارٍ التحقق من الحصة",
+    "offerproviders":"اختر مزود الخدمة",
+    "preparing":"جارٍ التحضير",
+    "uploading":"جارٍ الرفع",
+    "cancel":"إلغاء",
+    "providerlistuserslots":"خاناتك",
+    "providerlistoffersfreeslots":"خانات مجانية",
+    "memo":"ملاحظة",
+    "whitepaper": "الورقة البيضاء",
+    "linktodocumentation": "الوثائق",
+    "linktoupdown": "صفحة حالة updown.io",
+    "linksocialmedia": "حسابات التواصل الاجتماعي (Telegram & X.com)",
+    "information": "معلومات",
+    "links": "روابط",
+    "rules": "القواعد",
+    "nouploadsfound":"لم يتم العثور على أي عمليات رفع",
+    "nofavoritesfound":"لم يتم العثور على مفضلات"
 }
 
 

@@ -1,9 +1,8 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fr0gsite/chainactions/chainactions.dart';
 import 'package:fr0gsite/datatypes/favoritetag.dart';
 import 'package:fr0gsite/datatypes/globalstatus.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../infoscreens/pleaselogin.dart';
@@ -35,23 +34,23 @@ class _FavoriteTagsViewState extends State<FavoriteTagsView> {
           );
         }
 
-        if (userfavoriteTags == null || userfavoriteTags!.isEmpty) {
-          return const Center(
-            child: Text("No favorite Tags available."),
+        if (userfavoriteTags.isEmpty) {
+          return Center(
+            child: Text(AppLocalizations.of(context)!.nofavoritesfound),
           );
         }
 
         return Container(
-          margin: EdgeInsets.all(10),
+          margin: const EdgeInsets.all(10),
           child: ListView.builder(
-            itemCount: userfavoriteTags!.length,
+            itemCount: userfavoriteTags.length,
             itemBuilder: (context, index) {
               return Container(
-                margin: EdgeInsets.all(10),
+                margin: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     color: Colors.grey),
-                padding: EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -59,13 +58,13 @@ class _FavoriteTagsViewState extends State<FavoriteTagsView> {
                       onTap: () {
                         deleteFavoriteTag(userfavoriteTags[index].globaltagid.toString(),index);
                       },
-                      child: Icon(
+                      child: const Icon(
                         Icons.favorite,
                         color: Colors.yellow,
                         size: 25,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 15,
                     ),
                     Text(userfavoriteTags[index].globaltagname)

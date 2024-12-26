@@ -376,5 +376,6 @@
     "information": "Information",
     "links": "Links",
     "rules": "Rules",
-    "nouploadsfound":"No uploads found"
+    "nouploadsfound":"No uploads found",
+    "nofavoritesfound":"No Favorites found"
 }

@@ -336,7 +336,44 @@
     "selectrule":"选择规则",
     "automaticchooseipfsnode":"自动选择最佳IPFS节点",
     "automaticchooseblockchainnode":"自动选择最佳区块链节点",
-    "automatic":"自动"
+    "automatic":"自动",
+
+    "connectionname":"名称",
+    "connectionport":"端口",
+    "connectionprotokoll":"协议",
+    "connectionaddress":"地址",
+    "connectionpath":"路径",
+    "connectionmethode":"方法",
+    "connectionsuccessfull":"连接成功",
+    "connectionfailed":"连接失败",
+
+    "choosenfile":"已选择的文件",
+    "choosefiles":"选择文件",
+    "selectfile":"选择文件",
+    "selectthumb":"选择缩略图",
+    "nofileselected":"未选择任何文件",
+    "thumb":"缩略图",
+    "thumbexplain":"“缩略图”是图像或视频的小型预览图片",
+    "file":"文件",
+
+    "searchingnodes":"正在搜索节点",
+    "checkquota":"正在检查配额",
+    "offerproviders":"选择提供商",
+    "preparing":"正在准备",
+    "uploading":"正在上传",
+    "cancel":"取消",
+    "providerlistuserslots":"您的槽位",
+    "providerlistoffersfreeslots":"可用的空闲槽位",
+    "memo":"备注",
+    "whitepaper": "白皮书",
+    "linktodocumentation": "文档",
+    "linktoupdown": "updown.io 状态页面",
+    "linksocialmedia": "社交媒体账户（Telegram & X.com）",
+    "information": "信息",
+    "links": "链接",
+    "rules": "规则",
+    "nouploadsfound":"未找到上传记录",
+    "nofavoritesfound":"未找到收藏记录"
 }
 
 

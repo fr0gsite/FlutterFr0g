@@ -335,7 +335,45 @@
     "selectrule":"Selecciona la regla",
     "automaticchooseipfsnode":"Selecciona automáticamente el mejor nodo IPFS",
     "automaticchooseblockchainnode":"Selecciona automáticamente el mejor nodo de blockchain",
-    "automatic":"Auto"
+    "automatic":"Auto",
+
+    "connectionname":"Nombre",
+    "connectionport":"Puerto",
+    "connectionprotokoll":"Protocolo",
+    "connectionaddress":"Dirección",
+    "connectionpath":"Ruta",
+    "connectionmethode":"Método",
+    "connectionsuccessfull":"Conexión exitosa",
+    "connectionfailed":"Conexión fallida",
+
+    "choosenfile":"Archivo elegido",
+    "choosefiles":"Elegir archivos",
+    "selectfile":"Seleccionar archivo",
+    "selectthumb":"Seleccionar miniatura",
+    "nofileselected":"No se seleccionó ningún archivo",
+    "thumb":"Miniatura",
+    "thumbexplain":"Una “miniatura” es una pequeña imagen de vista previa de una imagen o video",
+    "file":"Archivo",
+
+    "searchingnodes":"Buscando nodos",
+    "checkquota":"Verificando cuota",
+    "offerproviders":"Seleccionar proveedor",
+    "preparing":"Preparando",
+    "uploading":"Subiendo",
+    "cancel":"Cancelar",
+    "providerlistuserslots":"Tus espacios",
+    "providerlistoffersfreeslots":"Espacios libres",
+    "memo":"Nota",
+    "whitepaper": "WhitePaper",
+    "linktodocumentation": "Documentación",
+    "linktoupdown": "Página de estado de updown.io",
+    "linksocialmedia": "Cuentas de redes sociales (Telegram & X.com)",
+    "information": "Información",
+    "links": "Enlaces",
+    "rules": "Reglas",
+    "nouploadsfound":"No se encontraron cargas",
+    "nofavoritesfound":"No se encontraron favoritos"
+
 }
 
 

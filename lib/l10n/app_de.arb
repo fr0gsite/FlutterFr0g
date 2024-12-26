@@ -347,14 +347,32 @@
     "connectionsuccessfull":"Verbindung erfolgreich",
     "connectionfailed":"Verbindung fehlgeschlagen",
 
-    "choosenfile":"Ausgewählter Upload",
-    "selectfile":"Upload auswählen",
-    "selectthumb":"Vorschau auswählen",
-    "nofileselected":"Kein Upload ausgewählt",
-    "thumb":"Vorschau",
-    "thumbexplain":"Ein kleines Vorschaubild für dein Bild oder Video.",
-    "file":"Upload"
+    "choosenfile":"Ausgewählte Datei",
+    "choosefiles":"Dateien auswählen",
+    "selectfile":"Datei auswählen",
+    "selectthumb":"Vorschaubild auswählen",
+    "nofileselected":"Keine Datei ausgewählt",
+    "thumb":"Vorschaubild",
+    "thumbexplain":"Ein „Vorschaubild“ ist ein kleines Vorschau-Bild einer Grafik oder eines Videos",
+    "file":"Datei",
 
-
+    "searchingnodes":"Knoten werden durchsucht",
+    "checkquota":"Kontingent wird überprüft",
+    "offerproviders":"Anbieter auswählen",
+    "preparing":"Vorbereiten",
+    "uploading":"Hochladen",
+    "cancel":"Abbrechen",
+    "providerlistuserslots":"Ihre Slots",
+    "providerlistoffersfreeslots":"Freie Slots",
+    "memo":"Notiz",
+    "whitepaper": "WhitePaper",
+    "linktodocumentation": "Dokumentation",
+    "linktoupdown": "updown.io Statusseite",
+    "linksocialmedia": "Social-Media-Accounts (Telegram & X.com)",
+    "information": "Informationen",
+    "links": "Links",
+    "rules": "Regeln",
+    "nouploadsfound":"Keine Uploads gefunden",
+    "nofavoritesfound":"Keine Favoriten gefunden"
 
 }   

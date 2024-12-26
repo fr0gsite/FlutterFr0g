@@ -337,7 +337,44 @@
     "selectrule":"Sélectionner la règle",
     "automaticchooseipfsnode":"Sélectionne automatiquement le meilleur nœud IPFS",
     "automaticchooseblockchainnode":"Sélectionne automatiquement le meilleur nœud blockchain",
-    "automatic":"Auto"
+    "automatic":"Auto",
+
+     "connectionname":"Nom",
+    "connectionport":"Port",
+    "connectionprotokoll":"Protocole",
+    "connectionaddress":"Adresse",
+    "connectionpath":"Chemin",
+    "connectionmethode":"Méthode",
+    "connectionsuccessfull":"Connexion réussie",
+    "connectionfailed":"Échec de la connexion",
+
+    "choosenfile":"Fichier choisi",
+    "choosefiles":"Choisir des fichiers",
+    "selectfile":"Sélectionner un fichier",
+    "selectthumb":"Sélectionner une miniature",
+    "nofileselected":"Aucun fichier sélectionné",
+    "thumb":"Miniature",
+    "thumbexplain":"Une « miniature » est une petite image d’aperçu d’une image ou d’une vidéo",
+    "file":"Fichier",
+
+    "searchingnodes":"Recherche de nœuds en cours",
+    "checkquota":"Vérification du quota",
+    "offerproviders":"Sélectionner un fournisseur",
+    "preparing":"Préparation en cours",
+    "uploading":"Téléversement",
+    "cancel":"Annuler",
+    "providerlistuserslots":"Vos emplacements",
+    "providerlistoffersfreeslots":"Emplacements gratuits",
+    "memo":"Note",
+    "whitepaper": "Livre blanc",
+    "linktodocumentation": "Documentation",
+    "linktoupdown": "Page d’état updown.io",
+    "linksocialmedia": "Comptes de réseaux sociaux (Telegram & X.com)",
+    "information": "Informations",
+    "links": "Liens",
+    "rules": "Règles",
+    "nouploadsfound":"Aucun téléversement trouvé",
+    "nofavoritesfound":"Aucun favori trouvé"
 }
 
    
