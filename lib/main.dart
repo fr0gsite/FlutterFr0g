@@ -7,7 +7,7 @@ import 'package:fr0gsite/datatypes/locationandlanguage.dart';
 import 'package:fr0gsite/datatypes/networkstatus.dart';
 import 'package:fr0gsite/datatypes/walletstatus.dart';
 import 'package:fr0gsite/localstorage.dart';
-import 'package:fr0gsite/widgets/infoscreens/Informations.dart';
+import 'package:fr0gsite/widgets/infoscreens/informations.dart';
 import 'package:fr0gsite/widgets/status/status.dart';
 import 'package:fr0gsite/widgets/resources/resourceviewer.dart';
 import 'package:fr0gsite/widgets/home/home.dart';
@@ -23,7 +23,6 @@ import 'package:url_strategy/url_strategy.dart';
 
 import 'config.dart';
 import 'datatypes/postviewerstatus.dart';
-import 'datatypes/videonotifier.dart';
 import 'l10n/l10n.dart';
 import 'widgets/favorite/favorite.dart';
 import 'widgets/follow/follow.dart';
@@ -40,7 +39,6 @@ void main() {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => VideoControllerProvider()),
         ChangeNotifierProvider<GlobalStatus>(
             create: (context) => GlobalStatus()),
         ChangeNotifierProvider<LocationandLanguage>(
@@ -123,18 +121,18 @@ class _MyAppState extends State<App> {
   }
 }
 
-class fr0gsiteApp extends StatefulWidget {
+class Fr0gsiteApp extends StatefulWidget {
   final String? page;
 
-  const fr0gsiteApp({super.key, this.page});
+  const Fr0gsiteApp({super.key, this.page});
 
   @override
-  State<fr0gsiteApp> createState() => StartPoint();
+  State<Fr0gsiteApp> createState() => StartPoint();
 }
 
 var _selectedIndex = 0;
 
-class StartPoint extends State<fr0gsiteApp> {
+class StartPoint extends State<Fr0gsiteApp> {
   List<String> pages = [
     "home",
     "follow",
@@ -168,7 +166,7 @@ class StartPoint extends State<fr0gsiteApp> {
     const Games(),
     const Status(),
     const ResourceViewer(),
-    Informations(),
+    const Informations(),
   ];
 
   void _onItemTapped(int index) {

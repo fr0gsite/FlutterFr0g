@@ -6,6 +6,7 @@ import 'package:fr0gsite/datatypes/cbasedtoken.dart';
 import 'package:fr0gsite/datatypes/favoritecomment.dart';
 import 'package:fr0gsite/datatypes/favoritetag.dart';
 import 'package:fr0gsite/datatypes/globalcomment.dart';
+import 'package:fr0gsite/datatypes/globalstatus.dart';
 import 'package:fr0gsite/datatypes/globaltags.dart';
 import 'package:fr0gsite/datatypes/ipfsuploadnode.dart';
 import 'package:fr0gsite/datatypes/producerinfo.dart';
@@ -23,6 +24,7 @@ import 'package:fr0gsite/datatypes/blockchainnode.dart';
 import 'package:eosdart/eosdart.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:provider/provider.dart';
 
 import '../datatypes/comment.dart';
 import '../datatypes/upload.dart';
@@ -40,6 +42,11 @@ class Chainactions {
   void setusernameandpermission(String username, String permission) {
     this.username = username;
     this.permission = permission;
+  }
+
+  void setUsernameAndPermissionWithContext(context) {
+    username = Provider.of<GlobalStatus>(context, listen: false).username;
+    permission = Provider.of<GlobalStatus>(context, listen: false).permission;
   }
 
   Future<bool> transactionHandler(List<Action> actions) async {
@@ -1107,7 +1114,8 @@ class Chainactions {
 
   //-----------------IPFS Community Node -----------------#
 
-  Future<bool> getslot(String contractname, String pubkey) async {
+  Future<bool> getslot(context, String contractname, String pubkey) async {
+    setUsernameAndPermissionWithContext(context);
     actionsbeforetransaction();
     List<Action> actions = [
       Action()

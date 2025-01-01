@@ -46,11 +46,9 @@ class _SoundBarState extends State<SoundBar> {
           AnimatedContainer(
             duration: const Duration(milliseconds: 300),
             height: !hide ||
-                    Provider.of<PostviewerStatus>(context, listen: true)
-                            .soundvolume ==
-                        0
+                    Provider.of<PostviewerStatus>(context, listen: true).soundvolume == 0
                 ? 150
-                : 50,
+                : 150,
             child: MouseRegion(
               onHover: (event) {
                 setState(() {
@@ -101,9 +99,7 @@ class _SoundBarState extends State<SoundBar> {
           ),
           IconButton(
             icon: Icon(
-              Provider.of<PostviewerStatus>(context, listen: true)
-                          .soundvolume ==
-                      0
+              Provider.of<PostviewerStatus>(context, listen: true).soundvolume == 0
                   ? Icons.volume_off
                   : Icons.volume_up,
               color: !hide ||

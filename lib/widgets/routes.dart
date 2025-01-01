@@ -1,5 +1,5 @@
 import 'package:fr0gsite/widgets/globaltag/globaltag.dart';
-import 'package:fr0gsite/widgets/infoscreens/Informations.dart';
+import 'package:fr0gsite/widgets/infoscreens/informations.dart';
 import 'package:fr0gsite/widgets/infoscreens/notfoundpage.dart';
 import 'package:fr0gsite/widgets/postviewer/postviewer.dart';
 import 'package:fr0gsite/widgets/profile/profile.dart';
@@ -23,7 +23,7 @@ class Mainrouter {
       handlerFunc: (context, Map<String, dynamic> params) => const Root());
   static final Handler _pageHandler = Handler(
       handlerFunc: (context, Map<String, dynamic> params) =>
-          fr0gsiteApp(page: params['page'][0]));
+          Fr0gsiteApp(page: params['page'][0]));
   static final Handler _notfoundpage = Handler(
       handlerFunc: (context, Map<String, dynamic> params) =>
           const NotFoundPage());

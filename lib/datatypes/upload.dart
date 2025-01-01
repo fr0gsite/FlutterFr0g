@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:fr0gsite/datatypes/tag.dart';
+import 'package:fr0gsite/ipfsactions.dart';
 
 class Upload {
   final int uploadid;
@@ -121,6 +122,13 @@ class Upload {
   //     return false;
   //   }
   // }
+
+  void loadContent(context) async{
+    // User IPFS to get the data
+    if(!havedata()){
+      data = await IPFSActions.fetchipfsdata(context, uploadipfshash);
+    }
+  }
 
   Uint8List setdata(Uint8List data) {
     //requsteddata = true;

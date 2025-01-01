@@ -56,11 +56,11 @@ class _FavoriteCommentsViewState extends State<FavoriteCommentsView> {
           itemCount: favoriteComments!.length,
           itemBuilder: (context, index) {
             return Container(
-              margin: EdgeInsets.all(10),
+              margin: const EdgeInsets.all(10),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   color: Colors.grey),
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

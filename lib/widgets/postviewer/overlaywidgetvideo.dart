@@ -1,7 +1,9 @@
+import 'package:fr0gsite/datatypes/postviewerstatus.dart';
 import 'package:fr0gsite/widgets/postviewer/soundbar.dart';
 import 'package:fr0gsite/widgets/postviewer/videoprocessIndicatorview.dart';
 import 'package:lottie/lottie.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
 
 class OverlayWidgetVideo extends StatefulWidget {
@@ -17,19 +19,22 @@ class _OverlayWidgetVideoState extends State<OverlayWidgetVideo> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {});
   }
 
   @override
   Widget build(BuildContext context) {
-    debugPrint("widget.controller.value.isPlaying >>> ${widget.controller.value.isPlaying}");
     return GestureDetector(
         behavior: HitTestBehavior.translucent,
         onTap: () {
           setState(() {
-            widget.controller.value.isPlaying
-                ? widget.controller.pause()
-                : widget.controller.play();
+            if(widget.controller.value.isPlaying){
+              widget.controller.pause();
+              Provider.of<PostviewerStatus>(context, listen: false).pause();
+            } else{
+              widget.controller.play();
+              Provider.of<PostviewerStatus>(context, listen: false).resume();
+            }
+                
           });
         },
         child: Material(
@@ -49,17 +54,23 @@ class _OverlayWidgetVideoState extends State<OverlayWidgetVideo> {
                   child: SoundBar(controller: widget.controller)),
             ],
           ),
-        ));
+        ),
+      );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   Widget playIcon() => widget.controller.value.isPlaying
       ? Container()
       : Center(
-          child: Lottie.asset(
-          'assets/lottie/paused.json',
-          width: 300,
-          height: 300,
-          fit: BoxFit.fill,
-          repeat: false,
-        ));
+            child: Image.asset(
+            'assets/images/paused.png',
+            width: 150,
+            height: 150,
+            fit: BoxFit.fill,
+          ),
+        );
 }

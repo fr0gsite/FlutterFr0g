@@ -102,16 +102,14 @@ class _WalletConfirmTransactionState extends State<WalletConfirmTransaction> {
                                 widget.memo)
                             .then((value) {
                           if (value) {
-                            if (Provider.of<GlobalStatus>(context,
-                                    listen: false)
-                                .audionotifications) {
+                            if (Provider.of<GlobalStatus>(context,listen: false).audionotifications) {
                               AudioPlayer audioPlayer = AudioPlayer();
                               audioPlayer.play(
                                   DeviceFileSource("assets/sounds/cash2.m4a"),
                                   volume: 0.5,
                                   mode: PlayerMode.lowLatency);
                             }
-
+                            
                             setState(() {
                               backgroundcolorslider = Colors.green;
                             });

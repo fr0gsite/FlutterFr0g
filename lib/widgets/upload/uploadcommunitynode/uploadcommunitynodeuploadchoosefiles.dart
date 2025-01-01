@@ -225,7 +225,7 @@ class _UploadChooseFilesState extends State<UploadChooseFiles> {
                           const SizedBox(width: 16),
                           ElevatedButton(
                             onPressed: () async {
-                              PlatformFile? file = await pickThumbFile();
+                              await pickThumbFile();
                             },
                             style: ButtonStyle(
                               shape: WidgetStateProperty.all(
@@ -282,15 +282,8 @@ class _UploadChooseFilesState extends State<UploadChooseFiles> {
                           String privkey = Uploadkey().privateKeyToHex(
                               keypair.privateKey as pc.ECPrivateKey);
 
-                          Chainactions chainaction = Chainactions()
-                            ..setusernameandpermission(
-                                Provider.of<GlobalStatus>(context,
-                                        listen: false)
-                                    .username,
-                                Provider.of<GlobalStatus>(context,
-                                        listen: false)
-                                    .permission);
-                          await chainaction.getslot("tacotoken", pubkey);
+                          await Chainactions().getslot(context, "tacotoken", pubkey);
+                          
 
                           //wait 5 seconds for chain to update
                           await Future.delayed(const Duration(seconds: 5));
@@ -299,8 +292,7 @@ class _UploadChooseFilesState extends State<UploadChooseFiles> {
                             status = "Uploading Files";
                           });
 
-                          UploadFeedback uploadfeedback = await uploadFiles(
-                              thumbselectedFile!, selectedFile!, privkey);
+                          UploadFeedback uploadfeedback = await uploadFiles(thumbselectedFile!, selectedFile!, privkey);
                           if (uploadfeedback.success) {
                             widget.feedback(true, uploadfeedback);
                             if (mounted) {
@@ -312,7 +304,6 @@ class _UploadChooseFilesState extends State<UploadChooseFiles> {
                               isLoading = false;
                             });
                           }
-                          //Navigator.pop(context);
                         } else {}
                       },
                       child: Padding(
@@ -445,12 +436,7 @@ class _UploadChooseFilesState extends State<UploadChooseFiles> {
       String privkey =
           Uploadkey().privateKeyToHex(keypair.privateKey as pc.ECPrivateKey);
 
-      Chainactions chainaction = Chainactions()
-        ..setusernameandpermission(
-            Provider.of<GlobalStatus>(context, listen: false).username,
-            Provider.of<GlobalStatus>(context, listen: false).permission);
-
-      bool requestslot = await chainaction.getslot("tacotoken", pubkey);
+      bool requestslot = await Chainactions().getslot(context, "tacotoken", pubkey);
 
       if (requestslot) {
         if (mounted) {
@@ -478,29 +464,22 @@ class _UploadChooseFilesState extends State<UploadChooseFiles> {
   Completer<void> completer = Completer<void>();
 
   Future<void> buyslot() async {
-    int slotsprice = await Provider.of<UploadFileStatus>(context, listen: false)
-        .choosenode
-        .getslotprice();
-
+    int slotsprice = await Provider.of<UploadFileStatus>(context, listen: false).choosenode.getslotprice();
     String formattedSlotsPrice = NumberFormat('0.0000').format(slotsprice/10000);
+    if(mounted){
+      String accountname = Provider.of<UploadFileStatus>(context, listen: false).choosenode.accountname;
+      String username = Provider.of<GlobalStatus>(context, listen: false).username;
 
-
-    String accountname = Provider.of<UploadFileStatus>(context, listen: false)
-        .choosenode
-        .accountname;
-
-    String username =
-        Provider.of<GlobalStatus>(context, listen: false).username;
-
-    await showDialog(
-      context: context,
-      builder: (context) {
-        return WalletConfirmTransaction(
-            callback: transactioncallback,
-            sendtoaccount: accountname,
-            amount: formattedSlotsPrice,
-            memo: "buyslot $username");
-      },
-    );
+      await showDialog(
+        context: context,
+        builder: (context) {
+          return WalletConfirmTransaction(
+              callback: transactioncallback,
+              sendtoaccount: accountname,
+              amount: formattedSlotsPrice,
+              memo: "buyslot $username");
+        },
+      );
+    }
   }
 }

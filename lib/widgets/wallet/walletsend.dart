@@ -183,7 +183,9 @@ class _WalletSendState extends State<WalletSend> {
                                         }
                                       },
                                     );
-                                    Navigator.pop(context);
+                                    if(context.mounted){
+                                      Navigator.pop(context);
+                                    }
                                   },
                                 );
                               },

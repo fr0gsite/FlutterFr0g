@@ -16,50 +16,26 @@ import 'package:video_player/video_player.dart';
 
 class SwipeItem extends StatefulWidget {
   final Upload upload;
-  VideoPlayerController videocontroller;
 
-  SwipeItem({super.key, required this.upload, required this.videocontroller});
-
-  // Move the method here
-  Future<bool> initializePlayer(Uint8List data) async {
-    try {
-      videocontroller = VideoPlayerController.networkUrl(
-        Uri.parse('data:video/mp4;base64,${base64Encode(data)}'),
-      );
-
-      await videocontroller.setLooping(true);
-      await videocontroller.initialize();
-      await videocontroller.setVolume(0.5); // Adjust as needed
-      return true;
-    } catch (e) {
-      debugPrint("initializePlayer Error: $e");
-      return false;
-    }
-  }
+  const SwipeItem({super.key, required this.upload});
 
   @override
   State<SwipeItem> createState() => _SwipeItemState();
 }
 
 class _SwipeItemState extends State<SwipeItem> {
+  Future initvideoplayer = Future.value(false);
+  late VideoPlayerController videocontroller;
+
   @override
   void initState() {
     super.initState();
+    videocontroller = VideoPlayerController.network('');
   }
-
-  Future initvideoplayer = Future.value(false);
-  final videoStateNotifier = ValueNotifier<bool>(false);
 
   @override
   Widget build(BuildContext context) {
-    final videoState = Provider.of<PostviewerStatus>(context);
-
-    if (videoState.isPlaying && widget.videocontroller.value.isInitialized) {
-      widget.videocontroller.play();
-    } else {
-      widget.videocontroller.pause();
-    }
-
+    
     return Container(
       color: AppColor.nicegrey,
       child: Stack(children: [
@@ -69,24 +45,17 @@ class _SwipeItemState extends State<SwipeItem> {
               builder: (context, snapshotmetadata) {
                 if (snapshotmetadata.connectionState == ConnectionState.done) {
                   if (snapshotmetadata.data.toString() == "hasdata") {
-                    Uint8List data =
-                        Provider.of<PostviewerStatus>(context, listen: false)
-                            .getcurrentupload()
-                            .data;
+                    Uint8List data = Provider.of<PostviewerStatus>(context, listen: false).getcurrentupload().data;
 
                     if (widget.upload.uploadipfshashfiletyp == "mp4") {
-                      if (AppConfig.plattformwithvideosupport.contains(
-                          Provider.of<GlobalStatus>(context, listen: false)
-                              .platform)) {
+                      if (AppConfig.plattformwithvideosupport.contains(Provider.of<GlobalStatus>(context, listen: false).platform)) {
                         debugPrint("Plattform support video");
                       } else {
                         debugPrint("Plattform not support video");
-                        return Sorryscreen(
-                            additionalinfo: AppLocalizations.of(context)!
-                                .platformnotsupportvideo);
+                        return Sorryscreen(additionalinfo: AppLocalizations.of(context)!.platformnotsupportvideo);
                       }
 
-                      if (!widget.videocontroller.value.isInitialized) {
+                      if (!videocontroller.value.isInitialized) {
                         initvideoplayer = initializePlayer(data);
                       }
 
@@ -95,41 +64,31 @@ class _SwipeItemState extends State<SwipeItem> {
                           builder: (context, snapshot) {
                             if (snapshot.connectionState ==
                                 ConnectionState.done) {
-                              return ValueListenableBuilder<bool>(
-                                  valueListenable: videoStateNotifier,
-                                  builder: (context, isPlaying, child) {
-                                    return widget
-                                            .videocontroller.value.isInitialized
+                                    return videocontroller.value.isInitialized
                                         ? Stack(
                                             children: [
                                               Center(
                                                 child: AspectRatio(
-                                                  aspectRatio: widget
-                                                      .videocontroller
-                                                      .value
-                                                      .aspectRatio,
-                                                  child: VideoPlayer(
-                                                      widget.videocontroller),
+                                                  aspectRatio: videocontroller.value.aspectRatio,
+                                                  child: VideoPlayer(videocontroller),
                                                 ),
                                               ),
-                                              OverlayWidgetVideo(
-                                                controller:
-                                                    widget.videocontroller,
-                                              )
+                                              OverlayWidgetVideo(controller:videocontroller,)
                                             ],
                                           )
                                         : const Center(
                                             child: CircularProgressIndicator(
                                             color: Colors.blueAccent,
-                                          ));
-                                  });
+                                          ),
+                                        );
                             } else {
                               return const Center(
                                   child: CircularProgressIndicator(
                                 color: Colors.blueAccent,
-                              ));
-                            }
-                          });
+                              ),
+                            );}
+                          },
+                        );
                     }
                     return Stack(
                       children: [
@@ -160,22 +119,11 @@ class _SwipeItemState extends State<SwipeItem> {
     );
   }
 
-  // @override
-  // void dispose() {
-  //   if (widget.upload.uploadipfshashfiletyp == "mp4") {
-  //     widget.videocontroller.dispose();
-  //   }
-  //   super.dispose();
-  // }
-  //
-  // //Stop video when dialog is open
-  // @override
-  // void deactivate() {
-  //   if (widget.upload.uploadipfshashfiletyp == "mp4") {
-  //     widget.videocontroller.pause();
-  //   }
-  //   super.deactivate();
-  // }
+  @override
+  void dispose() {
+    videocontroller.dispose();
+    super.dispose();
+  }
 
   Future<Object> fetchcontentdata() async {
     Upload currentupload = Provider.of<PostviewerStatus>(context, listen: false)
@@ -196,19 +144,21 @@ class _SwipeItemState extends State<SwipeItem> {
   }
 
   Future<bool> initializePlayer(Uint8List data) async {
-    if (widget.videocontroller.value.isInitialized) {
+    if (videocontroller.value.isInitialized) {
       return true; // Skip if already initialized
     }
 
     try {
-      widget.videocontroller = VideoPlayerController.networkUrl(
+      videocontroller = VideoPlayerController.networkUrl(
         Uri.parse('data:video/mp4;base64,${base64Encode(data)}'),
       );
 
-      await widget.videocontroller.setLooping(true);
-      await widget.videocontroller.initialize();
-      await widget.videocontroller.setVolume(0.5); // Adjust volume as needed
-      videoStateNotifier.value = true;
+      await videocontroller.setLooping(true);
+      await videocontroller.initialize();
+      await videocontroller.setVolume(Provider.of<PostviewerStatus>(context, listen: false).soundvolume);
+      if(Provider.of<PostviewerStatus>(context, listen: false).isPlaying){
+        await videocontroller.play();
+      }
       return true;
     } catch (e) {
       debugPrint("initializePlayer Error: $e");

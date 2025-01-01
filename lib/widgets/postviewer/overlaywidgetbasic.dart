@@ -151,9 +151,7 @@ Widget showTagsButton(function, int numoftags, context) {
 Widget reportButton(context) {
   return GestureDetector(
       onTap: () {
-        debugPrint("report button pressed");
-        // If video, pause video
-
+        Provider.of<PostviewerStatus>(context, listen: false).pause();
         showDialog(
             context: context,
             builder: ((context) => Report(
@@ -175,7 +173,8 @@ Widget reportButton(context) {
             size: 40,
           ),
         ),
-      ));
+      ),
+    );
 }
 
 Widget shareButton(context) {

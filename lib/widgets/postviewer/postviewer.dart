@@ -6,29 +6,24 @@ import 'package:fr0gsite/datatypes/favoriteupload.dart';
 import 'package:fr0gsite/datatypes/globalstatus.dart';
 import 'package:fr0gsite/datatypes/upload.dart';
 import 'package:fr0gsite/datatypes/uploadordertemplate.dart';
-import 'package:fr0gsite/widgets/infoscreens/loadingpleasewaitscreen.dart';
 import 'package:fr0gsite/widgets/postviewer/postvieweranimation.dart';
 import 'package:fr0gsite/widgets/postviewer/tagbarview.dart';
 import 'package:fr0gsite/widgets/postviewer/overlaywidgetbasic.dart';
 import 'package:fr0gsite/widgets/postviewer/comment/commentbar.dart';
 import 'package:fr0gsite/widgets/postviewer/postviewertopbar.dart';
 import 'package:fr0gsite/widgets/postviewer/swipeitem.dart';
-import 'package:flutter/foundation.dart' show Uint8List, kIsWeb;
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:universal_html/html.dart' as html;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:video_player/video_player.dart';
 
 import '../../chainactions/chainactions.dart';
 import '../../datatypes/postviewerstatus.dart';
-import '../../ipfsactions.dart';
 import 'postviewerbottombar.dart';
 
-/// Stateful widget to fetch and then display video content.
 class Postviewer extends StatefulWidget {
   final String? id;
-
   const Postviewer({super.key, this.id});
 
   @override
@@ -36,14 +31,7 @@ class Postviewer extends StatefulWidget {
 }
 
 class PostviewerState extends State<Postviewer> {
-  int metadatauppersurplus = 10;
-  int metadatalowersurplus = 10;
-  int contentdatauppersurplus = 2;
-  int contentdatalowersurplus = 2;
-
-  var videocontroller = VideoPlayerController.network('');
   PageController pagecontroller = PageController();
-
   List<SwipeItem> swipeItemList = [];
   bool fristrun = true;
 
@@ -79,12 +67,10 @@ class PostviewerState extends State<Postviewer> {
           //TODO: Downvote
         }
         if (value.logicalKey == LogicalKeyboardKey.keyC) {
-          Provider.of<GlobalStatus>(context, listen: false)
-              .toggleexpandedpostviewer();
+          Provider.of<GlobalStatus>(context, listen: false).toggleexpandedpostviewer();
         }
         if (value.logicalKey == LogicalKeyboardKey.keyT) {
-          Provider.of<GlobalStatus>(context, listen: false)
-              .toggleexpandedtagview();
+          Provider.of<GlobalStatus>(context, listen: false).toggleexpandedtagview();
         }
       },
       child: SafeArea(
@@ -123,20 +109,13 @@ class PostviewerState extends State<Postviewer> {
                                       behavior: AppScrollBehavior(),
                                       child: PageView.builder(
                                         itemBuilder: (context, index) {
-                                          debugPrint(
-                                              "itemBuilder index: $index");
-                                          return swipeItemList[index];
-                                        },
-                                        itemCount:
-                                            Provider.of<PostviewerStatus>(
-                                                    context,
-                                                    listen: false)
-                                                .uploadlist
-                                                .length,
+                                          debugPrint("itemBuilder index: $index");
+                                          return swipeItemList[index];},
+                                        itemCount:Provider.of<PostviewerStatus>(context,listen: false).uploadlist.length,
                                         controller: pagecontroller,
                                         scrollDirection: Axis.vertical,
-                                        onPageChanged: (value) => nextindex(
-                                            value), //TODO: 3fach laden
+                                        onPageChanged: (value) => onPageChanged(
+                                            value), 
                                       ),
                                     ),
                                   ),
@@ -156,20 +135,11 @@ class PostviewerState extends State<Postviewer> {
                                     left: 10,
                                     bottom: 10,
                                     child: expandButton(() {
-                                      double currentwidth =
-                                          MediaQuery.of(context).size.width;
-                                      setState(() {
-                                        if (videocontroller.value.isPlaying) {
-                                          videocontroller.pause();
-                                        } else {
-                                          videocontroller.play();
-                                        }
-                                      });
+                                      double currentwidth =MediaQuery.of(context).size.width;                      
                                       if (currentwidth < 1200) {
                                         Provider.of<GlobalStatus>(context,
                                                 listen: false)
                                             .expandedpostviewer = false;
-                                        // setState(() {});
                                         showModalBottomSheet(
                                           context: context,
                                           isScrollControlled: true,
@@ -185,46 +155,18 @@ class PostviewerState extends State<Postviewer> {
                                           },
                                         );
                                       } else {
-                                        Provider.of<GlobalStatus>(context,
-                                                listen: false)
-                                            .toggleexpandedpostviewer();
+                                        Provider.of<GlobalStatus>(context,listen: false).toggleexpandedpostviewer();
                                       }
                                     },
-                                        Provider.of<PostviewerStatus>(context,
-                                                listen: true)
-                                            .currentupload
-                                            .numofcomments,
-                                        context),
+                                        Provider.of<PostviewerStatus>(context,listen: true).currentupload.numofcomments,context),
                                   ),
                                   Positioned(
                                     left: 50,
                                     bottom: 10,
                                     child: showTagsButton(() {
-                                      //Big Window for Desktop
-                                      Provider.of<GlobalStatus>(context,
-                                              listen: false)
-                                          .toggleexpandedtagview();
-
-                                      // setState(() {
-                                      var playStatus =
-                                          Provider.of<PostviewerStatus>(context,
-                                              listen: false);
-                                      if (playStatus.isPlaying) {
-                                        Provider.of<PostviewerStatus>(context,
-                                                listen: false)
-                                            .pause();
-                                      } else {
-                                        Provider.of<PostviewerStatus>(context,
-                                                listen: false)
-                                            .resume();
-                                      }
-                                      // });
+                                      Provider.of<GlobalStatus>(context,listen: false).toggleexpandedtagview();
                                     },
-                                        Provider.of<PostviewerStatus>(context,
-                                                listen: true)
-                                            .currentupload
-                                            .numoftags,
-                                        context),
+                                        Provider.of<PostviewerStatus>(context,listen: true).currentupload.numoftags,context),
                                   ),
                                 ],
                               )),
@@ -234,8 +176,7 @@ class PostviewerState extends State<Postviewer> {
                               duration: const Duration(milliseconds: 300),
                               height: userstatus.expandedtagview ? 60 : 0,
                               child: userstatus.expandedtagview
-                                  ? const TagBarView()
-                                  : Container(
+                                  ? const TagBarView() : Container(
                                       color: AppColor.niceblack,
                                     ),
                             );
@@ -248,7 +189,8 @@ class PostviewerState extends State<Postviewer> {
                   ],
                 );
               } else {
-                return const Loadingpleasewaitscreen();
+                //return const Loadingpleasewaitscreen();
+                return Container();
               }
             },
           ),
@@ -257,25 +199,16 @@ class PostviewerState extends State<Postviewer> {
     );
   }
 
-  Uint8List processresponse(response) {
-    int cutlength = 512;
-    var cutedresponse =
-        response.bodyBytes.sublist(cutlength, response.bodyBytes.length);
-    return cutedresponse;
-  }
 
   Future<Object> fetchMetadata() async {
-    debugPrint("...............Postviewer: Fetch Metadata");
     if (fristrun) {
       Provider.of<PostviewerStatus>(context, listen: false).clearuploadlist();
       List<Upload> tempUploads = [];
       late Upload currentupload;
       try {
-        UploadOrderTemplate uploadorder =
-            ModalRoute.of(context)!.settings.arguments as UploadOrderTemplate;
+        UploadOrderTemplate uploadorder = ModalRoute.of(context)!.settings.arguments as UploadOrderTemplate;
         tempUploads = uploadorder.currentviewuploadlist;
-        currentupload = uploadorder.currentviewuploadlist
-            .firstWhere((element) => element.uploadid == int.parse(widget.id!));
+        currentupload = uploadorder.currentviewuploadlist.firstWhere((element) => element.uploadid == int.parse(widget.id!));
       } catch (e) {
         debugPrint("Postviewer: No UploadOrderTemplate");
         //No UploadOrderTemplate. Fetch Popular Uploads
@@ -302,36 +235,27 @@ class PostviewerState extends State<Postviewer> {
       }
       if (mounted) {
         debugPrint("Postviewer: Set Uploads");
-        Provider.of<PostviewerStatus>(context, listen: false)
-            .adduploads(tempUploads);
+        Provider.of<PostviewerStatus>(context, listen: false).adduploads(tempUploads);
 
         debugPrint("Postviewer: Add siwpeitems to uploadlist");
-        Provider.of<PostviewerStatus>(context, listen: false)
-            .uploadlist
-            .forEach((element) {
+        Provider.of<PostviewerStatus>(context, listen: false).uploadlist.forEach((element) {
           swipeItemList.add(SwipeItem(
             upload: element,
-            videocontroller: videocontroller,
           ));
         });
 
         debugPrint("Postviewer: Set current upload");
-        Provider.of<PostviewerStatus>(context, listen: false)
-            .setcurrentupload(currentupload);
+        Provider.of<PostviewerStatus>(context, listen: false).setcurrentupload(currentupload);
       }
 
       int indexofcurrentuploadinswiper = swipeItemList.indexWhere(
           (element) => element.upload.uploadid == currentupload.uploadid);
 
-      debugPrint(
-          "Index of current upload in swiper: $indexofcurrentuploadinswiper");
-
-      pagecontroller =
-          PageController(initialPage: indexofcurrentuploadinswiper);
+      debugPrint("Index of current upload in swiper: $indexofcurrentuploadinswiper");
+      pagecontroller = PageController(initialPage: indexofcurrentuploadinswiper);
 
       fristrun = false;
     }
-
     return 0;
   }
 
@@ -347,35 +271,15 @@ class PostviewerState extends State<Postviewer> {
             duration: const Duration(milliseconds: 200), curve: Curves.easeIn);
         break;
     }
-    //Provider.of<PostviewerStatus>(context,listen: false).setcurrentupload(currentupload);
-    //Change current uploadid
-    //Check if there are still enough uploads in the list
-    //Initiate fetch of next upload
-    //inform Swipe Controller
   }
 
-  // void nextindex(int value) {
-  //   Provider.of<PostviewerStatus>(context, listen: false)
-  //       .setcurrentupload(swipeItemList[value].upload);
-  //
-  //   // Preload videos
-  //   preloadVideos(value);
-  //
-  //   //Update URL
-  //   if (kIsWeb) {
-  //     html.window.history.pushState(null, "Postviewer",
-  //         "/postviewer/${swipeItemList[value].upload.uploadid}");
-  //   }
-  // }
-  void nextindex(int value) {
-    Provider.of<PostviewerStatus>(context, listen: false)
-        .setcurrentupload(swipeItemList[value].upload);
+  void onPageChanged(int value) {
 
-    // Preload videos next and previous to the current video
+    debugPrint("onPageChanged: $value");
+
+    Provider.of<PostviewerStatus>(context, listen: false).setcurrentupload(swipeItemList[value].upload);
+
     preloadVideos(value);
-
-    // Directly play the video when it is ready
-    playVideoWhenReady(value);
 
     // Update the URL for web
     if (kIsWeb) {
@@ -384,32 +288,19 @@ class PostviewerState extends State<Postviewer> {
     }
   }
 
-  void playVideoWhenReady(int index) {
-    final controller = swipeItemList[index].videocontroller;
-    if (controller.value.isInitialized && !controller.value.isPlaying) {
-      controller.play();
+  void preloadVideos(int index) {
+    // Vorheriges Video
+    if (index > 0) {
+      swipeItemList[index - 1].upload.loadContent(context);
     }
-  }
 
-  void preloadVideos(int currentIndex) async {
-    int preloadRange = 2; // Number of videos to preload before and after
-    for (int i = currentIndex - preloadRange;
-        i <= currentIndex + preloadRange;
-        i++) {
-      if (i >= 0 && i < swipeItemList.length) {
-        final item = swipeItemList[i];
-        if (!item.videocontroller.value.isInitialized) {
-          final upload = item.upload;
-          final data =
-              await fetchUploadData(upload.uploadipfshash); // Fetch video data
-          await item.initializePlayer(data); // Preload video
-        }
-      }
+    // Aktuelles Video
+    swipeItemList[index].upload.loadContent(context);
+
+    // Nächstes Video
+    if (index < swipeItemList.length - 1) {
+      swipeItemList[index + 1].upload.loadContent(context);
     }
-  }
-
-  Future<Uint8List> fetchUploadData(String hash) async {
-    return await IPFSActions.fetchipfsdata(context, hash);
   }
 }
 

@@ -13,25 +13,21 @@ class PostviewerStatus extends ChangeNotifier {
   List<Comment> commentlist = [];
   bool updatecommentbar = false;
   bool commentFold = true;
-  bool isLoading = true;
-
+  
   bool _isPlaying = true;
-
   bool get isPlaying => _isPlaying;
-
   void pause() {
     _isPlaying = false;
     notifyListeners();
-  }
-
+  } 
   void resume() {
     _isPlaying = true;
-    notifyListeners();
+    //notifyListeners();
   }
 
   void showedpostviewerfirsttime() {
     showpostviewerfirsttime = false;
-    notifyListeners();
+    //notifyListeners();
   }
 
   void setsoundvolume(double volume) {
@@ -49,33 +45,10 @@ class PostviewerStatus extends ChangeNotifier {
     return currentupload;
   }
 
-  List<Upload> fetchnextuploads(int uploadid) {
-    List<Upload> tofetchuploads = [];
-    for (var i = 0; i < uploadlist.length; i++) {
-      if (uploadlist[i].uploadid == uploadid) {
-        if (i + 1 < uploadlist.length) {
-          tofetchuploads.add(uploadlist[i + 1]);
-        }
-        if (i + 2 < uploadlist.length) {
-          tofetchuploads.add(uploadlist[i + 2]);
-        }
-        if (i + 3 < uploadlist.length) {
-          tofetchuploads.add(uploadlist[i + 3]);
-        }
-        break;
-      }
-    }
-    return tofetchuploads;
-  }
-
   void setdata(Uint8List data, int uploadid) {
     uploadlist
         .firstWhere((element) => element.uploadid == uploadid)
         .setdata(data);
-
-    // uploadlist
-    //     .firstWhere((element) => element.uploadid == uploadid)
-    //     .setVideoControllerData(data);
 
     notifyListeners();
   }
