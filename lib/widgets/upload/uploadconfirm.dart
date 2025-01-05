@@ -144,8 +144,12 @@ class Uploadconfirm extends StatelessWidget {
                     TextButton(
                         onPressed: () {
                           if (uploadstatus.textfieldipfsthumb.text != "") {
+                            IPFSNode ipfsnodefortest =
+                                Provider.of<NetworkStatus>(context,
+                                        listen: false)
+                                    .currentipfsnode;
                             launchUrl(Uri.parse(
-                                "https://ipfs.io/ipfs/${uploadstatus.textfieldipfsthumb.text}"));
+                                "${ipfsnodefortest.fullurl}${uploadstatus.textfieldipfsthumb.text}"));
                             uploadstatus.testedipfsthumbfunction();
                           }
                         },
