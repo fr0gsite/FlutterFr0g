@@ -2,6 +2,7 @@ import 'package:fr0gsite/chainactions/chainactions.dart';
 import 'package:fr0gsite/config.dart';
 import 'package:fr0gsite/datatypes/globalstatus.dart';
 import 'package:fr0gsite/datatypes/globaltags.dart';
+import 'package:fr0gsite/datatypes/postviewerstatus.dart';
 import 'package:fr0gsite/widgets/login/login.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -228,7 +229,8 @@ class _GlobalTagTopBarState extends State<GlobalTagTopBar> {
           ),
           onPressed: () {
             if (Navigator.canPop(context)) {
-              Navigator.popAndPushNamed(context, '/home');
+              Provider.of<PostviewerStatus>(context, listen: false).pause();
+              Navigator.pop(context);
             }
           },
         ),
