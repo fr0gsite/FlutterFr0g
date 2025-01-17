@@ -65,7 +65,8 @@ class _PostViewerTopBarState extends State<PostViewerTopBar> {
                   debugPrint(
                       'Open profile of ${postviewerstatus.getcurrentupload().autor}');
 
-                  Navigator.pushReplacementNamed(context,
+                  Provider.of<PostviewerStatus>(context, listen: false).pause();
+                  Navigator.pushNamed(context,
                       '/profile/${postviewerstatus.getcurrentupload().autor}',
                       arguments: {
                         'accountname': postviewerstatus.getcurrentupload().autor
