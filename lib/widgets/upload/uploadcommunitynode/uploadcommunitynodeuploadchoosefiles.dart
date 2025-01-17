@@ -12,13 +12,13 @@ import 'package:fr0gsite/datatypes/uploadfeedback.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fr0gsite/datatypes/uploadfilestatus.dart';
 import 'package:fr0gsite/widgets/upload/uploadcommunitynode/uploadkey.dart';
+import 'package:fr0gsite/widgets/upload/uploadcommunitynode/thumbnail_helper.dart';
 import 'package:fr0gsite/widgets/wallet/walletconfirmtransaction.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:intl/intl.dart';
 import 'package:pointycastle/pointycastle.dart' as pc;
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
-import 'package:image/image.dart' as img;
 
 class UploadChooseFiles extends StatefulWidget {
   const UploadChooseFiles({super.key, required this.feedback});
@@ -43,6 +43,7 @@ class _UploadChooseFilesState extends State<UploadChooseFiles> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      scrollDirection: Axis.vertical,
       child: Center(
         child: isLoading
             ? Center(
@@ -60,7 +61,7 @@ class _UploadChooseFilesState extends State<UploadChooseFiles> {
                 ),
               )
             : Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(20.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -90,13 +91,7 @@ class _UploadChooseFilesState extends State<UploadChooseFiles> {
                                     borderRadius: BorderRadius.circular(10),
                                     color: Colors.black.withOpacity(0.5),
                                   ),
-                                  child: selectedFile!.extension == 'mp4'
-                                      ? const Icon(
-                                          Icons.videocam,
-                                          size: 200,
-                                          color: Colors.white,
-                                        )
-                                      : Image.memory(
+                                  child: Image.memory(
                                           preview!,
                                           width: 200,
                                           height: 200,
@@ -337,7 +332,7 @@ class _UploadChooseFilesState extends State<UploadChooseFiles> {
     }
   }
 
-  Future<PlatformFile?> pickFile() async {
+  Future<PlatformFile?> pickFile() async {    
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
       allowedExtensions: AppConfig.alloweduploadfiletypes,
@@ -346,44 +341,66 @@ class _UploadChooseFilesState extends State<UploadChooseFiles> {
 
     if (result != null && result.files.isNotEmpty) {
       debugPrint(result.files.first.extension);
-
+    
       setState(() {
         selectedFile = result.files.first;
-        preview = result.files.first.bytes;
       });
 
       //Resize Image if it is an image an set as preview
       if (result.files.first.extension == 'jpg' ||
           result.files.first.extension == 'jpeg' ||
           result.files.first.extension == 'png') {
-        //Uint8List resizedData = resizeImage(result.files.first.bytes!);
+        Uint8List resizedData = createImageThumbnail(result.files.first.bytes!);
         setState(() {
-          //thumbpreview = resizedData;
+          PlatformFile platformFile = PlatformFile(
+          name: "thumb.jpeg",
+          size: resizedData.length,
+          bytes: resizedData,
+          );
+          thumbselectedFile = platformFile;
+          
+          //Preview
+          thumbpreview = resizedData;
+          preview = resizedData;
         });
-      }
-      return result.files.first;
-    } else {
-      return null;
-    }
-  }
+      }else{
+      //Generate Thumbnail for Video
+      if(kIsWeb){
+        Uint8List generatedthumb = await generateVideoThumbnailWeb(result.files.first.bytes!);
+        PlatformFile thumbplatformFile = PlatformFile(
+          name: "thumb.jpeg",
+          size: generatedthumb.length,
+          bytes: generatedthumb,
+        );
 
-  Uint8List resizeImage(Uint8List data) {
-    Uint8List resizedData = data;
-    img.Image? image = img.decodeImage(data);
-    if (image == null) {
-      return resizedData;
+        setState(() {
+          thumbpreview = generatedthumb;
+          preview = generatedthumb;
+          thumbselectedFile = thumbplatformFile;
+        });
+      }else{
+          Uint8List generatedthumb = await generateVideoThumbnailMobileDesktop(result.files.first);
+          PlatformFile thumbplatformFile = PlatformFile(
+          name: "thumb.jpeg",
+          size: generatedthumb.length,
+          bytes: generatedthumb,
+        );
+          setState(() {
+            thumbpreview = generatedthumb;
+            preview = generatedthumb;
+            thumbselectedFile = thumbplatformFile;
+          });
+        }
+      }
+      
     }
-    img.Image resized = img.copyResize(image, width: 128, height: 128);
-    resizedData = img.encodeJpg(resized);
-    return resizedData;
+    return null;
   }
 
   Future<UploadFeedback> uploadFiles(
       PlatformFile thumbFile, PlatformFile mainFile, String privkey) async {
     try {
-      String uploadurl = Provider.of<UploadFileStatus>(context, listen: false)
-          .choosenode
-          .uploadurl();
+      String uploadurl = Provider.of<UploadFileStatus>(context, listen: false).choosenode.uploadurl();
       var request = http.MultipartRequest('POST', Uri.parse(uploadurl));
 
       request.files.add(http.MultipartFile.fromBytes(
@@ -415,7 +432,7 @@ class _UploadChooseFilesState extends State<UploadChooseFiles> {
         UploadFeedback uploadfeedback = UploadFeedback.fromJson(responseJson);
         return uploadfeedback;
       } else {
-        debugPrint('Failed to upload files');
+        debugPrint('Failed to upload files: ${response.statusCode} ${response.reasonPhrase}');
         return UploadFeedback(false, '', '', '', '');
       }
     } catch (e) {
