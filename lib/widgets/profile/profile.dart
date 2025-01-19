@@ -158,6 +158,22 @@ class _ProfileState extends State<Profile> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          //Backbutton
+          SizedBox(
+            width: 50,
+            child: IconButton(
+              icon: const Icon(Icons.backspace_rounded),
+              color: Colors.white,
+              onPressed: () {
+                if(Navigator.canPop(context)){
+                  Navigator.pop(context);
+                }else{
+                  Navigator.pushNamed(context, "/");
+                }                
+              },
+            ),
+          ),
+          const Spacer(),
           const Icon(
             Icons.person,
             color: Colors.white,
@@ -197,6 +213,7 @@ class _ProfileState extends State<Profile> {
               },
             ),
           ),
+          Spacer(),
         ],
       ),
     );
