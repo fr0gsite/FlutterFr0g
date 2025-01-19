@@ -3,7 +3,7 @@ import 'package:video_player/video_player.dart';
 
 class SpeedDropdown extends StatefulWidget {
   final VideoPlayerController controller;
-  const SpeedDropdown({Key? key, required this.controller}) : super(key: key);
+  const SpeedDropdown({super.key, required this.controller});
 
   @override
   State<SpeedDropdown> createState() => _SpeedDropdownState();

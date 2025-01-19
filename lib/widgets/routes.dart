@@ -30,7 +30,7 @@ class Mainrouter {
 
   static final Handler _informationPage = Handler(
       handlerFunc: (context, Map<String, dynamic> params) =>
-      Informations());
+      const Informations());
   static final Handler _loadingpleasewaitscreen = Handler(
       handlerFunc: (context, Map<String, dynamic> params) =>
           const Loadingpleasewaitscreen());

@@ -213,7 +213,7 @@ class _ProfileState extends State<Profile> {
               },
             ),
           ),
-          Spacer(),
+          const Spacer(),
         ],
       ),
     );
