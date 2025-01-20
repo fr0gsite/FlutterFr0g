@@ -1,5 +1,6 @@
 import 'package:fr0gsite/datatypes/postviewerstatus.dart';
 import 'package:fr0gsite/widgets/postviewer/soundbar.dart';
+import 'package:fr0gsite/widgets/postviewer/speeddropdown.dart';
 import 'package:fr0gsite/widgets/postviewer/videoprocessIndicatorview.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -46,11 +47,18 @@ class _OverlayWidgetVideoState extends State<OverlayWidgetVideo> {
                   left: 100,
                   right: 80,
                   child: VideoProcessIndicatorView(
-                      controller: widget.controller, allowScrubbing: true)),
+                      controller: widget.controller, allowScrubbing: true),
+                  ),
               Positioned(
                   bottom: 100,
                   left: 0,
-                  child: SoundBar(controller: widget.controller)),
+                  child: SoundBar(controller: widget.controller),
+                ),
+              Positioned(
+              bottom: 100,         
+              left: 60,           
+              child: SpeedDropdown(controller: widget.controller),
+              ),
             ],
           ),
         ),

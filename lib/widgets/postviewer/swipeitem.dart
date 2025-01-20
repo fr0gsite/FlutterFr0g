@@ -121,6 +121,7 @@ class _SwipeItemState extends State<SwipeItem> {
 
   @override
   void dispose() {
+    debugPrint("SwipeItem dispose");
     videocontroller.dispose();
     super.dispose();
   }
@@ -144,7 +145,9 @@ class _SwipeItemState extends State<SwipeItem> {
   }
 
   Future<bool> initializePlayer(Uint8List data) async {
+    debugPrint("initializePlayer function");
     if (videocontroller.value.isInitialized) {
+      debugPrint("initializePlayer: Already initialized");
       return true; // Skip if already initialized
     }
 
