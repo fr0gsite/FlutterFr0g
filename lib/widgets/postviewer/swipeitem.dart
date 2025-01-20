@@ -121,6 +121,7 @@ class _SwipeItemState extends State<SwipeItem> {
 
   @override
   void dispose() {
+    debugPrint("SwipeItem dispose");
     videocontroller.dispose();
     super.dispose();
   }
