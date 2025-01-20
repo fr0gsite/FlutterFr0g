@@ -12,7 +12,6 @@ class PostviewerStatus extends ChangeNotifier {
   double soundvolume = 0.0;
   List<Comment> commentlist = [];
   bool updatecommentbar = false;
-  bool commentFold = true;
   
   bool _isPlaying = true;
   bool get isPlaying => _isPlaying;
@@ -119,11 +118,6 @@ class PostviewerStatus extends ChangeNotifier {
         up: 0,
         language: "de",
         token: 0));
-    notifyListeners();
-  }
-
-  void toggleCommentFold() {
-    commentFold = !commentFold;
     notifyListeners();
   }
 }

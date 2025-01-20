@@ -1,7 +1,6 @@
 import 'package:fr0gsite/datatypes/postviewerstatus.dart';
 import 'package:fr0gsite/widgets/postviewer/soundbar.dart';
 import 'package:fr0gsite/widgets/postviewer/videoprocessIndicatorview.dart';
-import 'package:lottie/lottie.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';

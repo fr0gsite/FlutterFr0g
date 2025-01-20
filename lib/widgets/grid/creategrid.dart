@@ -94,29 +94,27 @@ class _CreateGridState extends State<CreateGrid> {
     }
   }
 
-  Container getgridview() {
+  ScrollConfiguration getgridview() {
     var corssAxisCount = resize();
-    var grid = Container(
-      child: ScrollConfiguration(
-        behavior: AppScrollBehavior(),
-        child: GridView.builder(
-          itemCount: items.length,
-          scrollDirection: Axis.vertical,
-          controller: _scrollController,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: corssAxisCount),
-          itemBuilder: (context, index) {
-            return Container(
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey, width: 0.1),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: Container(child: items[index]),
-              ),
-            );
-          },
-        ),
+    var grid = ScrollConfiguration(
+      behavior: AppScrollBehavior(),
+      child: GridView.builder(
+        itemCount: items.length,
+        scrollDirection: Axis.vertical,
+        controller: _scrollController,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: corssAxisCount),
+        itemBuilder: (context, index) {
+          return Container(
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.grey, width: 0.1),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: Container(child: items[index]),
+            ),
+          );
+        },
       ),
     );
     return grid;
