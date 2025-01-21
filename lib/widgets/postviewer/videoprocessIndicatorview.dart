@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:fr0gsite/widgets/postviewer/speeddropdown.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoProcessIndicatorView extends StatefulWidget {
@@ -18,6 +19,7 @@ class _VideoProcessIndicatorViewState extends State<VideoProcessIndicatorView> {
   bool hide = true;
   DateTime lastactiveTime = DateTime.now();
   late Timer timer;
+  late Timer durationTimer;
 
   void setTimer() {
     timer = Timer(const Duration(seconds: 3), () {
@@ -28,36 +30,75 @@ class _VideoProcessIndicatorViewState extends State<VideoProcessIndicatorView> {
           });
         }
       }
+    },
+    );
+  }
+
+
+
+  @override
+  void initState() {
+    super.initState();
+    durationTimer = Timer.periodic(const Duration(milliseconds: 1000), (timer) {
+      if (widget.controller.value.isPlaying) {
+        if (mounted) {
+          setState(() {});
+        }
+      }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedContainer(
-      duration: const Duration(milliseconds: 300),
-      height: !hide ? 30 : 15,
-      child: MouseRegion(
-        onHover: (event) {
-          setState(() {
-            hide = false;
-          });
-          lastactiveTime = DateTime.now();
-          setTimer();
-        },
-        child: VideoProgressIndicator(
-          widget.controller,
-          allowScrubbing: true,
-          colors: VideoProgressColors(
-            playedColor: !hide ? Colors.red : Colors.red.withOpacity(0.3),
-            bufferedColor: !hide
-                ? Colors.white.withOpacity(0.5)
-                : Colors.white.withOpacity(0.1),
-            backgroundColor: !hide
-                ? Colors.white.withOpacity(0.2)
-                : Colors.white.withOpacity(0.1),
+    return Stack(
+      children: [
+        Positioned(
+          left: 10,
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 300),
+            height: !hide ? 35 : 15,
+            child: Center(
+              // In Style MM:SS / MM:SS
+              child: Text(
+                widget.controller.value.position.inMinutes.toString().padLeft(2, '0') +
+                    ':' +
+                    widget.controller.value.position.inSeconds.remainder(60).toString().padLeft(2, '0') +
+                    ' / ' +
+                    widget.controller.value.duration!.inMinutes.toString().padLeft(2, '0') +
+                    ':' +
+                    widget.controller.value.duration!.inSeconds.remainder(60).toString().padLeft(2, '0'),
+                style:  TextStyle(color: Colors.white, fontSize: !hide ? 25 : 14),
+              ),
+            ),
           ),
         ),
-      ),
+        AnimatedContainer(
+          duration: const Duration(milliseconds: 300),
+          height: !hide ? 35 : 15,
+          child: MouseRegion(
+            onHover: (event) {
+              setState(() {
+                hide = false;
+              });
+              lastactiveTime = DateTime.now();
+              setTimer();
+            },
+            child: VideoProgressIndicator(
+              widget.controller,
+              allowScrubbing: true,
+              colors: VideoProgressColors(
+                playedColor: !hide ? Colors.red.withOpacity(0.7) : Colors.red.withOpacity(0.3),
+                bufferedColor: !hide
+                    ? Colors.white.withOpacity(0.5)
+                    : Colors.white.withOpacity(0.1),
+                backgroundColor: !hide
+                    ? Colors.white.withOpacity(0.2)
+                    : Colors.white.withOpacity(0.1),
+              ),
+            ),
+          ),
+        ),        
+      ],
     );
   }
 }

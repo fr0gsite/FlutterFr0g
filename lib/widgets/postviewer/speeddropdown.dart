@@ -47,15 +47,14 @@ class _SpeedDropdownState extends State<SpeedDropdown> {
             );
           }).toList(),
           onChanged: (newValue) {
-            if (newValue == null) return;
-            if (newValue < 0.25) newValue = 0.25;
-            if (newValue > 2.0) newValue = 2.0;
-
-            setState(() {
-              _selectedSpeed = newValue!;
-            });
-
-            widget.controller.setPlaybackSpeed(newValue);
+            //if (newValue == null) return;
+            //if (newValue < 0.25) newValue = 0.25;
+            //if (newValue > 2.0) newValue = 2.0;
+            //setState(() {
+            //  _selectedSpeed = newValue!;
+            //});
+            //widget.controller.setPlaybackSpeed(newValue);
+            
           },
         ),
       ),
