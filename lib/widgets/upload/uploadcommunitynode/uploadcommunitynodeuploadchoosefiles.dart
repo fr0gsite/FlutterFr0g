@@ -364,34 +364,20 @@ class _UploadChooseFilesState extends State<UploadChooseFiles> {
           preview = resizedData;
         });
       }else{
-      //Generate Thumbnail for Video
-      if(kIsWeb){
-        Uint8List generatedthumb = await generateVideoThumbnailWeb(result.files.first.bytes!);
+        //Generate Thumbnail for Video
+        Uint8List generatedthumb = await generateVideoThumbnail(result.files.first);
         PlatformFile thumbplatformFile = PlatformFile(
-          name: "thumb.jpeg",
-          size: generatedthumb.length,
-          bytes: generatedthumb,
+        name: "thumb.jpeg",
+        size: generatedthumb.length,
+        bytes: generatedthumb,
         );
-
         setState(() {
           thumbpreview = generatedthumb;
           preview = generatedthumb;
           thumbselectedFile = thumbplatformFile;
         });
-      }else{
-          Uint8List generatedthumb = await generateVideoThumbnailMobileDesktop(result.files.first);
-          PlatformFile thumbplatformFile = PlatformFile(
-          name: "thumb.jpeg",
-          size: generatedthumb.length,
-          bytes: generatedthumb,
-        );
-          setState(() {
-            thumbpreview = generatedthumb;
-            preview = generatedthumb;
-            thumbselectedFile = thumbplatformFile;
-          });
-        }
       }
+      
       
     }
     return null;

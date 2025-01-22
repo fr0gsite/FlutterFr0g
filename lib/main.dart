@@ -175,8 +175,7 @@ class StartPoint extends State<Fr0gsiteApp> {
   }
 
   Timer? logoswitchtimer;
-  String logopathstring =
-      AppConfig.logoList[Random.secure().nextInt(AppConfig.logoList.length)];
+  String logopathstring = AppConfig.logoList[Random.secure().nextInt(AppConfig.logoList.length)];
 
   @override
   void initState() {
@@ -185,8 +184,7 @@ class StartPoint extends State<Fr0gsiteApp> {
       if (mounted) {
         setState(() {
           debugPrint("Switch Logo");
-          logopathstring = AppConfig
-              .logoList[Random.secure().nextInt(AppConfig.logoList.length)];
+          logopathstring = AppConfig.logoList[Random.secure().nextInt(AppConfig.logoList.length)];
         });
       }
     });
@@ -264,8 +262,8 @@ class StartPoint extends State<Fr0gsiteApp> {
               children: [
                 IconButton(
                   icon: Image.asset(
-                    "assets/$logopathstring",
-                    width: 60,
+                    "assets/images/logo_b.png",
+                    width: 50,
                   ),
                   onPressed: () {
                     Navigator.pushNamed(context, '/home');
@@ -276,6 +274,21 @@ class StartPoint extends State<Fr0gsiteApp> {
                         style: TextStyle(fontSize: 50, color: Colors.white))
                     : const Text(AppConfig.appname,
                         style: TextStyle(fontSize: 20, color: Colors.white)),
+                const SizedBox(width: 10),
+                const Text(
+                  "Beta",
+                  style: TextStyle(color: Colors.orange),
+                ),
+                const SizedBox(width: 10),
+                MediaQuery.of(context).size.width > 640 ? IconButton(
+                  icon: Image.asset(
+                    "assets/$logopathstring",
+                    width: 50,
+                  ),
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/home');
+                  },
+                  ): Container(),
               ],
             ),
             backgroundColor: AppColor.niceblack,

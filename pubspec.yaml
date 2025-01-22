@@ -4,7 +4,7 @@ description: Free Open-Source Plattform with a self managing community.
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
-version: 0.5.6
+version: 0.5.7
 
 environment:
   sdk: 3.5.4
@@ -99,8 +99,8 @@ dev_dependencies:
   test: any
   flutter_lints: ^4.0.0
 
-flutter_icons:
-  #After changes in flutter_icons, generate icons with: flutter pub run flutter_launcher_icons
+flutter_launcher_icons:
+  #After changes in flutter_icons, generate icons with: dart run flutter_launcher_icons
   image_path: "assets/images/ic_launcher.png"
   #remove_alpha_ios: true
 

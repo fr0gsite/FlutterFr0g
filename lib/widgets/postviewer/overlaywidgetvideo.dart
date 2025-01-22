@@ -54,11 +54,11 @@ class _OverlayWidgetVideoState extends State<OverlayWidgetVideo> {
                   left: 0,
                   child: SoundBar(controller: widget.controller),
                 ),
-              Positioned(
-              bottom: 100,         
-              left: 60,           
-              child: SpeedDropdown(controller: widget.controller),
-              ),
+              //Positioned(
+              //bottom: 100,         
+              //left: 60,           
+              //child: SpeedDropdown(controller: widget.controller),
+              //),
             ],
           ),
         ),

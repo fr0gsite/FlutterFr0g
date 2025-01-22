@@ -289,17 +289,19 @@ class PostviewerState extends State<Postviewer> {
   }
 
   void preloadVideos(int index) {
-    // Vorheriges Video
+    // Previous Previous Video
     if (index > 0) {
       swipeItemList[index - 1].upload.loadContent(context);
     }
 
-    // Aktuelles Video
-    swipeItemList[index].upload.loadContent(context);
-
-    // Nächstes Video
+    // Next Video
     if (index < swipeItemList.length - 1) {
       swipeItemList[index + 1].upload.loadContent(context);
+    }
+
+    // Next Next Video
+    if (index < swipeItemList.length - 2) {
+      swipeItemList[index + 2].upload.loadContent(context);
     }
   }
 }

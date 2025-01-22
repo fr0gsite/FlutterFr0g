@@ -53,7 +53,7 @@ class Informations extends StatelessWidget {
                   style: ruleTagStyle
                 ),
                 onPressed: (BuildContext context) {
-                  launchUrl(Uri.parse(whitepaperurl));
+                  launchUrl(Uri.parse(Documentation.rules));
                 },
               ),
               SettingsTile(
@@ -67,7 +67,7 @@ class Informations extends StatelessWidget {
                     style: ruleTagStyle
                 ),
                 onPressed: (BuildContext context) {
-                  launchUrl(Uri.parse(whitepaperurl));
+                  launchUrl(Uri.parse(Documentation.rules));
                 },
               ),
               SettingsTile(
@@ -81,7 +81,7 @@ class Informations extends StatelessWidget {
                     style: ruleTagStyle
                 ),
                 onPressed: (BuildContext context) {
-                  launchUrl(Uri.parse(whitepaperurl));
+                  launchUrl(Uri.parse(Documentation.rules));
                 },
               ),
               SettingsTile(
@@ -95,7 +95,7 @@ class Informations extends StatelessWidget {
                     style: ruleTagStyle
                 ),
                 onPressed: (BuildContext context) {
-                  launchUrl(Uri.parse(whitepaperurl));
+                  launchUrl(Uri.parse(Documentation.rules));
                 },
               ),
               SettingsTile(
@@ -109,7 +109,7 @@ class Informations extends StatelessWidget {
                     style: ruleTagStyle
                 ),
                 onPressed: (BuildContext context) {
-                  launchUrl(Uri.parse(whitepaperurl));
+                  launchUrl(Uri.parse(Documentation.rules));
                 },
               ),
               SettingsTile(
@@ -123,7 +123,7 @@ class Informations extends StatelessWidget {
                     style: ruleTagStyle
                 ),
                 onPressed: (BuildContext context) {
-                  launchUrl(Uri.parse(whitepaperurl));
+                  launchUrl(Uri.parse(Documentation.rules));
                 },
               ),
               SettingsTile(
@@ -137,7 +137,7 @@ class Informations extends StatelessWidget {
                     style: ruleTagStyle
                 ),
                 onPressed: (BuildContext context) {
-                  launchUrl(Uri.parse(whitepaperurl));
+                  launchUrl(Uri.parse(Documentation.rules));
                 },
               ),
               SettingsTile(
@@ -151,7 +151,7 @@ class Informations extends StatelessWidget {
                     style: ruleTagStyle
                 ),
                 onPressed: (BuildContext context) {
-                  launchUrl(Uri.parse(whitepaperurl));
+                  launchUrl(Uri.parse(Documentation.rules));
                 },
               ),
               SettingsTile(
@@ -165,7 +165,7 @@ class Informations extends StatelessWidget {
                     style: ruleTagStyle
                 ),
                 onPressed: (BuildContext context) {
-                  launchUrl(Uri.parse(whitepaperurl));
+                  launchUrl(Uri.parse(Documentation.rules));
                 },
               ),
               SettingsTile(
@@ -179,7 +179,7 @@ class Informations extends StatelessWidget {
                     style: ruleTagStyle
                 ),
                 onPressed: (BuildContext context) {
-                  launchUrl(Uri.parse(whitepaperurl));
+                  launchUrl(Uri.parse(Documentation.rules));
                 },
               ),
               SettingsTile(
@@ -193,7 +193,7 @@ class Informations extends StatelessWidget {
                     style: ruleTagStyle
                 ),
                 onPressed: (BuildContext context) {
-                  launchUrl(Uri.parse(whitepaperurl));
+                  launchUrl(Uri.parse(Documentation.rules));
                 },
               ),
             ],
@@ -202,11 +202,11 @@ class Informations extends StatelessWidget {
             title: Text(AppLocalizations.of(context)!.links),
             tiles: [
               SettingsTile(
-                title: Text(AppLocalizations.of(context)!.linksocialmedia),
+                title: const Text("Telegram"),
                 description: Text(AppLocalizations.of(context)!.openwebsite),
-                leading: const Icon(Icons.link),
+                leading: const Icon(Icons.telegram),
                 onPressed: (BuildContext context) {
-                  launchUrl(Uri.parse(whitepaperurl));
+                  launchUrl(Uri.parse(telegramurl));
                 },
               ),
               SettingsTile(
