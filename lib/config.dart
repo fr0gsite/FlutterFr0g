@@ -122,7 +122,7 @@ class AppConfig {
 
   static List<Reportnode> reportnodes = [
     Reportnode(
-        "Genesis Report Node", "report.fr0gsite.com", "8443", "https", "/api"),
+        "Genesis Report Node", "report.fr0g.site", "8443", "https", "/api"),
   ];
 
   static List<String> logoList = [
