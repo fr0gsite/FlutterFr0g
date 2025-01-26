@@ -275,9 +275,9 @@ class StartPoint extends State<Fr0gsiteApp> {
                     : const Text(AppConfig.appname,
                         style: TextStyle(fontSize: 20, color: Colors.white)),
                 const SizedBox(width: 10),
-                const Text(
+                Text(
                   "Beta",
-                  style: TextStyle(color: Colors.orange),
+                  style: TextStyle(color: Colors.orange, fontSize: MediaQuery.of(context).size.width > 640 ? 20 : 10),
                 ),
                 const SizedBox(width: 10),
                 MediaQuery.of(context).size.width > 640 ? IconButton(
