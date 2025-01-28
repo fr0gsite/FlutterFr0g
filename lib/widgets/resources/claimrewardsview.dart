@@ -103,7 +103,7 @@ class _ClaimRewardsViewState extends State<ClaimRewardsView> {
                 TextButton(
                   style: TextButton.styleFrom(
                     backgroundColor:
-                        AppConfig.rewardtoken[i].color.withOpacity(0.2),
+                        AppConfig.rewardtoken[i].color.withAlpha((0.2 * 255).toInt()),
                   ),
                   onPressed: () {
                     if (Provider.of<GlobalStatus>(context, listen: false)

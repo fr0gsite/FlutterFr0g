@@ -26,7 +26,7 @@ class _SpeedDropdownState extends State<SpeedDropdown> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.black.withOpacity(0.6),
+        color: Colors.black.withAlpha((0.6 * 255).toInt()),
         borderRadius: BorderRadius.circular(8),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 8.0),

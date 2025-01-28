@@ -34,7 +34,7 @@ class UploadScreen1 extends StatelessWidget {
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16),
-                color: Colors.red.withOpacity(0.5),
+                color: Colors.red.withAlpha((0.5 * 255).toInt()),
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,

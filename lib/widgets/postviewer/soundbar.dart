@@ -69,11 +69,11 @@ class _SoundBarState extends State<SoundBar> {
                   inactiveTrackBarHeight: 15,
                   activeTrackBar: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    color: !hide ? Colors.white : Colors.white.withOpacity(0.3),
+                    color: !hide ? Colors.white : Colors.white.withAlpha((0.3 * 255).toInt()),
                   ),
                   inactiveTrackBar: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    color: !hide ? Colors.grey : Colors.grey.withOpacity(0.3),
+                    color: !hide ? Colors.grey : Colors.grey.withAlpha((0.3 * 255).toInt()),
                   ),
                 ),
                 handler: FlutterSliderHandler(
@@ -82,8 +82,8 @@ class _SoundBarState extends State<SoundBar> {
                       ? Container(
                           decoration: BoxDecoration(
                             color: !hide
-                                ? Colors.white.withOpacity(0.6)
-                                : Colors.white.withOpacity(0.1),
+                                ? Colors.white.withAlpha((0.6 * 255).toInt())
+                                : Colors.white.withAlpha((0.1 * 255).toInt()),
                             shape: BoxShape.circle,
                           ),
                         )
@@ -107,7 +107,7 @@ class _SoundBarState extends State<SoundBar> {
                               .soundvolume ==
                           0
                   ? Colors.white
-                  : Colors.white.withOpacity(0.3),
+                  : Colors.white.withAlpha((0.3 * 255).toInt()),
               size: 30,
             ),
             onPressed: () {

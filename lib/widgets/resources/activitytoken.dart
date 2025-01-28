@@ -43,7 +43,7 @@ class _ActivityTokenState extends State<ActivityToken> {
               lineHeight: 30,
               percent:
                   widget.userconfig.acttoken / widget.userconfig.acttokenmax,
-              backgroundColor: Ressourcecolor.background.withOpacity(0.5),
+              backgroundColor: Ressourcecolor.background.withAlpha((0.5 * 255).toInt()),
               progressColor: Ressourcecolor.act,
               center: AutoSizeText(
                 "${widget.userconfig.acttoken}/${widget.userconfig.acttokenmax}",

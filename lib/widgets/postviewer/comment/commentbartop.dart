@@ -55,7 +55,7 @@ class _CommentBarTopState extends State<CommentBarTop> {
                   }
                 },
                 hoverColor: Colors.blue,
-                backgroundColor: Colors.blue.withOpacity(0.3),
+                backgroundColor: Colors.blue.withAlpha((0.3 * 255).toInt()),
                 label: AutoSizeText(
                   AppLocalizations.of(context)!.writecomment,
                   style: const TextStyle(color: Colors.white),
@@ -82,7 +82,7 @@ class _CommentBarTopState extends State<CommentBarTop> {
                       .toggleCommentFold();
                 },
                 hoverColor: Colors.blue,
-                backgroundColor: Colors.blue.withOpacity(0.3),
+                backgroundColor: Colors.blue.withAlpha((0.3 * 255).toInt()),
                 label: const Text("", style: TextStyle(color: Colors.white)),
                 icon: const Icon(Icons.devices_fold_outlined,
                     color: Colors.white),

@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:fr0gsite/widgets/postviewer/speeddropdown.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoProcessIndicatorView extends StatefulWidget {
@@ -60,13 +59,7 @@ class _VideoProcessIndicatorViewState extends State<VideoProcessIndicatorView> {
             child: Center(
               // In Style MM:SS / MM:SS
               child: Text(
-                widget.controller.value.position.inMinutes.toString().padLeft(2, '0') +
-                    ':' +
-                    widget.controller.value.position.inSeconds.remainder(60).toString().padLeft(2, '0') +
-                    ' / ' +
-                    widget.controller.value.duration!.inMinutes.toString().padLeft(2, '0') +
-                    ':' +
-                    widget.controller.value.duration!.inSeconds.remainder(60).toString().padLeft(2, '0'),
+                '${widget.controller.value.position.inMinutes.toString().padLeft(2, '0')}:${widget.controller.value.position.inSeconds.remainder(60).toString().padLeft(2, '0')} / ${widget.controller.value.duration.inMinutes.toString().padLeft(2, '0')}:${widget.controller.value.duration.inSeconds.remainder(60).toString().padLeft(2, '0')}',
                 style:  TextStyle(color: Colors.white, fontSize: !hide ? 25 : 14),
               ),
             ),
@@ -87,13 +80,13 @@ class _VideoProcessIndicatorViewState extends State<VideoProcessIndicatorView> {
               widget.controller,
               allowScrubbing: true,
               colors: VideoProgressColors(
-                playedColor: !hide ? Colors.red.withOpacity(0.7) : Colors.red.withOpacity(0.3),
+                playedColor: !hide ? Colors.red.withAlpha((0.7 * 255).toInt()) : Colors.red.withAlpha((0.3 * 255).toInt()),
                 bufferedColor: !hide
-                    ? Colors.white.withOpacity(0.5)
-                    : Colors.white.withOpacity(0.1),
+                    ? Colors.white.withAlpha((0.5 * 255).toInt())
+                    : Colors.white.withAlpha((0.1 * 255).toInt()),
                 backgroundColor: !hide
-                    ? Colors.white.withOpacity(0.2)
-                    : Colors.white.withOpacity(0.1),
+                    ? Colors.white.withAlpha((0.2 * 255).toInt())
+                    : Colors.white.withAlpha((0.1 * 255).toInt()),
               ),
             ),
           ),

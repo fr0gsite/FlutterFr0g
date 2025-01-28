@@ -147,7 +147,7 @@ class _CommentReplyState extends State<CommentReply> {
                         performNetworkRequest(context);
                       },
                       hoverColor: Colors.blue,
-                      backgroundColor: Colors.blue.withOpacity(0.8),
+                      backgroundColor: Colors.blue.withAlpha((0.8 * 255).toInt()),
                       label: isLoading
                           ? const CBCircularProgressIndicator()
                           : Text(AppLocalizations.of(context)!.reply,

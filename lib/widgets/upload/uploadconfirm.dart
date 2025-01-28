@@ -75,7 +75,7 @@ class Uploadconfirm extends StatelessWidget {
           Container(
             color: uploadstatus.testedipfshash & uploadstatus.testedipfsthumb
                 ? null
-                : Colors.orange.withOpacity(0.2),
+                : Colors.orange.withAlpha((0.2 * 255).toInt()),
             child: Column(
               children: [
                 Text("${AppLocalizations.of(context)?.pleasetestipfs}:"),

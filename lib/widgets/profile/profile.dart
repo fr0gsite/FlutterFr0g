@@ -136,7 +136,7 @@ class _ProfileState extends State<Profile> {
                         color: AppColor.nicegrey,
                         borderRadius: BorderRadius.circular(10),
                         border: Border.all(
-                          color: Colors.white.withOpacity(0.5),
+                          color: Colors.white.withAlpha((0.5 * 255).toInt()),
                           width: 2,
                         ),
                       ),
@@ -339,7 +339,7 @@ class _ProfileState extends State<Profile> {
                   decoration: BoxDecoration(
                     color: AppColor.niceblack,
                     border: Border.all(
-                      color: Colors.white.withOpacity(0.5),
+                      color: Colors.white.withAlpha((0.5 * 255).toInt()),
                       width: 2,
                     ),
                     borderRadius: BorderRadius.circular(10),
@@ -359,10 +359,10 @@ class _ProfileState extends State<Profile> {
                   padding: const EdgeInsets.all(16.0),
                   child: Container(
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.5),
+                        color: Colors.white.withAlpha((0.5 * 255).toInt()),
                         borderRadius: BorderRadius.circular(10),
                         border: Border.all(
-                          color: Colors.white.withOpacity(0.5),
+                          color: Colors.white.withAlpha((0.5 * 255).toInt()),
                           width: 2,
                         ),
                       ),
@@ -398,7 +398,7 @@ class _ProfileState extends State<Profile> {
                   color: AppColor.niceblack,
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(
-                    color: Colors.white.withOpacity(0.5),
+                    color: Colors.white.withAlpha((0.5 * 255).toInt()),
                     width: 2,
                   ),
                 ),
@@ -410,10 +410,10 @@ class _ProfileState extends State<Profile> {
               padding: const EdgeInsets.all(8.0),
               child: Container(
                 decoration: BoxDecoration(
-                  color: Colors.grey.withOpacity(0.3),
+                  color: Colors.grey.withAlpha((0.3 * 255).toInt()),
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(
-                    color: Colors.white.withOpacity(0.5),
+                    color: Colors.white.withAlpha((0.5 * 255).toInt()),
                     width: 2,
                   ),
                 ),

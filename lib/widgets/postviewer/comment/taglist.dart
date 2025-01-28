@@ -65,7 +65,7 @@ class _TaglistState extends State<Taglist> {
               }
             },
             hoverColor: Colors.blue,
-            backgroundColor: Colors.blue.withOpacity(0.3),
+            backgroundColor: Colors.blue.withAlpha((0.3 * 255).toInt()),
             label: AutoSizeText(
               AppLocalizations.of(context)!.addtag,
               style: const TextStyle(color: Colors.white),

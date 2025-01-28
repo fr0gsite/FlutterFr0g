@@ -99,19 +99,19 @@ Widget expandButton(function, int numofcomments, context) {
       message: "${AppLocalizations.of(context)!.showcomments} (C)",
       child: Container(
         decoration: BoxDecoration(
-          color: AppColor.nicegrey.withOpacity(0.5),
+          color: AppColor.nicegrey.withAlpha((0.5 * 255).toInt()),
           borderRadius: BorderRadius.circular(50),
         ),
         child: Column(
           children: [
             Icon(
               Icons.comment,
-              color: Colors.white.withOpacity(0.5),
+              color: Colors.white.withAlpha((0.5 * 255).toInt()),
               size: iconsize / 1.5,
             ),
             Text(
               numofcomments.toString(),
-              style: TextStyle(color: Colors.white.withOpacity(0.5)),
+              style: TextStyle(color: Colors.white.withAlpha((0.5 * 255).toInt())),
             ),
           ],
         ),
@@ -127,19 +127,19 @@ Widget showTagsButton(function, int numoftags, context) {
       message: "${AppLocalizations.of(context)!.showtags} (T)",
       child: Container(
         decoration: BoxDecoration(
-          color: AppColor.nicegrey.withOpacity(0.5),
+          color: AppColor.nicegrey.withAlpha((0.5 * 255).toInt()),
           borderRadius: BorderRadius.circular(50),
         ),
         child: Column(
           children: [
             Icon(
               Icons.tag,
-              color: Colors.white.withOpacity(0.5),
+              color: Colors.white.withAlpha((0.5 * 255).toInt()),
               size: iconsize / 1.5,
             ),
             Text(
               numoftags.toString(),
-              style: TextStyle(color: Colors.white.withOpacity(0.5)),
+              style: TextStyle(color: Colors.white.withAlpha((0.5 * 255).toInt())),
             ),
           ],
         ),
@@ -164,12 +164,12 @@ Widget reportButton(context) {
         message: "${AppLocalizations.of(context)!.report} (R)",
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.red.withOpacity(0.5),
+            color: Colors.red.withAlpha((0.5 * 255).toInt()),
             borderRadius: BorderRadius.circular(50),
           ),
           child: Icon(
             Icons.report,
-            color: Colors.white.withOpacity(0.5),
+            color: Colors.white.withAlpha((0.5 * 255).toInt()),
             size: 40,
           ),
         ),
@@ -180,7 +180,7 @@ Widget reportButton(context) {
 Widget shareButton(context) {
   return Container(
     decoration: BoxDecoration(
-      color: AppColor.nicegrey.withOpacity(0.5),
+      color: AppColor.nicegrey.withAlpha((0.5 * 255).toInt()),
       borderRadius: BorderRadius.circular(50),
     ),
     child: Tooltip(
@@ -189,7 +189,7 @@ Widget shareButton(context) {
         padding: EdgeInsets.zero,
         icon: Icon(
           Icons.share_rounded,
-          color: Colors.white.withOpacity(0.5),
+          color: Colors.white.withAlpha((0.5 * 255).toInt()),
           size: 25,
         ),
         onPressed: () async {

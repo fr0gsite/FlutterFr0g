@@ -43,7 +43,7 @@ class _GlobalTagTopBarState extends State<GlobalTagTopBar> {
               const Spacer(),
               Container(
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.1),
+                  color: Colors.white.withAlpha((0.1 * 255).toInt()),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Column(
@@ -136,7 +136,7 @@ class _GlobalTagTopBarState extends State<GlobalTagTopBar> {
               hiderating
                   ? Container(
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.1),
+                        color: Colors.white.withAlpha((0.1 * 255).toInt()),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Padding(

@@ -1,4 +1,3 @@
-import 'package:country_flags/country_flags.dart';
 import 'package:fr0gsite/widgets/login/loginwithfile.dart';
 import 'package:fr0gsite/widgets/login/loginwithqrcode.dart';
 import 'package:fr0gsite/widgets/login/loginwithtext.dart';

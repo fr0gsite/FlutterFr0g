@@ -29,7 +29,7 @@ class _ReportNextButtonState extends State<ReportNextButton> {
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: Colors.red.withOpacity(0.3),
+                    color: Colors.red.withAlpha((0.3 * 255).toInt()),
                   ),
                   child: Column(
                     children: [
@@ -160,13 +160,13 @@ class _ReportNextButtonState extends State<ReportNextButton> {
   Color currentbuttoncolor(BuildContext context) {
     if (Provider.of<ReportStatus>(context).currentStep == 0) {
       if (Provider.of<ReportStatus>(context).selectedrule == -1) {
-        return Colors.green.withOpacity(0.3);
+        return Colors.green.withAlpha((0.3 * 255).toInt());
       } else {
         return Colors.green;
       }
     } else if (Provider.of<ReportStatus>(context).currentStep == 1) {
       if (Provider.of<ReportStatus>(context).selectedprovider == -1) {
-        return Colors.green.withOpacity(0.3);
+        return Colors.green.withAlpha((0.3 * 255).toInt());
       } else {
         return Colors.green;
       }

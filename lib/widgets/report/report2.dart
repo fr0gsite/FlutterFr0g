@@ -91,7 +91,7 @@ class _Report2State extends State<Report2> {
                                 child: Container(
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10),
-                                      color: Colors.red.withOpacity(0.8),
+                                      color: Colors.red.withAlpha((0.8 * 255).toInt()),
                                     ),
                                     child: Padding(
                                       padding: const EdgeInsets.all(16),

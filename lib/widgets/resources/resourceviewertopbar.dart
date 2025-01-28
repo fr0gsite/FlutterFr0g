@@ -151,7 +151,7 @@ class _ResourceViewerTopBarState extends State<ResourceViewerTopBar> {
             userstatus.isLoggedin
                 ? Container()
                 : Container(
-                    color: Colors.black.withOpacity(0.5),
+                    color: Colors.black.withAlpha((0.5 * 255).toInt()),
                     width: width + 22,
                     child: Center(
                       child: TextButton(

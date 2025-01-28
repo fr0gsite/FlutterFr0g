@@ -35,7 +35,7 @@ class _GameTitleState extends State<GameTitle> {
           !gamelist.elementAt(widget.index).active
               ? Container(
                   decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.8),
+                    color: Colors.black.withAlpha((0.8 * 255).toInt()),
                   ),
                   child: Center(
                     child: AutoSizeText(

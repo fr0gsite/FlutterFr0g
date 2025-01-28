@@ -89,7 +89,7 @@ class _UploadChooseFilesState extends State<UploadChooseFiles> {
                                       width: 4,
                                     ),
                                     borderRadius: BorderRadius.circular(10),
-                                    color: Colors.black.withOpacity(0.5),
+                                    color: Colors.black.withAlpha((0.5 * 255).toInt()),
                                   ),
                                   child: Image.memory(
                                           preview!,
@@ -120,7 +120,7 @@ class _UploadChooseFilesState extends State<UploadChooseFiles> {
                                       width: 4,
                                     ),
                                     borderRadius: BorderRadius.circular(10),
-                                    color: Colors.black.withOpacity(0.5),
+                                    color: Colors.black.withAlpha((0.5 * 255).toInt()),
                                   ),
                                   child: Image.memory(
                                     thumbpreview!,

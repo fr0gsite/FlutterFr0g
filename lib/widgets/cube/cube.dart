@@ -142,8 +142,8 @@ class CubeState extends State<Cube> {
                             begin: Alignment.bottomRight,
                             stops: const [0.1, 0.9],
                             colors: [
-                              Colors.black.withOpacity(.8),
-                              Colors.black.withOpacity(.2),
+                              Colors.black.withAlpha((0.2 * 255).toInt()),
+                              Colors.black.withAlpha((0.2 * 255).toInt()),
                             ],
                           ),
                         ),

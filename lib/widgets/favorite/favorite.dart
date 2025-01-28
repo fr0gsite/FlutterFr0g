@@ -57,7 +57,7 @@ class _FavoriteState extends State<Favorite> {
               dividerColor: Colors.transparent,
               indicator: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color: Colors.white.withOpacity(0.2),
+                color: Colors.white.withAlpha((0.2 * 255).toInt()),
               ),
               indicatorSize: TabBarIndicatorSize.tab,
               tabs: tabs,

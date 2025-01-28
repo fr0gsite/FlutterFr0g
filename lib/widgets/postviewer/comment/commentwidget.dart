@@ -125,7 +125,7 @@ class _CommentWidgetState extends State<CommentWidget> {
                   tooltip: AppLocalizations.of(context)!.reply,
                   style: ButtonStyle(
                     backgroundColor: WidgetStateProperty.all<Color>(
-                        Colors.blue.withOpacity(0.5)),
+                        Colors.blue.withAlpha((0.5 * 255).toInt())),
                     shape: WidgetStateProperty.all<OutlinedBorder>(
                         RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10))),
@@ -149,7 +149,7 @@ class _CommentWidgetState extends State<CommentWidget> {
                 IconButton(
                   style: ButtonStyle(
                     backgroundColor: WidgetStateProperty.all<Color>(
-                        Colors.red.withOpacity(0.5)),
+                        Colors.red.withAlpha((0.5 * 255).toInt())),
                     shape: WidgetStateProperty.all<OutlinedBorder>(
                         RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10))),
@@ -288,7 +288,7 @@ class _CommentWidgetState extends State<CommentWidget> {
       context: context,
       barrierDismissible: true,
       barrierColor:
-          Colors.black.withOpacity(0.5), // Grau ausgegrauter Hintergrund
+          Colors.black.withAlpha((0.5 * 255).toInt()), // Grau ausgegrauter Hintergrund
       builder: (BuildContext context) {
         return CommentReply(comment: comment, callback: replycallback);
       },

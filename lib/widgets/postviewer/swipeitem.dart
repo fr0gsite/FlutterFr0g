@@ -158,9 +158,11 @@ class _SwipeItemState extends State<SwipeItem> {
 
       await videocontroller.setLooping(true);
       await videocontroller.initialize();
-      await videocontroller.setVolume(Provider.of<PostviewerStatus>(context, listen: false).soundvolume);
-      if(Provider.of<PostviewerStatus>(context, listen: false).isPlaying){
+      if(mounted){
+        await videocontroller.setVolume(Provider.of<PostviewerStatus>(context, listen: false).soundvolume);
+        if(Provider.of<PostviewerStatus>(context, listen: false).isPlaying){
         await videocontroller.play();
+        }
       }
       return true;
     } catch (e) {

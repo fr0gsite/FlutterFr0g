@@ -31,8 +31,8 @@ class _ResourceBalanceState extends State<ResourceBalance>
   double iconpadding = 8;
   double tableiconsize = 30;
 
-  Color stakecolor = Colors.green.withOpacity(0.5);
-  Color unstakecolor = Colors.red.withOpacity(0.5);
+  Color stakecolor = Colors.green.withAlpha((0.5 * 255).toInt());
+  Color unstakecolor = Colors.red.withAlpha((0.5 * 255).toInt());
   bool isbuttonactive = false;
 
   double liquid = 0.0;
@@ -164,7 +164,7 @@ class _ResourceBalanceState extends State<ResourceBalance>
           ),
           Container(
             decoration: BoxDecoration(
-              //color: Colors.green.withOpacity(0.1),
+              //color: Colors.green.withAlpha((0.1 * 255).toInt()),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Column(
@@ -259,7 +259,7 @@ class _ResourceBalanceState extends State<ResourceBalance>
                                     barRadius: const Radius.circular(15),
                                     percent: percentcpu,
                                     backgroundColor: Ressourcecolor.background
-                                        .withOpacity(0.5),
+                                        .withAlpha((0.5 * 255).toInt()),
                                     progressColor: Ressourcecolor.cpu,
                                     center: Padding(
                                       padding: const EdgeInsets.only(
@@ -327,7 +327,7 @@ class _ResourceBalanceState extends State<ResourceBalance>
                                   barRadius: const Radius.circular(15),
                                   percent: percentnet,
                                   backgroundColor: Ressourcecolor.background
-                                      .withOpacity(0.5),
+                                      .withAlpha((0.5 * 255).toInt()),
                                   progressColor: Ressourcecolor.net,
                                   center: Text(
                                       "$netLimitused kb / $netLimitmax kb",
@@ -436,7 +436,7 @@ class _ResourceBalanceState extends State<ResourceBalance>
             padding: const EdgeInsets.only(top: 16),
             child: Container(
               decoration: BoxDecoration(
-                //color: Colors.red.withOpacity(0.1),
+                //color: Colors.red.withAlpha((0.1 * 255).toInt()),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Column(
@@ -520,7 +520,7 @@ class _ResourceBalanceState extends State<ResourceBalance>
                                       barRadius: const Radius.circular(15),
                                       percent: 0,
                                       backgroundColor: Ressourcecolor.background
-                                          .withOpacity(0.5),
+                                          .withAlpha((0.5 * 255).toInt()),
                                       progressColor: Ressourcecolor.ram,
                                       center: Text(
                                           "$ramUsage kb / $ramQuota kb",

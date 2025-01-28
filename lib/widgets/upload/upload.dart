@@ -103,7 +103,7 @@ class _UploadState extends State<Upload> {
                                                             BorderRadius
                                                                 .circular(10),
                                                         color: Colors.red
-                                                            .withOpacity(0.3),
+                                                            .withAlpha((0.3 * 255).toInt()),
                                                       ),
                                                       child: Padding(
                                                         padding:
@@ -173,7 +173,7 @@ class _UploadState extends State<Upload> {
                                         finishedStepIconColor:
                                             Colors.transparent,
                                         activeStepBackgroundColor:
-                                            Colors.green.withOpacity(0.5),
+                                            Colors.green.withAlpha((0.5 * 255).toInt()),
                                         finishedStepTextColor: Colors.white,
                                         lineStyle: const LineStyle(
                                             lineType: LineType.dashed,

@@ -181,7 +181,7 @@ class _ProducervoteState extends State<Producervote> {
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                                 headingRowColor: WidgetStateColor.resolveWith(
-                                    (states) => Colors.blue.withOpacity(0.3)),
+                                    (states) => Colors.blue.withAlpha((0.3 * 255).toInt())),
                                 columns: [
                                   const DataColumn(label: Text('Nr')),
                                   DataColumn(

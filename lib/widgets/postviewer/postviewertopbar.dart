@@ -41,7 +41,7 @@ class _PostViewerTopBarState extends State<PostViewerTopBar> {
             children: [
               Container(
                 decoration: BoxDecoration(
-                  color: AppColor.nicegrey.withOpacity(0.5),
+                  color: AppColor.nicegrey.withAlpha((0.5 * 255).toInt()),
                   borderRadius: BorderRadius.circular(50),
                 ),
                 child: IconButton(

@@ -37,12 +37,12 @@ class Informations extends StatelessWidget {
           lightTheme: SettingsThemeData(
               settingsListBackground: AppColor.nicegrey,
               titleTextColor: Colors.white,
-              settingsSectionBackground: Colors.white.withOpacity(0.8)),
+              settingsSectionBackground: Colors.white.withAlpha((0.8 * 255).toInt())),
           darkTheme:
               const SettingsThemeData(settingsListBackground: AppColor.nicegrey),
           sections: [
             SettingsSection(
-              title: Text(AppLocalizations.of(context)!.links, style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w500)),
+              title: Text(AppLocalizations.of(context)!.links, style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w500)),
               tiles: [
                 SettingsTile(
                   title: const Text("Telegram"),
@@ -79,7 +79,7 @@ class Informations extends StatelessWidget {
               ],
             ),
             SettingsSection(
-              title: Text(AppLocalizations.of(context)!.rulesandguidelines, style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w500)),
+              title: Text(AppLocalizations.of(context)!.rulesandguidelines, style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w500)),
               tiles: [
                 SettingsTile(
                   title: Text(AppLocalizations.of(context)!.rule1,style: ruleTitleStyle,),

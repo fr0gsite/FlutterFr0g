@@ -72,7 +72,7 @@ class _AccountBalanceState extends State<AccountBalance> {
                 inside: BorderSide(width: 2, color: Colors.black)),
             children: [
               TableRow(
-                decoration: BoxDecoration(color: Colors.grey.withOpacity(0.3)),
+                decoration: BoxDecoration(color: Colors.grey.withAlpha((0.3 * 255).toInt())),
                 children: [
                   TableCell(
                     child: Tooltip(
@@ -107,7 +107,7 @@ class _AccountBalanceState extends State<AccountBalance> {
                 ],
               ),
               TableRow(
-                decoration: BoxDecoration(color: Colors.grey.withOpacity(0.3)),
+                decoration: BoxDecoration(color: Colors.grey.withAlpha((0.3 * 255).toInt())),
                 children: [
                   TableCell(
                     child: Tooltip(
@@ -142,7 +142,7 @@ class _AccountBalanceState extends State<AccountBalance> {
                 ],
               ),
               TableRow(
-                decoration: BoxDecoration(color: Colors.grey.withOpacity(0.3)),
+                decoration: BoxDecoration(color: Colors.grey.withAlpha((0.3 * 255).toInt())),
                 children: [
                   TableCell(
                     child: Tooltip(

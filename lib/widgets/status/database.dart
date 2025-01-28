@@ -151,7 +151,7 @@ class _DatabaseState extends State<Database> {
                                       headingRowColor:
                                           WidgetStateColor.resolveWith(
                                               (states) =>
-                                                  Colors.blue.withOpacity(0.3)),
+                                                  Colors.blue.withAlpha((0.3 * 255).toInt())),
                                       dataRowColor:
                                           WidgetStateColor.resolveWith(
                                               (states) => AppColor.nicegrey),

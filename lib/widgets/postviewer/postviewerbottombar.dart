@@ -198,12 +198,15 @@ class _PostViewerBottomParState extends State<PostViewerBottomBar> {
               up = up + 1;
             });
             if (value) {
+              // ignore: use_build_context_synchronously
               Provider.of<PostviewerStatus>(context, listen: false)
                   .uploadlist
                   .firstWhere((element) => element.uploadid == currentuploadid)
                   .upvote();
+              // ignore: use_build_context_synchronously
               Provider.of<GlobalStatus>(context, listen: false)
                   .updateaccountinfo();
+              // ignore: use_build_context_synchronously
               Provider.of<GlobalStatus>(context, listen: false)
                   .updateuserconfig();
             }
@@ -252,12 +255,15 @@ class _PostViewerBottomParState extends State<PostViewerBottomBar> {
                   0)
               .then((value) {
             if (value) {
+              // ignore: use_build_context_synchronously
               Provider.of<PostviewerStatus>(context, listen: false)
                   .uploadlist
                   .firstWhere((element) => element.uploadid == currentuploadid)
                   .downvote();
+              // ignore: use_build_context_synchronously
               Provider.of<GlobalStatus>(context, listen: false)
                   .updateaccountinfo();
+              // ignore: use_build_context_synchronously
               Provider.of<GlobalStatus>(context, listen: false)
                   .updateuserconfig();
             }

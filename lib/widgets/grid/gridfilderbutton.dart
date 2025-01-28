@@ -15,8 +15,8 @@ class GridFilterButton extends StatefulWidget {
 class _GridFilterButtonState extends State<GridFilterButton> {
   @override
   Widget build(BuildContext context) {
-    Color backgroundColoractivated = Colors.blue.withOpacity(0.8);
-    Color backgroundColordeactivated = Colors.blue.withOpacity(0.3);
+    Color backgroundColoractivated = Colors.blue.withAlpha((0.8 * 255).toInt());
+    Color backgroundColordeactivated = Colors.blue.withAlpha((0.3 * 255).toInt());
     Color hoverColor = Colors.blue;
 
     return SingleChildScrollView(

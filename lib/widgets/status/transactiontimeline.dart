@@ -257,7 +257,7 @@ class _TransactionTimelineState extends State<TransactionTimeline> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           headingRowColor: WidgetStateColor.resolveWith(
-                              (states) => Colors.blue.withOpacity(0.3)),
+                              (states) => Colors.blue.withAlpha((0.3 * 255).toInt())),
                           columns: [
                             const DataColumn(label: Text('Nr')),
                             DataColumn(
@@ -291,7 +291,7 @@ class _TransactionTimelineState extends State<TransactionTimeline> {
                                               producer.owner
                                           ? Colors.red
                                           : producers.indexOf(producer) < 21
-                                              ? Colors.red.withOpacity(0.2)
+                                              ? Colors.red.withAlpha((0.2 * 255).toInt())
                                               : null,
                                       borderRadius: BorderRadius.circular(10)),
                                   child: Padding(
@@ -314,9 +314,9 @@ class _TransactionTimelineState extends State<TransactionTimeline> {
                                       color: lastNodeInfo.headBlockProducer
                                                   .toString() ==
                                               producer.owner
-                                          ? Colors.green.withOpacity(0.6)
+                                          ? Colors.green.withAlpha((0.6 * 255).toInt())
                                           : producers.indexOf(producer) < 21
-                                              ? Colors.green.withOpacity(0.2)
+                                              ? Colors.green.withAlpha((0.2 * 255).toInt())
                                               : null,
                                       borderRadius: BorderRadius.circular(10)),
                                   child: Padding(
@@ -352,7 +352,7 @@ Widget infobox(String title, String info) {
     constraints: const BoxConstraints(maxWidth: 200, maxHeight: 70),
     child: Container(
       decoration: BoxDecoration(
-        color: Colors.blue.withOpacity(0.3),
+        color: Colors.blue.withAlpha((0.3 * 255).toInt()),
         border: Border.all(color: Colors.white),
         borderRadius: BorderRadius.circular(10),
       ),

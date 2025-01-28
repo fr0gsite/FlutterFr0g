@@ -20,7 +20,7 @@ class Settings extends StatelessWidget {
         lightTheme: SettingsThemeData(
             settingsListBackground: AppColor.nicegrey,
             titleTextColor: Colors.white,
-            settingsSectionBackground: Colors.white.withOpacity(0.8)),
+            settingsSectionBackground: Colors.white.withAlpha((0.8 * 255).toInt())),
         darkTheme:
             const SettingsThemeData(settingsListBackground: AppColor.nicegrey),
         sections: [

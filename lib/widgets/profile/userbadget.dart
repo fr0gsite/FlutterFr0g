@@ -9,7 +9,7 @@ class Userbadget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.black.withOpacity(0.4),
+        color: Colors.black.withAlpha((0.4 * 255).toInt()),
         borderRadius: BorderRadius.circular(10),
       ),
       constraints: const BoxConstraints(
