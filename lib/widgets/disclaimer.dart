@@ -108,315 +108,311 @@ class _GlobalDisclaimerState extends State<GlobalDisclaimer>
                       centerTitle: true,
                     ),
                     floatingActionButton: FloatingActionButton(
+                      backgroundColor: Colors.white,
+                      child: const Icon(Icons.translate, size: 25, color: Colors.black),
                       onPressed: () {
                         showDialog(
                             context: context,
                             builder: (_) => const SetLanguageView());
                       },
-                      child: Wrap(
-                        children: [
-                          const Icon(Icons.translate, size: 25),
-                          CountryFlag.fromCountryCode(
-                            AppLocalizations.of(context)!.countrycode,
-                            width: 25,
-                            height: 25,
-                          ),
-                        ],
-                      ),
                     ),
                     body: Padding(
                       padding: const EdgeInsets.all(32.0),
-                      child: ListView(
-                        children: [
-                          Center(
-                            child: MouseRegion(
-                              onEnter: (_) {
-                                setState(() {
-                                  animationpath = animationpath02;
-                                  greetingAnimationController.reset();
-                                  //greetingAnimationController.forward();
-                                });
-                              },
-                              onExit: (_) {
-                                setState(() {
-                                  animationpath = animationpath01;
-                                  greetingAnimationController.reset();
-                                  greetingAnimationController.duration =
-                                      defaultduration;
-                                  greetingAnimationController.forward();
-                                });
-                              },
-                              child: GestureDetector(
-                                onTap: () {
+                      child: ScrollConfiguration(
+                    
+                        behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
+                        child: ListView(
+                          children: [
+                            Center(
+                              child: MouseRegion(
+                                onEnter: (_) {
                                   setState(() {
-                                    if (Provider.of<GlobalStatus>(context,
-                                            listen: false)
-                                        .audionotifications) {
-                                      AudioPlayer audioPlayer = AudioPlayer();
-                                      audioPlayer.play(
-                                          DeviceFileSource(
-                                              "assets/sounds/boing.mp3"),
-                                          volume: 0.5,
-                                          mode: PlayerMode.lowLatency);
-                                    }
-
                                     animationpath = animationpath02;
                                     greetingAnimationController.reset();
+                                    //greetingAnimationController.forward();
+                                  });
+                                },
+                                onExit: (_) {
+                                  setState(() {
+                                    animationpath = animationpath01;
+                                    greetingAnimationController.reset();
                                     greetingAnimationController.duration =
-                                        const Duration(milliseconds: 500);
+                                        defaultduration;
                                     greetingAnimationController.forward();
                                   });
                                 },
-                                child: Padding(
-                                  padding: const EdgeInsets.all(16.0),
-                                  child: Lottie.asset(
-                                    animationpath,
-                                    height: 150,
-                                    width: 150,
-                                    controller: greetingAnimationController,
-                                    onLoaded: (composition) {
+                                child: GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      if (Provider.of<GlobalStatus>(context,
+                                              listen: false)
+                                          .audionotifications) {
+                                        AudioPlayer audioPlayer = AudioPlayer();
+                                        audioPlayer.play(
+                                            DeviceFileSource(
+                                                "assets/sounds/boing.mp3"),
+                                            volume: 0.5,
+                                            mode: PlayerMode.lowLatency);
+                                      }
+                        
+                                      animationpath = animationpath02;
+                                      greetingAnimationController.reset();
                                       greetingAnimationController.duration =
-                                          composition.duration;
-                                    },
+                                          const Duration(milliseconds: 500);
+                                      greetingAnimationController.forward();
+                                    });
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(16.0),
+                                    child: Lottie.asset(
+                                      animationpath,
+                                      height: 150,
+                                      width: 150,
+                                      controller: greetingAnimationController,
+                                      onLoaded: (composition) {
+                                        greetingAnimationController.duration =
+                                            composition.duration;
+                                      },
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
-                          Wrap(
-                            spacing: 10,
-                            runSpacing: 10,
-                            runAlignment: WrapAlignment.center,
-                            alignment: WrapAlignment.center,
-                            children: [
-                              ElevatedButton(
-                                onPressed: () {
-                                  launchUrl(Uri.parse(urltoandroidapp));
-                                },
-                                style: ButtonStyle(
-                                  backgroundColor:
-                                      WidgetStateProperty.all(Colors.white),
+                            Wrap(
+                              spacing: 10,
+                              runSpacing: 10,
+                              runAlignment: WrapAlignment.center,
+                              alignment: WrapAlignment.center,
+                              children: [
+                                ElevatedButton(
+                                  onPressed: () {
+                                    launchUrl(Uri.parse(urltoandroidapp));
+                                  },
+                                  style: ButtonStyle(
+                                    backgroundColor:
+                                        WidgetStateProperty.all(Colors.white),
+                                  ),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Icon(Icons.android,
+                                          color: Colors.green, size: iconsize),
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                      Text("Android",
+                                          style: TextStyle(
+                                              color: Colors.green,
+                                              fontSize: fontsizebutton)),
+                                    ],
+                                  ),
                                 ),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
+                                ElevatedButton(
+                                  onPressed: () {
+                                    launchUrl(Uri.parse(urltoiosapp));
+                                  },
+                                  style: ButtonStyle(
+                                    backgroundColor:
+                                        WidgetStateProperty.all(Colors.white),
+                                  ),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Icon(Icons.apple,
+                                          color: Colors.black, size: iconsize),
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                      Text("Apple",
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: fontsizebutton)),
+                                    ],
+                                  ),
+                                ),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    launchUrl(Uri.parse(urltowindowsapp));
+                                  },
+                                  style: ButtonStyle(
+                                    backgroundColor:
+                                        WidgetStateProperty.all(Colors.white),
+                                  ),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Icon(Icons.window_sharp,
+                                          color: Colors.blue, size: iconsize),
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                      Text("Windows",
+                                          style: TextStyle(
+                                              color: Colors.blue,
+                                              fontSize: fontsizebutton)),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            const Divider(),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            agreebutton(),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Center(
+                              child: SizedBox(
+                                width: 500,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Icon(Icons.android,
-                                        color: Colors.green, size: iconsize),
+                                    AutoSizeText(
+                                        AppLocalizations.of(context)!.disclaimer1,
+                                        style: style),
                                     const SizedBox(
-                                      width: 10,
+                                      height: 10,
                                     ),
-                                    Text("Android",
-                                        style: TextStyle(
-                                            color: Colors.green,
-                                            fontSize: fontsizebutton)),
+                                    AutoSizeText(
+                                        AppLocalizations.of(context)!.disclaimer2,
+                                        style: style),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    AutoSizeText(
+                                        AppLocalizations.of(context)!.disclaimer3(
+                                            AppLocalizations.of(context)!.iagree),
+                                        style: style),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    AutoSizeText(
+                                        AppLocalizations.of(context)!.disclaimer4(
+                                            AppLocalizations.of(context)!.iagree),
+                                        style: style),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    AutoSizeText(
+                                        AppLocalizations.of(context)!.disclaimer5,
+                                        style: style),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Center(
+                                      child: Wrap(
+                                        alignment: WrapAlignment.center,
+                                        spacing: 10,
+                                        runSpacing: 10,
+                                        children: [
+                                          ElevatedButton(
+                                            onPressed: () {
+                                              launchUrl(
+                                                  Uri.parse(Documentation.rules));
+                                            },
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                Icon(Icons.rule,
+                                                    color: Colors.black,
+                                                    size: iconsize),
+                                                const SizedBox(
+                                                  width: 10,
+                                                ),
+                                                Text(
+                                                    AppLocalizations.of(context)!
+                                                        .rulesandguidelines,
+                                                    style: TextStyle(
+                                                        color: Colors.black,
+                                                        fontSize:
+                                                            fontsizebutton)),
+                                              ],
+                                            ),
+                                          ),
+                                          ElevatedButton(
+                                            onPressed: () {
+                                              launchUrl(Uri.parse(githuburl));
+                                            },
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                Icon(Icons.cloud_circle_sharp,
+                                                    color: Colors.black,
+                                                    size: iconsize),
+                                                const SizedBox(
+                                                  width: 10,
+                                                ),
+                                                Text("Github",
+                                                    style: TextStyle(
+                                                        color: Colors.black,
+                                                        fontSize:
+                                                            fontsizebutton)),
+                                              ],
+                                            ),
+                                          ),
+                                          ElevatedButton(
+                                            onPressed: () {
+                                              launchUrl(
+                                                  Uri.parse(Documentation.url));
+                                            },
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                Icon(Icons.cloud_circle_sharp,
+                                                    color: Colors.black,
+                                                    size: iconsize),
+                                                const SizedBox(
+                                                  width: 10,
+                                                ),
+                                                Text(
+                                                    AppLocalizations.of(context)!
+                                                        .documentation,
+                                                    style: TextStyle(
+                                                        color: Colors.black,
+                                                        fontSize:
+                                                            fontsizebutton)),
+                                              ],
+                                            ),
+                                          ),
+                                          ElevatedButton(
+                                            onPressed: () {
+                                              launchUrl(Uri.parse(whitepaperurl));
+                                            },
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                Icon(Icons.document_scanner,
+                                                    color: Colors.black,
+                                                    size: iconsize),
+                                                const SizedBox(
+                                                  width: 10,
+                                                ),
+                                                Text("Whitepaper",
+                                                    style: TextStyle(
+                                                        color: Colors.black,
+                                                        fontSize:
+                                                            fontsizebutton)),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 20,
+                                    ),
                                   ],
                                 ),
-                              ),
-                              ElevatedButton(
-                                onPressed: () {
-                                  launchUrl(Uri.parse(urltoiosapp));
-                                },
-                                style: ButtonStyle(
-                                  backgroundColor:
-                                      WidgetStateProperty.all(Colors.white),
-                                ),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Icon(Icons.apple,
-                                        color: Colors.black, size: iconsize),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text("Apple",
-                                        style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: fontsizebutton)),
-                                  ],
-                                ),
-                              ),
-                              ElevatedButton(
-                                onPressed: () {
-                                  launchUrl(Uri.parse(urltowindowsapp));
-                                },
-                                style: ButtonStyle(
-                                  backgroundColor:
-                                      WidgetStateProperty.all(Colors.white),
-                                ),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Icon(Icons.window_sharp,
-                                        color: Colors.blue, size: iconsize),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text("Windows",
-                                        style: TextStyle(
-                                            color: Colors.blue,
-                                            fontSize: fontsizebutton)),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          const Divider(),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          agreebutton(),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Center(
-                            child: SizedBox(
-                              width: 500,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  AutoSizeText(
-                                      AppLocalizations.of(context)!.disclaimer1,
-                                      style: style),
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                  AutoSizeText(
-                                      AppLocalizations.of(context)!.disclaimer2,
-                                      style: style),
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                  AutoSizeText(
-                                      AppLocalizations.of(context)!.disclaimer3(
-                                          AppLocalizations.of(context)!.iagree),
-                                      style: style),
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                  AutoSizeText(
-                                      AppLocalizations.of(context)!.disclaimer4(
-                                          AppLocalizations.of(context)!.iagree),
-                                      style: style),
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                  AutoSizeText(
-                                      AppLocalizations.of(context)!.disclaimer5,
-                                      style: style),
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                  Center(
-                                    child: Wrap(
-                                      alignment: WrapAlignment.center,
-                                      spacing: 10,
-                                      runSpacing: 10,
-                                      children: [
-                                        ElevatedButton(
-                                          onPressed: () {
-                                            launchUrl(
-                                                Uri.parse(Documentation.rules));
-                                          },
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              Icon(Icons.rule,
-                                                  color: Colors.black,
-                                                  size: iconsize),
-                                              const SizedBox(
-                                                width: 10,
-                                              ),
-                                              Text(
-                                                  AppLocalizations.of(context)!
-                                                      .rulesandguidelines,
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize:
-                                                          fontsizebutton)),
-                                            ],
-                                          ),
-                                        ),
-                                        ElevatedButton(
-                                          onPressed: () {
-                                            launchUrl(Uri.parse(githuburl));
-                                          },
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              Icon(Icons.cloud_circle_sharp,
-                                                  color: Colors.black,
-                                                  size: iconsize),
-                                              const SizedBox(
-                                                width: 10,
-                                              ),
-                                              Text("Github",
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize:
-                                                          fontsizebutton)),
-                                            ],
-                                          ),
-                                        ),
-                                        ElevatedButton(
-                                          onPressed: () {
-                                            launchUrl(
-                                                Uri.parse(Documentation.url));
-                                          },
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              Icon(Icons.cloud_circle_sharp,
-                                                  color: Colors.black,
-                                                  size: iconsize),
-                                              const SizedBox(
-                                                width: 10,
-                                              ),
-                                              Text(
-                                                  AppLocalizations.of(context)!
-                                                      .documentation,
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize:
-                                                          fontsizebutton)),
-                                            ],
-                                          ),
-                                        ),
-                                        ElevatedButton(
-                                          onPressed: () {
-                                            launchUrl(Uri.parse(whitepaperurl));
-                                          },
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              Icon(Icons.document_scanner,
-                                                  color: Colors.black,
-                                                  size: iconsize),
-                                              const SizedBox(
-                                                width: 10,
-                                              ),
-                                              Text("Whitepaper",
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize:
-                                                          fontsizebutton)),
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 20,
-                                  ),
-                                ],
                               ),
                             ),
-                          ),
-                          agreebutton(),
-                        ],
+                            agreebutton(),
+                          ],
+                        ),
                       ),
                     )),
               ),

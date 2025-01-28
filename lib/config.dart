@@ -92,7 +92,7 @@ class Documentation {
 }
 
 class AppConfig {
-  static const String appname = "Fr0g.site";
+  static const String appname = "FR0G.SITE";
   static const String maincontract = "cbased";
   static const String systemtokencontract = "eosio.token";
   static const String cbasedtokencontract = "cbased.token";

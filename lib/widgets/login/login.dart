@@ -1,7 +1,9 @@
+import 'package:country_flags/country_flags.dart';
 import 'package:fr0gsite/widgets/login/loginwithfile.dart';
 import 'package:fr0gsite/widgets/login/loginwithqrcode.dart';
 import 'package:fr0gsite/widgets/login/loginwithtext.dart';
 import 'package:flutter/material.dart';
+import 'package:fr0gsite/widgets/settings/setlanguageview.dart';
 import 'package:lottie/lottie.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../config.dart';
@@ -86,6 +88,16 @@ class LoginState extends State<Login> with TickerProviderStateMixin {
                     side: BorderSide(color: Colors.white, width: 6)),
                 child: AutofillGroup(
                     child: Scaffold(
+                      floatingActionButton: FloatingActionButton(
+                      backgroundColor: Colors.white,
+                      child: const Icon(Icons.translate, size: 25, color: Colors.black,),
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (_) => const SetLanguageView()
+                            );
+                      },
+                    ),
                   resizeToAvoidBottomInset: false,
                   backgroundColor: Colors.transparent,
                   appBar: AppBar(

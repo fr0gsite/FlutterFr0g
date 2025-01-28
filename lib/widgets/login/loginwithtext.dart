@@ -27,6 +27,8 @@ class _LoginwithtextState extends State<Loginwithtext> {
   var defaultfillcolor = Colors.blueGrey;
   var fillcolorusername = Colors.blueGrey;
   var fillcolorprivatekey = Colors.blueGrey;
+  
+  bool extendedview = false;
 
   String permission = "active";
 
@@ -87,6 +89,25 @@ class _LoginwithtextState extends State<Loginwithtext> {
           ),
         ),
         const SizedBox(height: 25),
+
+        TextButton(
+          onPressed: () {
+            setState(() {
+              extendedview = !extendedview;
+            });
+          },
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(Icons.settings, color: Colors.white),
+              const SizedBox(width: 10),
+              Text(AppLocalizations.of(context)!.config,
+                  style: const TextStyle(color: Colors.white))
+            ],
+          ),
+        ),
+        !extendedview ? Container() : 
+
         Column(
           children: [
             Text(
@@ -133,6 +154,7 @@ class _LoginwithtextState extends State<Loginwithtext> {
             ),
           ],
         ),
+
         const SizedBox(height: 50),
         MaterialButton(
           shape:
@@ -154,7 +176,7 @@ class _LoginwithtextState extends State<Loginwithtext> {
         MaterialButton(
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(22.0)),
-          color: Colors.red.withOpacity(0.5),
+          color: Colors.blue,
           onPressed: () {
             launchUrl(Uri.parse(signupurl));
           },
