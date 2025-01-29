@@ -44,7 +44,6 @@ class _ProfileState extends State<Profile> {
       searchcontroller.text = widget.accountname!;
     }
 
-    // Set Gloabl Status exapndhomenavigationbar to false
     Provider.of<GlobalStatus>(context, listen: false).expandhomenavigationbar = true;
 
     Chainactions()
