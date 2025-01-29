@@ -94,27 +94,62 @@ class _CreateGridState extends State<CreateGrid> {
     }
   }
 
+    void scrollToTop() {
+    _scrollController.animateTo(
+      0,
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.easeInOut,
+    );
+  }
+
   ScrollConfiguration getgridview() {
     var corssAxisCount = resize();
     var grid = ScrollConfiguration(
       behavior: AppScrollBehavior(),
-      child: GridView.builder(
-        itemCount: items.length,
-        scrollDirection: Axis.vertical,
-        controller: _scrollController,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: corssAxisCount),
-        itemBuilder: (context, index) {
-          return Container(
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey, width: 0.1),
+      child: Stack(
+        children: [
+          GridView.builder(
+          itemCount: items.length,
+          scrollDirection: Axis.vertical,
+          controller: _scrollController,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: corssAxisCount),
+          itemBuilder: (context, index) {
+            return Container(
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.grey, width: 0.1),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: Container(child: items[index]),
+              ),
+            );
+          },
+        ),
+        
+        Positioned(
+          right: 10,
+          top: 10,
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.white.withAlpha((0.6 * 255).toInt()),
+              shadowColor: Colors.transparent,
+              // Für mehr "Glas"-Feeling ggf. ohne Schatten
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
             ),
-            child: Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: Container(child: items[index]),
+            onPressed: () {
+              scrollToTop();
+            },
+            child: const Icon(
+              Icons.arrow_upward,
+              color: Colors.white,
             ),
-          );
-        },
+          ),
+        ),
+        
+        ]
       ),
     );
     return grid;
