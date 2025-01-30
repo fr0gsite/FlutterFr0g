@@ -619,6 +619,36 @@ class Chainactions {
     return transactionHandler(actions);
   }
 
+  Future<bool> addfavoriteupload(String uploadid) async {
+    actionsbeforetransaction();
+    List<Action> actions = [
+      Action()
+        ..account = AppConfig.maincontract
+        ..name = "addfavorite"
+        ..authorization = getauth()
+        ..data = {
+          "autor": username,
+          "uploadid": uploadid,
+        }
+    ];
+    return transactionHandler(actions);
+  }
+
+  Future<bool> deletefavoriteupload(String uploadid) async {
+    actionsbeforetransaction();
+    List<Action> actions = [
+      Action()
+        ..account = AppConfig.maincontract
+        ..name = "delfavorite"
+        ..authorization = getauth()
+        ..data = {
+          "autor": username,
+          "uploadid": uploadid,
+        }
+    ];
+    return transactionHandler(actions);
+  }
+
   Future<bool> addfavoritetag(String globaltagid) async {
     debugPrint("Add favorite tag");
     actionsbeforetransaction();
@@ -836,7 +866,7 @@ class Chainactions {
     while (!receivedall) {
       var response = await geteosclient().getTableRows(
           AppConfig.maincontract, username, 'userfavorite',
-          limit: 200, reverse: true, json: true, lower: lowerbond.toString());
+          limit: 500, reverse: true, json: true, lower: lowerbond.toString());
       for (var index = 0; index < response.length; index++) {
         uploadlist.add(FavoriteUpload.fromJson(response[index]));
       }

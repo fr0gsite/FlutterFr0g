@@ -202,6 +202,16 @@ class GlobalStatus extends ChangeNotifier {
     return false;
   }
 
+  bool delfavoriteupload(FavoriteUpload upload) {
+    if (isLoggedin) {
+      if (favorituploads.contains(upload)) {
+        favorituploads.remove(upload);
+        return true;
+      }
+    }
+    return false;
+  }
+
   Future<bool> iscommentinfavorites(BigInt commentid) async {
     if (isLoggedin) {
       if (DateTime.now().difference(lastfavoritecomment).inMinutes >

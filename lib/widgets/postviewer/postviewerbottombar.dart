@@ -1,5 +1,6 @@
 import 'package:fr0gsite/chainactions/chainactions.dart';
 import 'package:fr0gsite/config.dart';
+import 'package:fr0gsite/datatypes/favoriteupload.dart';
 import 'package:fr0gsite/datatypes/globalstatus.dart';
 import 'package:fr0gsite/datatypes/upload.dart';
 import 'package:fr0gsite/widgets/login/login.dart';
@@ -152,12 +153,68 @@ class _PostViewerBottomParState extends State<PostViewerBottomBar> {
     return num / total;
   }
 
-  bool toogle = false;
-
   Future<bool> buttonpressfavorite(bool value) async {
     if (Provider.of<GlobalStatus>(context, listen: false).isLoggedin) {
       debugPrint("favorite");
-      toogle = !toogle;
+      bool toogle = Provider.of<PostviewerStatus>(context, listen: false)
+          .getcurrentupload()
+          .buttonfavoriteliked;
+      if (!toogle) {
+        Chainactions()
+          ..setusernameandpermission(
+              Provider.of<GlobalStatus>(context, listen: false).username,
+              Provider.of<GlobalStatus>(context, listen: false).permission)
+          ..addfavoriteupload(
+              Provider.of<PostviewerStatus>(context, listen: false)
+                  .getcurrentupload()
+                  .uploadid.toString())
+          .then((value) {
+            if (value) {
+              debugPrint("addfavorite : $value");
+
+              // Save in Global Favorite list
+              int currentuploadid = Provider.of<PostviewerStatus>(context, listen: false).getcurrentupload().uploadid;
+              DateTime now = DateTime.now();
+              FavoriteUpload newfavorite = FavoriteUpload(uploadid: BigInt.parse(currentuploadid.toString()), creationtime: now);
+              Provider.of<GlobalStatus>(context, listen: false).addfavoriteupload(newfavorite);
+
+              // Update the current upload
+              Provider.of<PostviewerStatus>(context, listen: false).currentupload.buttonfavoriteliked = true;
+              Provider.of<PostviewerStatus>(context, listen: false).currentupload.numoffavorites += 1;
+
+              setState(() {
+                favorite = favorite + 1;
+              });
+
+              return toogle;
+            }
+          });
+      } else {
+        Chainactions()
+          ..setusernameandpermission(
+              Provider.of<GlobalStatus>(context, listen: false).username,
+              Provider.of<GlobalStatus>(context, listen: false).permission)
+          ..deletefavoriteupload(
+              Provider.of<PostviewerStatus>(context, listen: false)
+                  .getcurrentupload()
+                  .uploadid.toString())
+          .then((value) {
+            if (value) {
+              debugPrint("deletefavorite : $value");
+              int currentuploadid = Provider.of<PostviewerStatus>(context, listen: false).getcurrentupload().uploadid;
+              FavoriteUpload oldfavorite = FavoriteUpload(uploadid: BigInt.parse(currentuploadid.toString()), creationtime: DateTime.now());
+              Provider.of<GlobalStatus>(context, listen: false).delfavoriteupload(oldfavorite);
+
+              Provider.of<PostviewerStatus>(context, listen: false).currentupload.buttonfavoriteliked = false;
+              Provider.of<PostviewerStatus>(context, listen: false).currentupload.numoffavorites -= 1;
+
+              setState(() {
+                favorite = favorite - 1;
+              });
+              return toogle;
+            }
+          });
+      }
       return toogle;
     } else {
       showDialog(
@@ -255,15 +312,12 @@ class _PostViewerBottomParState extends State<PostViewerBottomBar> {
                   0)
               .then((value) {
             if (value) {
-              // ignore: use_build_context_synchronously
               Provider.of<PostviewerStatus>(context, listen: false)
                   .uploadlist
                   .firstWhere((element) => element.uploadid == currentuploadid)
                   .downvote();
-              // ignore: use_build_context_synchronously
               Provider.of<GlobalStatus>(context, listen: false)
                   .updateaccountinfo();
-              // ignore: use_build_context_synchronously
               Provider.of<GlobalStatus>(context, listen: false)
                   .updateuserconfig();
             }

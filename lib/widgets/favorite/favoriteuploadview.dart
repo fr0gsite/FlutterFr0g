@@ -1,9 +1,10 @@
-import 'package:fr0gsite/chainactions/chainactions.dart';
-import 'package:fr0gsite/datatypes/favoriteupload.dart';
+import 'package:fr0gsite/config.dart';
 import 'package:fr0gsite/datatypes/globalstatus.dart';
-import 'package:fr0gsite/datatypes/upload.dart';
+import 'package:fr0gsite/datatypes/gridstatus.dart';
 import 'package:fr0gsite/datatypes/uploadordertemplate.dart';
-import 'package:fr0gsite/widgets/cube/cube.dart';
+import 'package:fr0gsite/serachmodes/searchuserfavorites.dart';
+import 'package:fr0gsite/widgets/grid/creategrid.dart';
+import 'package:fr0gsite/widgets/grid/gridfilderbutton.dart';
 import 'package:fr0gsite/widgets/infoscreens/pleaselogin.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -16,30 +17,74 @@ class FavoriteUploadView extends StatefulWidget {
 }
 
 class _FavoriteUploadViewState extends State<FavoriteUploadView> {
-  List<FavoriteUpload> favoriteuploads = [];
-  List<Upload> uploadList = [];
-  List<Widget> items = [];
-  final ScrollController _scrollController = ScrollController();
-  Future? getfavorites;
-  late UploadOrderTemplate uploadOrder;
+  late UploadOrderTemplate uploadorder;
+  Future? getuploads;
+  int? lasttabindex;
+
+  // Need for the filter buttons
+  bool showpicture = true;
+  bool showvideo = true;
 
   @override
   void initState() {
     super.initState();
-    if (Provider.of<GlobalStatus>(context, listen: false).isLoggedin) {
-      debugPrint("Logged in. Getting favorites");
-      getfavorites = getfavoritesofuser();
-    } else {
-      debugPrint("Not logged in. No favorites to show");
-      getfavorites = null;
+    bool isLoggedin = Provider.of<GlobalStatus>(context, listen: false).isLoggedin;
+    if (isLoggedin) {
+      String username = Provider.of<GlobalStatus>(context, listen: false).username;
+      uploadorder = SearchUserFavorites(username);
+      getuploads = uploadorder.initsearch();
     }
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) { 
     return Consumer<GlobalStatus>(builder: (context, userstatus, child) {
       if (userstatus.isLoggedin) {
-        return showfavorites();
+        return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<GridStatus>(create: (context) => GridStatus()),
+      ],
+      builder: (context, child) {
+      Provider.of<GridStatus>(context, listen: false).setSearch(uploadorder);
+
+        // Need for the filter buttons
+        showpicture = Provider.of<GridStatus>(context, listen: true).showpicture;
+        showvideo   = Provider.of<GridStatus>(context, listen: true).showvideo;
+
+        return SizedBox(
+          height: 1000,
+          child: Container(
+            color: AppColor.nicegrey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: GridFilterButton(uploadorder)),
+                Expanded(
+                  child: FutureBuilder(
+                      future: getuploads,
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState == ConnectionState.done) {
+                          return CreateGrid(
+                            uploadlist: uploadorder.currentviewuploadlist,
+                            loadmorecallback: loadmorecallback,
+                          );
+                        } else {
+                          return const Center(
+                              child: CircularProgressIndicator(
+                            color: Colors.white,
+                            strokeWidth: 15,
+                          ));
+                        }
+                      }),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
       } else {
         return const Stack(
           children: [
@@ -50,65 +95,11 @@ class _FavoriteUploadViewState extends State<FavoriteUploadView> {
     });
   }
 
-  Widget showfavorites() {
-    return FutureBuilder(
-      future: getfavorites,
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          return getgridview();
-        } else {
-          return const Center(child: CircularProgressIndicator());
-        }
-      },
-    );
-  }
-
-  GridView getgridview() {
-    var corssAxisCount = resize();
-    var grid = GridView.builder(
-      itemCount: items.length,
-      scrollDirection: Axis.vertical,
-      controller: _scrollController,
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: corssAxisCount),
-      itemBuilder: (context, index) {
-        return items[index];
-      },
-    );
-    return grid;
-  }
-
-  int resize() {
-    return (MediaQuery.of(context).size.width / 200).floor();
-  }
-
-  Future<bool> getfavoritesofuser() async {
-
-    var response = await Provider.of<GlobalStatus>(context, listen: false)
-        .getfavoriteuploads();
-    for (var item in response) {
-      favoriteuploads.add(item);
-
-    }
-    List<Future> futures = [];
-    for (int i = 0; i < favoriteuploads.length; i++) {
-      String uploadid = favoriteuploads.elementAt(i).uploadid.toString();
-      var future = Chainactions().getupload(uploadid).then((value) {
-        uploadList.add(value);
-      });
-      futures.add(future);
-    }
-    await Future.wait(futures);
-    debugPrint("Received all Upload Metadata");
-
-    for (var index = 0; index < uploadList.length; index++) {
-      items.add(
-        Cube(
-            informationaboutupload: uploadList.elementAt(index).toJson(),
-            mode: "userfavorite"),
-      );
-    }
-
+  Future<bool> loadmorecallback() async {
+    debugPrint("loadmorecallback");
+    await uploadorder.searchnext();
+    setState(() {});
     return true;
   }
+
 }

@@ -18,6 +18,7 @@ class HomeCubeList extends StatefulWidget {
 }
 
 class _HomeCubeListState extends State<HomeCubeList> {
+  late UploadOrderTemplate uploadorder;
   Future? getuploads;
   int? lasttabindex;
 
@@ -31,8 +32,6 @@ class _HomeCubeListState extends State<HomeCubeList> {
     getuploads = getdata();
     lasttabindex = widget.currenttabindex;
   }
-
-  late UploadOrderTemplate uploadorder;
 
   Future<bool> getdata() async {
     if (widget.currenttabindex == 0) {
