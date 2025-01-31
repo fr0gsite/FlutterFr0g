@@ -100,6 +100,9 @@ class _CreateGridState extends State<CreateGrid> {
       duration: const Duration(milliseconds: 500),
       curve: Curves.easeInOut,
     );
+    Future.delayed(const Duration(milliseconds: 600), () {
+      Provider.of<GlobalStatus>(context, listen: false).setexpandhomenavigationbar(true);
+    });
   }
 
   ScrollConfiguration getgridview() {
@@ -142,9 +145,13 @@ class _CreateGridState extends State<CreateGrid> {
             onPressed: () {
               scrollToTop();
             },
-            child: const Icon(
-              Icons.arrow_upward,
-              color: Colors.white,
+            child: const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Icon(
+                Icons.arrow_upward,
+                color: Colors.white,
+                size: 20,
+              ),
             ),
           ),
         ),

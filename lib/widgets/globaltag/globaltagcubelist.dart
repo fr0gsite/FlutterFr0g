@@ -1,7 +1,9 @@
+import 'package:fr0gsite/datatypes/globalstatus.dart';
 import 'package:fr0gsite/datatypes/gridstatus.dart';
 import 'package:fr0gsite/datatypes/upload.dart';
 import 'package:fr0gsite/datatypes/uploadordertemplate.dart';
 import 'package:fr0gsite/serachmodes/searchtag.dart';
+import 'package:fr0gsite/widgets/backbutton.dart';
 import 'package:fr0gsite/widgets/grid/creategrid.dart';
 import 'package:fr0gsite/widgets/grid/gridfilderbutton.dart';
 import 'package:fr0gsite/widgets/infoscreens/loadingpleasewaitscreen.dart';
@@ -52,7 +54,19 @@ class _GlobalTagCubeListState extends State<GlobalTagCubeList> {
             children: [
               Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: GridFilterButton(uploadorder)),
+                  child: Wrap(
+                    // center the children
+                    alignment: WrapAlignment.start,
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    
+                    children: [
+                      !Provider.of<GlobalStatus>(context, listen: true).expandhomenavigationbar
+                          ? backButton(context)
+                          : Container(),
+                      GridFilterButton(uploadorder),
+                    ],
+                  ),
+                ),
               Expanded(
                 child: FutureBuilder(
                   future: futureuploadorder,
