@@ -7,6 +7,7 @@ import 'package:fr0gsite/datatypes/globalstatus.dart';
 import 'package:fr0gsite/widgets/infoscreens/pleaselogin.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../postviewer/comment/timedifferencewidget.dart';
 import '../postviewer/commentandtagbutton.dart';
@@ -47,8 +48,8 @@ class _FavoriteCommentsViewState extends State<FavoriteCommentsView> {
         }
 
         if (favoriteComments == null || favoriteComments!.isEmpty) {
-          return const Center(
-            child: Text("No favorite comments available."),
+          return Center(
+            child: Text(AppLocalizations.of(context)!.nofavoritesfound),
           );
         }
 
