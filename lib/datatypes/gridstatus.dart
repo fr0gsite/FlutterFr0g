@@ -6,6 +6,9 @@ class GridStatus extends ChangeNotifier {
   bool showvideo = true;
   bool showinfowithouthover = true;
 
+  bool filterstatus = false;
+  double filterminvalue = 0;
+
   late UploadOrderTemplate search;
 
   void setshowpicture(bool value) {
@@ -38,6 +41,12 @@ class GridStatus extends ChangeNotifier {
   void toggleinfowithouthover() {
     showinfowithouthover = !showinfowithouthover;
     debugPrint("GridStatus: toggleinfowithouthover: $showinfowithouthover");
+    notifyListeners();
+  }
+
+  void setfilter(double minvalue, List<String> tags) {
+    filterstatus = true;
+    filterminvalue = minvalue;
     notifyListeners();
   }
 

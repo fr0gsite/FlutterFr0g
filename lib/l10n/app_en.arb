@@ -376,5 +376,6 @@
     "links": "Links",
     "rules": "Rules",
     "nouploadsfound":"No uploads found",
-    "nofavoritesfound":"No Favorites found"
+    "nofavoritesfound":"No Favorites found",
+    "filter":"Filter"
 }
