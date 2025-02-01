@@ -1,3 +1,4 @@
+import 'package:fr0gsite/config.dart';
 import 'package:fr0gsite/datatypes/globalstatus.dart';
 import 'package:fr0gsite/datatypes/upload.dart';
 import 'package:fr0gsite/widgets/cube/cube.dart';
@@ -76,7 +77,7 @@ class _CreateGridState extends State<CreateGrid> {
   }
 
   int resize() {
-    int div = MediaQuery.of(context).size.width > 640 ? 200 : 165;
+    int div = MediaQuery.of(context).size.width > AppConfig.thresholdValueForMobileLayout ? 200 : 165;
 
     return (MediaQuery.of(context).size.width / div).floor();
   }

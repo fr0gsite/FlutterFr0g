@@ -47,7 +47,7 @@ class _HomeTabBarState extends State<HomeTabBar> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     if (getPlatform(context) == Platformdetectionstatus.web &&
-        MediaQuery.of(context).size.width < 640) {
+        MediaQuery.of(context).size.width < AppConfig.thresholdValueForMobileLayout) {
       showanimation = false;
     }
 

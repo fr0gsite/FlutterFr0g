@@ -269,7 +269,7 @@ class StartPoint extends State<Fr0gsiteApp> {
                     Navigator.pushNamed(context, '/home');
                   },
                 ),
-                MediaQuery.of(context).size.width > 640
+                MediaQuery.of(context).size.width > AppConfig.thresholdValueForMobileLayout
                     ? const Text(AppConfig.appname,
                         style: TextStyle(fontSize: 50, color: Colors.white))
                     : const Text(AppConfig.appname,
@@ -277,10 +277,10 @@ class StartPoint extends State<Fr0gsiteApp> {
                 const SizedBox(width: 10),
                 Text(
                   "Beta",
-                  style: TextStyle(color: Colors.orange, fontSize: MediaQuery.of(context).size.width > 640 ? 20 : 8),
+                  style: TextStyle(color: Colors.orange, fontSize: MediaQuery.of(context).size.width > AppConfig.thresholdValueForMobileLayout ? 20 : 8),
                 ),
                 const SizedBox(width: 10),
-                MediaQuery.of(context).size.width > 640 ? IconButton(
+                MediaQuery.of(context).size.width > AppConfig.thresholdValueForMobileLayout ? IconButton(
                   icon: Image.asset(
                     "assets/$logopathstring",
                     width: 50,
@@ -294,7 +294,7 @@ class StartPoint extends State<Fr0gsiteApp> {
             backgroundColor: AppColor.niceblack,
             leading: Container(),
           ),
-          bottomNavigationBar: MediaQuery.of(context).size.width < 640
+          bottomNavigationBar: MediaQuery.of(context).size.width < AppConfig.thresholdValueForMobileLayout
               ? BottomNavigationBar(
                   backgroundColor: AppColor.niceblack,
                   items: pages.take(6).map((e) {
@@ -318,7 +318,7 @@ class StartPoint extends State<Fr0gsiteApp> {
                         constraints:
                             BoxConstraints(minHeight: constraint.maxHeight),
                         child: IntrinsicHeight(
-                            child: MediaQuery.of(context).size.width >= 640
+                            child: MediaQuery.of(context).size.width >= AppConfig.thresholdValueForMobileLayout
                                 ? NavigationRail(
                                     key: navigationRailDestinationKey,
                                     trailing: Column(

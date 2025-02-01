@@ -58,7 +58,7 @@ class _TagBarViewState extends State<TagBarView> {
                   },
                   hoverColor: Colors.blue,
                   backgroundColor: AppColor.tagcolor,
-                  label: MediaQuery.of(context).size.width > 1000
+                  label: MediaQuery.of(context).size.width > AppConfig.thresholdValueForMobileLayout
                       ? AutoSizeText(
                           AppLocalizations.of(context)!.addtag,
                           style: const TextStyle(color: Colors.white),

@@ -179,7 +179,7 @@ class _FollowState extends State<Follow> with TickerProviderStateMixin {
 
             //////////////// RIGHT SIDE //////////////////
             Expanded(
-              child: _isExpanded && MediaQuery.of(context).size.width < 640
+              child: _isExpanded && MediaQuery.of(context).size.width < AppConfig.thresholdValueForMobileLayout
                   ? Container()
                   : !userstatus.isLoggedin
                       ? const Pleaselogin()

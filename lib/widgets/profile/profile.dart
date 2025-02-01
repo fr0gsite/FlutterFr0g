@@ -182,7 +182,7 @@ class _ProfileState extends State<Profile> {
             size: iconsize,
           ),
           SizedBox(
-            width: MediaQuery.of(context).size.width < 640 ? 200 : 400,
+            width: MediaQuery.of(context).size.width < AppConfig.thresholdValueForMobileLayout ? 200 : 400,
             child: TextField(
               controller: searchcontroller,
               //inputFormatters: <TextInputFormatter>[
