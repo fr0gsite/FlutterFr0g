@@ -1,11 +1,11 @@
 {
-    "name": "fr0gsite",
-    "short_name": "fr0gsite",
+    "name": "🐸Fr0gsite🐸",
+    "short_name": "Fr0gsite",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "🔥Funny Videos and Images🔥 🚀Web3",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

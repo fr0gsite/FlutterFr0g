@@ -16,13 +16,11 @@ class _GridFilterViewState extends State<GridFilterView> {
   double filterrating = 0;
   List<String> filtertags = [];
   TextEditingController tagtextcontroller = TextEditingController();
-  
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
       backgroundColor: AppColor.nicegrey,
-      //white border with 16px border radius
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16.0),
         side: BorderSide(
@@ -62,7 +60,6 @@ class _GridFilterViewState extends State<GridFilterView> {
               child: ElevatedButton(
                 onPressed: () {
                   filtertags = [];
-                  // generate tags from textfield, split by comma, remove whitespace, remove empty strings
                   filtertags = tagtextcontroller.text.split(",").map((e) => e.trim()).where((element) => element.isNotEmpty).toList();
                   Provider.of<GridStatus>(context, listen: true).setfilter(filterrating, filtertags);
                   Navigator.of(context).pop();
