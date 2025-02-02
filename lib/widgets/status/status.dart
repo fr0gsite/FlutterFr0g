@@ -1,4 +1,5 @@
 import 'package:fr0gsite/config.dart';
+import 'package:fr0gsite/widgets/status/dashboard/dashboardwidget.dart';
 import 'package:fr0gsite/widgets/status/producervote.dart';
 import 'package:fr0gsite/widgets/status/database.dart';
 import 'package:fr0gsite/widgets/status/transactiontimeline.dart';
@@ -23,7 +24,7 @@ class StatusState extends State<Status> {
   List<Widget> widgetOptions = <Widget>[
     const Expanded(child: TransactionTimeline()),
     const Expanded(child: Producervote()),
-    const Expanded(child: Database()),
+    Expanded(child: DashboardWidget()),
   ];
 
   @override
@@ -58,7 +59,7 @@ class StatusState extends State<Status> {
                   text: AppLocalizations.of(context)!.blockproducers,
                 ),
                 Tab(
-                  text: AppLocalizations.of(context)!.database,
+                  text: AppLocalizations.of(context)!.statistics,
                 ),
               ],
             ),

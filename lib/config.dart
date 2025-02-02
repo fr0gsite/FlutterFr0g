@@ -99,6 +99,7 @@ class AppConfig {
   static const String systemtoken = "PEP";
   static const int systemtokendecimalafterdot = 4;
   static const int thresholdValueForMobileLayout = 640;
+  static const int maxtrusterlist = 600;
   static const chainid =
       "530d11d73d401999b533e0ef5ab1f4f3d2fcd436df7050850671733915fbd721";
 
@@ -252,6 +253,12 @@ enum Platformdetectionstatus {
   macos,
   linux,
   unknown
+}
+
+enum TrusterStatus {
+  active,
+  vacation,
+  blocked,
 }
 
 class GameConfig {

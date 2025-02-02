@@ -251,7 +251,7 @@
     "usernotfound":"Benutzer nicht gefunden",
     "searchforauser":"Suche nach Benutzer",
 
-    "daysago":"Tagen her",
+    "daysago":"Tage her",
     "hoursago":"Stunden her",
     "minutesago":"Minuten her",
     "secondsago":"Sekunden her",
@@ -375,6 +375,7 @@
     "nofavoritesfound":"Keine Favoriten gefunden",
     "filter":"Filter",
     "favoritize":"Favorisieren",
-    "discard":"Verwerfen"
+    "discard":"Verwerfen",
+    "statistics":"Statistiken"
 
 }   

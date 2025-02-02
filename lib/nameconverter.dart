@@ -30,4 +30,30 @@ class NameConverter {
 
     return 0;
   }
+
+  static const String _charMap = ".12345abcdefghijklmnopqrstuvwxyz";
+  // Converts a `BigInt` (EOS name in uint64 format) back
+  // into the readable string (max. 12 characters).
+  static String uint64ToName(BigInt value) {
+    // We retain up to 13 “potential” characters,
+    // as EOS still has the option of 13 characters internally.
+    List<String> temp = List.filled(13, '');
+    BigInt tmp = value;
+
+    for (int i = 0; i <= 12; i++) {
+       // Only 4 bits are read during the very first run (i == 0)
+      // (because of the EOS format). Thereafter 5 bits each time.
+      int c;
+      if (i == 0) {
+        c = (tmp & BigInt.from(0x0f)).toInt();
+        tmp = tmp >> 4;
+      } else {
+        c = (tmp & BigInt.from(0x1f)).toInt();
+        tmp = tmp >> 5;
+      }
+      temp[12 - i] = _charMap[c];
+    }
+
+    return temp.join('').replaceAll('.', '').trim();
+  }
 }

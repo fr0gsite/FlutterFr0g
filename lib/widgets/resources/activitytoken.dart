@@ -16,7 +16,6 @@ class _ActivityTokenState extends State<ActivityToken> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // Your widget code here
       child: Column(
         children: [
           Padding(

@@ -15,6 +15,7 @@ import 'package:fr0gsite/datatypes/reportstatus.dart';
 import 'package:fr0gsite/datatypes/reportvotes.dart';
 import 'package:fr0gsite/datatypes/rewardcalc.dart';
 import 'package:fr0gsite/datatypes/tag.dart';
+import 'package:fr0gsite/datatypes/truster.dart';
 import 'package:fr0gsite/datatypes/usersubscription.dart';
 import 'package:fr0gsite/datatypes/userupload.dart';
 import 'package:fr0gsite/datatypes/withthistag.dart';
@@ -1041,6 +1042,20 @@ class Chainactions {
         return false;
       }
     }
+  }
+
+  // -- Truster / Report -- #
+
+  Future<List<Truster>> gettrusters() async {
+    var response = await geteosclient().getTableRows(
+        AppConfig.maincontract, AppConfig.maincontract, 'trusters',
+        limit: AppConfig.maxtrusterlist, reverse: true, json: true);
+    List<Truster> trusterlist = [];
+    for (var index = 0; index < response.length; index++) {
+      trusterlist.add(Truster.fromJson(response[index]));
+    }
+    debugPrint("Received all trusters");
+    return trusterlist;
   }
 
   Future<List<Report>> getreports() async {

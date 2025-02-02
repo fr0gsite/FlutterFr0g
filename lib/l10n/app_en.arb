@@ -379,5 +379,6 @@
     "nofavoritesfound":"No Favorites found",
     "filter":"Filter",
     "favoritize":"Favoritize",
-    "discard":"Discard"
+    "discard":"Discard",
+    "statistics":"Statistics"
 }
