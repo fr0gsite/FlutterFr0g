@@ -40,38 +40,54 @@ class _FavoriteTagsViewState extends State<FavoriteTagsView> {
           );
         }
 
-        return Container(
-          margin: const EdgeInsets.all(10),
-          child: ListView.builder(
-            itemCount: userfavoriteTags.length,
-            itemBuilder: (context, index) {
-              return Container(
-                margin: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: Colors.grey),
-                padding: const EdgeInsets.all(10),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        deleteFavoriteTag(userfavoriteTags[index].globaltagid.toString(),index);
-                      },
-                      child: const Icon(
-                        Icons.favorite,
-                        color: Colors.yellow,
-                        size: 25,
+        return Center(
+          child: Container(
+            constraints: const BoxConstraints(maxWidth: 500),
+            margin: const EdgeInsets.all(8),
+            child: ListView.builder(
+              itemCount: userfavoriteTags.length,
+              itemBuilder: (context, index) {
+                return Container(
+                  margin: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      color: Colors.grey),
+                  padding: const EdgeInsets.all(10),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          deleteFavoriteTag(userfavoriteTags[index].globaltagid.toString(),index);
+                        },
+                        child: const Icon(
+                          Icons.favorite,
+                          color: Colors.yellow,
+                          size: 25,
+                        ),
                       ),
-                    ),
-                    const SizedBox(
-                      width: 15,
-                    ),
-                    Text(userfavoriteTags[index].globaltagname)
-                  ],
-                ),
-              );
-            },
+                      const SizedBox(
+                        width: 15,
+                      ),
+                      // Text button. Go to globaltag page
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/globaltag/${userfavoriteTags[index].globaltagid}',
+                              arguments: userfavoriteTags[index].globaltagid);
+                        },
+                        child: Text(
+                          userfavoriteTags[index].globaltagname,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
           ),
         );
       } else {

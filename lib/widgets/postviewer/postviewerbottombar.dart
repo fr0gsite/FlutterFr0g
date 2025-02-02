@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:like_button/like_button.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../datatypes/postviewerstatus.dart';
 
 class PostViewerBottomBar extends StatefulWidget {
@@ -68,7 +69,7 @@ class _PostViewerBottomParState extends State<PostViewerBottomBar> {
                   : Container(),
               viewerbutton(
                   Icons.add_circle_outline_sharp,
-                  "Upvote",
+                  "",
                   buttonpressup,
                   currentupload.buttonupliked,
                   up.round(),
@@ -76,7 +77,7 @@ class _PostViewerBottomParState extends State<PostViewerBottomBar> {
                   Colors.orange),
               viewerbutton(
                   Icons.do_not_disturb_on_outlined,
-                  "Downvote",
+                  "",
                   buttonpressdown,
                   currentupload.buttondownliked,
                   down.round(),
@@ -84,7 +85,9 @@ class _PostViewerBottomParState extends State<PostViewerBottomBar> {
                   Colors.orange),
               viewerbutton(
                   Icons.favorite,
-                  "Favorite",
+                  currentupload.buttonfavoriteliked
+                      ? AppLocalizations.of(context)!.discard
+                      : AppLocalizations.of(context)!.favoritize,
                   buttonpressfavorite,
                   currentupload.buttonfavoriteliked,
                   favorite.round(),
@@ -109,41 +112,44 @@ class _PostViewerBottomParState extends State<PostViewerBottomBar> {
 
   Widget viewerbutton(IconData icon, String tooltip, function, bool isliked,
       int likecount, Color primary, Color secondary) {
-    return Container(
-      decoration: BoxDecoration(
-        color: AppColor.nicegrey,
-        borderRadius: BorderRadius.circular(50),
-      ),
-      child: LikeButton(
-        size: iconsize,
-        circleColor: CircleColor(start: primary, end: primary),
-        bubblesColor: BubblesColor(
-          dotPrimaryColor: primary,
-          dotSecondaryColor: secondary,
+    return Tooltip(
+      message: tooltip,
+      child: Container(
+        decoration: BoxDecoration(
+          color: AppColor.nicegrey,
+          borderRadius: BorderRadius.circular(50),
         ),
-        isLiked: isliked,
-        likeBuilder: (bool isLiked) {
-          return Icon(
-            icon,
-            color: isLiked ? primary : Colors.white,
-            size: iconsize,
-          );
-        },
-        likeCount: likecount,
-        countBuilder: (int? count, bool isLiked, String text) {
-          var color = isLiked ? primary : Colors.white;
-          Widget result;
-          if (count == -1) {
-            return Container();
-          }
-          result = Text(
-            text,
-            style: TextStyle(color: color, fontSize: textsize),
-          );
-
-          return result;
-        },
-        onTap: function,
+        child: LikeButton(
+          size: iconsize,
+          circleColor: CircleColor(start: primary, end: primary),
+          bubblesColor: BubblesColor(
+            dotPrimaryColor: primary,
+            dotSecondaryColor: secondary,
+          ),
+          isLiked: isliked,
+          likeBuilder: (bool isLiked) {
+            return Icon(
+              icon,
+              color: isLiked ? primary : Colors.white,
+              size: iconsize,
+            );
+          },
+          likeCount: likecount,
+          countBuilder: (int? count, bool isLiked, String text) {
+            var color = isLiked ? primary : Colors.white;
+            Widget result;
+            if (count == -1) {
+              return Container();
+            }
+            result = Text(
+              text,
+              style: TextStyle(color: color, fontSize: textsize),
+            );
+      
+            return result;
+          },
+          onTap: function,
+        ),
       ),
     );
   }
@@ -155,7 +161,6 @@ class _PostViewerBottomParState extends State<PostViewerBottomBar> {
 
   Future<bool> buttonpressfavorite(bool value) async {
     if (Provider.of<GlobalStatus>(context, listen: false).isLoggedin) {
-      debugPrint("favorite");
       bool toogle = Provider.of<PostviewerStatus>(context, listen: false)
           .getcurrentupload()
           .buttonfavoriteliked;

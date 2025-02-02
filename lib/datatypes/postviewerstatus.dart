@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:fr0gsite/datatypes/comment.dart';
 import 'package:fr0gsite/datatypes/upload.dart';
 import 'package:flutter/foundation.dart';
@@ -107,17 +105,5 @@ class PostviewerStatus extends ChangeNotifier {
     return commentlist;
   }
 
-  void addcomment(int parentcommentId, String comment) {
-    commentlist.add(Comment(
-        commentId: Random().nextInt(1000000),
-        parentCommentId: parentcommentId,
-        author: "test",
-        commentText: comment,
-        creationTime: DateTime.now(),
-        down: 0,
-        up: 0,
-        language: "de",
-        token: 0));
-    notifyListeners();
-  }
+
 }

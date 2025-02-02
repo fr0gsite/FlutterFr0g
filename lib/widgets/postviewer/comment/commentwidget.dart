@@ -1,5 +1,4 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/gestures.dart';
 import 'package:fr0gsite/chainactions/chainactions.dart';
 import 'package:fr0gsite/datatypes/comment.dart';
 import 'package:fr0gsite/datatypes/commentbarstatus.dart';
@@ -7,13 +6,12 @@ import 'package:fr0gsite/datatypes/globalstatus.dart';
 import 'package:fr0gsite/datatypes/postviewerstatus.dart';
 import 'package:fr0gsite/widgets/login/login.dart';
 import 'package:fr0gsite/widgets/postviewer/comment/commentreply.dart';
+import 'package:fr0gsite/widgets/postviewer/comment/commentrichtext.dart';
 import 'package:fr0gsite/widgets/postviewer/comment/timedifferencewidget.dart';
 import 'package:fr0gsite/widgets/postviewer/commentandtagbutton.dart';
 import 'package:flutter/material.dart';
-import 'package:like_button/like_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../../../config.dart';
 import '../../report/report.dart';
@@ -38,14 +36,16 @@ class CommentWidget extends StatefulWidget {
 class _CommentWidgetState extends State<CommentWidget> {
   bool expansionState = true;
   bool initiallyExpanded = true;
-
-  List<Comment> subComments = [];
+  
+  bool isliked = false;
+  bool isdisliked = false;
+  bool isfavorited = false;
 
   @override
   Widget build(BuildContext context) {
     expansionState =
         Provider.of<CommentBarStatus>(context, listen: true).commentFold;
-    subComments = widget.comments
+    List<Comment> subComments = widget.comments
         .where((comment) =>
             comment.parentCommentId == widget.comment.commentId.toInt())
         .toList();
@@ -83,10 +83,28 @@ class _CommentWidgetState extends State<CommentWidget> {
                   children: [
                     commentandtagbutton(
                         widget.comment.commentId.toString(),
+                        Icons.add_circle_outline_sharp,
+                        "Upvote",
+                        upvotecomment,
+                        isliked,
+                        0,
+                        Colors.green,
+                        Colors.orange),
+                    commentandtagbutton(
+                        widget.comment.commentId.toString(),
+                        Icons.do_not_disturb_on_outlined,
+                        "Downvote",
+                        downvotecomment,
+                        isdisliked,
+                        0,
+                        Colors.red,
+                        Colors.orange),
+                    commentandtagbutton(
+                        widget.comment.commentId.toString(),
                         Icons.favorite,
-                        "Favorite",
+                        isfavorited ? AppLocalizations.of(context)!.discard : AppLocalizations.of(context)!.favoritize,
                         favoritecomment,
-                        false,
+                        isfavorited,
                         0,
                         Colors.yellow,
                         Colors.orange),
@@ -110,8 +128,7 @@ class _CommentWidgetState extends State<CommentWidget> {
                 height: 10,
               ),
               SelectionArea(
-                  child: buildRichTextWithAutoSize(widget.comment
-                      .commentText)
+                  child: commentRichText(widget.comment.commentText)
                   ),
             ],
           ),
@@ -121,51 +138,65 @@ class _CommentWidgetState extends State<CommentWidget> {
             ),
             child: Row(
               children: [
-                IconButton(
-                  tooltip: AppLocalizations.of(context)!.reply,
-                  style: ButtonStyle(
-                    backgroundColor: WidgetStateProperty.all<Color>(
-                        Colors.blue.withAlpha((0.5 * 255).toInt())),
-                    shape: WidgetStateProperty.all<OutlinedBorder>(
+                SizedBox(
+                  height: 30,
+                  child: FloatingActionButton.extended(
+                    heroTag: null,
+                    onPressed: () {
+                      if (Provider.of<GlobalStatus>(context, listen: false)
+                          .isLoggedin) {
+                        debugPrint("Create replay to ${widget.comment.author}");
+                        writecomment(context, widget.comment);
+                      } else {
+                        {
+                          showDialog(
+                              context: context,
+                              builder: ((context) {
+                                return const Login();
+                              }));
+                        }
+                      }
+                    },
+                    hoverColor: Colors.blue,
+                    backgroundColor: Colors.blue.withAlpha((0.3 * 255).toInt()),
+                    label: Text(AppLocalizations.of(context)!.reply,
+                        style: const TextStyle(color: Colors.white)),
+                    icon: const Icon(Icons.reply, color: Colors.white),
+                    shape: ShapeBorder.lerp(
                         RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10))),
+                            borderRadius: BorderRadius.circular(10)),
+                        RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
+                        0.5),
                   ),
-                  onPressed: () {
-                    if (Provider.of<GlobalStatus>(context, listen: false)
-                        .isLoggedin) {
-                      debugPrint("Create reply to ${widget.comment.author}");
-                      writecomment(context, widget.comment);
-                    } else {
+                ),
+                SizedBox(
+                  height: 30,
+                  child: FloatingActionButton.extended(
+                    heroTag: null,
+                    onPressed: () {
+                      debugPrint(
+                          "Report comment from ${widget.comment.author}");
                       showDialog(
                         context: context,
-                        builder: (context) {
-                          return const Login();
-                        },
+                        builder: ((context) => Report(
+                              mode: "comment",
+                              id: widget.comment.commentId.toInt(),
+                            )),
                       );
-                    }
-                  },
-                  icon: const Icon(Icons.reply, color: Colors.white),
-                ),
-                IconButton(
-                  style: ButtonStyle(
-                    backgroundColor: WidgetStateProperty.all<Color>(
-                        Colors.red.withAlpha((0.5 * 255).toInt())),
-                    shape: WidgetStateProperty.all<OutlinedBorder>(
+                    },
+                    hoverColor: Colors.red,
+                    backgroundColor: Colors.red.withAlpha((0.3 * 255).toInt()),
+                    label: Text(AppLocalizations.of(context)!.report,
+                        style: const TextStyle(color: Colors.white)),
+                    icon: const Icon(Icons.report, color: Colors.white),
+                    shape: ShapeBorder.lerp(
                         RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10))),
+                            borderRadius: BorderRadius.circular(10)),
+                        RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
+                        0.5),
                   ),
-                  tooltip: AppLocalizations.of(context)!.report,
-                  onPressed: () {
-                    debugPrint("Report comment from ${widget.comment.author}");
-                    showDialog(
-                      context: context,
-                      builder: ((context) => Report(
-                            mode: "comment",
-                            id: widget.comment.commentId.toInt(),
-                          )),
-                    );
-                  },
-                  icon: const Icon(Icons.report, color: Colors.white),
                 ),
                 const Spacer(),
                 subComments.isNotEmpty
@@ -191,89 +222,6 @@ class _CommentWidgetState extends State<CommentWidget> {
     );
   }
 
-  Widget buildRichTextWithAutoSize(String text) {
-    final RegExp linkRegex = RegExp(
-      r'(https?:\/\/[^\s]+)', // Matches URLs starting with http:// or https://
-      caseSensitive: false,
-    );
-
-    final List<InlineSpan> spans = [];
-    int currentIndex = 0;
-
-    // Parse text and identify links
-    for (final match in linkRegex.allMatches(text)) {
-      final String linkText = match.group(0)!;
-      final int start = match.start;
-
-      // Add text before the link
-      if (start > currentIndex) {
-        spans.add(TextSpan(
-          text: text.substring(currentIndex, start),
-          style: const TextStyle(color: Colors.white), // Default text style
-        ));
-      }
-
-      // Add the link text with special styling
-      spans.add(
-        TextSpan(
-          text: linkText,
-          style: const TextStyle(
-            color: Colors.blue,
-            decoration: TextDecoration.underline,
-            decorationColor: Colors.blue
-          ),
-          recognizer: TapGestureRecognizer()
-            ..onTap = () async {
-              if (await canLaunchUrl(Uri.parse(linkText))) {
-                await launchUrl(Uri.parse(linkText));
-              } else {
-                debugPrint('Could not launch $linkText');
-              }
-            },
-        ),
-      );
-
-      currentIndex = match.end;
-    }
-
-    // Add remaining text after the last link
-    if (currentIndex < text.length) {
-      spans.add(TextSpan(
-        text: text.substring(currentIndex),
-        style: const TextStyle(color: Colors.white),
-      ));
-    }
-
-    return AutoSizeText.rich(
-      TextSpan(
-        children: spans,
-      ),
-      minFontSize: 12,
-      maxFontSize: 14,
-    );
-  }
-
-  Widget commentbutton(IconData icon, String tooltip, function, bool isliked,
-      int likecount, Color primary, Color secondary) {
-    return LikeButton(
-      mainAxisAlignment: MainAxisAlignment.start,
-      size: 25,
-      circleColor: CircleColor(start: primary, end: primary),
-      bubblesColor: BubblesColor(
-        dotPrimaryColor: primary,
-        dotSecondaryColor: secondary,
-      ),
-      isLiked: isliked,
-      likeBuilder: (bool isLiked) {
-        return Icon(
-          icon,
-          color: isLiked ? primary : Colors.white,
-          size: 25,
-        );
-      },
-      onTap: function,
-    );
-  }
 
   void replycallback(value, String comment) {
     debugPrint("Reply callback called with $value");
@@ -288,7 +236,7 @@ class _CommentWidgetState extends State<CommentWidget> {
       context: context,
       barrierDismissible: true,
       barrierColor:
-          Colors.black.withAlpha((0.5 * 255).toInt()), // Grau ausgegrauter Hintergrund
+          Colors.black.withAlpha((0.5 * 255).toInt()),
       builder: (BuildContext context) {
         return CommentReply(comment: comment, callback: replycallback);
       },
@@ -313,7 +261,7 @@ class _CommentWidgetState extends State<CommentWidget> {
       await temp.votecomment(commentid, 1).then((value) {
         result = value;
         setState(() {
-
+          isliked = result;
         });
       });
       if (!result) {
@@ -321,7 +269,11 @@ class _CommentWidgetState extends State<CommentWidget> {
       }
       return result;
     } else {
-      // Show error message. User is not logged in
+      showDialog(
+          context: context,
+          builder: ((context) {
+            return const Login();
+          }));
       return false;
     }
   }
@@ -340,7 +292,7 @@ class _CommentWidgetState extends State<CommentWidget> {
       await temp.votecomment(commentid, 0).then((value) {
         result = value;
         setState(() {
-
+          isdisliked = result;
         });
       });
       if (!result) {
@@ -348,7 +300,11 @@ class _CommentWidgetState extends State<CommentWidget> {
       }
       return result;
     } else {
-      // Show error message. User is not logged in
+      showDialog(
+          context: context,
+          builder: ((context) {
+            return const Login();
+          }));
       return false;
     }
   }
@@ -366,14 +322,17 @@ class _CommentWidgetState extends State<CommentWidget> {
       bool result = false;
       await temp.addfavoritecomment(commentid).then((value) {
         result = value;
-        setState(() {});
       });
       if (!result) {
         //Show error message
       }
       return result;
     } else {
-      // Show error message. User is not logged in
+      showDialog(
+          context: context,
+          builder: ((context) {
+            return const Login();
+          }));
       return false;
     }
   }

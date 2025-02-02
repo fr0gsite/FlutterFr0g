@@ -28,7 +28,7 @@
     "loginwith":"Login with",
     "active":"Active",
     "pictures":"Pictures",
-    "videos":"videos",
+    "videos":"Videos",
 
     "settings": "Settings",
     "balance": "Balance",
@@ -377,5 +377,7 @@
     "rules": "Rules",
     "nouploadsfound":"No uploads found",
     "nofavoritesfound":"No Favorites found",
-    "filter":"Filter"
+    "filter":"Filter",
+    "favoritize":"Favoritize",
+    "discard":"Discard"
 }

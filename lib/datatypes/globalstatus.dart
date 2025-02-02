@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:fr0gsite/chainactions/chainactions.dart';
 import 'package:fr0gsite/config.dart';
-import 'package:fr0gsite/datatypes/favoritecomment.dart';
+import 'package:fr0gsite/datatypes/comment.dart';
 import 'package:fr0gsite/datatypes/favoritetag.dart';
 import 'package:fr0gsite/datatypes/favoriteupload.dart';
 import 'package:fr0gsite/datatypes/localuserconfig.dart';
@@ -32,7 +32,7 @@ class GlobalStatus extends ChangeNotifier {
   //User Favorites
   List<FavoriteUpload> favorituploads = [];
   DateTime lastfavoriteupload = DateTime.parse("2000-01-01 00:00:00.000000");
-  List<FavoriteComment> favoritecomments = [];
+  List<Comment> favoritecomments = [];
   DateTime lastfavoritecomment = DateTime.parse("2000-01-01 00:00:00.000000");
   List<FavoriteTag> favoritetags = [];
   DateTime lastfavoritetag = DateTime.parse("2000-01-01 00:00:00.000000");
@@ -212,7 +212,7 @@ class GlobalStatus extends ChangeNotifier {
     return false;
   }
 
-  Future<bool> iscommentinfavorites(BigInt commentid) async {
+  Future<bool> iscommentinfavorites(int commentid) async {
     if (isLoggedin) {
       if (DateTime.now().difference(lastfavoritecomment).inMinutes >
           AppConfig.refreshuserfavoritecomment) {
@@ -222,7 +222,7 @@ class GlobalStatus extends ChangeNotifier {
         });
       }
       for (var item in favoritecomments) {
-        if (item.commentid == commentid) {
+        if (item.commentId == commentid) {
           return true;
         }
       }
@@ -230,7 +230,7 @@ class GlobalStatus extends ChangeNotifier {
     return false;
   }
 
-  Future<List<FavoriteComment>> getfavoritecomments() async {
+  Future<List<Comment>> getfavoritecomments() async {
     if (isLoggedin) {
       if (DateTime.now().difference(lastfavoritecomment).inMinutes >
           AppConfig.refreshuserfavoritecomment) {
@@ -244,7 +244,7 @@ class GlobalStatus extends ChangeNotifier {
     return [];
   }
 
-  bool addfavoritecomment(FavoriteComment comment) {
+  bool addfavoritecomment(Comment comment) {
     if (isLoggedin) {
       if (!favoritecomments.contains(comment)) {
         favoritecomments.add(comment);

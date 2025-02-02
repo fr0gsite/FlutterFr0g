@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fr0gsite/config.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:fr0gsite/datatypes/gridstatus.dart';
-import 'package:provider/provider.dart';
 
 class GridFilterView extends StatefulWidget {
   const GridFilterView({super.key});
@@ -59,9 +57,9 @@ class _GridFilterViewState extends State<GridFilterView> {
               padding: const EdgeInsets.all(8.0),
               child: ElevatedButton(
                 onPressed: () {
-                  filtertags = [];
-                  filtertags = tagtextcontroller.text.split(",").map((e) => e.trim()).where((element) => element.isNotEmpty).toList();
-                  Provider.of<GridStatus>(context, listen: true).setfilter(filterrating, filtertags);
+                  //filtertags = [];
+                  //filtertags = tagtextcontroller.text.split(",").map((e) => e.trim()).where((element) => element.isNotEmpty).toList();
+                  //Provider.of<GridStatus>(context, listen: true).setfilter(filterrating, filtertags);
                   Navigator.of(context).pop();
                 },
                 child: Text(AppLocalizations.of(context)!.close),

@@ -9,6 +9,8 @@ class Comment {
   final int up;
   final int down;
 
+  final int uploadid;
+
   Comment({
     required this.commentId,
     required this.parentCommentId,
@@ -19,9 +21,10 @@ class Comment {
     required this.token,
     required this.up,
     required this.down,
+    required this.uploadid,
   });
 
-  static Comment fromJson(Map<String, dynamic> json) {
+  static Comment fromJson(Map<String, dynamic> json, int uploadid) {
     return Comment(
       commentId: json['commentid'],
       parentCommentId: json['parentcommentid'],
@@ -32,6 +35,7 @@ class Comment {
       token: json['token'],
       up: json['up'],
       down: json['down'],
+      uploadid: uploadid,
     );
   }
 }

@@ -1,6 +1,6 @@
 class GlobalComments {
-  final String commentid;
-  final String uploadid;
+  final int commentid;
+  final int uploadid;
 
   GlobalComments({
     required this.commentid,
@@ -9,8 +9,8 @@ class GlobalComments {
 
   static GlobalComments fromJson(Map<String, dynamic> json) {
     return GlobalComments(
-      commentid: json['commentid'].toString(),
-      uploadid: json['uploadid'].toString(),
+      commentid: int.parse(json['commentid'].toString()),
+      uploadid: int.parse(json['uploadid'].toString()),
     );
   }
 

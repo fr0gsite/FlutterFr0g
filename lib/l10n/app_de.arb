@@ -373,6 +373,8 @@
     "rules": "Regeln",
     "nouploadsfound":"Keine Uploads gefunden",
     "nofavoritesfound":"Keine Favoriten gefunden",
-    "filter":"Filter"
+    "filter":"Filter",
+    "favoritize":"Favorisieren",
+    "discard":"Verwerfen"
 
 }   

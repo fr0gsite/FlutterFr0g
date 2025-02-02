@@ -886,25 +886,23 @@ class Chainactions {
     return uploadlist;
   }
 
-  Future<List<FavoriteComment>> getfavoritecommentsofuser(
-      String username) async {
+  Future<List<Comment>> getfavoritecommentsofuser(String username) async {
     debugPrint("Requesting favorite comments of user $username");
     var response = await geteosclient().getTableRows(
         AppConfig.maincontract, username, 'userfavocom',
         limit: 200, reverse: true, json: true);
-    List<FavoriteComment> commentlist = [];
+
+    List<FavoriteComment> favoritetlist = [];
     for (var index = 0; index < response.length; index++) {
-      commentlist.add(FavoriteComment.fromJson(response[index]));
+      favoritetlist.add(FavoriteComment.fromJson(response[index]));
     }
-
-    List<Future> futures = [];
-    for (int i = 0; i < commentlist.length; i++) {
-      var future = getcommentbyglobalid(commentlist[i].commentid.toString())
-          .then((value) => commentlist[i].commenttext = value.commentText);
-      futures.add(future);
+    
+    List<Future<Comment>> commentfutures = [];
+    for (int i = 0; i < favoritetlist.length; i++) {
+      Future<Comment> future = getcommentbyglobalid(favoritetlist[i].commentid.toString());
+      commentfutures.add(future);
     }
-
-    await Future.wait(futures);
+    List<Comment> commentlist = await Future.wait(commentfutures);
 
     return commentlist;
   }
@@ -1214,7 +1212,7 @@ Future<List<Comment>> fetchComments(String uploadid) async {
           json: true,
           lower: lastcommentid.toString());
       List<Comment> commentlist =
-          response.map((json) => Comment.fromJson(json)).toList();
+          response.map((json) => Comment.fromJson(json, int.parse(uploadid))).toList();
       completecommentlist.addAll(commentlist);
       if (completecommentlist.length >= numofcomments) {
         requestcomplete = true;
@@ -1238,8 +1236,8 @@ Future<Comment> getcommentbyglobalid(String commentid) async {
     GlobalComments globalcomment = GlobalComments.fromJson(globcommentsresponse[0]);
     //get comment from upload
     var commentsresponse = await Chainactions().geteosclient().getTableRows(
-        AppConfig.maincontract, globalcomment.uploadid, 'comments',
+        AppConfig.maincontract, globalcomment.uploadid.toString(), 'comments',
         limit: 1, json: true, lower: commentid);
-    Comment comment = Comment.fromJson(commentsresponse[0]);
+    Comment comment = Comment.fromJson(commentsresponse[0], globalcomment.uploadid);
     return comment;
 }
