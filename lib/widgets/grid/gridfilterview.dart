@@ -23,7 +23,7 @@ class _GridFilterViewState extends State<GridFilterView> {
       backgroundColor: AppColor.nicegrey,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16.0),
-        side: BorderSide(
+        side: const BorderSide(
           color: Colors.white,
           width: 2,
         ),
@@ -44,13 +44,13 @@ class _GridFilterViewState extends State<GridFilterView> {
               divisions: 5,
               label: filterrating.toString(),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
               child: Text("Tags"),
             ),
             TextField(
               controller: tagtextcontroller,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'Tags',
               ),

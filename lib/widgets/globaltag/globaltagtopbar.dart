@@ -3,6 +3,7 @@ import 'package:fr0gsite/config.dart';
 import 'package:fr0gsite/datatypes/globalstatus.dart';
 import 'package:fr0gsite/datatypes/globaltags.dart';
 import 'package:fr0gsite/datatypes/postviewerstatus.dart';
+import 'package:fr0gsite/widgets/home/tagbutton.dart';
 import 'package:fr0gsite/widgets/login/login.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -12,8 +13,9 @@ import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:provider/provider.dart';
 
 class GlobalTagTopBar extends StatefulWidget {
-  const GlobalTagTopBar({super.key, required this.globaltagid});
+  const GlobalTagTopBar({super.key, required this.globaltagid, required this.tagtext});
   final String globaltagid;
+  final String tagtext;
 
   @override
   State<GlobalTagTopBar> createState() => _GlobalTagTopBarState();
@@ -27,6 +29,7 @@ class _GlobalTagTopBarState extends State<GlobalTagTopBar> {
   @override
   void initState() {
     super.initState();
+    globaltag.text = widget.tagtext;
     futuregetglobaltag = getglobaltag();
     checkifuserhasfavoritedtag();
   }
@@ -53,23 +56,8 @@ class _GlobalTagTopBarState extends State<GlobalTagTopBar> {
                       spacing: 10,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: AppColor.tagcolor,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                globaltag.text,
-                                style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          ),
+                          padding: const EdgeInsets.all(16.0),
+                          child: TagButton(text: globaltag.text, globaltagid: globaltag.globaltagid),
                         ),
                         Tooltip(
                             message:

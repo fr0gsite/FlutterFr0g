@@ -1,10 +1,10 @@
 import 'dart:ui';
 
 import 'package:fr0gsite/chainactions/chainactions.dart';
-import 'package:fr0gsite/config.dart';
 import 'package:fr0gsite/datatypes/globaltags.dart';
 import 'package:fr0gsite/utils/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:fr0gsite/widgets/home/tagbutton.dart';
 
 class Populartags extends StatefulWidget {
   final int currenttabindex;
@@ -66,20 +66,18 @@ class _PopulartagsState extends State<Populartags> {
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.all(8),
-                                    child: buildButton(
-                                        taglist[index * 2].text,
-                                        taglist[index * 2]
-                                            .globaltagid
-                                            .toString()),
+                                    child: TagButton(
+                                        text: taglist[index * 2].text,
+                                        globaltagid: taglist[index * 2]
+                                            .globaltagid),
                                   ),
                                   if (index * 2 + 1 < snapshot.data!.length)
                                     Padding(
                                       padding: const EdgeInsets.all(8.0),
-                                      child: buildButton(
-                                          taglist[index * 2 + 1].text,
-                                          taglist[index * 2 + 1]
-                                              .globaltagid
-                                              .toString()),
+                                      child: TagButton(
+                                          text: taglist[index * 2 + 1].text,
+                                          globaltagid: taglist[index * 2 + 1]
+                                              .globaltagid),
                                     ),
                                 ],
                               ),
@@ -99,69 +97,6 @@ class _PopulartagsState extends State<Populartags> {
           },
         ));
   }
-
-  MaterialButton buildButton(String text, String globaltagid) {
-    return MaterialButton(
-      onPressed: () {
-        debugPrint('Show Globaltag $text ');
-        Navigator.pushNamed(context, '/globaltag/$globaltagid',
-            arguments: {'text': text, 'globaltagid': globaltagid});
-      },
-      shape: const _OctagonBorder(),
-      color: AppColor.tagcolor,
-      hoverColor: Colors.blue,
-      child: SizedBox(
-        width: tagwidth,
-        height: 35,
-        child: Align(
-          alignment: Alignment.center,
-          child: Text(
-            text,
-            textAlign: TextAlign.center,
-            overflow: TextOverflow.ellipsis,
-            style: const TextStyle(color: Colors.white),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _OctagonBorder extends ShapeBorder {
-  final double sideLength;
-
-  const _OctagonBorder({this.sideLength = 10.0});
-
-  @override
-  EdgeInsetsGeometry get dimensions => EdgeInsets.all(sideLength);
-
-  @override
-  Path getInnerPath(Rect rect, {TextDirection? textDirection}) {
-    return getOuterPath(rect, textDirection: textDirection);
-  }
-
-  @override
-  Path getOuterPath(Rect rect, {TextDirection? textDirection}) {
-    double flatSize = 5.0;
-    final Path path = Path()
-      ..moveTo(rect.left + flatSize, rect.top) // Startpunkt
-      ..lineTo(rect.right - flatSize, rect.top)
-      ..lineTo(rect.right, rect.top + flatSize)
-      ..lineTo(rect.right, rect.bottom - flatSize)
-      ..lineTo(rect.right - flatSize, rect.bottom)
-      ..lineTo(rect.left + flatSize, rect.bottom)
-      ..lineTo(rect.left, rect.bottom - flatSize)
-      ..lineTo(rect.left, rect.top + flatSize)
-      ..close(); // Schließt den Pfad
-
-    return path;
-  }
-
-  @override
-  ShapeBorder scale(double t) => _OctagonBorder(sideLength: sideLength * t);
-
-  @override
-  void paint(Canvas canvas, Rect rect, {TextDirection? textDirection}) {}
 }
 
 class AppScrollBehavior extends MaterialScrollBehavior {

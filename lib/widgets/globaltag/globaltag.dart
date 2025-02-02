@@ -7,7 +7,8 @@ import 'package:provider/provider.dart';
 
 class GlobalTag extends StatefulWidget {
   final String? globaltagid;
-  const GlobalTag({super.key, this.globaltagid});
+  final String? tagtext;
+  const GlobalTag({super.key, this.globaltagid, this.tagtext});
 
   @override
   State<GlobalTag> createState() => _GlobalTagState();
@@ -35,7 +36,7 @@ class _GlobalTagState extends State<GlobalTag> {
                   duration: const Duration(milliseconds: 300),
                   height: userstatus.expandhomenavigationbar ? 120 : 0,
                   child: userstatus.expandhomenavigationbar
-                      ? GlobalTagTopBar(globaltagid: widget.globaltagid ?? "")
+                      ? GlobalTagTopBar(globaltagid: widget.globaltagid ?? "", tagtext: widget.tagtext ?? "",)
                       : Container(
                           color: AppColor.niceblack,
                         ),

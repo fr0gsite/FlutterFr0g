@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fr0gsite/config.dart';
 import 'package:fr0gsite/widgets/grid/gridfilterview.dart';
-import 'package:fr0gsite/widgets/topbar/setflag.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fr0gsite/datatypes/gridstatus.dart';
@@ -64,7 +63,7 @@ class _GridFilterButtonState extends State<GridFilterButton> {
           ),
           _buildFilterButton(
             context,
-            label: "Rating",
+            label: AppLocalizations.of(context)!.filter,
             icon: Icons.sort,
             isActive: true,
             onPressed: () {
@@ -97,7 +96,7 @@ class _GridFilterButtonState extends State<GridFilterButton> {
             case "info":
               Provider.of<GridStatus>(context, listen: false).toggleinfowithouthover();
               break;
-            case "rating":
+            case "filter":
               showDialog(context: context, builder: (BuildContext context) {
                 return const GridFilterView();
               });
@@ -108,7 +107,7 @@ class _GridFilterButtonState extends State<GridFilterButton> {
           _buildMenuItem("pictures", AppLocalizations.of(context)!.pictures, Icons.photo_size_select_actual_rounded, Provider.of<GridStatus>(context, listen: false).showpicture),
           _buildMenuItem("videos", AppLocalizations.of(context)!.videos, Icons.video_camera_back_sharp, Provider.of<GridStatus>(context, listen: false).showvideo),
           _buildMenuItem("info", AppLocalizations.of(context)!.info, Icons.info_sharp, Provider.of<GridStatus>(context, listen: false).showinfowithouthover),
-          _buildMenuItem("rating", "Rating", Icons.sort,  true),
+          _buildMenuItem("filter", AppLocalizations.of(context)!.filter, Icons.sort,  true),
         ],
       ),
     );
