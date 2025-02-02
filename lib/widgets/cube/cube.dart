@@ -3,6 +3,7 @@ import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:fr0gsite/datatypes/gridstatus.dart';
+import 'package:fr0gsite/datatypes/upload.dart';
 import 'package:fr0gsite/datatypes/uploadordertemplate.dart';
 import 'package:fr0gsite/ipfsactions.dart';
 import 'package:fr0gsite/widgets/cube/cubeloading.dart';
@@ -13,12 +14,12 @@ import 'onhoverbutton.dart';
 
 class Cube extends StatefulWidget {
   const Cube(
-      {super.key, required this.informationaboutupload, this.mode = 'new'});
+      {super.key, required this.upload, this.mode = 'new'});
 
   final cubeheight = 180.0;
   final cubebwidth = 180.0;
 
-  final Map<String, dynamic> informationaboutupload;
+  final Upload upload;
   final String mode;
 
   @override
@@ -42,13 +43,13 @@ class CubeState extends State<Cube> {
   void initState() {
     randomstring = generateRandomString(10);
     super.initState();
-    imagestring = widget.informationaboutupload['thumbipfshash'];
+    imagestring = widget.upload.thumbipfshash;
     imagefuture = fetchdata();
   }
 
   Future<int> fetchdata() async {
     imagebytes = await IPFSActions.fetchipfsdata(
-        context, widget.informationaboutupload['thumbipfshash']);
+        context, widget.upload.thumbipfshash);
     return 0;
   }
 
@@ -77,14 +78,14 @@ class CubeState extends State<Cube> {
       debugPrint("No GridStatus");
     }
 
-    if (widget.informationaboutupload['numoffavorites'] > 20) {
+    if (widget.upload.numoffavorites > 20) {
       iconwidth = 20;
       titlesize = 20;
       textsize = 15;
     }
 
-    if (imagestring != widget.informationaboutupload['thumbipfshash']) {
-      imagestring = widget.informationaboutupload['thumbipfshash'];
+    if (imagestring != widget.upload.thumbipfshash) {
+      imagestring = widget.upload.thumbipfshash;
       imagefuture = fetchdata();
     }
 
@@ -104,17 +105,14 @@ class CubeState extends State<Cube> {
                 UploadOrderTemplate uploadorder =
                     Provider.of<GridStatus>(context, listen: false).getSerach();
                 uploadorder.setcurrentuploadid(
-                    widget.informationaboutupload['uploadid']);
+                    widget.upload.uploadid);
                 Navigator.pushNamed(context,
-                    '/postviewer/${widget.informationaboutupload['uploadid']}',
+                    '/postviewer/${widget.upload.uploadid}',
                     arguments: uploadorder);
               } catch (e) {
-                Map<String, dynamic> pusharguments =
-                    widget.informationaboutupload;
-
                 Navigator.pushNamed(context,
-                    '/postviewer/${widget.informationaboutupload['uploadid']}',
-                    arguments: pusharguments);
+                    '/postviewer/${widget.upload.uploadid}',
+                    arguments: widget.upload);
               }
 
               //Still missing:
@@ -156,7 +154,7 @@ class CubeState extends State<Cube> {
                                   children: [
                                     Text(
                                         widget
-                                            .informationaboutupload['uploadid']
+                                            .upload.uploadid
                                             .toString(),
                                         maxLines: 2,
                                         overflow: TextOverflow.ellipsis,
@@ -173,7 +171,7 @@ class CubeState extends State<Cube> {
                                         ),
                                         Text(
                                             widget
-                                                .informationaboutupload['autor']
+                                                .upload.autor
                                                 .toString(),
                                             style: TextStyle(
                                                 color: Colors.white,
@@ -189,8 +187,7 @@ class CubeState extends State<Cube> {
                                           size: iconwidth,
                                         ),
                                         Text(
-                                          widget.informationaboutupload[
-                                                  'numoffavorites']
+                                          widget.upload.numoffavorites
                                               .toString(),
                                           style: TextStyle(
                                             color: Colors.white,
@@ -206,8 +203,7 @@ class CubeState extends State<Cube> {
                                           size: iconwidth,
                                         ),
                                         Text(
-                                          widget.informationaboutupload[
-                                                  'numofcomments']
+                                          widget.upload.numofcomments
                                               .toString(),
                                           style: TextStyle(
                                             color: Colors.white,

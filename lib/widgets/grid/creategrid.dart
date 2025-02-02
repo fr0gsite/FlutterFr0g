@@ -26,7 +26,7 @@ class _CreateGridState extends State<CreateGrid> {
     super.initState();
     for (var upload in widget.uploadlist) {
       items.add(Cube(
-        informationaboutupload: upload.toJson(),
+        upload: upload,
       ));
     }
     _scrollController.addListener(_scrollListenerLoadMore);
@@ -88,7 +88,7 @@ class _CreateGridState extends State<CreateGrid> {
         items = [];
         for (var upload in widget.uploadlist) {
           items.add(Cube(
-            informationaboutupload: upload.toJson(),
+            upload: upload,
           ));
         }
       });
