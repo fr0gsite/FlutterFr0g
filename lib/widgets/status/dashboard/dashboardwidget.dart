@@ -17,10 +17,10 @@ class DashboardWidget extends StatelessWidget {
                 crossAxisCount: isWide ? constraints.maxWidth ~/ 600 : 1,
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
-                padding: EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
                 children: [
-                  StatisticTrusterList(),
-                  StatisticReportStatusPieDiagramm(),
+                  const StatisticTrusterList(),
+                  const StatisticReportStatusPieDiagramm(),
                   buildBarChartSegment(),
                   buildTableSegment(),
                 ],
@@ -31,18 +31,19 @@ class DashboardWidget extends StatelessWidget {
     );
   }
 
+
   Widget buildTableSegment() {
     return Card(
       elevation: 4,
       color: AppColor.niceblack,
       child: Padding(
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         child: DataTable(
-          columns: [
+          columns: const [
             DataColumn(label: Text('Name')),
             DataColumn(label: Text('Wert')),
           ],
-          rows: [
+          rows: const [
             DataRow(cells: [DataCell(Text('Item 1')), DataCell(Text('10'))]),
             DataRow(cells: [DataCell(Text('Item 2')), DataCell(Text('20'))]),
             DataRow(cells: [DataCell(Text('Item 3')), DataCell(Text('30'))]),
@@ -57,7 +58,7 @@ class DashboardWidget extends StatelessWidget {
       elevation: 4,
       color: AppColor.niceblack,
       child: Padding(
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         child: PieChart(
           PieChartData(
             sections: [
@@ -76,7 +77,7 @@ class DashboardWidget extends StatelessWidget {
       elevation: 4,
       color: AppColor.niceblack,
       child: Padding(
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         child: BarChart(
           BarChartData(
             barGroups: [

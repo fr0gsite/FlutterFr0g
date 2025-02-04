@@ -1,7 +1,6 @@
 import 'package:fr0gsite/config.dart';
 import 'package:fr0gsite/widgets/status/dashboard/dashboardwidget.dart';
 import 'package:fr0gsite/widgets/status/producervote.dart';
-import 'package:fr0gsite/widgets/status/database.dart';
 import 'package:fr0gsite/widgets/status/transactiontimeline.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

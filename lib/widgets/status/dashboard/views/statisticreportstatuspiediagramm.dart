@@ -26,13 +26,14 @@ class _StatisticReportStatusPieDiagrammState extends State<StatisticReportStatus
       elevation: 4,
       color: AppColor.niceblack,
       child: Padding(
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         child: PieChart(
           PieChartData(
+            centerSpaceRadius: 100,
             sections: [
-              PieChartSectionData(value: 40, title: '40%', color: Colors.blue),
-              PieChartSectionData(value: 30, title: '30%', color: Colors.red),
-              PieChartSectionData(value: 30, title: '30%', color: Colors.green),
+              PieChartSectionData(value: 40, title: 'In Process', color: Colors.blue, radius: 100),
+              PieChartSectionData(value: 30, title: 'Open Reports', color: Colors.red, radius: 100),
+              PieChartSectionData(value: 30, title: 'Closed', color: Colors.green, radius: 100),
             ],
           ),
         ),
