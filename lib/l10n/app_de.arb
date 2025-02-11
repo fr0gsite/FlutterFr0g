@@ -376,6 +376,8 @@
     "filter":"Filter",
     "favoritize":"Favorisieren",
     "discard":"Verwerfen",
-    "statistics":"Statistiken"
+    "statistics":"Statistiken",
+    "apply":"Bewerben",
+    "trusterexplain":"Truster urteilen über gemeldete Inhalte. Sie halten die Plattform sauber. Jeder Benuzter kann Truster werden. Für ihre Arbeit werden sie mit TRUST Token belohnt"
 
 }   

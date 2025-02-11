@@ -521,17 +521,18 @@ class Chainactions {
     return transactionHandler(actions);
   }
 
-  Future<bool> reportupload(
-      String autor, String uploadid, int violatedrule, String reporttext) {
+  Future<bool> addreport(String autor, int typ, String uploadid, int violatedrule, String reporttext) {
+    // type 1 = upload, 2 = comment, 3 = tag
     actionsbeforetransaction();
     List<Action> actions = [
       Action()
         ..account = AppConfig.maincontract
-        ..name = "reportupload"
+        ..name = "addreport"
         ..authorization = getauth()
         ..data = {
           "autor": autor,
-          "uploadid": uploadid,
+          "typ": typ,
+          "id": uploadid,
           "violatedrule": violatedrule,
           "reporttext": reporttext,
         }

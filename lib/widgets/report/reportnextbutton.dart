@@ -75,9 +75,10 @@ class _ReportNextButtonState extends State<ReportNextButton> {
                   String permission =
                       Provider.of<GlobalStatus>(context, listen: false)
                           .permission;
+                    //TODO: Report for comment and tag
                   Chainactions()
                     ..setusernameandpermission(username, permission)
-                    ..reportupload(selectedusername, uploadid, selectedrule,
+                    ..addreport(selectedusername, 1,uploadid, selectedrule,
                             reporttext)
                         .then((value) {
                       if (value) {
