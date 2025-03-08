@@ -92,7 +92,7 @@ class _FavoriteCommentsViewState extends State<FavoriteCommentsView> {
                                   favoriteComments![index].commentId.toString(),
                                   Icons.favorite,
                                   AppLocalizations.of(context)!.discard,
-                                  (commentId) => favoriteComment(commentId, index),
+                                  (commentId) => deleltefavoriteComment(commentId, index),
                                   true,
                                   0,
                                   Colors.yellow,
@@ -138,7 +138,7 @@ class _FavoriteCommentsViewState extends State<FavoriteCommentsView> {
   }
 
 
-  Future<bool> favoriteComment(String commentid, int index) async {
+  Future<bool> deleltefavoriteComment(String commentid, int index) async {
     debugPrint("Favorite comment $commentid");
     if (Provider.of<GlobalStatus>(context, listen: false).isLoggedin) {
       String username =

@@ -2,6 +2,8 @@ class UserConfig {
   final BigInt configid;
   DateTime creationtime;
   int active;
+  int sanction;
+  DateTime sanctionuntil;
   DateTime lastactreset;
   int acttoken;
   int acttokenmax = 10000;
@@ -27,6 +29,8 @@ class UserConfig {
     required this.configid,
     required this.creationtime,
     required this.active,
+    required this.sanction,
+    required this.sanctionuntil,
     required this.lastactreset,
     required this.acttoken,
     required this.lastclaimtime,
@@ -53,6 +57,8 @@ class UserConfig {
       configid: BigInt.parse(json['configid']),
       creationtime: DateTime.parse(json['creationtime']),
       active: json['active'],
+      sanction: json['sanction'],
+      sanctionuntil: DateTime.parse(json['sanctionuntil']),
       lastactreset: DateTime.parse(json['last_act_reset']),
       acttoken: json['act_token'],
       lastclaimtime: DateTime.parse(json['last_claim_time']),
@@ -80,6 +86,8 @@ class UserConfig {
       configid: BigInt.parse("0"),
       creationtime: DateTime.parse("2000-01-01 00:00:00.000000"),
       active: 0,
+      sanction: 0,
+      sanctionuntil: DateTime.parse("2000-01-01 00:00:00.000000"),
       lastactreset: DateTime.parse("2000-01-01 00:00:00.000000"),
       acttoken: 0,
       lastclaimtime: DateTime.parse("2000-01-01 00:00:00.000000"),

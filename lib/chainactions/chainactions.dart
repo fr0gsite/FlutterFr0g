@@ -141,7 +141,6 @@ class Chainactions {
       accountinfo = await client.getAccount(username);
     } catch (error) {
       accountinfo = Account("notfound", 0);
-      throw "Username does not exist in blockchain.";
     }
 
     return accountinfo;
@@ -599,6 +598,22 @@ class Chainactions {
           "autor": username,
           "globuptagid": tagid,
           "vote": vote,
+        }
+    ];
+    return transactionHandler(actions);
+  }
+
+  Future<bool> voteproducer (List<String> producernamelist){
+    actionsbeforetransaction();
+    List<Action> actions = [
+      Action()
+        ..account = "eosio"
+        ..name = "voteproducer"
+        ..authorization = getauth()
+        ..data = {
+          "voter": username,
+          "proxy": "",
+          "producers": producernamelist,
         }
     ];
     return transactionHandler(actions);
