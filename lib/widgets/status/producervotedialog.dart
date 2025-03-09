@@ -3,6 +3,7 @@ import 'package:fr0gsite/config.dart';
 import 'package:flutter/material.dart';
 import 'package:fr0gsite/datatypes/globalstatus.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProducervoteDialog extends StatefulWidget {
   const ProducervoteDialog({super.key});
@@ -41,7 +42,7 @@ class _ProducervoteDialogState extends State<ProducervoteDialog> {
       // Abort if the name is already in the list
       if (_producerNames.contains(text)) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("The account '$text' is already on the list.")),
+          SnackBar(content: Text(AppLocalizations.of(context)!.settings,)),
         );
         return;
       }
@@ -57,8 +58,8 @@ class _ProducervoteDialogState extends State<ProducervoteDialog> {
         } else {
           // Show error message if the account doesn't exist
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text("The account was not found."),
+            SnackBar(
+              content: Text(AppLocalizations.of(context)!.usernotfound),
               backgroundColor: Colors.red,
             ),
           );
@@ -67,7 +68,7 @@ class _ProducervoteDialogState extends State<ProducervoteDialog> {
         // General error (e.g., network problems)
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text("Error fetching account info: $error"),
+            content: Text(AppLocalizations.of(context)!.sorrysomethingwentwrong),
             backgroundColor: Colors.red,
           ),
         );
@@ -105,7 +106,7 @@ class _ProducervoteDialogState extends State<ProducervoteDialog> {
                   icon: const Icon(Icons.close),
                   onPressed: () => Navigator.of(context).pop(),
                 ),
-                title: const Text("Vote for Block Producers"),
+                title: Text(AppLocalizations.of(context)!.voteforblockproducers),
               ),
               body: SingleChildScrollView(
                 child: Padding(
@@ -121,8 +122,8 @@ class _ProducervoteDialogState extends State<ProducervoteDialog> {
                               child: TextField(
                                 controller: _producerController,
                                 focusNode: _textFocusNode,
-                                decoration: const InputDecoration(
-                                  hintText: "Enter producer name",
+                                decoration: InputDecoration(
+                                  hintText: AppLocalizations.of(context)!.enterproducername,
                                 ),
                                 cursorColor: Colors.white,
                                 onSubmitted: (_) => _addProducerName(),
@@ -138,8 +139,8 @@ class _ProducervoteDialogState extends State<ProducervoteDialog> {
                       // Show the list header and the list only if at least one name is present
                       if (_producerNames.isNotEmpty) ...[
                         const SizedBox(height: 24),
-                        const Text(
-                          'List of Producers:',
+                         Text(
+                          AppLocalizations.of(context)!.listofproducers,
                           style: TextStyle(fontSize: 16),
                         ),
                         ..._producerNames.map((name) {
@@ -171,10 +172,10 @@ class _ProducervoteDialogState extends State<ProducervoteDialog> {
                       // Vote button
                       ElevatedButton(
                         style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(
+                          backgroundColor: WidgetStateProperty.all(
                             canVote ? Colors.green : Colors.grey,
                           ),
-                          shape: MaterialStateProperty.all(
+                          shape: WidgetStateProperty.all(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10),
                             ),
@@ -184,8 +185,8 @@ class _ProducervoteDialogState extends State<ProducervoteDialog> {
                           if (!canVote) {
                             // The list is empty => show error message
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text("The list is empty!"),
+                              SnackBar(
+                                content: Text(AppLocalizations.of(context)!.thelistisempty),
                                 backgroundColor: Colors.red,
                               ),
                             );
@@ -199,15 +200,16 @@ class _ProducervoteDialogState extends State<ProducervoteDialog> {
                               (value) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
-                                    content: Text("Vote successful!"),
+                                    content: Text(AppLocalizations.of(context)!.votesuccessful),
                                     backgroundColor: Colors.green,
                                   ),
                                 );
+                                Navigator.of(context).pop(_producerNames);
                               },
                             ).catchError((error) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
-                                  content: Text("Error voting: $error"),
+                                  content: Text("${AppLocalizations.of(context)!.error}: $error"),
                                   backgroundColor: Colors.red,
                                 ),
                               );

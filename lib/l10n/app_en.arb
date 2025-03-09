@@ -380,5 +380,11 @@
     "filter":"Filter",
     "favoritize":"Favoritize",
     "discard":"Discard",
-    "statistics":"Statistics"
+    "statistics":"Statistics",
+    "theaccountisalreadyonthelist":"The account is already on the list.",
+    "voteforblockproducers":"Vote for Block Producers",
+    "enterproducername":"Enter producer name",
+    "listofproducers":"List of Producers",
+    "thelistisempty":"The list is empty!",
+    "votesuccessful":"Vote successful!"
 }
