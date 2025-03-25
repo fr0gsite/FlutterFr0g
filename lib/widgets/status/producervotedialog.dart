@@ -141,7 +141,7 @@ class _ProducervoteDialogState extends State<ProducervoteDialog> {
                         const SizedBox(height: 24),
                          Text(
                           AppLocalizations.of(context)!.listofproducers,
-                          style: TextStyle(fontSize: 16),
+                          style: const TextStyle(fontSize: 16),
                         ),
                         ..._producerNames.map((name) {
                           return Padding(
@@ -166,7 +166,7 @@ class _ProducervoteDialogState extends State<ProducervoteDialog> {
                               ],
                             ),
                           );
-                        }).toList(),
+                        }),
                       ],
                       const SizedBox(height: 24),
                       // Vote button

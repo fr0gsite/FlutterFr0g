@@ -13,7 +13,9 @@ class AppColor {
   //static const Color nicegrey = Color(0xFF161722);
   static const Color nicegrey = Color(0xFF161722);
   static const Color textcolor = Color(0xFFFFFFFF);
-  static Color tagcolor = Colors.blue.withOpacity(0.2);
+  static Color tagcolor = Colors.blue;
+  static Color uploadcolor = Colors.green;
+  static Color commentcolor = Colors.red;
 }
 
 class Statuscolor {

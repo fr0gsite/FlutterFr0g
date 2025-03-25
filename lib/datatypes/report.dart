@@ -1,5 +1,8 @@
 class Report {
-  int uploadid;
+  int reportid;
+  int status;
+  int id;
+  int type;
   String reportername;
   int violatedrule;
   String reporttext;
@@ -7,9 +10,13 @@ class Report {
   int numberoftrusters;
   int outstandingvotes;
   int voteweight;
+  String json;
 
   Report({
-    required this.uploadid,
+    required this.reportid,
+    required this.status,
+    required this.id,
+    required this.type,
     required this.reportername,
     required this.violatedrule,
     required this.reporttext,
@@ -17,11 +24,15 @@ class Report {
     required this.numberoftrusters,
     required this.outstandingvotes,
     required this.voteweight,
+    required this.json,
   });
 
   factory Report.fromJson(Map<String, dynamic> json) {
     return Report(
-      uploadid: json['uploadid'],
+      reportid: json['reportid'],
+      status: json['status'],
+      id: json['id'],
+      type: json['type'],
       reportername: json['reportername'],
       violatedrule: json['violatedrule'],
       reporttext: json['reporttext'],
@@ -29,6 +40,7 @@ class Report {
       numberoftrusters: json['numberoftrusters'],
       outstandingvotes: json['outstandingvotes'],
       voteweight: json['vote_weight'],
+      json: json['json'],
     );
   }
 }

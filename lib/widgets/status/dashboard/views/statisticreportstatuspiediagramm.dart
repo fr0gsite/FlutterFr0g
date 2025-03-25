@@ -1,8 +1,10 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:fr0gsite/chainactions/chainactions.dart';
+import 'package:fr0gsite/chainactions/statisticactions.dart';
 import 'package:fr0gsite/config.dart';
 import 'package:fr0gsite/datatypes/report.dart';
+import 'package:fr0gsite/datatypes/statistics.dart';
+// Für den einfachen Zugriff auf math Funktionen
 
 class StatisticReportStatusPieDiagramm extends StatefulWidget {
   const StatisticReportStatusPieDiagramm({super.key});
@@ -11,41 +13,97 @@ class StatisticReportStatusPieDiagramm extends StatefulWidget {
   State<StatisticReportStatusPieDiagramm> createState() => _StatisticReportStatusPieDiagrammState();
 }
 
-class _StatisticReportStatusPieDiagrammState extends State<StatisticReportStatusPieDiagramm> {
+class _StatisticReportStatusPieDiagrammState extends State<StatisticReportStatusPieDiagramm>
+    with SingleTickerProviderStateMixin {
   List<Report> reportlist = [];
+  late Future globalstatistics;
+
+  // AnimationController für die Rotation
+  late AnimationController _rotationController;
 
   @override
   void initState() {
     super.initState();
-    loadreportdata();
+    globalstatistics = loadreportdata();
+
+    _rotationController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 40),
+    )..repeat();
+  }
+
+  @override
+  void dispose() {
+    _rotationController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 4,
-      color: AppColor.niceblack,
-      child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: PieChart(
-          PieChartData(
-            centerSpaceRadius: 100,
-            sections: [
-              PieChartSectionData(value: 40, title: 'In Process', color: Colors.blue, radius: 100),
-              PieChartSectionData(value: 30, title: 'Open Reports', color: Colors.red, radius: 100),
-              PieChartSectionData(value: 30, title: 'Closed', color: Colors.green, radius: 100),
-            ],
+    return Column(
+      children: [
+        const Text("Action ratio", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+        Expanded(
+          child: FutureBuilder(
+            future: globalstatistics,
+            builder: (BuildContext context, AsyncSnapshot snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                if (snapshot.hasData && snapshot.data.isNotEmpty) {
+                  return Card(
+                    elevation: 4,
+                    color: AppColor.niceblack,
+                    child: Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: AnimatedBuilder(
+                        animation: _rotationController,
+                        builder: (context, child) {
+                          final rotationDegrees = 360 * _rotationController.value;
+          
+                          return PieChart(
+                            PieChartData(
+                              startDegreeOffset: rotationDegrees,
+                              centerSpaceRadius: 80,
+                              sections: [
+                                PieChartSectionData(
+                                  color: AppColor.uploadcolor,
+                                  value: snapshot.data[1].int64number.toDouble(),
+                                  title: "${snapshot.data[1].text} \n ${snapshot.data[1].int64number.toString()}",
+                                  radius: 50,
+                                ),
+                                PieChartSectionData(
+                                  color: AppColor.commentcolor,
+                                  value: snapshot.data[2].int64number.toDouble(),
+                                  title: "${snapshot.data[2].text} \n ${snapshot.data[2].int64number.toString()}",
+                                  radius: 50,
+                                ),
+                                PieChartSectionData(
+                                  color: AppColor.tagcolor,
+                                  value: snapshot.data[3].int64number.toDouble(),
+                                  title: "${snapshot.data[3].text} \n ${snapshot.data[3].int64number.toString()}",
+                                  radius: 50,
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  );
+                } else {
+                  return const Center(child: Text('No data available'));
+                }
+              } else {
+                return const Center(child: CircularProgressIndicator());
+              }
+            },
           ),
         ),
-      ),
+      ],
     );
   }
 
-  void loadreportdata(){
-    Chainactions().getreports().then((value) {
-      setState(() {
-        reportlist = value;
-      });
-    });
+  Future<List<Statistics>> loadreportdata() async {
+    List<Statistics> statistics = await StatisticActions().getglobalstatistics();
+    return statistics;
   }
 }

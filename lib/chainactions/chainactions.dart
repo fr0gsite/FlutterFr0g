@@ -1063,6 +1063,7 @@ class Chainactions {
   // -- Truster / Report -- #
 
   Future<List<Truster>> gettrusters() async {
+    debugPrint("Requesting all trusters");
     var response = await geteosclient().getTableRows(
         AppConfig.maincontract, AppConfig.maincontract, 'trusters',
         limit: AppConfig.maxtrusterlist, reverse: true, json: true);
@@ -1070,15 +1071,13 @@ class Chainactions {
     for (var index = 0; index < response.length; index++) {
       trusterlist.add(Truster.fromJson(response[index]));
     }
-    debugPrint("Received all trusters");
     return trusterlist;
   }
 
   Future<List<Report>> getreports() async {
     debugPrint("Requesting all reports");
     var response = await geteosclient().getTableRows(
-        AppConfig.maincontract, AppConfig.maincontract, 'reports',
-        limit: 100, reverse: true, json: true);
+      AppConfig.maincontract, AppConfig.maincontract, 'reports',limit: 10000, reverse: true, json: true);
     List<Report> reportlist = [];
     if (response.isNotEmpty) {
       for (var index = 0; index < response.length; index++) {

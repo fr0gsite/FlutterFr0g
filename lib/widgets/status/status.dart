@@ -23,7 +23,7 @@ class StatusState extends State<Status> {
   List<Widget> widgetOptions = <Widget>[
     const Expanded(child: TransactionTimeline()),
     const Expanded(child: Producervote()),
-    Expanded(child: DashboardWidget()),
+    const Expanded(child: DashboardWidget()),
   ];
 
   @override

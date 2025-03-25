@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:fr0gsite/config.dart';
+import 'package:fr0gsite/widgets/status/dashboard/views/statisticglobalaslist.dart';
 import 'package:fr0gsite/widgets/status/dashboard/views/statisticreportstatuspiediagramm.dart';
 import 'package:fr0gsite/widgets/status/dashboard/views/statistictruster.dart';
 
 class DashboardWidget extends StatelessWidget {
+  const DashboardWidget({super.key});
+
   @override
   Widget build(BuildContext context) {
     return  LayoutBuilder(
@@ -18,11 +21,10 @@ class DashboardWidget extends StatelessWidget {
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
                 padding: const EdgeInsets.all(10),
-                children: [
-                  const StatisticTrusterList(),
-                  const StatisticReportStatusPieDiagramm(),
-                  buildBarChartSegment(),
-                  buildTableSegment(),
+                children: const [
+                  StatisticTrusterList(),
+                  StatisticReportStatusPieDiagramm(),
+                  Statisticglobalaslist(),
                 ],
               ),
             ),
