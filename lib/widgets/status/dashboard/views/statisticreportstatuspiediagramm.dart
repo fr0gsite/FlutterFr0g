@@ -42,7 +42,7 @@ class _StatisticReportStatusPieDiagrammState extends State<StatisticReportStatus
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Text("Action ratio", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+        const Text("Action Pie", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
         Expanded(
           child: FutureBuilder(
             future: globalstatistics,
