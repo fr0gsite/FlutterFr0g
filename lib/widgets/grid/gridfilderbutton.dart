@@ -79,36 +79,38 @@ class _GridFilterButtonState extends State<GridFilterButton> {
 
   // Small Screen
   Widget _buildBurgerMenu() {
-    return Align(
-      alignment: Alignment.centerLeft,
-      child: PopupMenuButton<String>(
-        icon: const Icon(Icons.menu, color: Colors.white),
-        onSelected: (String value) {
-          switch (value) {
-            case "pictures":
-              Provider.of<GridStatus>(context, listen: false).togglepicture();
-              widget.uploadorder.showpictures(Provider.of<GridStatus>(context, listen: false).showpicture);
-              break;
-            case "videos":
-              Provider.of<GridStatus>(context, listen: false).togglevideo();
-              widget.uploadorder.showvideos(Provider.of<GridStatus>(context, listen: false).showvideo);
-              break;
-            case "info":
-              Provider.of<GridStatus>(context, listen: false).toggleinfowithouthover();
-              break;
-            case "filter":
-              showDialog(context: context, builder: (BuildContext context) {
-                return const GridFilterView();
-              });
-              break;
-          }
-        },
-        itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
-          _buildMenuItem("pictures", AppLocalizations.of(context)!.pictures, Icons.photo_size_select_actual_rounded, Provider.of<GridStatus>(context, listen: false).showpicture),
-          _buildMenuItem("videos", AppLocalizations.of(context)!.videos, Icons.video_camera_back_sharp, Provider.of<GridStatus>(context, listen: false).showvideo),
-          _buildMenuItem("info", AppLocalizations.of(context)!.info, Icons.info_sharp, Provider.of<GridStatus>(context, listen: false).showinfowithouthover),
-          _buildMenuItem("filter", AppLocalizations.of(context)!.filter, Icons.sort,  true),
-        ],
+    return SafeArea(
+      child: Align(
+        alignment: Alignment.centerLeft,
+        child: PopupMenuButton<String>(
+          icon: const Icon(Icons.menu, color: Colors.white),
+          onSelected: (String value) {
+            switch (value) {
+              case "pictures":
+                Provider.of<GridStatus>(context, listen: false).togglepicture();
+                widget.uploadorder.showpictures(Provider.of<GridStatus>(context, listen: false).showpicture);
+                break;
+              case "videos":
+                Provider.of<GridStatus>(context, listen: false).togglevideo();
+                widget.uploadorder.showvideos(Provider.of<GridStatus>(context, listen: false).showvideo);
+                break;
+              case "info":
+                Provider.of<GridStatus>(context, listen: false).toggleinfowithouthover();
+                break;
+              case "filter":
+                showDialog(context: context, builder: (BuildContext context) {
+                  return const GridFilterView();
+                });
+                break;
+            }
+          },
+          itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+            _buildMenuItem("pictures", AppLocalizations.of(context)!.pictures, Icons.photo_size_select_actual_rounded, Provider.of<GridStatus>(context, listen: false).showpicture),
+            _buildMenuItem("videos", AppLocalizations.of(context)!.videos, Icons.video_camera_back_sharp, Provider.of<GridStatus>(context, listen: false).showvideo),
+            _buildMenuItem("info", AppLocalizations.of(context)!.info, Icons.info_sharp, Provider.of<GridStatus>(context, listen: false).showinfowithouthover),
+            _buildMenuItem("filter", AppLocalizations.of(context)!.filter, Icons.sort,  true),
+          ],
+        ),
       ),
     );
   }

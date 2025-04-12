@@ -18,25 +18,28 @@ class TagButtonState extends State<TagButton> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialButton(
-      onPressed: () {
-        debugPrint('Show Globaltag ${widget.text} ');
-        Navigator.pushNamed(context, '/globaltag/${widget.globaltagid}',
-            arguments: {'text': widget.text, 'globaltagid': widget.globaltagid});
-      },
-      shape: const OctagonBorder(),
-      color: AppColor.tagcolor,
-      hoverColor: Colors.blue,
-      child: SizedBox(
-        width: tagwidth,
-        height: 35,
-        child: Align(
-          alignment: Alignment.center,
-          child: Text(
-            widget.text,
-            textAlign: TextAlign.center,
-            overflow: TextOverflow.ellipsis,
-            style: const TextStyle(color: Colors.white),
+    return Tooltip(
+      message: widget.text.length > 17 ? widget.text : '',
+      child: MaterialButton(
+        onPressed: () {
+          debugPrint('Show Globaltag ${widget.text} ');
+          Navigator.pushNamed(context, '/globaltag/${widget.globaltagid}',
+              arguments: {'text': widget.text, 'globaltagid': widget.globaltagid});
+        },
+        shape: const OctagonBorder(),
+        color: AppColor.tagcolor,
+        hoverColor: Colors.blue,
+        child: SizedBox(
+          width: tagwidth,
+          height: 35,
+          child: Align(
+            alignment: Alignment.center,
+            child: Text(
+              widget.text,
+              textAlign: TextAlign.center,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(color: Colors.white),
+            ),
           ),
         ),
       ),

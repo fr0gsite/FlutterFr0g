@@ -7,10 +7,12 @@ import 'package:fr0gsite/datatypes/userconfig.dart';
 import 'package:fr0gsite/widgets/login/login.dart';
 import 'package:fr0gsite/widgets/profile/profilepicture.dart';
 import 'package:fr0gsite/widgets/profile/profilestatistic.dart';
+import 'package:fr0gsite/widgets/profile/setprofile.dart';
 import 'package:fr0gsite/widgets/profile/userbadget.dart';
 import 'package:fr0gsite/widgets/profile/useruploadsview.dart';
 import 'package:eosdart/eosdart.dart';
 import 'package:flutter/material.dart';
+import 'package:fr0gsite/widgets/topbar/topbar.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:universal_html/html.dart' as html;
@@ -116,8 +118,13 @@ class _ProfileState extends State<Profile> {
           return SingleChildScrollView(
             scrollDirection: Axis.vertical,
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                usersearchbar(),
+                profiletopbar(),
+                Divider(
+                  color: Colors.white.withAlpha((0.5 * 255).toInt()),
+                  height: 2,
+                ),
                 AnimatedContainer(
                   duration: const Duration(milliseconds: 300),
                   height: userstatus.expandhomenavigationbar
@@ -126,7 +133,7 @@ class _ProfileState extends State<Profile> {
                           : 450
                       : 0,
                   child: userstatus.expandhomenavigationbar
-                      ? profiletopbar()
+                      ? profileactions()
                       : Container(
                           color: AppColor.niceblack,
                         ),
@@ -154,13 +161,11 @@ class _ProfileState extends State<Profile> {
     );
   }
 
-  Widget usersearchbar() {
+  Widget profiletopbar() {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          //Backbutton
           SizedBox(
             width: 50,
             child: IconButton(
@@ -175,7 +180,7 @@ class _ProfileState extends State<Profile> {
               },
             ),
           ),
-          const Spacer(),
+          Spacer(),
           const Icon(
             Icons.person,
             color: Colors.white,
@@ -215,13 +220,14 @@ class _ProfileState extends State<Profile> {
               },
             ),
           ),
-          const Spacer(),
+          Spacer(),
+          Topbar()
         ],
       ),
     );
   }
 
-  Widget profiletopbar() {
+  Widget profileactions() {
     return Column(
       children: [
         SizedBox(
@@ -229,6 +235,31 @@ class _ProfileState extends State<Profile> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
+
+              if (Provider.of<GlobalStatus>(context, listen: false).isLoggedin && Provider.of<GlobalStatus>(context, listen: false).username == account.accountName)
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor:
+                        Colors.blue, // Set the background color to blue
+                  ),
+                  onPressed: () {
+                    showDialog(context: context, builder: ((context) {
+                      return const SetProfile();
+                    }));
+                  },
+                  child: Row(
+                    children: [
+                      const Icon(
+                        Icons.settings,
+                        color: Colors.white,
+                      ),
+                      Text(
+                        AppLocalizations.of(context)!.editprofile,
+                        style: const TextStyle(color: Colors.white),
+                      ),
+                    ],
+                  ),
+                ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor:

@@ -730,6 +730,26 @@ class Chainactions {
     return transactionHandler(actions);
   }
 
+  Future<bool> setuserprofile(
+      String username, String profilebio, String profileimageipfs, String profileimagefiletyp, String language, String otherconfigsasjson) async {
+    actionsbeforetransaction();
+    List<Action> actions = [
+      Action()
+        ..account = AppConfig.maincontract
+        ..name = "setprofile"
+        ..authorization = getauth()
+        ..data = {
+          "username": username,
+          "profilebio": profilebio,
+          "profileimageipfs": profileimageipfs,
+          "profileimagefiletyp": profileimagefiletyp,
+          "language": language,
+          "otherconfigsasjson": otherconfigsasjson,
+        }
+    ];
+    return transactionHandler(actions);
+  }
+
   //-----------------Uploads-----------------
 
   //uint64_t get_trending() const { return token; } index 2

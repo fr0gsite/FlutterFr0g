@@ -386,5 +386,8 @@
     "enterproducername":"Enter producer name",
     "listofproducers":"List of Producers",
     "thelistisempty":"The list is empty!",
-    "votesuccessful":"Vote successful!"
+    "votesuccessful":"Vote successful!",
+    "editprofile":"Edit Profile",
+    "profilebio":"Profile Beschreibung",
+    "profileimageipfs":"IPFS Hash of profile picture"
 }
