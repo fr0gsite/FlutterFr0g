@@ -105,7 +105,7 @@ class UserConfig {
       profilebio: "",
       profileimageipfs: "",
       profileimagefiletyp: "",
-      language: "",
+      language: "en",
       otherconfigsasjson: "",
     );
   }

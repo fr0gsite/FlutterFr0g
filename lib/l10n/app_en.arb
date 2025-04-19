@@ -389,5 +389,8 @@
     "votesuccessful":"Vote successful!",
     "editprofile":"Edit Profile",
     "profilebio":"Profile Beschreibung",
-    "profileimageipfs":"IPFS Hash of profile picture"
+    "profileimageipfs":"IPFS Hash of profile picture",
+    "apply":"Apply",
+    "trusterexplain":"Trusters review reported content. They keep the platform clean. Any user can become a Truster. For their work, they are rewarded with TRUST tokens."
+
 }

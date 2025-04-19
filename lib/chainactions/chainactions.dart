@@ -731,7 +731,7 @@ class Chainactions {
   }
 
   Future<bool> setuserprofile(
-      String username, String profilebio, String profileimageipfs, String profileimagefiletyp, String language, String otherconfigsasjson) async {
+      String autor, String profilebio, String profileimageipfs, String profileimagefiletyp, String language, String otherconfigsasjson) async {
     actionsbeforetransaction();
     List<Action> actions = [
       Action()
@@ -739,7 +739,7 @@ class Chainactions {
         ..name = "setprofile"
         ..authorization = getauth()
         ..data = {
-          "username": username,
+          "autor": autor,
           "profilebio": profilebio,
           "profileimageipfs": profileimageipfs,
           "profileimagefiletyp": profileimagefiletyp,

@@ -162,8 +162,10 @@ class _ProfileState extends State<Profile> {
   }
 
   Widget profiletopbar() {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
+    return Container(
+      decoration: BoxDecoration(
+        color: AppColor.niceblack,
+      ),
       child: Row(
         children: [
           SizedBox(
@@ -180,7 +182,17 @@ class _ProfileState extends State<Profile> {
               },
             ),
           ),
-          Spacer(),
+          const SizedBox(
+            width: 10,
+          ),
+          Container(
+            height: 30,
+            width: 1,
+            color: Colors.grey,
+          ),
+          const SizedBox(
+            width: 10,
+          ),
           const Icon(
             Icons.person,
             color: Colors.white,
@@ -240,7 +252,10 @@ class _ProfileState extends State<Profile> {
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor:
-                        Colors.blue, // Set the background color to blue
+                        Colors.blue,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
                   ),
                   onPressed: () {
                     showDialog(context: context, builder: ((context) {
@@ -260,10 +275,15 @@ class _ProfileState extends State<Profile> {
                     ],
                   ),
                 ),
+              const SizedBox(
+                width: 10,
+              ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor:
-                      Colors.blue, // Set the background color to blue
+                  backgroundColor:Colors.blue,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
                 ),
                 onPressed: () {
                   if (Provider.of<GlobalStatus>(context, listen: false)
@@ -297,11 +317,17 @@ class _ProfileState extends State<Profile> {
                   ],
                 ),
               ),
+              const SizedBox(
+                width: 10,
+              ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: followbutton
                       ? Colors.red.shade400
-                      : Colors.blue, // Set the background color to blue
+                      : Colors.blue,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
                 ),
                 onPressed: () async {
                   if (Provider.of<GlobalStatus>(context, listen: false)

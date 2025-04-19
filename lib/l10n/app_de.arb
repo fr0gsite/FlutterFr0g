@@ -377,6 +377,15 @@
     "favoritize":"Favorisieren",
     "discard":"Verwerfen",
     "statistics":"Statistiken",
+    "theaccountisalreadyonthelist":"Das Konto ist bereits in der Liste.",
+    "voteforblockproducers":"Stimme für Blockproduzenten ab",
+    "enterproducername":"Produzentennamen eingeben",
+    "listofproducers":"Liste der Produzenten",
+    "thelistisempty":"Die Liste ist leer!",
+    "votesuccessful":"Abstimmung erfolgreich!",
+    "editprofile":"Profil bearbeiten",
+    "profilebio":"Profilbeschreibung",
+    "profileimageipfs":"IPFS-Hash des Profilbilds",
     "apply":"Bewerben",
     "trusterexplain":"Truster urteilen über gemeldete Inhalte. Sie halten die Plattform sauber. Jeder Benuzter kann Truster werden. Für ihre Arbeit werden sie mit TRUST Token belohnt"
 
