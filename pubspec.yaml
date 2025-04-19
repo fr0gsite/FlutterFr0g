@@ -127,6 +127,7 @@ flutter:
     - assets/
     - assets/images/
     - assets/images/badge/
+    - assets/images/ageverification/
     - assets/icons/
     - assets/fonts/
     - assets/sounds/
