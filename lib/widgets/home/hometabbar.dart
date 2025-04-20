@@ -137,7 +137,7 @@ class _HomeTabBarState extends State<HomeTabBar> with TickerProviderStateMixin {
               children: [
                 showanimation
                     ? Lottie.asset(
-                  'assets/lottie/cat.json',
+                  'assets/lottie/newuploads.json',
                   controller: _controller,
                   height: 40,
                   width: 40,
