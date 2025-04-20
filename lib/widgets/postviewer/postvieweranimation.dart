@@ -122,7 +122,7 @@ class _PostViewerAnimationState extends State<PostViewerAnimation>
   Widget buildswipe() {
     return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
       Container(
-        color: Colors.grey.withOpacity(textbackgroundopacity),
+        color: Colors.grey.withAlpha((textbackgroundopacity * 255).toInt()),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: AutoSizeText(AppLocalizations.of(context)!.swipe,
@@ -142,7 +142,7 @@ class _PostViewerAnimationState extends State<PostViewerAnimation>
   Widget buildkeyboard() {
     return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
       Container(
-        color: Colors.grey.withOpacity(textbackgroundopacity),
+        color: Colors.grey.withAlpha((textbackgroundopacity * 255).toInt()),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: AutoSizeText(AppLocalizations.of(context)!.arrowkeys,
@@ -162,7 +162,7 @@ class _PostViewerAnimationState extends State<PostViewerAnimation>
   Widget buildmousescroll() {
     return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
       Container(
-        color: Colors.grey.withOpacity(textbackgroundopacity),
+        color: Colors.grey.withAlpha((textbackgroundopacity * 255).toInt()),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: AutoSizeText(AppLocalizations.of(context)!.mousescroll,

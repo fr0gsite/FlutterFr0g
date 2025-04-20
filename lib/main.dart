@@ -78,20 +78,14 @@ class _MyAppState extends State<App> {
         title: 'fr0gsite',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primarySwatch: MaterialColor(
-            AppColor.niceblack.value,
-            const {
-              50: AppColor.niceblack,
-              100: AppColor.niceblack,
-              200: AppColor.niceblack,
-              300: AppColor.niceblack,
-              400: AppColor.niceblack,
-              500: AppColor.niceblack,
-              600: AppColor.niceblack,
-              700: AppColor.niceblack,
-              800: AppColor.niceblack,
-              900: AppColor.niceblack,
-            },
+          brightness: Brightness.dark,
+          primarySwatch: Colors.blue,
+          scaffoldBackgroundColor: AppColor.niceblack,
+          appBarTheme: const AppBarTheme(
+            backgroundColor: AppColor.niceblack,
+            foregroundColor: Colors.white,
+            elevation: 0,
+            centerTitle: true,
           ),
           useMaterial3: true,
           visualDensity: VisualDensity.adaptivePlatformDensity,

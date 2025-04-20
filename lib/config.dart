@@ -29,7 +29,7 @@ class Statuscolor {
 
 BoxDecoration gloabltabindicator = BoxDecoration(
   borderRadius: BorderRadius.circular(20),
-  color: Colors.white.withOpacity(0.2),
+  color: Colors.white.withAlpha((0.2 * 255).toInt()),
 );
 
 List<Color> commentLevelColor = [

@@ -79,7 +79,7 @@ class _QuizState extends State<Quiz> {
                                 imageData: snapshot.data as Uint8List,
                                 onAnswerSelected: (index) {
                                   // Handle answer selection
-                                  print("Selected answer: $index");
+                                  debugPrint("Selected answer: $index");
                                 },
                               );
                             } else {
