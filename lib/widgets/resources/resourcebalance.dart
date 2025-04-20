@@ -164,7 +164,7 @@ class _ResourceBalanceState extends State<ResourceBalance>
           ),
           Container(
             decoration: BoxDecoration(
-              //color: Colors.green.withAlpha((0.1 * 255).toInt()),
+              color: Colors.green.withAlpha((0.1 * 255).toInt()),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Column(
@@ -183,11 +183,13 @@ class _ResourceBalanceState extends State<ResourceBalance>
                           child: Center(
                               child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: AutoSizeText(
+                        child: Text(
                             AppLocalizations.of(context)!.staked,
                             maxLines: 1,
-                            textScaleFactor: 1.5,
-                            style: const TextStyle(color: Colors.white)),
+                                style: TextStyle(fontSize: 20, 
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    )),
                       ))),
                       TableCell(
                         child: Padding(
@@ -224,12 +226,11 @@ class _ResourceBalanceState extends State<ResourceBalance>
                                     ),
                                   ),
                                 ),
-                                Lottie.asset(
-                                  "assets/lottie/cpu.json",
-                                  width: 150,
-                                  height: 150,
-                                  controller: controllercpu,
-                                ),
+                                //Lottie.asset("assets/lottie/cpu.json",
+                                //  width: 150,
+                                //  height: 150,
+                                //  controller: controllercpu,
+                                //),
                               ],
                             )),
                         TableCell(
@@ -281,7 +282,10 @@ class _ResourceBalanceState extends State<ResourceBalance>
                     TableRow(
                       children: [
                         TableCell(
-                            child: Column(
+                          verticalAlignment: TableCellVerticalAlignment.middle,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Padding(
                               padding: const EdgeInsets.all(8.0),
@@ -294,12 +298,11 @@ class _ResourceBalanceState extends State<ResourceBalance>
                                 ),
                               ),
                             ),
-                            Lottie.asset(
-                              "assets/lottie/net.json",
-                              width: 150,
-                              height: 150,
-                              controller: controllernet,
-                            ),
+                            //Lottie.asset("assets/lottie/net.json",
+                            //  width: 150,
+                            //  height: 150,
+                            //  controller: controllernet,
+                            //),
                           ],
                         )),
                         TableCell(
@@ -362,9 +365,7 @@ class _ResourceBalanceState extends State<ResourceBalance>
                                           showDialog(
                                               context: context,
                                               barrierDismissible: true,
-                                              barrierColor: Colors.black
-                                                  .withOpacity(
-                                                      0.5), // Grau ausgegrauter Hintergrund
+                                              barrierColor: Colors.black.withOpacity(0.5),
                                               builder: (BuildContext context) {
                                                 return Dialog(
                                                   child: StakeorUnstake(
@@ -436,7 +437,7 @@ class _ResourceBalanceState extends State<ResourceBalance>
             padding: const EdgeInsets.only(top: 16),
             child: Container(
               decoration: BoxDecoration(
-                //color: Colors.red.withAlpha((0.1 * 255).toInt()),
+                color: Colors.red.withAlpha((0.1 * 255).toInt()),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Column(
@@ -461,7 +462,11 @@ class _ResourceBalanceState extends State<ResourceBalance>
                                   child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(AppLocalizations.of(context)!.purchased,
-                                style: TextStyle(fontSize: textsizetitle)),
+                                maxLines: 1,
+                                style: TextStyle(fontSize: 20, 
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    )),
                           ))),
                           TableCell(
                             child: Padding(
@@ -483,6 +488,7 @@ class _ResourceBalanceState extends State<ResourceBalance>
                         TableRow(
                           children: [
                             TableCell(
+                              verticalAlignment: TableCellVerticalAlignment.middle,
                                 child: Column(
                               children: [
                                 Padding(
@@ -496,12 +502,11 @@ class _ResourceBalanceState extends State<ResourceBalance>
                                     ),
                                   ),
                                 ),
-                                Lottie.asset(
-                                  "assets/lottie/ram.json",
-                                  width: 150,
-                                  height: 150,
-                                  controller: controllerram,
-                                ),
+                                //Lottie.asset("assets/lottie/ram.json",
+                                //  width: 150,
+                                //  height: 150,
+                                //  controller: controllerram,
+                                //),
                               ],
                             )),
                             TableCell(
