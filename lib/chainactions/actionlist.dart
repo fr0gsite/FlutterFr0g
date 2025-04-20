@@ -77,7 +77,7 @@ List<Action> stakeressources(
     String from, String receiver, String cpu, String net, auth) {
   List<Action> actions = [
     Action()
-      ..account = "eosio"
+      ..account = AppConfig.blockchainsystemcontract
       ..name = "delegatebw"
       ..authorization = auth
       ..data = {
@@ -95,7 +95,7 @@ List<Action> unstakeressources(
     String from, String receiver, String cpu, String net, auth) {
   List<Action> actions = [
     Action()
-      ..account = "eosio"
+      ..account = AppConfig.blockchainsystemcontract
       ..data = {
         "from": from,
         "receiver": receiver,
@@ -111,7 +111,7 @@ List<Action> unstakeressources(
 List<Action> buyram(String payer, String receiver, int bytes, auth) {
   List<Action> actions = [
     Action()
-      ..account = "eosio"
+      ..account = AppConfig.blockchainsystemcontract
       ..data = {"payer": payer, "receiver": receiver, "bytes": bytes}
       ..name = "buyrambytes"
       ..authorization = auth,
@@ -123,7 +123,7 @@ List<Action> buyram(String payer, String receiver, int bytes, auth) {
 List<Action> sellram(String account, int bytes, auth) {
   List<Action> actions = [
     Action()
-      ..account = "eosio"
+      ..account = AppConfig.blockchainsystemcontract
       ..data = {"account": account, "bytes": bytes}
       ..name = "sellram"
       ..authorization = auth,
@@ -135,7 +135,7 @@ List<Action> newaccount(String creator, String newusername, String ownerpubkey,
     String activepubkey, auth) {
   List<Action> actions = [
     Action()
-      ..account = "eosio"
+      ..account = AppConfig.blockchainsystemcontract
       ..data = {
         "creator": creator,
         "name": newusername,
@@ -166,7 +166,7 @@ List<Action> sendtokenlistaction(
     String from, String to, String amount, String memo, auth) {
   List<Action> actions = [
     Action()
-      ..account = "eosio.token"
+      ..account = AppConfig.blockchainsystemtokencontract
       ..data = {"from": from, "to": to, "quantity": amount, "memo": memo}
       ..name = "transfer"
       ..authorization = auth,

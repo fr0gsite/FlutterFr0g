@@ -5,6 +5,7 @@ import 'package:fr0gsite/datatypes/globalstatus.dart';
 import 'package:fr0gsite/datatypes/userconfig.dart';
 import 'package:fr0gsite/widgets/resources/accountbalance.dart';
 import 'package:fr0gsite/widgets/resources/activitytoken.dart';
+import 'package:fr0gsite/widgets/resources/applytrusterroleview.dart';
 import 'package:fr0gsite/widgets/resources/claimrewardsview.dart';
 import 'package:fr0gsite/widgets/resources/resourcebalance.dart';
 import 'package:eosdart/eosdart.dart';
@@ -302,6 +303,24 @@ class _ResourceViewerState extends State<ResourceViewer> {
                         child: SizedBox(
                             width: 400,
                             child: ActivityToken(userconfig: userconfig)),
+                      ),
+
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      
+                      // Apply Truster Role
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(
+                            color: Colors.white,
+                            width: 2,
+                          ),
+                        ),
+                        child: SizedBox(
+                            width: 400,
+                            child: ApplyTrusterroleView(userconfig: userconfig)),
                       ),
                     ])
                   ],

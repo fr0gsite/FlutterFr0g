@@ -96,12 +96,14 @@ class Documentation {
 class AppConfig {
   static const String appname = "FR0G.SITE";
   static const String maincontract = "cbased";
-  static const String systemtokencontract = "eosio.token";
+  static const String blockchainsystemcontract = "eosio";
+  static const String blockchainsystemtokencontract = "eosio.token";
   static const String cbasedtokencontract = "cbased.token";
   static const String systemtoken = "PEP";
   static const int systemtokendecimalafterdot = 4;
   static const int thresholdValueForMobileLayout = 640;
   static const int maxtrusterlist = 600;
+  
   static const chainid =
       "530d11d73d401999b533e0ef5ab1f4f3d2fcd436df7050850671733915fbd721";
 

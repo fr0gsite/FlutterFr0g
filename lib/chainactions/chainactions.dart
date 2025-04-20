@@ -226,7 +226,7 @@ class Chainactions {
 
     double cbasedsupply = 0;
     var getcbasedsystemtokens = await geteosclient().getTableRows(
-      AppConfig.systemtokencontract,
+      AppConfig.blockchainsystemtokencontract,
       AppConfig.maincontract,
       "accounts",
     );
@@ -607,7 +607,7 @@ class Chainactions {
     actionsbeforetransaction();
     List<Action> actions = [
       Action()
-        ..account = "eosio"
+        ..account = AppConfig.blockchainsystemcontract
         ..name = "voteproducer"
         ..authorization = getauth()
         ..data = {
@@ -745,6 +745,26 @@ class Chainactions {
           "profileimagefiletyp": profileimagefiletyp,
           "language": language,
           "otherconfigsasjson": otherconfigsasjson,
+        }
+    ];
+    return transactionHandler(actions);
+  }
+
+  Future<bool> applyfortrusterrole(String autor) async {
+    actionsbeforetransaction();
+
+    String applytext = "applytruster $autor";
+
+    List<Action> actions = [
+      Action()
+        ..account = AppConfig.blockchainsystemtokencontract
+        ..name = "transfer"
+        ..authorization = getauth()
+        ..data = {
+          "from": autor,
+          "to": AppConfig.maincontract,
+          "quantity": "10.0000 PEP",
+          "memo": applytext
         }
     ];
     return transactionHandler(actions);
@@ -1178,7 +1198,7 @@ class Chainactions {
     debugPrint("Requesting producer info");
     List<ProducerInfo> producerinfo = [];
     var response = await geteosclient()
-        .getTableRows("eosio", "eosio", 'producers', limit: 300, json: true);
+        .getTableRows(AppConfig.blockchainsystemcontract,AppConfig.blockchainsystemcontract, 'producers', limit: 300, json: true);
     try {
       for (var index = 0; index < response.length; index++) {
         producerinfo.add(ProducerInfo.fromJson(response[index]));

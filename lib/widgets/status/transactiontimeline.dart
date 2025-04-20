@@ -142,7 +142,7 @@ class _TransactionTimelineState extends State<TransactionTimeline> {
     });
 
     timerglobal = Timer.periodic(const Duration(seconds: 2), (timer) {
-      client.getTableRow("eosio", "eosio", "global", json: true).then((value) {
+      client.getTableRow(AppConfig.maincontract, AppConfig.maincontract, "global", json: true).then((value) {
         if (mounted) {
           GlobalTable1 temp = GlobalTable1.fromJson(value!);
           usedram = (temp.totalRamBytesReserved / 1024 / 1024).roundToDouble();
@@ -153,7 +153,7 @@ class _TransactionTimelineState extends State<TransactionTimeline> {
 
     timerproducers = Timer.periodic(const Duration(seconds: 2), (timer) {
       client
-          .getTableRows("eosio", "eosio", "producers", json: true, limit: 300)
+          .getTableRows(AppConfig.maincontract, AppConfig.maincontract, "producers", json: true, limit: 300)
           .then((value) {
         if (mounted) {
           producers = value.map((data) => ProducerInfo.fromJson(data)).toList();
