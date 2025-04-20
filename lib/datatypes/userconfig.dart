@@ -1,3 +1,5 @@
+import 'package:fr0gsite/config.dart';
+
 class UserConfig {
   final BigInt configid;
   DateTime creationtime;
@@ -6,7 +8,7 @@ class UserConfig {
   DateTime sanctionuntil;
   DateTime lastactreset;
   int acttoken;
-  int acttokenmax = 10000;
+  int acttokenmax = AppConfig.acttokenresetvalue;
   DateTime lastclaimtime;
   bool istruster;
   int numofsubscribtions;

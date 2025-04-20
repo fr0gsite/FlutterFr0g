@@ -174,20 +174,9 @@ class StartPoint extends State<Fr0gsiteApp> {
     Navigator.pushReplacementNamed(context, '/${pages[index]}');
   }
 
-  Timer? logoswitchtimer;
-  String logopathstring = AppConfig.logoList[Random.secure().nextInt(AppConfig.logoList.length)];
-
   @override
   void initState() {
     super.initState();
-    logoswitchtimer = Timer.periodic(const Duration(seconds: 20), (timer) {
-      if (mounted) {
-        setState(() {
-          debugPrint("Switch Logo");
-          logopathstring = AppConfig.logoList[Random.secure().nextInt(AppConfig.logoList.length)];
-        });
-      }
-    });
 
     WidgetsBinding.instance.addPostFrameCallback(
       (_) {
@@ -280,15 +269,6 @@ class StartPoint extends State<Fr0gsiteApp> {
                   style: TextStyle(color: Colors.orange, fontSize: MediaQuery.of(context).size.width > AppConfig.thresholdValueForMobileLayout ? 20 : 8),
                 ),
                 const SizedBox(width: 10),
-                MediaQuery.of(context).size.width > AppConfig.thresholdValueForMobileLayout ? IconButton(
-                  icon: Image.asset(
-                    "assets/$logopathstring",
-                    width: 50,
-                  ),
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/home');
-                  },
-                  ): Container(),
               ],
             ),
             backgroundColor: AppColor.niceblack,
@@ -390,7 +370,6 @@ class StartPoint extends State<Fr0gsiteApp> {
 
   @override
   void dispose() {
-    logoswitchtimer?.cancel();
     super.dispose();
   }
 }
