@@ -1,12 +1,10 @@
 import 'dart:async';
 
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:fr0gsite/config.dart';
 import 'package:fr0gsite/datatypes/globalstatus.dart';
 import 'package:fr0gsite/widgets/resources/stakeorunstake.dart';
 import 'package:eosdart/eosdart.dart';
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -186,7 +184,7 @@ class _ResourceBalanceState extends State<ResourceBalance>
                         child: Text(
                             AppLocalizations.of(context)!.staked,
                             maxLines: 1,
-                                style: TextStyle(fontSize: 20, 
+                                style: const TextStyle(fontSize: 20, 
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
                                     )),
@@ -463,7 +461,7 @@ class _ResourceBalanceState extends State<ResourceBalance>
                             padding: const EdgeInsets.all(8.0),
                             child: Text(AppLocalizations.of(context)!.purchased,
                                 maxLines: 1,
-                                style: TextStyle(fontSize: 20, 
+                                style: const TextStyle(fontSize: 20, 
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
                                     )),

@@ -1,7 +1,5 @@
 import 'package:fr0gsite/datatypes/globalstatus.dart';
 import 'package:fr0gsite/widgets/ageverification/quiz.dart';
-import 'package:fr0gsite/widgets/ageverification/quizcard.dart';
-import 'package:fr0gsite/widgets/search.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -21,7 +19,7 @@ class _SearchButtonState extends State<SearchButton> {
           showDialog(
               context: context,
               builder: ((context) {
-                return Quiz();
+                return const Quiz();
               }));
 
           //showGeneralDialog(

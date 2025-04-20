@@ -1,5 +1,3 @@
-import 'dart:async';
-import 'dart:math';
 
 import 'package:fr0gsite/datatypes/followstatus.dart';
 import 'package:fr0gsite/datatypes/globalstatus.dart';

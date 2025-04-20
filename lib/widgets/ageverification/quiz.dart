@@ -1,4 +1,3 @@
-import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -72,7 +71,7 @@ class _QuizState extends State<Quiz> {
                             if (snapshot.connectionState == ConnectionState.done) {
                               return QuizCard(
                                 question: "Was ist das?",
-                                answers: [
+                                answers: const [
                                   "VHS Kasette",
                                   "CD",
                                   "Floppy Disk",
@@ -80,7 +79,7 @@ class _QuizState extends State<Quiz> {
                                 imageData: snapshot.data as Uint8List,
                                 onAnswerSelected: (index) {
                                   // Handle answer selection
-                                  print("Selected answer: ${index}");
+                                  print("Selected answer: $index");
                                 },
                               );
                             } else {

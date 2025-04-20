@@ -1,11 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:fr0gsite/chainactions/chainactions.dart';
-import 'package:fr0gsite/config.dart';
 import 'package:fr0gsite/datatypes/globalstatus.dart';
 import 'package:fr0gsite/datatypes/userconfig.dart';
 import 'package:flutter/material.dart';
-import 'package:fr0gsite/main.dart';
-import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
@@ -52,10 +49,10 @@ class _ApplyTrusterroleViewState extends State<ApplyTrusterroleView> {
                     ),
                   ),
                   child: 
-                AutoSizeText(
+                const AutoSizeText(
                   "Apply",
                   minFontSize: 20,
-                  style: const TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.white),
                 ),
                 onPressed: () async {  
                   if(Provider.of<GlobalStatus>(context, listen: false).isLoggedin){
@@ -72,7 +69,7 @@ class _ApplyTrusterroleViewState extends State<ApplyTrusterroleView> {
                   });
 
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text("Applied for Truster Role")),
+                    const SnackBar(content: Text("Applied for Truster Role")),
                   );
                   }
                 }

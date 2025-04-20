@@ -11,13 +11,12 @@ class QuizCard extends StatelessWidget {
   final Uint8List? imageData;
 
   const QuizCard({
-    Key? key,
+    super.key,
     required this.question,
     required this.answers,
     this.imageData,
     this.onAnswerSelected,
-  })  : assert(answers.length == 4),
-        super(key: key);
+  })  : assert(answers.length == 4);
 
   @override
   Widget build(BuildContext context) {

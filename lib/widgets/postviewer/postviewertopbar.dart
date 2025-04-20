@@ -151,7 +151,7 @@ class _PostViewerTopBarState extends State<PostViewerTopBar> {
                       color: Colors.white,
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   if (constraints.maxWidth > 600) ...[
                     const Padding(
                       padding: EdgeInsets.all(5),
@@ -159,7 +159,7 @@ class _PostViewerTopBarState extends State<PostViewerTopBar> {
                           cpu: true, ram: false, net: true, act: true),
                     ),
                   ],
-                  if (constraints.maxWidth > 400) Topbar(),
+                  if (constraints.maxWidth > 400) const Topbar(),
                 ],
               ),
             );

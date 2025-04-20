@@ -163,7 +163,7 @@ class _ProfileState extends State<Profile> {
 
   Widget profiletopbar() {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: AppColor.niceblack,
       ),
       child: Row(
@@ -232,8 +232,8 @@ class _ProfileState extends State<Profile> {
               },
             ),
           ),
-          Spacer(),
-          Topbar()
+          const Spacer(),
+          const Topbar()
         ],
       ),
     );
