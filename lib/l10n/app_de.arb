@@ -387,6 +387,13 @@
     "profilebio":"Profilbeschreibung",
     "profileimageipfs":"IPFS-Hash des Profilbilds",
     "apply":"Bewerben",
-    "trusterexplain":"Truster urteilen über gemeldete Inhalte. Sie halten die Plattform sauber. Jeder Benuzter kann Truster werden. Für ihre Arbeit werden sie mit TRUST Token belohnt"
+    "trusterexplain":"Truster urteilen über gemeldete Inhalte. Sie halten die Plattform sauber. Jeder Benuzter kann Truster werden. Für ihre Arbeit werden sie mit TRUST Token belohnt",
+    "reports":"Meldungen",
+    "forme":"Für mich",
+    "allreports":"All Meldungen",
+    "changestatus":"Ändere Status",
+    "vacation":"Urlaub",
+    "openreport":"Offene Meldungen",
+    "closedreports":"Geschlossen"
 
 }   

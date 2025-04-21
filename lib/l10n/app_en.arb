@@ -391,6 +391,13 @@
     "profilebio":"Profile Beschreibung",
     "profileimageipfs":"IPFS Hash of profile picture",
     "apply":"Apply",
-    "trusterexplain":"Trusters review reported content. They keep the platform clean. Any user can become a Truster. For their work, they are rewarded with TRUST tokens."
+    "trusterexplain":"Trusters review reported content. They keep the platform clean. Any user can become a Truster. For their work, they are rewarded with TRUST tokens.",
+    "reports":"Reports",
+    "forme":"For me",
+    "allreports":"All reports",
+    "changestatus":"Change Status",
+    "vacation":"Vacation",
+    "openreport":"Open Reports",
+    "closedreports":"Closed Reports"
 
 }
