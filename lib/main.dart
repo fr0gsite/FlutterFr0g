@@ -237,31 +237,34 @@ class StartPoint extends State<Fr0gsiteApp> {
           appBar: AppBar(
             actions: const [Topbar()],
             leadingWidth: 1,
-            title: Wrap(
-              direction: Axis.horizontal,
-              crossAxisAlignment: WrapCrossAlignment.center,
-              children: [
-                IconButton(
-                  icon: Image.asset(
-                    "assets/images/logo_b.png",
-                    width: 50,
+            title: Align(
+              alignment: Alignment.centerLeft,
+              child: Wrap(
+                direction: Axis.horizontal,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                children: [
+                  IconButton(
+                    icon: Image.asset(
+                      "assets/images/logo_b.png",
+                      width: 50,
+                    ),
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/home');
+                    },
                   ),
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/home');
-                  },
-                ),
-                MediaQuery.of(context).size.width > AppConfig.thresholdValueForMobileLayout
-                    ? const Text(AppConfig.appname,
-                        style: TextStyle(fontSize: 50, color: Colors.white))
-                    : const Text(AppConfig.appname,
-                        style: TextStyle(fontSize: 20, color: Colors.white)),
-                const SizedBox(width: 10),
-                Text(
-                  "Beta",
-                  style: TextStyle(color: Colors.orange, fontSize: MediaQuery.of(context).size.width > AppConfig.thresholdValueForMobileLayout ? 20 : 8),
-                ),
-                const SizedBox(width: 10),
-              ],
+                  MediaQuery.of(context).size.width > AppConfig.thresholdValueForMobileLayout
+                      ? const Text(AppConfig.appname,
+                          style: TextStyle(fontSize: 50, color: Colors.white))
+                      : const Text(AppConfig.appname,
+                          style: TextStyle(fontSize: 20, color: Colors.white)),
+                  const SizedBox(width: 10),
+                  Text(
+                    "Beta",
+                    style: TextStyle(color: Colors.orange, fontSize: MediaQuery.of(context).size.width > AppConfig.thresholdValueForMobileLayout ? 20 : 8),
+                  ),
+                  const SizedBox(width: 10),
+                ],
+              ),
             ),
             backgroundColor: AppColor.niceblack,
             leading: Container(),

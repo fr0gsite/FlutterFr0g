@@ -14,13 +14,12 @@ import 'onhoverbutton.dart';
 
 class Cube extends StatefulWidget {
   const Cube(
-      {super.key, required this.upload, this.mode = 'new'});
+      {super.key, required this.upload});
 
   final cubeheight = 180.0;
   final cubebwidth = 180.0;
 
   final Upload upload;
-  final String mode;
 
   @override
   State<Cube> createState() => CubeState();

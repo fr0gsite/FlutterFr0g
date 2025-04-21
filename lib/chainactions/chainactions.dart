@@ -1151,13 +1151,16 @@ class Chainactions {
     return Report.fromJson(response[0]);
   }
 
-  Future<ReportVotes> getreportvotes(String reportid) async {
+  Future<List<ReportVotes>> getreportvotes(String reportid) async {
     debugPrint("Requesting report votes of report $reportid");
     var response = await geteosclient().getTableRows(
         AppConfig.maincontract, reportid, 'reportvotes',
         limit: 100, reverse: true, json: true);
-    ReportVotes reportvotes = ReportVotes.fromJson(response[0]);
-    return reportvotes;
+    List<ReportVotes> reportvoteslist = [];
+    for (var index = 0; index < response.length; index++) {
+      reportvoteslist.add(ReportVotes.fromJson(response[index]));
+    }
+    return reportvoteslist;
   }
 
   Future<bool> claimreward(String accountName, String symbol) {

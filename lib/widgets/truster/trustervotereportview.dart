@@ -2,6 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:fr0gsite/chainactions/chainactions.dart';
 
 import 'package:fr0gsite/datatypes/report.dart';
+import 'package:fr0gsite/datatypes/reportvotes.dart';
+import 'package:fr0gsite/datatypes/upload.dart';
+import 'package:fr0gsite/nameconverter.dart';
+import 'package:fr0gsite/widgets/cube/cube.dart';
+import 'package:fr0gsite/widgets/postviewer/swipeitem.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TrusterVoteReportView extends StatefulWidget {
   final int reportid;
@@ -14,11 +20,14 @@ class TrusterVoteReportView extends StatefulWidget {
 
 class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
   late Future<Report> futureReport;
+  late Future<Upload> futureUpload;
+  late Future<List<ReportVotes>> futureReportVotes;
 
   @override
   void initState() {
     super.initState();
     futureReport = Chainactions().getreport(widget.reportid.toString());
+    futureReportVotes = Chainactions().getreportvotes(widget.reportid.toString());
   }
 
   @override
@@ -27,118 +36,125 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
       appBar: AppBar(title: const Text('Report Vote')),
       body: FutureBuilder<Report>(
         future: futureReport,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
+        builder: (context, reportSnapshot) {
+          if (reportSnapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           }
-          if (snapshot.hasError) {
-            return Center(child: Text('Fehler: ${snapshot.error}'));
+          if (reportSnapshot.hasError) {
+            return Center(child: Text('Fehler: ${reportSnapshot.error}'));
           }
 
-          final report = snapshot.data!;
-          return Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: ListView(
-              children: [
-                Row(
+          final report = reportSnapshot.data!;
+          futureUpload = Chainactions().getupload(report.id.toString());
+          return FutureBuilder<Upload>(
+            future: futureUpload,
+            builder: (context, uploadSnapshot) {
+              if (uploadSnapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              }
+              if (uploadSnapshot.hasError) {
+                return Center(child: Text('Fehler: ${uploadSnapshot.error}'));
+              }
+
+              final upload = uploadSnapshot.data!;
+
+              return Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: ListView(
                   children: [
-                    Text('Nr. ${report.reportid}', style: const TextStyle(fontSize: 18)),
-                    const SizedBox(width: 16),
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                      color: Colors.grey.shade300,
-                      child: Text(statusText(report.status)),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 12),
-                Row(
-                  children: [
-                    Container(
-                      width: 60,
-                      height: 60,
-                      color: Colors.grey.shade400,
-                      child: const Center(child: Text('Thumb')),
-                    ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Reported by: ${report.reportername}', style: const TextStyle(fontWeight: FontWeight.bold)),
-                          Text('USER: ${report.id}'),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 20),
-                Container(
-                  height: 200,
-                  color: Colors.grey.shade200,
-                  child: const Center(child: Text('Upload', style: TextStyle(fontSize: 24))),
-                ),
-                const SizedBox(height: 20),
-                Row(
-                  children: [
-                    const Text('Regel: '),
-                    Text(
-                      '"${report.violatedrule}"',
-                      style: const TextStyle(decoration: TextDecoration.underline, color: Colors.blue),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 20),
-                Row(
-                  children: [
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-                      onPressed: () {},
-                      child: const Text('Verstoß'),
-                    ),
-                    const SizedBox(width: 10),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
-                      onPressed: () {},
-                      child: const Text('In Ordnung'),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 20),
-                const Text('Voting Übersicht (Demo-Daten):'),
-                Table(
-                  border: TableBorder.all(),
-                  columnWidths: const {
-                    0: FlexColumnWidth(2),
-                    1: FlexColumnWidth(2),
-                    2: FlexColumnWidth(2),
-                  },
-                  children: [
-                    const TableRow(children: [
-                      Padding(padding: EdgeInsets.all(8.0), child: Text('Truster Name')),
-                      Padding(padding: EdgeInsets.all(8.0), child: Text('Reaction Time')),
-                      Padding(padding: EdgeInsets.all(8.0), child: Text('Vote')),
-                    ]),
-                    const TableRow(children: [
-                      Padding(padding: EdgeInsets.all(8.0), child: Text('testuser')),
-                      Padding(padding: EdgeInsets.all(8.0), child: Text('outstanding')),
-                      Padding(padding: EdgeInsets.all(8.0), child: Text('none')),
-                    ]),
-                    TableRow(children: [
-                      const Padding(padding: EdgeInsets.all(8.0), child: Text('User1')),
-                      const Padding(padding: EdgeInsets.all(8.0), child: Text('4h')),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          child: const Text('Vote'),
+                    Row(
+                      children: [
+                        Text('Nr. ${report.reportid}', style: const TextStyle(fontSize: 18)),
+                        const SizedBox(width: 16),
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                          color: statusColor(report.status),
+                          child: Text(statusText(report.status)),
                         ),
-                      ),
-                    ]),
+                      ],
+                    ),
+                    const SizedBox(height: 12),
+                    Row(
+                      children: [
+                        Container(
+                          width: 180,
+                          height: 180,
+                          color: Colors.grey.shade400,
+                          child: Cube(upload: upload),
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('Reported by: ${NameConverter.uint64ToName(BigInt.parse(report.reportername))}', style: const TextStyle(fontWeight: FontWeight.bold)),
+                              Text('Uploaded by: ${upload.autor}'),
+                              Text('Rule: ${report.violatedrule}: ${getrule(report.violatedrule, context)}'),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 20),
+                    SizedBox(
+                      height: 600,
+                      child: SwipeItem(upload: upload)),
+                    const SizedBox(height: 20),
+                    Row(
+                      children: [
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+                          onPressed: () {},
+                          child: const Text('Verstoß'),
+                        ),
+                        const SizedBox(width: 10),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
+                          onPressed: () {},
+                          child: const Text('In Ordnung'),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 20),
+                    const Text('Voting Übersicht:', style: TextStyle(fontSize: 18)),
+                    const SizedBox(height: 12),
+                    FutureBuilder<List<ReportVotes>>(
+                      future: futureReportVotes,
+                      builder: (context, votesSnapshot) {
+                        if (votesSnapshot.connectionState == ConnectionState.waiting) {
+                          return const Center(child: CircularProgressIndicator());
+                        }
+                        if (votesSnapshot.hasError) {
+                          return Center(child: Text('Fehler: ${votesSnapshot.error}'));
+                        }
+
+                        final votes = votesSnapshot.data!;
+
+                        return SizedBox(
+                          width: 600,
+                          child: Table(
+                            border: TableBorder.all(),
+                            defaultColumnWidth: const FixedColumnWidth(100),
+                            children: [
+                            TableRow(children: [
+                              Padding(padding: const EdgeInsets.all(4.0), child: Text(AppLocalizations.of(context)!.username, style: const TextStyle(fontWeight: FontWeight.bold))),
+                              Padding(padding: const EdgeInsets.all(4.0), child: Text(AppLocalizations.of(context)!.vote, style: const TextStyle(fontWeight: FontWeight.bold))),
+                            ]),
+                            ...votes.map((vote) {
+                              return TableRow(children: [
+                              Padding(padding: const EdgeInsets.all(4.0), child: Text(NameConverter.uint64ToName(BigInt.parse(vote.trustername)))),
+                              Padding(padding: const EdgeInsets.all(4.0), child: Text(votestatus(vote.vote))),
+                              ]);
+                            }),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
                   ],
                 ),
-              ],
-            ),
+              );
+            },
           );
         },
       ),
@@ -157,4 +173,58 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
         return 'Unbekannt';
     }
   }
+  Color statusColor(int status) {
+    switch (status) {
+      case 0:
+        return Colors.green;
+      case 1:
+        return Colors.red;
+      case 2:
+        return Colors.orange;
+      default:
+        return Colors.grey;
+    }
+  }
 }
+
+  String votestatus(int status) {
+    switch (status) {
+      case 0:
+        return 'Offen';
+      case 1:
+        return 'In Ordnung';
+      case -1:
+        return 'Verstoß';
+      default:
+        return 'Unbekannt';
+    }
+  }
+
+String getrule(violatedrule, context) {
+    switch (violatedrule) {
+      case 1:
+        return AppLocalizations.of(context)!.rule1;
+      case 2:
+        return AppLocalizations.of(context)!.rule2;
+      case 3:
+        return AppLocalizations.of(context)!.rule3;
+      case 4:
+        return AppLocalizations.of(context)!.rule4;
+      case 5:
+        return AppLocalizations.of(context)!.rule5;
+      case 6:
+        return AppLocalizations.of(context)!.rule6;
+      case 7:
+        return AppLocalizations.of(context)!.rule7;
+      case 8:
+        return AppLocalizations.of(context)!.rule8;
+      case 9:
+        return AppLocalizations.of(context)!.rule9;
+      case 10:
+        return AppLocalizations.of(context)!.rule10;
+      case 11:
+        return AppLocalizations.of(context)!.rule11;
+      default:
+        return "No Rule found";
+    }
+  }
