@@ -3,12 +3,16 @@ class Truster {
   late final String trustername;
   late int karma;
   late int status;
+  late int numofopenreports;
+  late int numofclosedreports;
   late DateTime electiondate;
 
   Truster({
     required this.trustername,
     required this.karma,
     required this.status,
+    required this.numofopenreports,
+    required this.numofclosedreports,
     required this.electiondate,
   });
 
@@ -17,6 +21,8 @@ class Truster {
       'trustername': trustername,
       'karma': karma,
       'status': status,
+      'numofopenreports': numofopenreports,
+      'numofclosedreports': numofclosedreports,
       'electiondate': electiondate,
     };
   }
@@ -26,7 +32,19 @@ class Truster {
       trustername: json['trustername'].toString(),
       karma: int.parse(json['karma'].toString()),
       status: int.parse(json['status'].toString()),
+      numofopenreports: int.parse(json['numofopenreports'].toString()),
+      numofclosedreports: int.parse(json['numofclosedreports'].toString()),
       electiondate: DateTime.parse(json['election_date']),
     );
   }
+  
+  Truster.dummy() {
+    trustername = "dummytruster";
+    karma = 0;
+    status = 0;
+    numofopenreports = 0;
+    numofclosedreports = 0;
+    electiondate = DateTime.now();
+  }
+
 }

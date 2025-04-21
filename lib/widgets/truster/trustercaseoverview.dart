@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fr0gsite/chainactions/chainactions.dart';
 import 'package:fr0gsite/datatypes/globalstatus.dart';
 import 'package:fr0gsite/datatypes/report.dart';
+import 'package:fr0gsite/widgets/truster/trustervotereportview.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -81,7 +82,8 @@ class ReportsTable extends StatelessWidget {
                     InkWell(
                       child: Text('${report.reportid}', style: const TextStyle(color: Colors.blue)),
                       onTap: () {
-                        // Link zu Report-Detail
+                        // Open TrusterVoteReportView
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => TrusterVoteReportView(reportid: report.reportid)));
                       },
                     ),
                   ),
@@ -102,7 +104,7 @@ class ReportsTable extends StatelessWidget {
                     children: [
                       Text('${report.status}'),
                       const SizedBox(width: 10),
-                      Text('${report.numberoftrusters} / ${report.outstandingvotes}'),
+                      Text('${report.outstandingvotes} / ${report.numberoftrusters }'),
                     ],
                   )),
                 ],

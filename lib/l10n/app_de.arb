@@ -393,7 +393,8 @@
     "allreports":"All Meldungen",
     "changestatus":"Ändere Status",
     "vacation":"Urlaub",
-    "openreport":"Offene Meldungen",
-    "closedreports":"Geschlossen"
+    "openreport":"Offen",
+    "closedreports":"Geschlossen",
+    "applyasatruster":"Als Truster bewerben"
 
 }   

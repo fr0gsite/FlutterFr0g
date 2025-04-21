@@ -1114,6 +1114,18 @@ class Chainactions {
     return trusterlist;
   }
 
+  Future<Truster> gettruster(String trustername) async {
+    debugPrint("Requesting truster info of $trustername");
+    var response = await geteosclient().getTableRows(
+        AppConfig.maincontract, AppConfig.maincontract, 'trusters',
+        limit: 1, json: true, lower: NameConverter.nameToUint64(trustername).toString(), upper: NameConverter.nameToUint64(trustername).toString());
+    if (response.isEmpty) {
+      debugPrint("Truster not found");
+      return Truster.dummy();
+    }
+    return Truster.fromJson(response[0]);
+  }
+
   Future<List<Report>> getreports() async {
     debugPrint("Requesting all reports");
     var response = await geteosclient().getTableRows(
@@ -1125,6 +1137,18 @@ class Chainactions {
       }
     }
     return reportlist;
+  }
+
+  Future<Report> getreport(String reportid) async {
+    debugPrint("Requesting report info of $reportid");
+    var response = await geteosclient().getTableRows(
+        AppConfig.maincontract, AppConfig.maincontract, 'reports',
+        limit: 1, json: true, lower: reportid, upper: reportid);
+    if (response.isEmpty) {
+      debugPrint("Report not found");
+      throw "Report not found";
+    }
+    return Report.fromJson(response[0]);
   }
 
   Future<ReportVotes> getreportvotes(String reportid) async {

@@ -397,7 +397,8 @@
     "allreports":"All reports",
     "changestatus":"Change Status",
     "vacation":"Vacation",
-    "openreport":"Open Reports",
-    "closedreports":"Closed Reports"
+    "openreport":"Open",
+    "closedreports":"Closed",
+    "applyasatruster":"Apply as a truster"
 
 }

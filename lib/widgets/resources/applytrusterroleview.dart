@@ -19,12 +19,12 @@ class _ApplyTrusterroleViewState extends State<ApplyTrusterroleView> {
     return Container(
       child:Column(
         children: [
-          const Padding(
-            padding: EdgeInsets.all(8.0),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
             child: AutoSizeText(
-              "Apply for Truster Role",
+              AppLocalizations.of(context)!.applyasatruster,
               minFontSize: 20,
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
             ),
           ),
           Padding(
@@ -49,10 +49,10 @@ class _ApplyTrusterroleViewState extends State<ApplyTrusterroleView> {
                     ),
                   ),
                   child: 
-                const AutoSizeText(
-                  "Apply",
+                AutoSizeText(
+                  AppLocalizations.of(context)!.apply,
                   minFontSize: 20,
-                  style: TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.white),
                 ),
                 onPressed: () async {  
                   if(Provider.of<GlobalStatus>(context, listen: false).isLoggedin){
