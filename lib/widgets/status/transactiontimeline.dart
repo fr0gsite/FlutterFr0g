@@ -44,11 +44,11 @@ class _TransactionTimelineState extends State<TransactionTimeline> {
 
     lineChartData = LineChartData(
         backgroundColor: AppColor.nicegrey,
-        lineTouchData: const LineTouchData(enabled: false),
+        lineTouchData: const LineTouchData(enabled: true),
         gridData: const FlGridData(
           show: true,
         ),
-        titlesData: const FlTitlesData(
+        titlesData: FlTitlesData(
           show: true,
           bottomTitles: AxisTitles(
             axisNameSize: 60,
@@ -59,6 +59,9 @@ class _TransactionTimelineState extends State<TransactionTimeline> {
               ),
             ),
           ),
+          topTitles: const AxisTitles(
+      sideTitles: SideTitles(showTitles: false),
+    ),
           leftTitles: AxisTitles(
             axisNameSize: 60,
             axisNameWidget: Text(
@@ -66,9 +69,6 @@ class _TransactionTimelineState extends State<TransactionTimeline> {
               style: TextStyle(color: Colors.white),
             ),
           ),
-        ),
-        borderData: FlBorderData(
-          show: true,
         ),
         lineBarsData: [lineChartBarData1],
         minX: 0,
@@ -142,7 +142,11 @@ class _TransactionTimelineState extends State<TransactionTimeline> {
     });
 
     timerglobal = Timer.periodic(const Duration(seconds: 2), (timer) {
-      client.getTableRow(AppConfig.maincontract, AppConfig.maincontract, "global", json: true).then((value) {
+      client
+          .getTableRow(AppConfig.blockchainsystemcontract,
+              AppConfig.blockchainsystemcontract, "global",
+              json: true)
+          .then((value) {
         if (mounted) {
           GlobalTable1 temp = GlobalTable1.fromJson(value!);
           usedram = (temp.totalRamBytesReserved / 1024 / 1024).roundToDouble();
@@ -153,7 +157,9 @@ class _TransactionTimelineState extends State<TransactionTimeline> {
 
     timerproducers = Timer.periodic(const Duration(seconds: 2), (timer) {
       client
-          .getTableRows(AppConfig.maincontract, AppConfig.maincontract, "producers", json: true, limit: 300)
+          .getTableRows(AppConfig.blockchainsystemcontract,
+              AppConfig.blockchainsystemcontract, "producers",
+              json: true, limit: 300)
           .then((value) {
         if (mounted) {
           producers = value.map((data) => ProducerInfo.fromJson(data)).toList();
@@ -257,26 +263,49 @@ class _TransactionTimelineState extends State<TransactionTimeline> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           headingRowColor: WidgetStateColor.resolveWith(
-                              (states) => Colors.blue.withAlpha((0.3 * 255).toInt())),
+                              (states) =>
+                                  Colors.blue.withAlpha((0.3 * 255).toInt())),
                           columns: [
-                            const DataColumn(label: Text('Nr')),
+                            const DataColumn(
+                                label: Flexible(
+                                    child: Text(
+                              'Nr',
+                            ))),
                             DataColumn(
-                                label:
-                                    Text(AppLocalizations.of(context)!.status)),
+                                label: Flexible(
+                                    child: Text(
+                              AppLocalizations.of(context)!.status,
+                              overflow: TextOverflow.ellipsis,
+                            ))),
                             DataColumn(
-                                label:
-                                    Text(AppLocalizations.of(context)!.owner)),
+                                label: Flexible(
+                                    child: Text(
+                              AppLocalizations.of(context)!.owner,
+                              overflow: TextOverflow.ellipsis,
+                            ))),
                             DataColumn(
-                                label: Text(
-                                    AppLocalizations.of(context)!.totalvotes)),
+                                label: Flexible(
+                                    child: Text(
+                              AppLocalizations.of(context)!.totalvotes,
+                              overflow: TextOverflow.ellipsis,
+                            ))),
                             DataColumn(
-                                label: Text(AppLocalizations.of(context)!
-                                    .unpaidblocks)),
+                                label: Flexible(
+                                    child: Text(
+                              AppLocalizations.of(context)!.unpaidblocks,
+                              overflow: TextOverflow.ellipsis,
+                            ))),
                             DataColumn(
-                                label: Text(
-                                    AppLocalizations.of(context)!.isactive)),
+                                label: Flexible(
+                                    child: Text(
+                              AppLocalizations.of(context)!.isactive,
+                              overflow: TextOverflow.ellipsis,
+                            ))),
                             DataColumn(
-                                label: Text(AppLocalizations.of(context)!.url)),
+                                label: Flexible(
+                                    child: Text(
+                              AppLocalizations.of(context)!.url,
+                            ))),
                           ],
                           rows: producers
                               .where((element) => element.totalVotes != 0)
@@ -291,7 +320,8 @@ class _TransactionTimelineState extends State<TransactionTimeline> {
                                               producer.owner
                                           ? Colors.red
                                           : producers.indexOf(producer) < 21
-                                              ? Colors.red.withAlpha((0.2 * 255).toInt())
+                                              ? Colors.red.withAlpha(
+                                                  (0.2 * 255).toInt())
                                               : null,
                                       borderRadius: BorderRadius.circular(10)),
                                   child: Padding(
@@ -314,9 +344,11 @@ class _TransactionTimelineState extends State<TransactionTimeline> {
                                       color: lastNodeInfo.headBlockProducer
                                                   .toString() ==
                                               producer.owner
-                                          ? Colors.green.withAlpha((0.6 * 255).toInt())
+                                          ? Colors.green
+                                              .withAlpha((0.6 * 255).toInt())
                                           : producers.indexOf(producer) < 21
-                                              ? Colors.green.withAlpha((0.2 * 255).toInt())
+                                              ? Colors.green.withAlpha(
+                                                  (0.2 * 255).toInt())
                                               : null,
                                       borderRadius: BorderRadius.circular(10)),
                                   child: Padding(
