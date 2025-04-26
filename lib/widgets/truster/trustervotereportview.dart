@@ -23,6 +23,9 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
   late Future<Upload> futureUpload;
   late Future<List<ReportVotes>> futureReportVotes;
 
+  // Rules
+  // Punishment for breaking the rules
+
   @override
   void initState() {
     super.initState();

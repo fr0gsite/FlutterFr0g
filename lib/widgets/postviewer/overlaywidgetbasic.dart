@@ -155,10 +155,9 @@ Widget reportButton(context) {
         showDialog(
             context: context,
             builder: ((context) => Report(
-                mode: "upload",
                 id: Provider.of<PostviewerStatus>(context, listen: false)
                     .getcurrentupload()
-                    .uploadid)));
+                    .uploadid , type: 1)));
       },
       child: Tooltip(
         message: "${AppLocalizations.of(context)!.report} (R)",

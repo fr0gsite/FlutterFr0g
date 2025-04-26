@@ -3,6 +3,7 @@ import 'package:fr0gsite/datatypes/followstatus.dart';
 import 'package:fr0gsite/datatypes/globalstatus.dart';
 import 'package:fr0gsite/datatypes/locationandlanguage.dart';
 import 'package:fr0gsite/datatypes/networkstatus.dart';
+import 'package:fr0gsite/datatypes/trusterstatus.dart';
 import 'package:fr0gsite/datatypes/walletstatus.dart';
 import 'package:fr0gsite/localstorage.dart';
 import 'package:fr0gsite/widgets/infoscreens/informations.dart';
@@ -49,6 +50,8 @@ void main() {
             create: (context) => WalletStatus()),
         ChangeNotifierProvider<NetworkStatus>(
             create: (context) => NetworkStatus()),
+        ChangeNotifierProvider<TrusterStatus>(
+            create: (context) => TrusterStatus()),
       ],
       builder: (context, child) {
         return const App();

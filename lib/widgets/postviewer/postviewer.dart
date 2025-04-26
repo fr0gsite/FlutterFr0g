@@ -95,6 +95,20 @@ class PostviewerState extends State<Postviewer> {
                               ),
                       );
                     }),
+                    Consumer<GlobalStatus>(
+                        builder: (context, userstatus, child) {
+                      return AnimatedContainer(
+                        duration: const Duration(milliseconds: 500),
+                        width: 2,
+                        child: userstatus.expandedpostviewer
+                            ? Container(
+                                color: Colors.green,
+                              )
+                            : Container(
+                                color: AppColor.niceblack,
+                              ),
+                      );
+                    }),
                     Expanded(
                       flex: 2,
                       child: Column(

@@ -1,6 +1,7 @@
 import 'package:fr0gsite/datatypes/reportstatus.dart';
 import 'package:fr0gsite/datatypes/rule.dart';
 import 'package:flutter/material.dart';
+import 'package:fr0gsite/datatypes/rules.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -23,7 +24,14 @@ class _ReportObjectViewState extends State<ReportObjectView> {
 
   @override
   Widget build(BuildContext context) {
-    List<Rule> rules = Provider.of<ReportStatus>(context).getrules(context);
+    //List<Rule> rules = Provider.of<ReportStatus>(context).getrules(context);
+    List<Rule> rules = [];
+    switch(Provider.of<ReportStatus>(context).reporttype){
+      case 1: rules = Rules().getUploadRules(context); break;
+      case 2: rules = Rules().getCommentRules(context); break;
+      case 3: rules = Rules().getTagRules(context); break;
+      default: rules = []; break;
+    }
 
     return ConstrainedBox(
       constraints: const BoxConstraints(maxWidth: 600, maxHeight: 800),
@@ -50,7 +58,10 @@ class _ReportObjectViewState extends State<ReportObjectView> {
           isDense: false,
           value: Provider.of<ReportStatus>(context).selectedrule < 0
               ? null
-              : rules[Provider.of<ReportStatus>(context).selectedrule - 1],
+              : rules.firstWhere(
+                  (element) =>
+                      element.ruleNr ==
+                      Provider.of<ReportStatus>(context).selectedrule),
           hint: Text(AppLocalizations.of(context)!.selectrule,
               style: const TextStyle(color: Colors.white)),
           elevation: 16,

@@ -14,7 +14,7 @@ class ReportsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 2,
+      length: 3,
       child: Scaffold(
         appBar: AppBar(
           title: Text(AppLocalizations.of(context)!.reports),
@@ -22,6 +22,7 @@ class ReportsWidget extends StatelessWidget {
             tabs: [
               Tab(text: AppLocalizations.of(context)!.forme),
               Tab(text: AppLocalizations.of(context)!.allreports),
+              Tab(text: AppLocalizations.of(context)!.urgentreport),
             ],
           ),
           actions: [
@@ -35,8 +36,9 @@ class ReportsWidget extends StatelessWidget {
         ),
         body: const TabBarView(
           children: [
-            ReportsTable(forMe: true),
-            ReportsTable(forMe: false),
+            ReportsTable(mode: "forme"),
+            ReportsTable(mode: "all"),
+            ReportsTable(mode: "urgent"),
           ],
         ),
       ),
@@ -45,9 +47,9 @@ class ReportsWidget extends StatelessWidget {
 }
 
 class ReportsTable extends StatelessWidget {
-  final bool forMe;
+  final String mode;
 
-  const ReportsTable({super.key, required this.forMe});
+  const ReportsTable({super.key, required this.mode});
 
   @override
   Widget build(BuildContext context) {
@@ -62,9 +64,21 @@ class ReportsTable extends StatelessWidget {
         }
         final reports = snapshot.data!;
         String username = Provider.of<GlobalStatus>(context, listen: false).username;
-        final filteredReports = forMe
-            ? reports.where((r) => r.reportername == username).toList() // ersetzen!
-            : reports;
+        
+        var filteredReports = reports;
+        switch (mode) {
+          case "forme":
+            filteredReports = reports.where((r) => r.reportername == username).toList();
+            break;
+          case "all":
+            filteredReports = reports;
+            break;
+          case "urgent":
+            filteredReports = reports.where((report) => report.reporttime.isBefore(DateTime.now().subtract(Duration(hours: 23)))).toList();
+            break;
+          default:
+            filteredReports = reports;
+        }
 
         return SingleChildScrollView(
           scrollDirection: Axis.horizontal,

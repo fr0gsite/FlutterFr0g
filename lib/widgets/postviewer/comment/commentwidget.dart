@@ -180,8 +180,8 @@ class _CommentWidgetState extends State<CommentWidget> {
                       showDialog(
                         context: context,
                         builder: ((context) => Report(
-                              mode: "comment",
                               id: widget.comment.commentId.toInt(),
+                              type: 2,
                             )),
                       );
                     },

@@ -10,15 +10,16 @@ import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Report extends StatefulWidget {
-  final String mode;
   final int id;
-  const Report({super.key, required this.mode, required this.id});
+  final int type; // type of the report, 1 = upload, 2 = comment, 3 = tag
+  const Report({super.key, required this.id, required this.type});
 
   @override
   State<Report> createState() => _ReportState();
 }
 
 class _ReportState extends State<Report> with TickerProviderStateMixin {
+
   late final AnimationController controller = AnimationController(
     duration: const Duration(milliseconds: 5000),
     vsync: this,
@@ -31,9 +32,14 @@ class _ReportState extends State<Report> with TickerProviderStateMixin {
   ];
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<ReportStatus>(
-        create: (context) => ReportStatus(),
+        create: (context) => ReportStatus(widget.type, widget.id),
         builder: (context, child) {
           return Center(
             child: SizedBox(

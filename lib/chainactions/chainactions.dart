@@ -520,7 +520,7 @@ class Chainactions {
     return transactionHandler(actions);
   }
 
-  Future<bool> addreport(String autor, int typ, String uploadid, int violatedrule, String reporttext) {
+  Future<bool> addreport(String autor, int typ, int contentid, int violatedrule, String reporttext) {
     // type 1 = upload, 2 = comment, 3 = tag
     actionsbeforetransaction();
     List<Action> actions = [
@@ -531,7 +531,7 @@ class Chainactions {
         ..data = {
           "autor": autor,
           "typ": typ,
-          "id": uploadid,
+          "id": contentid,
           "violatedrule": violatedrule,
           "reporttext": reporttext,
         }
@@ -547,7 +547,8 @@ class Chainactions {
 
     var requestBody = jsonEncode({
       "rule": report.selectedrule.toString(),
-      "uploadid": report.uploadid.toString(),
+      "type": report.reporttype.toString(),
+      "contentid" : report.contentid.toString(),
       "text": report.reporttext.toString(),
     });
 

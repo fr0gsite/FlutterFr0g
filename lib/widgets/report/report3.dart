@@ -3,8 +3,9 @@ import 'dart:async';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:fr0gsite/config.dart';
 import 'package:fr0gsite/datatypes/globalstatus.dart';
-import 'package:fr0gsite/datatypes/postviewerstatus.dart';
 import 'package:fr0gsite/datatypes/reportstatus.dart';
+import 'package:fr0gsite/datatypes/rule.dart';
+import 'package:fr0gsite/datatypes/rules.dart';
 import 'package:fr0gsite/widgets/report/reportnextbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -19,7 +20,10 @@ class Report3 extends StatefulWidget {
 
 class _Report3State extends State<Report3> {
   TextEditingController textcontroller = TextEditingController();
+  Rules rules = Rules();
   int textlength = 0;
+
+  Rule selectedrule = Rule.dummy();
 
   FocusNode focusNode = FocusNode();
 
@@ -53,17 +57,27 @@ class _Report3State extends State<Report3> {
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: (context, ReportStatus reportStatus, child) {
+      switch(Provider.of<ReportStatus>(context, listen: false).reporttype)
+      {
+        case 1: selectedrule = rules.getUploadRules(context).firstWhere((element) => element.ruleNr == reportStatus.selectedrule); break;
+        case 2: selectedrule = rules.getCommentRules(context).firstWhere((element) => element.ruleNr == reportStatus.selectedrule); break;
+        case 3: selectedrule = rules.getTagRules(context).firstWhere((element) => element.ruleNr == reportStatus.selectedrule); break;
+      }
+      textcontroller.text = reportStatus.reporttext;
+    
       if (!reportStatus.initmessagegenerated) {
+        // Generate the initial message for the report
         reportStatus.initmessagegenerated = true;
-        Provider.of<ReportStatus>(context, listen: false).uploadid =
-            Provider.of<PostviewerStatus>(context, listen: false)
-                .currentupload
-                .uploadid
-                .toString();
 
-        textcontroller.text = "Upload ID : ${reportStatus.uploadid}\n";
+        switch(Provider.of<ReportStatus>(context, listen: false).reporttype)
+        {
+          case 1: textcontroller.text = "Upload ID: ${selectedrule.ruleNr}\n"; break;
+          case 2: textcontroller.text = "Comment ID: ${selectedrule.ruleNr}\n"; break;
+          case 3: textcontroller.text = "Tag ID: ${selectedrule.ruleNr}\n"; break;
+        }
+
         textcontroller.text +=
-            "Violating Rule Nr : ${reportStatus.rules[reportStatus.selectedrule - 1].ruleNr}\n";
+            "Violating Rule Nr : ${selectedrule.ruleNr}\n";
         reportStatus.selectedprovider == 1
             ? textcontroller.text +=
                 "Reported by :${Provider.of<GlobalStatus>(context).username}\n"
@@ -89,9 +103,29 @@ class _Report3State extends State<Report3> {
                           borderRadius: BorderRadius.circular(5)),
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: AutoSizeText(
-                          AppLocalizations.of(context)!
-                              .moreinformationaboutreport,
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                const Icon(Icons.info, color: Colors.white),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                AutoSizeText(
+                                  AppLocalizations.of(context)!
+                                      .important,
+                                  style: const TextStyle(color: Colors.white , fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            AutoSizeText(
+                              AppLocalizations.of(context)!
+                                  .moreinformationaboutreport,
+                            ),
+                          ],
                         ),
                       ),
                     ),
@@ -104,30 +138,53 @@ class _Report3State extends State<Report3> {
                           border: Border.all(color: Colors.white, width: 2),
                           color: Colors.black,
                           borderRadius: BorderRadius.circular(5)),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: RichText(
-                          text: TextSpan(
-                            style: const TextStyle(
-                              fontSize: 14.0,
-                              color: Colors.white,
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                left: 8, right: 20, top: 10, bottom: 0),
+                            child: Row(
+                              children: [
+                                const Icon(Icons.rule, color: Colors.white),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                AutoSizeText(
+                                  AppLocalizations.of(context)!.selectedrule,
+                                  style: const TextStyle(color: Colors.white , fontWeight: FontWeight.bold),
+                                ),
+                              ],
                             ),
-                            children: <TextSpan>[
-                              TextSpan(
-                                text:
-                                    "${AppLocalizations.of(context)!.rule} ${reportStatus.rules[reportStatus.selectedrule - 1].ruleNr}: ${reportStatus.rules[reportStatus.selectedrule - 1].ruleName} \n",
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              TextSpan(
-                                  text:
-                                      "${AppLocalizations.of(context)!.punishment}: ${reportStatus.rules[reportStatus.selectedrule - 1].rulePunishment}",
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.redAccent)),
-                            ],
                           ),
-                        ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: RichText(
+                              text: TextSpan(
+                                style: const TextStyle(
+                                  fontSize: 14.0,
+                                  color: Colors.white,
+                                ),
+                                children: <TextSpan>[
+                                  TextSpan(
+                                    text:
+                                        "${AppLocalizations.of(context)!.rule} ${reportStatus.selectedrule}: ${selectedrule.ruleName} \n",
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  TextSpan(
+                                      text:
+                                          "${AppLocalizations.of(context)!.punishment}: ${selectedrule.rulePunishment}",
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.redAccent)),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   )

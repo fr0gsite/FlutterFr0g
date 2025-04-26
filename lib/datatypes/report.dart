@@ -14,15 +14,15 @@ class Report {
 
   Report({
     required this.reportid,
-    required this.status,
-    required this.id,
-    required this.type,
-    required this.reportername,
-    required this.violatedrule,
+    required this.status,  // 0 = open, 1 = closed
+    required this.id, // id of the content (e.g. upload id)
+    required this.type, // type of the report, 1 = upload, 2 = comment, 3 = tag
+    required this.reportername, // name of the reporter
+    required this.violatedrule, 
     required this.reporttext,
     required this.reporttime,
-    required this.numberoftrusters,
-    required this.outstandingvotes,
+    required this.numberoftrusters, // number of trusters selected for vote
+    required this.outstandingvotes, // number of votes that are still open
     required this.voteweight,
     required this.json,
   });

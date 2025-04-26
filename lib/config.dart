@@ -5,6 +5,7 @@ import 'package:fr0gsite/datatypes/reportnode.dart';
 import 'package:fr0gsite/datatypes/rewardtoken.dart';
 import 'package:fr0gsite/datatypes/blockchainnode.dart';
 import 'package:flutter/material.dart';
+import 'package:fr0gsite/datatypes/rule.dart';
 
 class AppColor {
   static const Color nicewhite = Color.fromARGB(255, 230, 230, 230);
@@ -259,12 +260,6 @@ enum Platformdetectionstatus {
   unknown
 }
 
-enum TrusterStatus {
-  active,
-  vacation,
-  blocked,
-}
-
 class GameConfig {
   List<Game> gamelist = [
     Game(
@@ -305,3 +300,5 @@ class GameConfig {
         active: false)
   ];
 }
+
+

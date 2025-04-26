@@ -96,6 +96,13 @@
     "rule10": "No vandalism or spamming of the platform.",
     "rule11": "sfw, nsfw and nsfl content must be marked accordingly for uploads.",
 
+    "punishment0":"No Punishment",
+    "punishment1":"Pillory",
+    "punishment2":"Token Sanction",
+    "punishment3":"Ban for 14 days",
+    "punishment4":"Ban for 30 days",
+    "punishment5":"Ban forever",
+
     "resources":"Resource",
     "resourcesexplain":"Are needed to perform actions on the blockchain. Resources are consumed during transactions",
     "staked":"Staked",
@@ -399,6 +406,9 @@
     "vacation":"Vacation",
     "openreport":"Open",
     "closedreports":"Closed",
-    "applyasatruster":"Apply as a truster"
+    "applyasatruster":"Apply as a truster",
+    "urgentreport":"Urgent",
+    "important":"Important",
+    "selectedrule":"Selected Rule"
 
 }

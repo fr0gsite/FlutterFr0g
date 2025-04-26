@@ -53,19 +53,12 @@ class _ReportNextButtonState extends State<ReportNextButton> {
             int currentstep =
                 Provider.of<ReportStatus>(context, listen: false).currentStep;
             if (currentstep == 2) {
-              int selectedprovider =
-                  Provider.of<ReportStatus>(context, listen: false)
-                      .selectedprovider;
-              int selectedrule =
-                  Provider.of<ReportStatus>(context, listen: false)
-                      .selectedrule;
-              String reporttext =
-                  Provider.of<ReportStatus>(context, listen: false).reporttext;
-              String uploadid =
-                  Provider.of<ReportStatus>(context, listen: false).uploadid;
-              String selectedusername =
-                  Provider.of<ReportStatus>(context, listen: false)
-                      .selectedusername;
+              int selectedprovider = Provider.of<ReportStatus>(context, listen: false).selectedprovider;
+              int selectedrule = Provider.of<ReportStatus>(context, listen: false).selectedrule;
+              String reporttext =Provider.of<ReportStatus>(context, listen: false).reporttext;
+              int contentid =Provider.of<ReportStatus>(context, listen: false).contentid;
+              int reporttype = Provider.of<ReportStatus>(context, listen: false).reporttype;
+              String selectedusername =Provider.of<ReportStatus>(context, listen: false).selectedusername;
 
               if (selectedprovider != -1 && selectedrule != -1) {
                 if (selectedprovider == 1) {
@@ -75,10 +68,9 @@ class _ReportNextButtonState extends State<ReportNextButton> {
                   String permission =
                       Provider.of<GlobalStatus>(context, listen: false)
                           .permission;
-                    //TODO: Report for comment and tag
                   Chainactions()
                     ..setusernameandpermission(username, permission)
-                    ..addreport(selectedusername, 1,uploadid, selectedrule,
+                    ..addreport(selectedusername, reporttype, contentid, selectedrule,
                             reporttext)
                         .then((value) {
                       if (value) {

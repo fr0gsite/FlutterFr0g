@@ -93,6 +93,13 @@
     "rule10": "Kein Vandalismus oder Spamming der Plattform.",
     "rule11": "SFW-, NSFW- und NSFL-Inhalte müssen beim Hochladen entsprechend gekennzeichnet werden.",
 
+    "punishment0":"Keine Strafe",
+    "punishment1":"Pranger",
+    "punishment2":"Token-Sanktion",
+    "punishment3":"Bann für 14 Tage",
+    "punishment4":"Bann für 30 Tage",
+    "punishment5":"Bann für immer",
+
     "resources":"Ressourcen",
     "resourcesexplain":"Werden bei Transaktionen mit der Blockchain verbraucht. Ressourcen lassen sich durch staking reservieren.",
     "staked":"Staked",
@@ -395,6 +402,9 @@
     "vacation":"Urlaub",
     "openreport":"Offen",
     "closedreports":"Geschlossen",
-    "applyasatruster":"Als Truster bewerben"
+    "applyasatruster":"Als Truster bewerben",
+    "urgentreport":"Dringend",
+    "important":"Wichtig",
+    "selectedrule":"Ausgewählte Regel"
 
 }   

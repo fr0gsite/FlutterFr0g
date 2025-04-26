@@ -80,10 +80,7 @@ class _GlobalDisclaimerState extends State<GlobalDisclaimer>
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: ChangeNotifierProvider<ReportStatus>(
-        create: (context) => ReportStatus(),
-        builder: (context, child) {
-          return Center(
+      child: Center(
             child: SizedBox(
               width: 700,
               height: MediaQuery.of(context).size.height * 0.9 < 800
@@ -416,10 +413,9 @@ class _GlobalDisclaimerState extends State<GlobalDisclaimer>
                     )),
               ),
             ),
-          );
-        },
-      ),
+          ),
     );
+        
   }
 
   Widget agreebutton() {

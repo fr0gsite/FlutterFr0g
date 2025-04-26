@@ -1,6 +1,7 @@
 import 'package:fr0gsite/chainactions/chainactions.dart';
 import 'package:fr0gsite/datatypes/globalstatus.dart';
 import 'package:fr0gsite/datatypes/truster.dart';
+import 'package:fr0gsite/datatypes/trusterstatus.dart';
 import 'package:fr0gsite/widgets/truster/trusterview.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -30,6 +31,7 @@ class _TrusterToolState extends State<TrusterTool> {
   Widget build(BuildContext context) {
     return Consumer<GlobalStatus>(builder: (context, userstatus, child) {
       if (userstatus.userconfig.istruster) {
+        Provider.of<TrusterStatus>(context, listen: false).startTrusterStatus();
         return ElevatedButton(
           style: ButtonStyle(
             backgroundColor: WidgetStateProperty.all<Color>(Colors.transparent),

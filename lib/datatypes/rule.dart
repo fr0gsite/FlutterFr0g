@@ -2,12 +2,14 @@ class Rule {
   int ruleNr;
   String ruleName;
   String rulePunishment;
-  bool needproof;
 
-  Rule(this.ruleNr, this.ruleName, this.rulePunishment,
-      {this.needproof = false});
+  Rule(this.ruleNr, this.ruleName, this.rulePunishment);
 
   String getRuleName() {
     return ruleName;
+  }
+
+  static Rule dummy() {
+    return Rule(0, "Dummy", "Dummy punishment");
   }
 }
