@@ -248,7 +248,7 @@ class StartPoint extends State<Fr0gsiteApp> {
                 children: [
                   IconButton(
                     icon: Image.asset(
-                      "assets/images/logo_b.png",
+                      "assets/images/logo_g.png",
                       width: 50,
                     ),
                     onPressed: () {
@@ -257,9 +257,9 @@ class StartPoint extends State<Fr0gsiteApp> {
                   ),
                   MediaQuery.of(context).size.width > AppConfig.thresholdValueForMobileLayout
                       ? const Text(AppConfig.appname,
-                          style: TextStyle(fontSize: 50, color: Colors.white))
+                          style: TextStyle(fontSize: 50, color: Colors.green))
                       : const Text(AppConfig.appname,
-                          style: TextStyle(fontSize: 20, color: Colors.white)),
+                          style: TextStyle(fontSize: 20, color: Colors.green)),
                   const SizedBox(width: 10),
                   Text(
                     "Beta",

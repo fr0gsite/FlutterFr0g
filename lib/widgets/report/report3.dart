@@ -139,6 +139,7 @@ class _Report3State extends State<Report3> {
                           color: Colors.black,
                           borderRadius: BorderRadius.circular(5)),
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(
