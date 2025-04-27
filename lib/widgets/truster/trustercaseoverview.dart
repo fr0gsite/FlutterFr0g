@@ -65,6 +65,7 @@ class ReportsTable extends StatelessWidget {
         final reports = snapshot.data!;
         String username = Provider.of<GlobalStatus>(context, listen: false).username;
         
+        
         var filteredReports = reports;
         switch (mode) {
           case "forme":
@@ -87,7 +88,8 @@ class ReportsTable extends StatelessWidget {
               const DataColumn(label: Text('Nr')),
               DataColumn(label: Text(AppLocalizations.of(context)!.rule)),
               DataColumn(label: Text(AppLocalizations.of(context)!.upload)),
-              DataColumn(label: Text(AppLocalizations.of(context)!.status)),
+              DataColumn(label: Text(AppLocalizations.of(context)!.votes)),
+              DataColumn(label: Text("Time Left")),
             ],
             rows: filteredReports.map((report) {
               return DataRow(
@@ -101,7 +103,9 @@ class ReportsTable extends StatelessWidget {
                       },
                     ),
                   ),
-                  DataCell(Text('${report.violatedrule}')),
+                  DataCell(Tooltip(
+                    message: getrule(report.type, report.violatedrule, context).ruleName,
+                    child: Text('${report.violatedrule}'))),
                   DataCell(Row(
                     children: [
                       const Icon(Icons.insert_drive_file),
@@ -116,11 +120,42 @@ class ReportsTable extends StatelessWidget {
                   )),
                   DataCell(Row(
                     children: [
-                      Text('${report.status}'),
-                      const SizedBox(width: 10),
                       Text('${report.outstandingvotes} / ${report.numberoftrusters }'),
                     ],
                   )),
+                  // Show how much time is left for the report to be voted on
+                  
+                 DataCell(
+                  Builder(
+                    builder: (context) {
+                      final now = DateTime.now();
+                      final deadline = report.reporttime.add(const Duration(hours: 24));
+                      final totalDuration = deadline.difference(report.reporttime).inSeconds;
+                      final elapsedDuration = now.difference(report.reporttime).inSeconds;
+                      final progress = (elapsedDuration / totalDuration).clamp(0.0, 1.0);
+                      final timeLeft = deadline.difference(now);
+
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          LinearProgressIndicator(
+                            value: progress,
+                            backgroundColor: Colors.green,
+                            color: timeLeft <= const Duration(hours: 2) ? Colors.red : Colors.grey,
+                            minHeight: 10,
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            '${(elapsedDuration / 3600).round()} / 24 h',
+                            style: const TextStyle(fontSize: 12),
+                          ),
+                        ],
+                      );
+                    },
+                  ),
+                ),
+
                 ],
               );
             }).toList(),

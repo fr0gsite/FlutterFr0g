@@ -409,6 +409,7 @@
     "applyasatruster":"Apply as a truster",
     "urgentreport":"Urgent",
     "important":"Important",
-    "selectedrule":"Selected Rule"
+    "selectedrule":"Selected Rule",
+    "votes":"Votes"
 
 }

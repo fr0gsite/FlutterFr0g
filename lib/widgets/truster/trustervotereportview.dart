@@ -3,6 +3,8 @@ import 'package:fr0gsite/chainactions/chainactions.dart';
 
 import 'package:fr0gsite/datatypes/report.dart';
 import 'package:fr0gsite/datatypes/reportvotes.dart';
+import 'package:fr0gsite/datatypes/rule.dart';
+import 'package:fr0gsite/datatypes/rules.dart';
 import 'package:fr0gsite/datatypes/upload.dart';
 import 'package:fr0gsite/nameconverter.dart';
 import 'package:fr0gsite/widgets/cube/cube.dart';
@@ -92,7 +94,7 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                             children: [
                               Text('Reported by: ${NameConverter.uint64ToName(BigInt.parse(report.reportername))}', style: const TextStyle(fontWeight: FontWeight.bold)),
                               Text('Uploaded by: ${upload.autor}'),
-                              Text('Rule: ${report.violatedrule}: ${getrule(report.violatedrule, context)}'),
+                              Text('Rule: ${report.violatedrule}: ${getrule(report.type,report.violatedrule, context)}'),
                             ],
                           ),
                         ),
@@ -203,31 +205,15 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
     }
   }
 
-String getrule(violatedrule, context) {
-    switch (violatedrule) {
-      case 1:
-        return AppLocalizations.of(context)!.rule1;
-      case 2:
-        return AppLocalizations.of(context)!.rule2;
-      case 3:
-        return AppLocalizations.of(context)!.rule3;
-      case 4:
-        return AppLocalizations.of(context)!.rule4;
-      case 5:
-        return AppLocalizations.of(context)!.rule5;
-      case 6:
-        return AppLocalizations.of(context)!.rule6;
-      case 7:
-        return AppLocalizations.of(context)!.rule7;
-      case 8:
-        return AppLocalizations.of(context)!.rule8;
-      case 9:
-        return AppLocalizations.of(context)!.rule9;
-      case 10:
-        return AppLocalizations.of(context)!.rule10;
-      case 11:
-        return AppLocalizations.of(context)!.rule11;
-      default:
-        return "No Rule found";
-    }
+Rule getrule(type, violatedrule, context) {
+  switch (type) {
+    case 1:
+      return Rules().getUploadRules(context).firstWhere((element) => element.ruleNr == violatedrule);
+    case 2:
+      return Rules().getCommentRules(context).firstWhere((element) => element.ruleNr == violatedrule);
+    case 3:
+      return Rules().getTagRules(context).firstWhere((element) => element.ruleNr == violatedrule);
+    default:
+      return Rule.dummy();
   }
+}
