@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:action_slider/action_slider.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:fr0gsite/chainactions/chainactions.dart';
+import 'package:fr0gsite/chainactions/blockchainactions.dart';
 import 'package:fr0gsite/config.dart';
 import 'package:fr0gsite/datatypes/globalstatus.dart';
 import 'package:eosdart/eosdart.dart';
@@ -542,7 +542,7 @@ class _StakeorUnstakeState extends State<StakeorUnstake> {
                     action: (controller) async {
                       controller.loading();
                       if (widget.action == "Stake") {
-                        Chainactions()
+                        BlockchainActions()
                           ..setusernameandpermission(
                               Provider.of<GlobalStatus>(context, listen: false)
                                   .username,
@@ -573,7 +573,7 @@ class _StakeorUnstakeState extends State<StakeorUnstake> {
                             }
                           });
                       } else {
-                        Chainactions()
+                        BlockchainActions()
                           ..setusernameandpermission(
                               Provider.of<GlobalStatus>(context, listen: false)
                                   .username,

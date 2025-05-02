@@ -1,5 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:fr0gsite/chainactions/chainactions.dart';
+import 'package:fr0gsite/chainactions/commentactions.dart';
 import 'package:fr0gsite/datatypes/comment.dart';
 import 'package:fr0gsite/datatypes/commentbarstatus.dart';
 import 'package:fr0gsite/datatypes/globalstatus.dart';

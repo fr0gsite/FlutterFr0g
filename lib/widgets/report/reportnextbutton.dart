@@ -1,4 +1,4 @@
-import 'package:fr0gsite/chainactions/chainactions.dart';
+import 'package:fr0gsite/chainactions/reportactions.dart';
 import 'package:fr0gsite/datatypes/globalstatus.dart';
 import 'package:fr0gsite/datatypes/reportstatus.dart';
 import 'package:fr0gsite/globalnotifications.dart';
@@ -68,8 +68,7 @@ class _ReportNextButtonState extends State<ReportNextButton> {
                   String permission =
                       Provider.of<GlobalStatus>(context, listen: false)
                           .permission;
-                  Chainactions()
-                    ..setusernameandpermission(username, permission)
+                  ReportActions()
                     ..addreport(selectedusername, reporttype, contentid, selectedrule,
                             reporttext)
                         .then((value) {
@@ -96,7 +95,7 @@ class _ReportNextButtonState extends State<ReportNextButton> {
                 } else {
                   ReportStatus reportStatus =
                       Provider.of<ReportStatus>(context, listen: false);
-                  Chainactions()
+                  ReportActions()
                       .reportuploadwithcommunity(reportStatus)
                       .then((value) {
                     if (value) {

@@ -1,4 +1,4 @@
-import 'package:fr0gsite/chainactions/chainactions.dart';
+import 'package:fr0gsite/chainactions/useractions.dart';
 import 'package:fr0gsite/config.dart';
 import 'package:fr0gsite/datatypes/globalstatus.dart';
 import 'package:fr0gsite/datatypes/rewardcalc.dart';
@@ -111,7 +111,7 @@ class _ClaimRewardsViewState extends State<ClaimRewardsView> {
                       if (widget.account.accountName ==
                           Provider.of<GlobalStatus>(context, listen: false)
                               .username) {
-                        Chainactions()
+                        UserActions()
                           ..setusernameandpermission(
                               Provider.of<GlobalStatus>(context, listen: false)
                                   .username,
@@ -209,7 +209,7 @@ class _ClaimRewardsViewState extends State<ClaimRewardsView> {
 
   Future getrewardinfofunc() async {
     RewardCalc result =
-        await Chainactions().getrewardtokeninfo(widget.account.accountName);
+        await UserActions().getrewardtokeninfo(widget.account.accountName);
     setState(() {
       if (mounted) {
         rewardinfo = result;

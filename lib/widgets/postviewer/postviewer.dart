@@ -18,7 +18,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-import '../../chainactions/chainactions.dart';
+import '../../chainactions/uploadactions.dart';
 import '../../datatypes/postviewerstatus.dart';
 import 'postviewerbottombar.dart';
 
@@ -226,8 +226,8 @@ class PostviewerState extends State<Postviewer> {
       } catch (e) {
         debugPrint("Postviewer: No UploadOrderTemplate");
         //No UploadOrderTemplate. Fetch Popular Uploads
-        tempUploads = await Chainactions().getpopularuploads();
-        currentupload = await Chainactions().getupload(widget.id!);
+        tempUploads = await UploadActions().getpopularuploads();
+        currentupload = await UploadActions().getupload(widget.id!);
         tempUploads.insert(tempUploads.length ~/ 2, currentupload);
       }
       //Check if uploads are favorites of user

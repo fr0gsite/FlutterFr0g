@@ -1,5 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:fr0gsite/chainactions/chainactions.dart';
+import 'package:fr0gsite/chainactions/useractions.dart';
 import 'package:fr0gsite/config.dart';
 import 'package:fr0gsite/datatypes/globalstatus.dart';
 import 'package:fr0gsite/datatypes/postviewerstatus.dart';
@@ -115,7 +115,7 @@ class _PostViewerTopBarState extends State<PostViewerTopBar> {
                             Provider.of<GlobalStatus>(context, listen: false)
                                 .permission;
                         if (followbutton) {
-                          Chainactions()
+                          UserActions()
                             ..setusernameandpermission(username, permission)
                             ..unfollowuser(
                                 postviewerstatus.currentupload.autor)
@@ -125,7 +125,7 @@ class _PostViewerTopBarState extends State<PostViewerTopBar> {
                               }
                             });
                         } else {
-                          Chainactions()
+                          UserActions()
                             ..setusernameandpermission(username, permission)
                             ..followuser(
                                 postviewerstatus.currentupload.autor)

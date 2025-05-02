@@ -1,4 +1,4 @@
-import 'package:fr0gsite/chainactions/chainactions.dart';
+import 'package:fr0gsite/chainactions/useractions.dart';
 import 'package:fr0gsite/datatypes/globalstatus.dart';
 import 'package:fr0gsite/datatypes/userconfig.dart';
 import 'package:fr0gsite/ipfsactions.dart';
@@ -139,7 +139,7 @@ class _ProfilepictureState extends State<Profilepicture> {
     }
 
     if (!foundexisting) {
-      userconfig = await Chainactions().getuserconfig(username);
+      userconfig = await UserActions().getuserconfig(username);
       Provider.of<GlobalStatus>(context, listen: false)
           .userconfiglist
           .add(userconfig);

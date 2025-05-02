@@ -1,4 +1,4 @@
-import 'package:fr0gsite/chainactions/chainactions.dart';
+import 'package:fr0gsite/chainactions/uploadactions.dart';
 import 'package:fr0gsite/config.dart';
 import 'package:fr0gsite/datatypes/favoriteupload.dart';
 import 'package:fr0gsite/datatypes/globalstatus.dart';
@@ -165,7 +165,7 @@ class _PostViewerBottomParState extends State<PostViewerBottomBar> {
           .getcurrentupload()
           .buttonfavoriteliked;
       if (!toogle) {
-        Chainactions()
+        UploadActions()
           ..setusernameandpermission(
               Provider.of<GlobalStatus>(context, listen: false).username,
               Provider.of<GlobalStatus>(context, listen: false).permission)
@@ -195,7 +195,7 @@ class _PostViewerBottomParState extends State<PostViewerBottomBar> {
             }
           });
       } else {
-        Chainactions()
+        UploadActions()
           ..setusernameandpermission(
               Provider.of<GlobalStatus>(context, listen: false).username,
               Provider.of<GlobalStatus>(context, listen: false).permission)
@@ -246,7 +246,7 @@ class _PostViewerBottomParState extends State<PostViewerBottomBar> {
             Provider.of<PostviewerStatus>(context, listen: false)
                 .getcurrentupload()
                 .uploadid;
-        Chainactions()
+        UploadActions()
           ..setusernameandpermission(
               Provider.of<GlobalStatus>(context, listen: false).username,
               Provider.of<GlobalStatus>(context, listen: false).permission)
@@ -306,7 +306,7 @@ class _PostViewerBottomParState extends State<PostViewerBottomBar> {
             Provider.of<PostviewerStatus>(context, listen: false)
                 .getcurrentupload()
                 .uploadid;
-        Chainactions()
+        UploadActions()
           ..setusernameandpermission(
               Provider.of<GlobalStatus>(context, listen: false).username,
               Provider.of<GlobalStatus>(context, listen: false).permission)

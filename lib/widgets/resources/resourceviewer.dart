@@ -1,5 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:fr0gsite/chainactions/chainactions.dart';
+import 'package:fr0gsite/chainactions/useractions.dart';
 import 'package:fr0gsite/config.dart';
 import 'package:fr0gsite/datatypes/globalstatus.dart';
 import 'package:fr0gsite/datatypes/userconfig.dart';
@@ -43,10 +43,10 @@ class _ResourceViewerState extends State<ResourceViewer> {
           Provider.of<GlobalStatus>(context, listen: false).username;
       searchcontroller.text = currentusername;
       currentaccount = Account(currentusername, 0);
-      Chainactions()
+      UserActions()
           .getaccountinfo(currentusername)
           .then((value) => setaccountinfo(value));
-      Chainactions().getuserconfig(searchcontroller.text).then((value) {
+      UserActions().getuserconfig(searchcontroller.text).then((value) {
         setState(() {
           userconfig = value;
         });
@@ -55,11 +55,11 @@ class _ResourceViewerState extends State<ResourceViewer> {
     if (currentaccount.accountName == "") {
       searchcontroller.text = AppConfig.exampleaccount;
       currentusername = AppConfig.exampleaccount;
-      Chainactions()
+      UserActions()
           .getaccountinfo(currentusername)
           .then((value) => setaccountinfo(value));
     }
-    Chainactions().getuserconfig(AppConfig.exampleaccount).then((value) {
+    UserActions().getuserconfig(AppConfig.exampleaccount).then((value) {
       setState(() {
         userconfig = value;
       });
@@ -82,13 +82,13 @@ class _ResourceViewerState extends State<ResourceViewer> {
 
   void newSearch() {
     debugPrint("newsearch");
-    Chainactions().getaccountinfo(searchcontroller.text).then((value) {
+    UserActions().getaccountinfo(searchcontroller.text).then((value) {
       setState(() {
         customsearch = true;
         currentusername = searchcontroller.text;
         setaccountinfo(value);
       });
-      Chainactions().getuserconfig(searchcontroller.text).then((value) {
+      UserActions().getuserconfig(searchcontroller.text).then((value) {
         setState(() {
           userconfig = value;
         });

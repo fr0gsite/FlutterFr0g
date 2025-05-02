@@ -1,5 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:fr0gsite/chainactions/chainactions.dart';
+import 'package:fr0gsite/chainactions/uploadactions.dart';
 import 'package:fr0gsite/datatypes/globalstatus.dart';
 import 'package:fr0gsite/datatypes/postviewerstatus.dart';
 import 'package:fr0gsite/datatypes/tag.dart';
@@ -114,7 +114,7 @@ class _TaglistState extends State<Taglist> {
   }
 
   Future<bool> gettags(String uploadid) async {
-    List<Tag> response = await Chainactions().fetchTags(uploadid);
+    List<Tag> response = await UploadActions().fetchTags(uploadid);
     debugPrint("Upload $uploadid has ${response.length} tags");
 
     response.sort((a, b) => b.token.compareTo(a.token));

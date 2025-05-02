@@ -33,6 +33,11 @@ import '../datatypes/userconfig.dart';
 
 import 'package:http/http.dart' as http;
 
+import 'useractions.dart';
+import 'uploadactions.dart';
+import 'reportactions.dart';
+import 'blockchainactions.dart';
+
 //Action with EOS Blockchain
 class Chainactions {
   String username = "";

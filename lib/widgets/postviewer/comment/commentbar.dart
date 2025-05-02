@@ -1,4 +1,4 @@
-import 'package:fr0gsite/chainactions/chainactions.dart';
+import 'package:fr0gsite/chainactions/commentactions.dart';
 import 'package:fr0gsite/datatypes/comment.dart';
 import 'package:fr0gsite/widgets/postviewer/comment/commentlist.dart';
 import 'package:fr0gsite/widgets/postviewer/comment/taglist.dart';

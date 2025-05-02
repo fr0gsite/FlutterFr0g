@@ -1,7 +1,7 @@
 import 'package:country_flags/country_flags.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:fr0gsite/chainactions/chainactions.dart';
+import 'package:fr0gsite/chainactions/useractions.dart';
 import 'package:fr0gsite/config.dart';
 import 'package:fr0gsite/datatypes/globalstatus.dart';
 import 'package:fr0gsite/datatypes/locationandlanguage.dart';
@@ -103,11 +103,11 @@ class _SetProfileState extends State<SetProfile> {
             ElevatedButton(
               onPressed: () {
                 // TODO: Check if ipfs link is valid and not exceeds the limit
-                Chainactions tempchainactions = Chainactions();
+                UserActions tempUserActions = UserActions();
                 String username = Provider.of<GlobalStatus>(context, listen: false).username;
                 String permission = Provider.of<GlobalStatus>(context, listen: false).permission;
-                tempchainactions.setusernameandpermission(username, permission);
-                tempchainactions.setuserprofile(
+                tempUserActions.setusernameandpermission(username, permission);
+                tempUserActions.setuserprofile(
                   username,
                   biotextcontroller.text,
                   userconfig.profileimageipfs,
@@ -128,7 +128,7 @@ class _SetProfileState extends State<SetProfile> {
     // Load current profile data if available and set it to the text field
     // get current user
     final currentuser = Provider.of<GlobalStatus>(context, listen: false).username;
-    Chainactions().getuserconfig(currentuser).then((value) {
+    UserActions().getuserconfig(currentuser).then((value) {
       setState(() {
         userconfig = value;
         biotextcontroller.text = userconfig.profilebio;
