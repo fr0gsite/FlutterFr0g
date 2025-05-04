@@ -4,7 +4,6 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:fr0gsite/config.dart';
 import 'package:fr0gsite/datatypes/globalstatus.dart';
-import 'package:fr0gsite/datatypes/reportstatus.dart';
 import 'package:fr0gsite/widgets/settings/setlanguageview.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -97,6 +96,7 @@ class _GlobalDisclaimerState extends State<GlobalDisclaimer>
                     appBar: AppBar(
                       backgroundColor: Colors.transparent,
                       elevation: 0,
+                      automaticallyImplyLeading: false,
                       title: AutoSizeText(
                         AppLocalizations.of(context)!.disclaimer,
                         style: const TextStyle(color: Colors.white),

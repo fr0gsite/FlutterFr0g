@@ -3,6 +3,7 @@ import 'package:fr0gsite/config.dart';
 import 'package:fr0gsite/datatypes/followstatus.dart';
 import 'package:fr0gsite/datatypes/globalstatus.dart';
 import 'package:flutter/material.dart';
+import 'package:fr0gsite/datatypes/userconfig.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -18,15 +19,14 @@ class Followlistitem extends StatefulWidget {
 }
 
 class _FollowlistitemState extends State<Followlistitem> {
-  Future? getnumoffollowerfuture;
-  int follower = 1;
+  Future? getuserconfigfuture;
   double textwidth = 60;
   Color textcolor = AppColor.nicewhite;
 
   @override
   void initState() {
     super.initState();
-    getnumoffollowerfuture = getnumoffollower();
+    getuserconfigfuture = getuserconfig();
   }
 
   @override
@@ -46,12 +46,25 @@ class _FollowlistitemState extends State<Followlistitem> {
                 ),
               ),
               FutureBuilder(
-                  future: getnumoffollowerfuture,
+                  future: Chainactions().getuserconfig(widget.username),
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
-                      return Text(
-                        "${AppLocalizations.of(context)!.follower}: ${follower.toString()}",
-                        style: const TextStyle(fontSize: 10),
+                      return Row(children: [
+                        const Icon(Icons.notifications_on_sharp,
+                            color: AppColor.nicewhite, size: 15),
+                        Text(
+                          "${snapshot.data?.numoffollowers}",
+                          style: const TextStyle(fontSize: 15),
+                        ),
+                        const SizedBox(width: 10),
+                        const Icon(Icons.arrow_circle_up,
+                            color: AppColor.nicewhite, size: 15),
+                        const SizedBox(width: 5),
+                        Text(
+                          "${snapshot.data?.numofuploads}",
+                          style: const TextStyle(fontSize: 15),
+                        ),
+                      ],
                       );
                     } else {
                       return Text(
@@ -100,10 +113,8 @@ class _FollowlistitemState extends State<Followlistitem> {
                                             "${AppLocalizations.of(context)!.unfollowuser}: ${widget.username}"),
                                       ),
                                     );
-                                    widget.callback(
-
-                                        widget.username, widget.isselected, true);
-
+                                    widget.callback(widget.username, widget.isselected, true);
+                                    Provider.of<GlobalStatus>(context, listen: false).delusersubscription(widget.username);
                                   } else {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
@@ -113,6 +124,9 @@ class _FollowlistitemState extends State<Followlistitem> {
                                     );
                                   }
                                 });
+
+                                //Update local state of subscription
+                                Provider.of<GlobalStatus>(context, listen: false).delusersubscription(widget.username);
                               },
                             );
                         },
@@ -135,13 +149,8 @@ class _FollowlistitemState extends State<Followlistitem> {
     });
   }
 
-  Future<bool> getnumoffollower() async {
-    Chainactions().getuserconfig(widget.username).then((value) {
-      setState(() {
-        follower = value.numoffollowers;
-      });
-    });
-    return true;
+  Future<UserConfig> getuserconfig() async {
+    return await Chainactions().getuserconfig(widget.username);
   }
 }
 

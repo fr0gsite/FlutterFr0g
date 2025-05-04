@@ -16,4 +16,20 @@ class Usersubscription {
       creationtime: DateTime.parse(json['creationtime']),
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'subscriptionid': subscriptionid.toString(),
+      'username': username,
+      'creationtime': creationtime.toIso8601String(),
+    };
+  }
+  
+  static Usersubscription dummy() {
+    return Usersubscription(
+      subscriptionid: BigInt.zero,
+      username: '',
+      creationtime: DateTime.now(),
+    );
+  }
 }

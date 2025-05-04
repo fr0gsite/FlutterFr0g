@@ -3,6 +3,7 @@ import 'package:fr0gsite/localstorage.dart';
 class LocalUserConfig {
   String username;
   bool accepteddisclaimer;
+  List<String> followlist = [];
 
   LocalUserConfig({required this.username, required this.accepteddisclaimer});
 

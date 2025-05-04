@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:fr0gsite/chainactions/chainactions.dart';
 import 'package:fr0gsite/datatypes/report.dart';
-import 'package:provider/provider.dart';
 
 class TrusterStatus with ChangeNotifier {
 

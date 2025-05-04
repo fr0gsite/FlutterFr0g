@@ -40,7 +40,7 @@ class _NewTagViewState extends State<NewTagView> {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
       child: SingleChildScrollView(
         child: SizedBox(
-          width: MediaQuery.of(context).size.width * 0.8,
+          width: 500,
           child: Material(
             color: AppColor.nicegrey,
             shape: const RoundedRectangleBorder(
@@ -62,6 +62,7 @@ class _NewTagViewState extends State<NewTagView> {
                         hintStyle: TextStyle(color: Colors.white),
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.blue, width: 2),
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.blue, width: 2),
@@ -110,7 +111,7 @@ class _NewTagViewState extends State<NewTagView> {
                       backgroundColor: Colors.blue.withAlpha((0.8 * 255).toInt()),
                       label: isLoading
                           ? const CBCircularProgressIndicator()
-                          : Text(AppLocalizations.of(context)!.reply,
+                          : Text(AppLocalizations.of(context)!.addtag,
                               style: const TextStyle(color: Colors.white)),
                       icon: const Icon(Icons.reply, color: Colors.white),
                       shape: ShapeBorder.lerp(

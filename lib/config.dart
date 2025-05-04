@@ -5,7 +5,6 @@ import 'package:fr0gsite/datatypes/reportnode.dart';
 import 'package:fr0gsite/datatypes/rewardtoken.dart';
 import 'package:fr0gsite/datatypes/blockchainnode.dart';
 import 'package:flutter/material.dart';
-import 'package:fr0gsite/datatypes/rule.dart';
 
 class AppColor {
   static const Color nicewhite = Color.fromARGB(255, 230, 230, 230);
@@ -157,6 +156,7 @@ class AppConfig {
   static int refreshuserfavoriteupload = 15; //in minutes
   static int refreshuserfavoritecomment = 15; //in minutes
   static int refreshuserfavoritetags = 15; //in minutes
+  static int refreshusersubscriptions = 15; //in minutes
 
   // Vales from smart contract
   static int maxUploadText = 1024;

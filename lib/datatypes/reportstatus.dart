@@ -1,6 +1,4 @@
-import 'package:fr0gsite/datatypes/rule.dart';
 import 'package:flutter/material.dart';
-import 'package:fr0gsite/datatypes/rules.dart';
 
 class ReportStatus extends ChangeNotifier {
   int currentStep = 0;

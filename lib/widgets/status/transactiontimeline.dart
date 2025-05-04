@@ -48,7 +48,7 @@ class _TransactionTimelineState extends State<TransactionTimeline> {
         gridData: const FlGridData(
           show: true,
         ),
-        titlesData: FlTitlesData(
+        titlesData: const FlTitlesData(
           show: true,
           bottomTitles: AxisTitles(
             axisNameSize: 60,
@@ -59,7 +59,7 @@ class _TransactionTimelineState extends State<TransactionTimeline> {
               ),
             ),
           ),
-          topTitles: const AxisTitles(
+          topTitles: AxisTitles(
       sideTitles: SideTitles(showTitles: false),
     ),
           leftTitles: AxisTitles(

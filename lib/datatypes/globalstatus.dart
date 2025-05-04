@@ -11,6 +11,8 @@ import 'package:fr0gsite/datatypes/userconfig.dart';
 import 'package:eosdart/eosdart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:fr0gsite/datatypes/usersubscription.dart';
+import 'package:fr0gsite/nameconverter.dart';
 
 class GlobalStatus extends ChangeNotifier {
   //Global Status
@@ -32,10 +34,16 @@ class GlobalStatus extends ChangeNotifier {
   //User Favorites
   List<FavoriteUpload> favorituploads = [];
   DateTime lastfavoriteupload = DateTime.parse("2000-01-01 00:00:00.000000");
+
   List<Comment> favoritecomments = [];
   DateTime lastfavoritecomment = DateTime.parse("2000-01-01 00:00:00.000000");
+  
   List<FavoriteTag> favoritetags = [];
   DateTime lastfavoritetag = DateTime.parse("2000-01-01 00:00:00.000000");
+
+  //Subscriptions
+  List<Usersubscription> subscriptions = [];
+  DateTime lastsubscription = DateTime.parse("2000-01-01 00:00:00.000000");
 
   //List
   List<Blockchainnode> nodelist = [];
@@ -285,6 +293,71 @@ class GlobalStatus extends ChangeNotifier {
     }
     return [];
   }
+
+  // ------------------Subscriptions------------------
+  Future<bool> isusersubscribed(String username) async {
+    debugPrint("check if $username is subscribed");
+    if (isLoggedin) {
+      if (DateTime.now().difference(lastsubscription).inMinutes >
+          AppConfig.refreshusersubscriptions) {
+        await Chainactions().getusersubscriptions(this.username).then((value) {
+          subscriptions = value;
+          lastsubscription = DateTime.now();
+        });
+      }
+      for (var item in subscriptions) {
+        if (item.username == username) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  Future<List<Usersubscription>> getusersubscriptions() async {
+    if (isLoggedin) {
+      if (DateTime.now().difference(lastsubscription).inMinutes >
+          AppConfig.refreshusersubscriptions) {
+        await Chainactions().getusersubscriptions(username).then((value) {
+          subscriptions = value;
+          lastsubscription = DateTime.now();
+        });
+      }
+      return subscriptions;
+    }
+    return [];
+  }
+
+  bool addusersubscription(String username) {
+    if (isLoggedin) {
+      if (!subscriptions.firstWhere(
+              (element) => element.username == username,
+              orElse: () => Usersubscription.dummy())
+          .username
+          .isNotEmpty) {
+        subscriptions.add(Usersubscription(subscriptionid: NameConverter.nameToUint64(username), username: username,creationtime: DateTime.now()));
+        debugPrint("Added local subscription $username");
+        return true;
+      }
+    }
+    return false;
+  }
+
+  bool delusersubscription(String subscription) {
+    if (isLoggedin) {
+      if (subscriptions.firstWhere(
+              (element) => element.username == subscription,
+              orElse: () => Usersubscription.dummy())
+          .username
+          .isNotEmpty) {
+        subscriptions.removeWhere((element) => element.username == subscription);
+        debugPrint("Removed local subscription $subscription");
+        return true;
+      }
+    }
+    return false;
+  }
+
 
   Duration getUserTimezone() {
     final now = DateTime.now();

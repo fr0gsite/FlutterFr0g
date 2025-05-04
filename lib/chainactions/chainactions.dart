@@ -402,16 +402,6 @@ class Chainactions {
     return uploadlist;
   }
 
-  Future<List<Usersubscription>> getusersubscriptions(String username) async {
-    debugPrint("Requesting subscriptions of user $username");
-    var response = await geteosclient().getTableRows(
-        AppConfig.maincontract, username, 'usersubscrip',
-        limit: 200, reverse: true, json: true);
-    List<Usersubscription> subscriptionlist =
-        response.map((json) => Usersubscription.fromJson(json)).toList();
-    return subscriptionlist;
-  }
-
   Future<bool> actionsbeforetransaction() async {
     return true;
   }
@@ -1082,6 +1072,7 @@ class Chainactions {
     return uploadlist;
   }
 
+
   Future<bool> isuserfollowinguser(
       String username, String usernametofollow) async {
     String usernameasnumber =
@@ -1099,6 +1090,16 @@ class Chainactions {
         return false;
       }
     }
+  }
+
+  Future<List<Usersubscription>> getusersubscriptions(String username) async {
+    debugPrint("Requesting subscriptions of user $username");
+    var response = await geteosclient().getTableRows(
+        AppConfig.maincontract, username, 'usersubscrip',
+        limit: 200, reverse: true, json: true);
+    List<Usersubscription> subscriptionlist =
+        response.map((json) => Usersubscription.fromJson(json)).toList();
+    return subscriptionlist;
   }
 
   // -- Truster / Report -- #

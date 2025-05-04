@@ -1,10 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:fr0gsite/chainactions/chainactions.dart';
 import 'package:fr0gsite/config.dart';
-import 'package:fr0gsite/datatypes/globalstatus.dart';
 import 'package:fr0gsite/datatypes/postviewerstatus.dart';
 import 'package:flutter/material.dart';
-import 'package:fr0gsite/widgets/login/login.dart';
+import 'package:fr0gsite/widgets/postviewer/subscriptionicon.dart';
 import 'package:fr0gsite/widgets/topbar/topbar.dart';
 import 'package:provider/provider.dart';
 
@@ -21,14 +19,6 @@ class _PostViewerTopBarState extends State<PostViewerTopBar> {
   @override
   void initState() {
     super.initState();
-  }
-
-  bool followbutton = false;
-
-  void setfollowbutton(bool value) {
-    setState(() {
-      followbutton = value;
-    });
   }
 
   @override
@@ -104,53 +94,7 @@ class _PostViewerTopBarState extends State<PostViewerTopBar> {
                       ],
                     ),
                   ),
-                  IconButton(
-                    onPressed: () async {
-                      if (Provider.of<GlobalStatus>(context, listen: false)
-                          .isLoggedin) {
-                        String username =
-                            Provider.of<GlobalStatus>(context, listen: false)
-                                .username;
-                        String permission =
-                            Provider.of<GlobalStatus>(context, listen: false)
-                                .permission;
-                        if (followbutton) {
-                          Chainactions()
-                            ..setusernameandpermission(username, permission)
-                            ..unfollowuser(
-                                postviewerstatus.currentupload.autor)
-                                .then((value) {
-                              if (value) {
-                                setfollowbutton(!followbutton);
-                              }
-                            });
-                        } else {
-                          Chainactions()
-                            ..setusernameandpermission(username, permission)
-                            ..followuser(
-                                postviewerstatus.currentupload.autor)
-                                .then((value) {
-                              if (value) {
-                                setfollowbutton(!followbutton);
-                              }
-                            });
-                        }
-                      } else {
-                        showDialog(
-                          context: context,
-                          builder: ((context) {
-                            return const Login();
-                          }),
-                        );
-                      }
-                    },
-                    icon: Icon(
-                      followbutton
-                          ? Icons.notifications_off
-                          : Icons.notification_add_sharp,
-                      color: Colors.white,
-                    ),
-                  ),
+                  SubscriptionIcon(username: postviewerstatus.getcurrentupload().autor),
                   const Spacer(),
                   if (constraints.maxWidth > 600) ...[
                     const Padding(
@@ -169,3 +113,6 @@ class _PostViewerTopBarState extends State<PostViewerTopBar> {
     );
   }
 }
+
+
+

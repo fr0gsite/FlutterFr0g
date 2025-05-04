@@ -55,16 +55,10 @@ class _ProfileState extends State<Profile> {
         .getuserconfig(account.accountName)
         .then((value) => setuserconfig(value));
 
-    if (Provider.of<GlobalStatus>(context, listen: false).isLoggedin) {
-      Chainactions()
-          .isuserfollowinguser(
-              Provider.of<GlobalStatus>(context, listen: false).username,
-              account.accountName)
-          .then((value) {
+    if (Provider.of<GlobalStatus>(context, listen: false).subscriptions.map((e) => e.username).contains(account.accountName)) {
         setState(() {
-          followbutton = value;
+          followbutton = true;
         });
-      });
     }
   }
 

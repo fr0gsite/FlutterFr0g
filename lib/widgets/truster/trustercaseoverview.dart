@@ -75,7 +75,7 @@ class ReportsTable extends StatelessWidget {
             filteredReports = reports;
             break;
           case "urgent":
-            filteredReports = reports.where((report) => report.reporttime.isBefore(DateTime.now().subtract(Duration(hours: 23)))).toList();
+            filteredReports = reports.where((report) => report.reporttime.isBefore(DateTime.now().subtract(const Duration(hours: 23)))).toList();
             break;
           default:
             filteredReports = reports;
@@ -89,7 +89,7 @@ class ReportsTable extends StatelessWidget {
               DataColumn(label: Text(AppLocalizations.of(context)!.rule)),
               DataColumn(label: Text(AppLocalizations.of(context)!.upload)),
               DataColumn(label: Text(AppLocalizations.of(context)!.votes)),
-              DataColumn(label: Text("Time Left")),
+              const DataColumn(label: Text("Time Left")),
             ],
             rows: filteredReports.map((report) {
               return DataRow(
