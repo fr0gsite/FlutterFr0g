@@ -148,468 +148,303 @@ class _ResourceBalanceState extends State<ResourceBalance>
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(AppLocalizations.of(context)!.resources,
-                    style: const TextStyle(color: Colors.white, fontSize: 20)),
-                Text(AppLocalizations.of(context)!.resourcesexplain,
-                    style: TextStyle(fontSize: textsize)),
-              ],
-            ),
-          ),
+          // CPU Section
           Container(
             decoration: BoxDecoration(
-              color: Colors.green.withAlpha((0.1 * 255).toInt()),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Column(
-              children: [
-                Table(
-                  border: const TableBorder.symmetric(
-                      inside: BorderSide(width: 1, color: Colors.black)),
-                  columnWidths: const {
-                    0: FlexColumnWidth(1),
-                    1: FlexColumnWidth(2),
-                  },
-                  children: [
-                    //INFO
-                    TableRow(children: [
-                      TableCell(
-                          child: Center(
-                              child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                            AppLocalizations.of(context)!.staked,
-                            maxLines: 1,
-                                style: const TextStyle(fontSize: 20, 
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    )),
-                      ))),
-                      TableCell(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            children: [
-                              Text(AppLocalizations.of(context)!.stakedexplain,
-                                  style: TextStyle(
-                                      fontSize: textsize, color: Colors.white)),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ]),
-
-                    //CPU
-                    TableRow(
-                      children: [
-                        TableCell(
-                            verticalAlignment:
-                                TableCellVerticalAlignment.middle,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Tooltip(
-                                    message: AppLocalizations.of(context)!
-                                        .cpuexplain,
-                                    child: Text(
-                                      "CPU",
-                                      style: TextStyle(fontSize: textsizeleft),
-                                    ),
-                                  ),
-                                ),
-                                //Lottie.asset("assets/lottie/cpu.json",
-                                //  width: 150,
-                                //  height: 150,
-                                //  controller: controllercpu,
-                                //),
-                              ],
-                            )),
-                        TableCell(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                      "$totalcpu ${AppConfig.systemtoken}",
-                                      style:
-                                          TextStyle(fontSize: textsizeright)),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 8, right: 8, bottom: 8),
-                                  child: Text(
-                                      AppLocalizations.of(context)!
-                                          .reservesthisamountofresources,
-                                      style: TextStyle(fontSize: textsize)),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: LinearPercentIndicator(
-                                    lineHeight: 30,
-                                    barRadius: const Radius.circular(15),
-                                    percent: percentcpu,
-                                    backgroundColor: Ressourcecolor.background
-                                        .withAlpha((0.5 * 255).toInt()),
-                                    progressColor: Ressourcecolor.cpu,
-                                    center: Padding(
-                                      padding: const EdgeInsets.only(
-                                          right: 8, left: 8),
-                                      child: Text(
-                                          "$cpuLimitused s / $cpuLimitmax s",
-                                          overflow: TextOverflow.ellipsis),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    //NET
-
-                    TableRow(
-                      children: [
-                        TableCell(
-                          verticalAlignment: TableCellVerticalAlignment.middle,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Tooltip(
-                                message:
-                                    AppLocalizations.of(context)!.netexplain,
-                                child: Text(
-                                  "NET",
-                                  style: TextStyle(fontSize: textsizeleft),
-                                ),
-                              ),
-                            ),
-                            //Lottie.asset("assets/lottie/net.json",
-                            //  width: 150,
-                            //  height: 150,
-                            //  controller: controllernet,
-                            //),
-                          ],
-                        )),
-                        TableCell(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                      "$totalnet ${AppConfig.systemtoken}",
-                                      style:
-                                          TextStyle(fontSize: textsizeright)),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 8, right: 8, bottom: 8),
-                                  child: Text(
-                                      AppLocalizations.of(context)!
-                                          .reservesthisamountofresources,
-                                      style: TextStyle(fontSize: textsize)),
-                                ),
-                                LinearPercentIndicator(
-                                  lineHeight: 30,
-                                  barRadius: const Radius.circular(15),
-                                  percent: percentnet,
-                                  backgroundColor: Ressourcecolor.background
-                                      .withAlpha((0.5 * 255).toInt()),
-                                  progressColor: Ressourcecolor.net,
-                                  center: Text(
-                                      "$netLimitused kb / $netLimitmax kb",
-                                      overflow: TextOverflow.ellipsis),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-
-                    //StakeButton
-                    TableRow(
-                      children: [
-                        const TableCell(child: Text("")),
-                        TableCell(
-                          child: Wrap(
-                            alignment: WrapAlignment.center,
-                            spacing: 10,
-                            children: [
-                              isbuttonactive
-                                  ? Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: ElevatedButton(
-                                        style: ButtonStyle(
-                                          backgroundColor:
-                                              WidgetStateProperty.all<Color>(
-                                                  stakecolor),
-                                        ),
-                                        onPressed: () {
-                                          showDialog(
-                                              context: context,
-                                              barrierDismissible: true,
-                                              barrierColor: Colors.black.withOpacity(0.5),
-                                              builder: (BuildContext context) {
-                                                return Dialog(
-                                                  child: StakeorUnstake(
-                                                      action: "Stake",
-                                                      account: widget.account),
-                                                );
-                                              }).then((value) {
-                                            debugPrint("Dialog closed");
-                                            widget.callback();
-                                          });
-                                        },
-                                        child: Text(
-                                            AppLocalizations.of(context)!.stake,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: TextStyle(
-                                                fontSize: textsizebutton,
-                                                color: Colors.white)),
-                                      ),
-                                    )
-                                  : Container(),
-                              isbuttonactive
-                                  ? Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: ElevatedButton(
-                                        style: ButtonStyle(
-                                          backgroundColor:
-                                              WidgetStateProperty.all<Color>(
-                                                  unstakecolor),
-                                        ),
-                                        onPressed: () {
-                                          showDialog(
-                                              context: context,
-                                              barrierDismissible: true,
-                                              barrierColor: Colors.black
-                                                  .withOpacity(
-                                                      0.5), // Grau ausgegrauter Hintergrund
-                                              builder: (BuildContext context) {
-                                                return Dialog(
-                                                  child: StakeorUnstake(
-                                                      action: "Unstake",
-                                                      account: widget.account),
-                                                );
-                                              }).then((value) {
-                                            debugPrint("Dialog closed");
-                                            widget.callback();
-                                          });
-                                        },
-                                        child: Text(
-                                            AppLocalizations.of(context)!
-                                                .unstake,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: TextStyle(
-                                                fontSize: textsizebutton,
-                                                color: Colors.white)),
-                                      ),
-                                    )
-                                  : Container()
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 16),
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.red.withAlpha((0.1 * 255).toInt()),
-                borderRadius: BorderRadius.circular(10),
+              border: Border(
+                bottom: BorderSide(color: Colors.grey.withOpacity(0.5)),
               ),
-              child: Column(
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  ConstrainedBox(
-                    constraints: const BoxConstraints(
-                      minWidth: 300,
-                      maxWidth: 600,
-                    ),
-                    child: Table(
-                      border: const TableBorder.symmetric(
-                          inside: BorderSide(width: 1, color: Colors.black)),
-                      columnWidths: const {
-                        0: FlexColumnWidth(1),
-                        1: FlexColumnWidth(2),
-                      },
-                      children: [
-                        //INFO
-                        TableRow(children: [
-                          TableCell(
-                              child: Center(
-                                  child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(AppLocalizations.of(context)!.purchased,
-                                maxLines: 1,
-                                style: const TextStyle(fontSize: 20, 
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    )),
-                          ))),
-                          TableCell(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                children: [
-                                  Text(
-                                    AppLocalizations.of(context)!
-                                        .purchasedexplain,
-                                    style: TextStyle(fontSize: textsize),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ]),
-
-                        //RAM
-                        TableRow(
-                          children: [
-                            TableCell(
-                              verticalAlignment: TableCellVerticalAlignment.middle,
-                                child: Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Tooltip(
-                                    message: AppLocalizations.of(context)!
-                                        .ramexplain,
-                                    child: Text(
-                                      "RAM",
-                                      style: TextStyle(fontSize: textsizeleft),
-                                    ),
-                                  ),
-                                ),
-                                //Lottie.asset("assets/lottie/ram.json",
-                                //  width: 150,
-                                //  height: 150,
-                                //  controller: controllerram,
-                                //),
-                              ],
-                            )),
-                            TableCell(
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Column(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Text("$totalram kb",
-                                          style: TextStyle(
-                                              fontSize: textsizeright)),
-                                    ),
-                                    LinearPercentIndicator(
-                                      lineHeight: 30,
-                                      barRadius: const Radius.circular(15),
-                                      percent: 0,
-                                      backgroundColor: Ressourcecolor.background
-                                          .withAlpha((0.5 * 255).toInt()),
-                                      progressColor: Ressourcecolor.ram,
-                                      center: Text(
-                                          "$ramUsage kb / $ramQuota kb",
-                                          overflow: TextOverflow.ellipsis),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-
-                        //StakeButton
-                        TableRow(children: [
-                          const TableCell(
-                            child: Text(""),
-                          ),
-                          TableCell(
-                              child: Wrap(
-                            alignment: WrapAlignment.center,
-                            spacing: 10,
-                            children: [
-                              isbuttonactive
-                                  ? Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: ElevatedButton(
-                                        style: ButtonStyle(
-                                          backgroundColor:
-                                              WidgetStateProperty.all<Color>(
-                                                  stakecolor),
-                                        ),
-                                        onPressed: () {
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(SnackBar(
-                                            content: Text(AppLocalizations.of(
-                                                    context)!
-                                                .thisfeatureisnotavailableyet),
-                                          ));
-                                        },
-                                        child: Text(
-                                          AppLocalizations.of(context)!.buy,
-                                          style: TextStyle(
-                                              fontSize: textsizebutton,
-                                              color: Colors.white),
-                                        ),
-                                      ),
-                                    )
-                                  : Container(),
-                              isbuttonactive
-                                  ? Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: ElevatedButton(
-                                        style: ButtonStyle(
-                                          backgroundColor:
-                                              WidgetStateProperty.all<Color>(
-                                                  unstakecolor),
-                                        ),
-                                        onPressed: () {
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(
-                                            SnackBar(
-                                              content: Text(
-                                                AppLocalizations.of(context)!
-                                                    .thisfeatureisnotavailableyet,
-                                              ),
-                                            ),
-                                          );
-                                        },
-                                        child: Text(
-                                          AppLocalizations.of(context)!.sell,
-                                          style: TextStyle(
-                                              fontSize: textsizebutton,
-                                              color: Colors.white),
-                                        ),
-                                      ),
-                                    )
-                                  : Container()
-                            ],
-                          )),
-                        ])
-                      ],
-                    ),
-                  ),
+                  Text("CPU", style: TextStyle(fontSize: textsizeleft)),
+                  Text("$totalcpu ${AppConfig.systemtoken}",
+                      style: TextStyle(fontSize: textsizeright)),
                 ],
               ),
             ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: LinearPercentIndicator(
+              lineHeight: 30,
+              barRadius: const Radius.circular(15),
+              percent: percentcpu,
+              backgroundColor:
+                  Ressourcecolor.background.withAlpha((0.5 * 255).toInt()),
+              progressColor: Ressourcecolor.cpu,
+              center: Padding(
+                padding: const EdgeInsets.only(right: 8, left: 8),
+                child: Text("$cpuLimitused s / $cpuLimitmax s",
+                    overflow: TextOverflow.ellipsis),
+              ),
+            ),
+          ),
+          Wrap(
+            alignment: WrapAlignment.center,
+            spacing: 10,
+            children: [
+              isbuttonactive
+                  ? Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor:
+                              WidgetStateProperty.all<Color>(stakecolor),
+                        ),
+                        onPressed: () {
+                          showDialog(
+                              context: context,
+                              barrierDismissible: true,
+                              barrierColor: Colors.black.withOpacity(0.5),
+                              builder: (BuildContext context) {
+                                return Dialog(
+                                  child: StakeorUnstake(
+                                      action: "Stake", account: widget.account),
+                                );
+                              }).then((value) {
+                            debugPrint("Dialog closed");
+                            widget.callback();
+                          });
+                        },
+                        child: Text(AppLocalizations.of(context)!.stake,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                                fontSize: textsizebutton, color: Colors.white)),
+                      ),
+                    )
+                  : Container(),
+              isbuttonactive
+                  ? Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor:
+                              WidgetStateProperty.all<Color>(unstakecolor),
+                        ),
+                        onPressed: () {
+                          showDialog(
+                              context: context,
+                              barrierDismissible: true,
+                              barrierColor: Colors.black.withOpacity(0.5),
+                              builder: (BuildContext context) {
+                                return Dialog(
+                                  child: StakeorUnstake(
+                                      action: "Unstake",
+                                      account: widget.account),
+                                );
+                              }).then((value) {
+                            debugPrint("Dialog closed");
+                            widget.callback();
+                          });
+                        },
+                        child: Text(AppLocalizations.of(context)!.unstake,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                                fontSize: textsizebutton, color: Colors.white)),
+                      ),
+                    )
+                  : Container()
+            ],
+          ),
+          // NET Section
+          Container(
+            decoration: BoxDecoration(
+              border: Border(
+                bottom: BorderSide(color: Colors.grey.withOpacity(0.5)),
+              ),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("NET", style: TextStyle(fontSize: textsizeleft)),
+                  Text("$totalnet ${AppConfig.systemtoken}",
+                      style: TextStyle(fontSize: textsizeright)),
+                ],
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: LinearPercentIndicator(
+              lineHeight: 30,
+              barRadius: const Radius.circular(15),
+              percent: percentnet,
+              backgroundColor:
+                  Ressourcecolor.background.withAlpha((0.5 * 255).toInt()),
+              progressColor: Ressourcecolor.net,
+              center: Text("$netLimitused kb / $netLimitmax kb",
+                  overflow: TextOverflow.ellipsis),
+            ),
+          ),
+          Wrap(
+            alignment: WrapAlignment.center,
+            spacing: 10,
+            children: [
+              isbuttonactive
+                  ? Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor:
+                              WidgetStateProperty.all<Color>(stakecolor),
+                        ),
+                        onPressed: () {
+                          showDialog(
+                              context: context,
+                              barrierDismissible: true,
+                              barrierColor: Colors.black.withOpacity(0.5),
+                              builder: (BuildContext context) {
+                                return Dialog(
+                                  child: StakeorUnstake(
+                                      action: "Stake", account: widget.account),
+                                );
+                              }).then((value) {
+                            debugPrint("Dialog closed");
+                            widget.callback();
+                          });
+                        },
+                        child: Text(AppLocalizations.of(context)!.stake,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                                fontSize: textsizebutton, color: Colors.white)),
+                      ),
+                    )
+                  : Container(),
+              isbuttonactive
+                  ? Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor:
+                              WidgetStateProperty.all<Color>(unstakecolor),
+                        ),
+                        onPressed: () {
+                          showDialog(
+                              context: context,
+                              barrierDismissible: true,
+                              barrierColor: Colors.black.withOpacity(0.5),
+                              builder: (BuildContext context) {
+                                return Dialog(
+                                  child: StakeorUnstake(
+                                      action: "Unstake",
+                                      account: widget.account),
+                                );
+                              }).then((value) {
+                            debugPrint("Dialog closed");
+                            widget.callback();
+                          });
+                        },
+                        child: Text(AppLocalizations.of(context)!.unstake,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                                fontSize: textsizebutton, color: Colors.white)),
+                      ),
+                    )
+                  : Container()
+            ],
+          ),
+          // Staked Total Section
+          Container(
+            decoration: BoxDecoration(
+              border: Border(
+                bottom: BorderSide(color: Colors.grey.withOpacity(0.5)),
+              ),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(AppLocalizations.of(context)!.stakedtotal,
+                      style: TextStyle(fontSize: textsizeleft)),
+                  Text("${totalcpu + totalnet} ${AppConfig.systemtoken}",
+                      style: TextStyle(fontSize: textsizeright)),
+                ],
+              ),
+            ),
+          ),
+          // RAM Section
+          Container(
+            decoration: BoxDecoration(
+              border: Border(
+                bottom: BorderSide(color: Colors.grey.withOpacity(0.5)),
+              ),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("RAM", style: TextStyle(fontSize: textsizeleft)),
+                  Text("$totalram kb", style: TextStyle(fontSize: textsizeright)),
+                ],
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: LinearPercentIndicator(
+              lineHeight: 30,
+              barRadius: const Radius.circular(15),
+              percent: ramUsage / ramQuota,
+              backgroundColor:
+                  Ressourcecolor.background.withAlpha((0.5 * 255).toInt()),
+              progressColor: Ressourcecolor.ram,
+              center: Text("$ramUsage kb / $ramQuota kb",
+                  overflow: TextOverflow.ellipsis),
+            ),
+          ),
+          Wrap(
+            alignment: WrapAlignment.center,
+            spacing: 10,
+            children: [
+              isbuttonactive
+                  ? Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor:
+                              WidgetStateProperty.all<Color>(stakecolor),
+                        ),
+                        onPressed: () {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text(AppLocalizations.of(context)!
+                                .thisfeatureisnotavailableyet),
+                          ));
+                        },
+                        child: Text(AppLocalizations.of(context)!.buy,
+                            style: TextStyle(
+                                fontSize: textsizebutton, color: Colors.white)),
+                      ),
+                    )
+                  : Container(),
+              isbuttonactive
+                  ? Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor:
+                              WidgetStateProperty.all<Color>(unstakecolor),
+                        ),
+                        onPressed: () {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text(AppLocalizations.of(context)!
+                                .thisfeatureisnotavailableyet),
+                          ));
+                        },
+                        child: Text(AppLocalizations.of(context)!.sell,
+                            style: TextStyle(
+                                fontSize: textsizebutton, color: Colors.white)),
+                      ),
+                    )
+                  : Container()
+            ],
           ),
         ],
       ),
