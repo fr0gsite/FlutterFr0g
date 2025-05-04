@@ -370,13 +370,7 @@ class _ResourceBalanceState extends State<ResourceBalance>
             ),
           ),
           // RAM Section
-          Container(
-            decoration: BoxDecoration(
-              border: Border(
-                bottom: BorderSide(color: Colors.grey.withOpacity(0.5)),
-              ),
-            ),
-            child: Padding(
+          Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -386,7 +380,7 @@ class _ResourceBalanceState extends State<ResourceBalance>
                 ],
               ),
             ),
-          ),
+         
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: LinearPercentIndicator(
