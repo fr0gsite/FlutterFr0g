@@ -149,29 +149,45 @@ class _ResourceBalanceState extends State<ResourceBalance>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // CPU Section
-          Container(
-            decoration: BoxDecoration(
-              border: Border(
-                bottom: BorderSide(color: Colors.grey.withOpacity(0.5)),
-              ),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("CPU", style: TextStyle(fontSize: textsizeleft)),
-                  Text("$totalcpu ${AppConfig.systemtoken}",
-                      style: TextStyle(fontSize: textsizeright)),
-                ],
-              ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    Icon(
+                      Icons.memory,
+                      size: tableiconsize,
+                      color: Ressourcecolor.cpu,
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Text("CPU", style: TextStyle(fontSize: textsizeleft, fontWeight: FontWeight.bold)),
+                  ],
+                ),
+                Flexible(
+                  child: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Text(
+                      AppLocalizations.of(context)!.cpuexplain,
+                      style: TextStyle(fontSize: 13),
+                      maxLines: 3,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ),
+                Text("$totalcpu ${AppConfig.systemtoken}",
+                    style: TextStyle(fontSize: textsizeright)),
+              ],
             ),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: LinearPercentIndicator(
               lineHeight: 30,
-              barRadius: const Radius.circular(15),
+              barRadius: const Radius.circular(8),
               percent: percentcpu,
               backgroundColor:
                   Ressourcecolor.background.withAlpha((0.5 * 255).toInt()),
@@ -183,97 +199,47 @@ class _ResourceBalanceState extends State<ResourceBalance>
               ),
             ),
           ),
-          Wrap(
-            alignment: WrapAlignment.center,
-            spacing: 10,
-            children: [
-              isbuttonactive
-                  ? Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                          backgroundColor:
-                              WidgetStateProperty.all<Color>(stakecolor),
-                        ),
-                        onPressed: () {
-                          showDialog(
-                              context: context,
-                              barrierDismissible: true,
-                              barrierColor: Colors.black.withOpacity(0.5),
-                              builder: (BuildContext context) {
-                                return Dialog(
-                                  child: StakeorUnstake(
-                                      action: "Stake", account: widget.account),
-                                );
-                              }).then((value) {
-                            debugPrint("Dialog closed");
-                            widget.callback();
-                          });
-                        },
-                        child: Text(AppLocalizations.of(context)!.stake,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                                fontSize: textsizebutton, color: Colors.white)),
-                      ),
-                    )
-                  : Container(),
-              isbuttonactive
-                  ? Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                          backgroundColor:
-                              WidgetStateProperty.all<Color>(unstakecolor),
-                        ),
-                        onPressed: () {
-                          showDialog(
-                              context: context,
-                              barrierDismissible: true,
-                              barrierColor: Colors.black.withOpacity(0.5),
-                              builder: (BuildContext context) {
-                                return Dialog(
-                                  child: StakeorUnstake(
-                                      action: "Unstake",
-                                      account: widget.account),
-                                );
-                              }).then((value) {
-                            debugPrint("Dialog closed");
-                            widget.callback();
-                          });
-                        },
-                        child: Text(AppLocalizations.of(context)!.unstake,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                                fontSize: textsizebutton, color: Colors.white)),
-                      ),
-                    )
-                  : Container()
-            ],
-          ),
+         
           // NET Section
-          Container(
-            decoration: BoxDecoration(
-              border: Border(
-                bottom: BorderSide(color: Colors.grey.withOpacity(0.5)),
-              ),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("NET", style: TextStyle(fontSize: textsizeleft)),
-                  Text("$totalnet ${AppConfig.systemtoken}",
-                      style: TextStyle(fontSize: textsizeright)),
-                ],
-              ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    Icon(
+                      Icons.network_check,
+                      size: tableiconsize,
+                      color: Ressourcecolor.net,
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Text("NET", style: TextStyle(fontSize: textsizeleft, fontWeight: FontWeight.bold)),
+                  ],
+                ),
+                Flexible(
+                  child: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Text(
+                      AppLocalizations.of(context)!.netexplain,
+                      style: TextStyle(fontSize: 13),
+                      maxLines: 3,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ),
+                Text("$totalnet ${AppConfig.systemtoken}",
+                    style: TextStyle(fontSize: textsizeright)),
+              ],
             ),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: LinearPercentIndicator(
               lineHeight: 30,
-              barRadius: const Radius.circular(15),
+              barRadius: const Radius.circular(8),
               percent: percentnet,
               backgroundColor:
                   Ressourcecolor.background.withAlpha((0.5 * 255).toInt()),
@@ -290,9 +256,11 @@ class _ResourceBalanceState extends State<ResourceBalance>
                   ? Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: ElevatedButton(
-                        style: ButtonStyle(
-                          backgroundColor:
-                              WidgetStateProperty.all<Color>(stakecolor),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: stakecolor,
+                          shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          ),
                         ),
                         onPressed: () {
                           showDialog(
@@ -320,9 +288,11 @@ class _ResourceBalanceState extends State<ResourceBalance>
                   ? Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: ElevatedButton(
-                        style: ButtonStyle(
-                          backgroundColor:
-                              WidgetStateProperty.all<Color>(unstakecolor),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: unstakecolor,
+                          shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          ),
                         ),
                         onPressed: () {
                           showDialog(
@@ -350,24 +320,20 @@ class _ResourceBalanceState extends State<ResourceBalance>
             ],
           ),
           // Staked Total Section
-          Container(
-            decoration: BoxDecoration(
-              border: Border(
-                bottom: BorderSide(color: Colors.grey.withOpacity(0.5)),
-              ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(AppLocalizations.of(context)!.stakedtotal,
+                    style: TextStyle(fontSize: textsizeleft)),
+                Text("${totalcpu + totalnet} ${AppConfig.systemtoken}",
+                    style: TextStyle(fontSize: textsizeright)),
+              ],
             ),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(AppLocalizations.of(context)!.stakedtotal,
-                      style: TextStyle(fontSize: textsizeleft)),
-                  Text("${totalcpu + totalnet} ${AppConfig.systemtoken}",
-                      style: TextStyle(fontSize: textsizeright)),
-                ],
-              ),
-            ),
+          ),
+          SizedBox(
+            height: 30,
           ),
           // RAM Section
           Padding(
@@ -375,7 +341,30 @@ class _ResourceBalanceState extends State<ResourceBalance>
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("RAM", style: TextStyle(fontSize: textsizeleft)),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.memory,
+                        size: tableiconsize,
+                        color: Ressourcecolor.ram,
+                      ),
+                      Text("RAM", style: TextStyle(fontSize: textsizeleft, fontWeight: FontWeight.bold)),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                    ],
+                  ),
+                    Flexible(
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Text(
+                        AppLocalizations.of(context)!.ramexplain,
+                        style: TextStyle(fontSize: 13),
+                        maxLines: 3,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ),
                   Text("$totalram kb", style: TextStyle(fontSize: textsizeright)),
                 ],
               ),
@@ -385,7 +374,7 @@ class _ResourceBalanceState extends State<ResourceBalance>
             padding: const EdgeInsets.all(8.0),
             child: LinearPercentIndicator(
               lineHeight: 30,
-              barRadius: const Radius.circular(15),
+              barRadius: const Radius.circular(8),
               percent: ramUsage / ramQuota,
               backgroundColor:
                   Ressourcecolor.background.withAlpha((0.5 * 255).toInt()),
@@ -402,9 +391,11 @@ class _ResourceBalanceState extends State<ResourceBalance>
                   ? Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: ElevatedButton(
-                        style: ButtonStyle(
-                          backgroundColor:
-                              WidgetStateProperty.all<Color>(stakecolor),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: stakecolor,
+                          shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          ),
                         ),
                         onPressed: () {
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -422,9 +413,11 @@ class _ResourceBalanceState extends State<ResourceBalance>
                   ? Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: ElevatedButton(
-                        style: ButtonStyle(
-                          backgroundColor:
-                              WidgetStateProperty.all<Color>(unstakecolor),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: unstakecolor,
+                          shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          ),
                         ),
                         onPressed: () {
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
