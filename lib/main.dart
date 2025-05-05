@@ -81,7 +81,7 @@ class _MyAppState extends State<App> {
         title: 'fr0gsite',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          brightness: Brightness.dark,
+          brightness: Brightness.light,
           primarySwatch: Colors.blue,
           scaffoldBackgroundColor: AppColor.niceblack,
           appBarTheme: const AppBarTheme(
