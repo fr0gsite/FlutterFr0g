@@ -104,7 +104,7 @@
     "punishment5":"Ban forever",
 
     "resources":"Resource",
-    "resourcesexplain":"Are needed to perform actions on the blockchain. Resources are consumed during transactions",
+    "resourcesexplain":"Staked resources are consumed during transactions with the blockchain and are fully restored within 3 days",
     "staked":"Staked",
     "stake":"Stake",
     "unstake":"Unstake",
@@ -407,6 +407,7 @@
     "openreport":"Open",
     "closedreports":"Closed",
     "applyasatruster":"Apply as a truster",
+    "applysuccessful":"Applyed successful",
     "urgentreport":"Urgent",
     "important":"Important",
     "selectedrule":"Selected Rule",

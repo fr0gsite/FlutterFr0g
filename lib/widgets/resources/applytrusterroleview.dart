@@ -72,15 +72,22 @@ class _ApplyTrusterroleViewState extends State<ApplyTrusterroleView> {
                           chainactions.setusernameandpermission(username, permission);
                           await chainactions.applyfortrusterrole(username).then(
                             (value) {
-                              debugPrint("Apply for Truster Role: $value");
-                            },
+                              if (value) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text(AppLocalizations.of(context)!.applysuccessful)),
+                                );
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text(AppLocalizations.of(context)!.sorrysomethingwentwrong)),
+                                );
+                              }
+                            }
                           ).catchError((error) {
                             debugPrint("Error applying for Truster Role: $error");
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text("Error: $error")),
+                            );
                           });
-
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text("Applied for Truster Role")),
-                          );
                         }
                       },
                     ),

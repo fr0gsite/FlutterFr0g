@@ -358,6 +358,9 @@ class _ResourceBalanceState extends State<ResourceBalance>
                           size: tableiconsize,
                           color: Ressourcecolor.ram,
                         ),
+                        const SizedBox(
+                          width: 10,
+                        ),
                         Text("RAM", style: TextStyle(fontSize: textsizeleft, fontWeight: FontWeight.bold)),
                         const SizedBox(
                           width: 10,
