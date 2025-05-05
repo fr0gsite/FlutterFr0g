@@ -101,7 +101,7 @@
     "punishment5":"Bann für immer",
 
     "resources":"Ressourcen",
-    "resourcesexplain":"Werden bei Transaktionen mit der Blockchain verbraucht. Ressourcen lassen sich durch staking reservieren.",
+    "resourcesexplain":"Staked Ressourcen werden bei Transaktionen mit der Blockchain verbraucht und werden innerhalb von 3 Tagen vollständig wiederhergestellt",
     "staked":"Staked",
     "stake":"Stake",
     "unstake":"Unstake",

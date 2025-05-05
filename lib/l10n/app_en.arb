@@ -410,6 +410,7 @@
     "urgentreport":"Urgent",
     "important":"Important",
     "selectedrule":"Selected Rule",
-    "votes":"Votes"
+    "votes":"Votes",
+    "stakedtotal":"Total Staked"
 
 }
