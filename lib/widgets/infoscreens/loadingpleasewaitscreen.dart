@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
 class Loadingpleasewaitscreen extends StatelessWidget {
-  const Loadingpleasewaitscreen({super.key});
+  final ValueNotifier<double> downloadProgress;
+
+  const Loadingpleasewaitscreen({super.key, required this.downloadProgress});
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +31,17 @@ class Loadingpleasewaitscreen extends StatelessWidget {
           children: [
             Lottie.asset('assets/lottie/loadingdots.json',
                 repeat: true, animate: true, height: elementheight * 6),
+            SizedBox(height: elementheight),
+            ValueListenableBuilder<double>(
+              valueListenable: downloadProgress,
+              builder: (context, value, child) {
+                return LinearProgressIndicator(
+                  value: value,
+                  backgroundColor: Colors.grey,
+                  valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
+                );
+              },
+            ),
           ],
         ),
       ),

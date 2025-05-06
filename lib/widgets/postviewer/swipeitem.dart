@@ -26,6 +26,7 @@ class SwipeItem extends StatefulWidget {
 class _SwipeItemState extends State<SwipeItem> {
   Future initvideoplayer = Future.value(false);
   late VideoPlayerController videocontroller;
+  final ValueNotifier<double> downloadProgress = ValueNotifier<double>(0.0);
 
   @override
   void initState() {
@@ -108,10 +109,10 @@ class _SwipeItemState extends State<SwipeItem> {
                       ],
                     );
                   } else {
-                    return const Loadingpleasewaitscreen();
+                    return Loadingpleasewaitscreen(downloadProgress: downloadProgress);
                   }
                 } else {
-                  return const Loadingpleasewaitscreen();
+                  return Loadingpleasewaitscreen(downloadProgress: downloadProgress);
                 }
               });
         }),
@@ -132,7 +133,7 @@ class _SwipeItemState extends State<SwipeItem> {
     if (currentupload.uploadid == widget.upload.uploadid) {
       if (!currentupload.havedata()) {
         Uint8List response = await IPFSActions.fetchipfsdata(
-            context, currentupload.uploadipfshash);
+            context, currentupload.uploadipfshash, downloadProgress);
         if (mounted) {
           Provider.of<PostviewerStatus>(context, listen: false)
               .setdata(response, currentupload.uploadid);
