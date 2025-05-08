@@ -78,7 +78,7 @@ dependencies:
   #flutter_bloc: ^8.1.2
   http: ^1.0.0
   url_strategy: ^0.3.0
-  blur: ^4.0.0
+  blur: ^4.0.2
   qr_flutter: ^4.1.0
   audioplayers: ^6.0.0
   #universal_io: ^2.2.0
