@@ -56,7 +56,6 @@ class _HomeTabBarState extends State<HomeTabBar> with TickerProviderStateMixin {
       length: 4,
       child: TabBar(
           onTap: (value) {
-            debugPrint("TabBar: $value");
             setState(() {
               playAnimation();
             });

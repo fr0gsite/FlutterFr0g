@@ -31,9 +31,11 @@ class _HomeState extends State<Home> {
   }
 
   void tabbarPressed(int index) {
+    if(index == currenttabindex) {
+      return; // No need to update the state if the same tab is pressed again
+    }
     setState(() {
       currenttabindex = index;
-      debugPrint("currenttabindex: $currenttabindex");
     });
   }
 
