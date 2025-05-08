@@ -320,6 +320,16 @@ class StartPoint extends State<Fr0gsiteApp> {
                                             launchUrl(Uri.parse(telegramurl));
                                           },
                                         ),
+                                        IconButton(
+                                          icon: Image.asset(
+                                            "assets/images/github60.png",
+                                            width: 22,
+                                            height: 22,
+                                          ),
+                                          onPressed: () {
+                                            launchUrl(Uri.parse(githuburl));
+                                          },
+                                        ),
                                         TextButton(
                                           onPressed: () {
                                             launchUrl(Uri.parse(githuburl));
