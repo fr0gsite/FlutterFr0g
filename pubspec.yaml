@@ -21,7 +21,7 @@ dependencies:
 
   #Accessbility
   google_fonts: ^6.2.1
-  share_plus: ^10.0.0
+  share_plus: ^11.0.0
   cupertino_icons: ^1.0.2
   url_launcher: ^6.3.1
   qr_code_scanner: ^1.0.1
