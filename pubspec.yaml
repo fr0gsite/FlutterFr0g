@@ -21,7 +21,7 @@ dependencies:
 
   #Accessbility
   google_fonts: ^6.2.1
-  share_plus: ^10.0.0
+  share_plus: ^11.0.0
   cupertino_icons: ^1.0.2
   url_launcher: ^6.3.1
   qr_code_scanner: ^1.0.1
@@ -40,7 +40,7 @@ dependencies:
   like_button: ^2.0.5
   file_picker: ^8.1.2
   percent_indicator: ^4.2.3
-  elegant_notification: ^2.2.2
+  elegant_notification: ^2.5.1
   settings_ui: ^2.0.2
   another_xlider: ^3.0.1 #for audio adjustment in postviewer
   action_slider: ^0.7.0
@@ -55,7 +55,7 @@ dependencies:
   
   #Animation
   lottie: ^3.1.0
-  video_player: ^2.8.2 #Support only Mobile and Web. Todo find video_player for Windows
+  video_player: ^2.9.5 #Support only Mobile and Web. Todo find video_player for Windows
   video_thumbnail: ^0.5.3
   
   #Blockchain
@@ -74,11 +74,11 @@ dependencies:
   fluro: ^2.0.5
   pointycastle: ^3.9.1
   universal_html: ^2.2.3
-  package_info_plus: ^8.0.0 #Querying information about the application package
+  package_info_plus: ^8.3.0 #Querying information about the application package
   #flutter_bloc: ^8.1.2
   http: ^1.0.0
   url_strategy: ^0.3.0
-  blur: ^4.0.0
+  blur: ^4.0.2
   qr_flutter: ^4.1.0
   audioplayers: ^6.0.0
   #universal_io: ^2.2.0
