@@ -190,7 +190,7 @@ class AppConfig {
 
   static List<AppLanguage> applanguage = [
     AppLanguage("international/none", "none"),
-    AppLanguage("German", "de"),
+    AppLanguage("Deutsch", "de"),
     AppLanguage("English", "en"),
     AppLanguage("Français", "fr"),
     AppLanguage("Español", "es"),
@@ -203,6 +203,7 @@ class AppConfig {
     AppLanguage("हिन्दी", "hi"),
     AppLanguage("Italiano", "it"),
     AppLanguage("Čeština", "cs"),
+    AppLanguage("한국어", "ko"),
   ];
 }
 

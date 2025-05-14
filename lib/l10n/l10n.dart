@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+// Run autotranlation with the command: 
 
 class L10n {
   static final all = [
@@ -15,5 +16,6 @@ class L10n {
     const Locale('hi', 'IN'),
     const Locale('it', 'IT'),
     const Locale('cs', 'CZ'),
+    const Locale('ko', 'KR'),
   ];
 }
