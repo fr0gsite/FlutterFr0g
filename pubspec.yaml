@@ -97,7 +97,7 @@ dev_dependencies:
   integration_test:
     sdk: flutter
   test: any
-  flutter_lints: ^4.0.0
+  flutter_lints: ^5.0.0
 
 flutter_launcher_icons:
   #After changes in flutter_icons, generate icons with: dart run flutter_launcher_icons
