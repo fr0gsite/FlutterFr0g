@@ -30,11 +30,6 @@ loginwhencredentialsarestored(context) async {
         debugPrint("No username found in secure storage");
       }
     });
-
-    //Login for debugging purposes
-    Provider.of<GlobalStatus>(context, listen: false).login("asdfasdfff", "active");
-    secstorage.write(key: AppConfig.secureStorageusername,value: "asdfasdfff");
-    secstorage.write(key: AppConfig.secureStoragePKey, value: "5J3DdDcQVZzBmEvRAdS8c2mZMcfMXaEVipL6qBFqbLGri9sd2MB");
   }
 }
 

@@ -78,7 +78,7 @@ class _MyAppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'fr0gsite',
+        title: 'Fr0gsite',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           brightness: Brightness.light,

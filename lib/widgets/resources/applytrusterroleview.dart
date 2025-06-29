@@ -10,10 +10,10 @@ class ApplyTrusterroleView extends StatefulWidget {
   const ApplyTrusterroleView({super.key, required this.userconfig});
   final UserConfig userconfig;
   @override
-  _ApplyTrusterroleViewState createState() => _ApplyTrusterroleViewState();
+  ApplyTrusterroleViewState createState() => ApplyTrusterroleViewState();
 }
 
-class _ApplyTrusterroleViewState extends State<ApplyTrusterroleView> {
+class ApplyTrusterroleViewState extends State<ApplyTrusterroleView> {
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -27,7 +27,7 @@ class _ApplyTrusterroleViewState extends State<ApplyTrusterroleView> {
         ),
         // Foreground content
         Container(
-          color: Colors.black.withOpacity(0.6), // Optional overlay for better text visibility
+          color: Colors.black.withAlpha((0.6 * 255).toInt()), // Optional overlay for better text visibility
           child: Column(
             children: [
               Padding(

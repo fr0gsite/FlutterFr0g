@@ -11,10 +11,10 @@ class VideoProcessIndicatorView extends StatefulWidget {
 
   @override
   State<VideoProcessIndicatorView> createState() =>
-      _VideoProcessIndicatorViewState();
+      VideoProcessIndicatorViewState();
 }
 
-class _VideoProcessIndicatorViewState extends State<VideoProcessIndicatorView> {
+class VideoProcessIndicatorViewState extends State<VideoProcessIndicatorView> {
   bool hide = true;
   DateTime lastactiveTime = DateTime.now();
   late Timer timer;

@@ -9,10 +9,10 @@ class ActivityToken extends StatefulWidget {
   const ActivityToken({super.key, required this.userconfig});
   final UserConfig userconfig;
   @override
-  _ActivityTokenState createState() => _ActivityTokenState();
+  ActivityTokenState createState() => ActivityTokenState();
 }
 
-class _ActivityTokenState extends State<ActivityToken> {
+class ActivityTokenState extends State<ActivityToken> {
   @override
   Widget build(BuildContext context) {
     return Container(

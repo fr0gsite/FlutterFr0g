@@ -197,7 +197,7 @@ Widget shareButton(context) {
                   .getcurrentupload();
           String posturl = "$postviewerurl/${uploadtoshare.uploadid}";
           if (kIsWeb) {
-            Share.share(posturl);
+            SharePlus.instance.share(ShareParams(text: posturl));
             return;
           }
           //Check if file is downloaded completely
@@ -218,16 +218,24 @@ Widget shareButton(context) {
           try {
             if (await File('$tempPath/$filename').exists()) {
               debugPrint("File already exists");
-              await Share.shareXFiles([XFile('$tempPath/$filename')],
-                  text: filetext);
+              await SharePlus.instance.share(
+                ShareParams(
+                  text: filetext,
+                  files: [XFile('$tempPath/$filename')],
+                ),
+              );
               return;
             } else {
               debugPrint(
                   "File does not exist. Creating file $tempPath/$filename");
               await File('$tempPath/$filename')
                   .writeAsBytes(uploadtoshare.data);
-              await Share.shareXFiles([XFile('$tempPath/$filename')],
-                  text: filetext);
+              await SharePlus.instance.share(
+                ShareParams(
+                  text: filetext,
+                  files: [XFile('$tempPath/$filename')],
+                ),
+              );
             }
           } catch (e) {
             Globalnotifications.shownotification(
