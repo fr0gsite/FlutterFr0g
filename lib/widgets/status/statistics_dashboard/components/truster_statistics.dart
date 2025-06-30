@@ -5,15 +5,16 @@ import 'package:fr0gsite/datatypes/truster.dart';
 import 'package:fr0gsite/nameconverter.dart';
 import 'package:fr0gsite/l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
+import 'dashboard_card.dart';
 
-class StatisticTrusterList extends StatefulWidget {
-  const StatisticTrusterList({super.key});
+class TrusterStatistics extends StatefulWidget {
+  const TrusterStatistics({super.key});
 
   @override
-  State<StatisticTrusterList> createState() => _StatisticTrusterListState();
+  State<TrusterStatistics> createState() => _TrusterStatisticsState();
 }
 
-class _StatisticTrusterListState extends State<StatisticTrusterList> {
+class _TrusterStatisticsState extends State<TrusterStatistics> {
   List<Truster> trusterlist = [];
   List<DataRow> dataRow = [];
   bool sortAscending = true;
@@ -51,9 +52,7 @@ class _StatisticTrusterListState extends State<StatisticTrusterList> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 4,
-      color: AppColor.niceblack,
+    return DashboardCard(
       child: Center(
         child: SingleChildScrollView(
           child: Padding(
