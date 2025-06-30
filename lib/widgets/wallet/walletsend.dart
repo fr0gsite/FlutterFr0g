@@ -163,7 +163,6 @@ class _WalletSendState extends State<WalletSend> {
                           builder: (context) {
                             return MobileScanner(
                               controller: controller,
-                              allowDuplicates: false,
                               onDetect: (capture) {
                                 final code =
                                     capture.barcodes.first.rawValue ?? '';
