@@ -1,5 +1,5 @@
 import 'package:fr0gsite/config.dart';
-import 'package:fr0gsite/widgets/status/dashboard/dashboardwidget.dart';
+import 'package:fr0gsite/widgets/status/statistics_dashboard/statistics_dashboard.dart';
 import 'package:fr0gsite/widgets/status/producervote.dart';
 import 'package:fr0gsite/widgets/status/transactiontimeline.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +23,7 @@ class StatusState extends State<Status> {
   List<Widget> widgetOptions = <Widget>[
     const Expanded(child: TransactionTimeline()),
     const Expanded(child: Producervote()),
-    const Expanded(child: DashboardWidget()),
+    const Expanded(child: StatisticsDashboard()),
   ];
 
   @override
