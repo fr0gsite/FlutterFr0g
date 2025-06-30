@@ -65,6 +65,7 @@ class _GlobalStatisticsListState extends State<GlobalStatisticsList> {
           ),
         ),
       ],
+      )
     );
   }
 

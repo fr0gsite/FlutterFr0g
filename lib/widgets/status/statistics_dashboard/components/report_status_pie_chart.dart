@@ -94,7 +94,7 @@ class _ReportStatusPieChartState extends State<ReportStatusPieChart>
           ),
         ),
       ],
-    );
+      ));
   }
 
   Future<List<Statistics>> loadreportdata() async {
