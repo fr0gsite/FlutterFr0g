@@ -9,7 +9,7 @@ import 'package:eosdart/eosdart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:fr0gsite/l10n/app_localizations.dart';
 
 class WalletSend extends StatefulWidget {
@@ -25,9 +25,7 @@ class _WalletSendState extends State<WalletSend> {
   TextEditingController sendtotextcontroller = TextEditingController();
   TextEditingController amounttextcontroller = TextEditingController();
   TextEditingController memotextcontroller = TextEditingController();
-  Barcode? result;
-  QRViewController? controller;
-  final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
+  final MobileScannerController controller = MobileScannerController();
 
   @override
   void initState() {
@@ -144,7 +142,7 @@ class _WalletSendState extends State<WalletSend> {
                     }
                   }
 
-                  await controller?.toggleFlash();
+                  await controller.toggleTorch();
                   setState(() {});
                 },
                 icon: const Icon(Icons.search, color: Colors.white, size: 30),
@@ -157,37 +155,30 @@ class _WalletSendState extends State<WalletSend> {
                       Provider.of<GlobalStatus>(context, listen: false)
                               .platform ==
                           Platformdetectionstatus.ios) {
-                    await controller?.toggleFlash();
+                    await controller.toggleTorch();
                     setState(
                       () {
                         showDialog(
                           context: context,
                           builder: (context) {
-                            return QRView(
-                              key: qrKey,
-                              formatsAllowed: const [BarcodeFormat.qrcode],
-                              onQRViewCreated: (controller) {
-                                this.controller = controller;
-                                controller.scannedDataStream.listen(
-                                  (scanData) {
-                                    setState(
-                                      () {
-                                        List<String> splitstring =
-                                            scanData.code?.split(":") ??
-                                                ["", ""];
-                                        if (splitstring[0] == "cb" &&
-                                            splitstring[1] == "actions" &&
-                                            splitstring[2] == "sendto") {
-                                          sendtotextcontroller.text =
-                                              splitstring[3];
-                                        }
-                                      },
-                                    );
-                                    if(context.mounted){
-                                      Navigator.pop(context);
-                                    }
-                                  },
-                                );
+                            return MobileScanner(
+                              controller: controller,
+                              allowDuplicates: false,
+                              onDetect: (capture) {
+                                final code =
+                                    capture.barcodes.first.rawValue ?? '';
+                                List<String> splitstring = code.split(":");
+                                if (splitstring.length > 3 &&
+                                    splitstring[0] == 'cb' &&
+                                    splitstring[1] == 'actions' &&
+                                    splitstring[2] == 'sendto') {
+                                  setState(() {
+                                    sendtotextcontroller.text = splitstring[3];
+                                  });
+                                }
+                                if (context.mounted) {
+                                  Navigator.pop(context);
+                                }
                               },
                             );
                           },
