@@ -6,7 +6,7 @@ import 'package:fr0gsite/widgets/upload/uploadcommunitynode/uploadscreencommunit
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fr0gsite/l10n/app_localizations.dart';
 
 class Uploadscreen3provider extends StatefulWidget {
   const Uploadscreen3provider({super.key});

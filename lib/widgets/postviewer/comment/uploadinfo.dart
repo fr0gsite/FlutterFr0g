@@ -3,7 +3,7 @@ import 'package:fr0gsite/datatypes/upload.dart';
 import 'package:fr0gsite/globalnotifications.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fr0gsite/l10n/app_localizations.dart';
 
 class UploadInfo extends StatefulWidget {
   const UploadInfo({super.key, required this.upload});

@@ -9,7 +9,7 @@ import 'package:fr0gsite/chainactions/chainactions.dart';
 import 'package:fr0gsite/config.dart';
 import 'package:fr0gsite/datatypes/globalstatus.dart';
 import 'package:fr0gsite/datatypes/uploadfeedback.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fr0gsite/l10n/app_localizations.dart';
 import 'package:fr0gsite/datatypes/uploadfilestatus.dart';
 import 'package:fr0gsite/widgets/upload/uploadcommunitynode/uploadkey.dart';
 import 'package:fr0gsite/widgets/upload/uploadcommunitynode/thumbnail_helper.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fr0gsite/datatypes/ipfsuploadnode.dart';
 import 'package:fr0gsite/datatypes/uploadfilestatus.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fr0gsite/l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 class ProviderList extends StatefulWidget {

@@ -7,7 +7,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 0.5.7
 
 environment:
-  sdk: 3.7.2
+  sdk: 3.8.1
   flutter: 3.27.3
 
 dependencies:
@@ -32,7 +32,7 @@ dependencies:
   ##Internationalization
   flutter_localizations:
     sdk: flutter
-  intl: ^0.19.0
+  intl: ^0.20.2
 
   ##UI
   toggle_switch: ^2.0.1
@@ -89,6 +89,7 @@ dependencies:
   convert: any
   http_parser: any
   image: any
+  flutter_gen: ^5.10.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

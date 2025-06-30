@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:settings_ui/settings_ui.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fr0gsite/l10n/app_localizations.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../config.dart';
 import '../../datatypes/globalstatus.dart';

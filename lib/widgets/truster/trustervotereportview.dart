@@ -9,7 +9,7 @@ import 'package:fr0gsite/datatypes/upload.dart';
 import 'package:fr0gsite/nameconverter.dart';
 import 'package:fr0gsite/widgets/cube/cube.dart';
 import 'package:fr0gsite/widgets/postviewer/swipeitem.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fr0gsite/l10n/app_localizations.dart';
 
 class TrusterVoteReportView extends StatefulWidget {
   final int reportid;

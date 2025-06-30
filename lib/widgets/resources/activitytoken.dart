@@ -3,7 +3,7 @@ import 'package:fr0gsite/config.dart';
 import 'package:fr0gsite/datatypes/userconfig.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fr0gsite/l10n/app_localizations.dart';
 
 class ActivityToken extends StatefulWidget {
   const ActivityToken({super.key, required this.userconfig});

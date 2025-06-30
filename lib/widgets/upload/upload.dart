@@ -8,7 +8,7 @@ import 'package:fr0gsite/widgets/upload/uploadscreen2requirements.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_stepper/easy_stepper.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fr0gsite/l10n/app_localizations.dart';
 
 class Upload extends StatefulWidget {
   const Upload({super.key});

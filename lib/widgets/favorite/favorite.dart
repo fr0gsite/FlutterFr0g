@@ -5,7 +5,7 @@ import 'package:fr0gsite/widgets/favorite/favoritetagsview.dart';
 import 'package:fr0gsite/widgets/favorite/favoriteuploadview.dart';
 import 'package:fr0gsite/widgets/infoscreens/pleaselogin.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fr0gsite/l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 class Favorite extends StatefulWidget {

@@ -6,7 +6,7 @@ import 'package:fr0gsite/datatypes/upload.dart';
 import 'package:fr0gsite/widgets/infoscreens/pleaselogin.dart';
 import 'package:fr0gsite/widgets/postviewer/comment/commentrichtext.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fr0gsite/l10n/app_localizations.dart';
 
 import '../postviewer/comment/timedifferencewidget.dart';
 import '../postviewer/commentandtagbutton.dart';

@@ -9,7 +9,7 @@ import 'package:fr0gsite/datatypes/rules.dart';
 import 'package:fr0gsite/widgets/report/reportnextbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fr0gsite/l10n/app_localizations.dart';
 
 class Report3 extends StatefulWidget {
   const Report3({super.key});

@@ -3,7 +3,7 @@ import 'package:fr0gsite/chainactions/chainactions.dart';
 import 'package:fr0gsite/datatypes/globalstatus.dart';
 import 'package:fr0gsite/datatypes/userconfig.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fr0gsite/l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 class ApplyTrusterroleView extends StatefulWidget {

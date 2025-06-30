@@ -3,7 +3,7 @@ import 'package:fr0gsite/config.dart';
 import 'package:flutter/material.dart';
 import 'package:fr0gsite/datatypes/globalstatus.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fr0gsite/l10n/app_localizations.dart';
 
 class ProducervoteDialog extends StatefulWidget {
   const ProducervoteDialog({super.key});

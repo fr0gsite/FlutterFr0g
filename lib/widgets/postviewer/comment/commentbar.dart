@@ -5,7 +5,7 @@ import 'package:fr0gsite/widgets/postviewer/comment/taglist.dart';
 import 'package:fr0gsite/widgets/postviewer/comment/uploadinfo.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fr0gsite/l10n/app_localizations.dart';
 
 import '../../../config.dart';
 import '../../../datatypes/postviewerstatus.dart';

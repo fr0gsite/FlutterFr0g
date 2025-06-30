@@ -5,7 +5,7 @@ import 'package:fr0gsite/datatypes/globalstatus.dart';
 import 'package:flutter/material.dart';
 import 'package:fr0gsite/datatypes/userconfig.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fr0gsite/l10n/app_localizations.dart';
 
 // ignore: must_be_immutable
 class Followlistitem extends StatefulWidget {

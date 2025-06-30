@@ -10,7 +10,7 @@ import 'package:fr0gsite/widgets/postviewer/comment/commentrichtext.dart';
 import 'package:fr0gsite/widgets/postviewer/comment/timedifferencewidget.dart';
 import 'package:fr0gsite/widgets/postviewer/commentandtagbutton.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fr0gsite/l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../../../config.dart';

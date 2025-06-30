@@ -3,7 +3,7 @@ import 'package:fr0gsite/datatypes/blockchainnode.dart';
 import 'package:fr0gsite/datatypes/ipfsnode.dart';
 import 'package:fr0gsite/datatypes/networkstatus.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fr0gsite/l10n/app_localizations.dart';
 import 'package:fr0gsite/widgets/topbar/customconnectionchain.dart';
 import 'package:fr0gsite/widgets/topbar/customconnectionipfs.dart';
 import 'package:provider/provider.dart';

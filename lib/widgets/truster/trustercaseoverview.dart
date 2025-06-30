@@ -4,7 +4,7 @@ import 'package:fr0gsite/datatypes/globalstatus.dart';
 import 'package:fr0gsite/datatypes/report.dart';
 import 'package:fr0gsite/widgets/truster/trustervotereportview.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fr0gsite/l10n/app_localizations.dart';
 
 // Angenommen, Report und getreports() sind bereits importiert
 

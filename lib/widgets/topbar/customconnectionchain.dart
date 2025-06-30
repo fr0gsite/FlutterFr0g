@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fr0gsite/config.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fr0gsite/l10n/app_localizations.dart';
 import 'package:fr0gsite/datatypes/blockchainnode.dart';
 import 'package:fr0gsite/datatypes/networkstatus.dart';
 import 'package:provider/provider.dart';

@@ -7,7 +7,7 @@ import 'package:fr0gsite/widgets/report/report3.dart';
 import 'package:easy_stepper/easy_stepper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fr0gsite/l10n/app_localizations.dart';
 
 class Report extends StatefulWidget {
   final int id;

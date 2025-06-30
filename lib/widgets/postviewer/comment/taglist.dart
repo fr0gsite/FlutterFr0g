@@ -8,7 +8,7 @@ import 'package:fr0gsite/widgets/postviewer/comment/newtagview.dart';
 import 'package:fr0gsite/widgets/postviewer/tagelemente.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fr0gsite/l10n/app_localizations.dart';
 
 class Taglist extends StatefulWidget {
   const Taglist({super.key, required this.uploadid});

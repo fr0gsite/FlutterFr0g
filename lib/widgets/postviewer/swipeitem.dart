@@ -9,7 +9,7 @@ import 'package:fr0gsite/widgets/infoscreens/loadingpleasewaitscreen.dart';
 import 'package:fr0gsite/widgets/infoscreens/sorryscreen.dart';
 import 'package:fr0gsite/widgets/postviewer/overlaywidgetvideo.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fr0gsite/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';

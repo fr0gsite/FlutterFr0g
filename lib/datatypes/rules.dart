@@ -1,5 +1,5 @@
 import 'package:fr0gsite/datatypes/rule.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fr0gsite/l10n/app_localizations.dart';
 
 class Rules {
 

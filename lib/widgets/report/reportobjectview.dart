@@ -3,7 +3,7 @@ import 'package:fr0gsite/datatypes/rule.dart';
 import 'package:flutter/material.dart';
 import 'package:fr0gsite/datatypes/rules.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fr0gsite/l10n/app_localizations.dart';
 
 class ReportObjectView extends StatefulWidget {
   const ReportObjectView({super.key});
