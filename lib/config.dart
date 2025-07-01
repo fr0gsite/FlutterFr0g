@@ -152,6 +152,13 @@ class AppConfig {
   static const String secureStorageusername = "username";
   static const String secureStorageUserConfig = "userconfig";
 
+  // Debug login credentials
+  // Provide values here if you want the app to automatically
+  // log in while running in debug mode.
+  static const String debugUsername = ""; // e.g. "testuser"
+  static const String debugPKey = ""; // private key of debug account
+  static const String debugPermission = "active";
+
   static const connectioncheckinterval = 60; //in seconds
   static int refreshuserfavoriteupload = 15; //in minutes
   static int refreshuserfavoritecomment = 15; //in minutes

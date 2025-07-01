@@ -177,6 +177,7 @@ class StartPoint extends State<Fr0gsiteApp> {
       (_) {
         //Check if there are any saved credentials
         loginwhencredentialsarestored(context);
+        debugAutoLogin(context);
         if (navigationRailwidth == 0.0) {
           setState(
             () {
