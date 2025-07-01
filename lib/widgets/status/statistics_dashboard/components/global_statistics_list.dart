@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:fr0gsite/chainactions/statisticactions.dart';
 import 'package:fr0gsite/datatypes/statistics.dart';
+import 'dashboard_card.dart';
 
-class Statisticglobalaslist extends StatefulWidget {
-  const Statisticglobalaslist({super.key});
+class GlobalStatisticsList extends StatefulWidget {
+  const GlobalStatisticsList({super.key});
 
   @override
-  State<Statisticglobalaslist> createState() => _StatisticglobalaslistState();
+  State<GlobalStatisticsList> createState() => _GlobalStatisticsListState();
 }
 
-class _StatisticglobalaslistState extends State<Statisticglobalaslist> {
+class _GlobalStatisticsListState extends State<GlobalStatisticsList> {
   late Future globalstatistics;
 
   @override
@@ -20,11 +21,12 @@ class _StatisticglobalaslistState extends State<Statisticglobalaslist> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const Text("Global statistics", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-        Expanded(
-          child: FutureBuilder(
+    return DashboardCard(
+      child: Column(
+        children: [
+          const Text("Global statistics", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+          Expanded(
+            child: FutureBuilder(
             future: globalstatistics,
             builder: (BuildContext context, AsyncSnapshot snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
@@ -63,6 +65,7 @@ class _StatisticglobalaslistState extends State<Statisticglobalaslist> {
           ),
         ),
       ],
+      )
     );
   }
 

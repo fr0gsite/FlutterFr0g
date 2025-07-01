@@ -1,9 +1,11 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:fr0gsite/nameconverter.dart';
 
 void main() {
-  test('Example test', () {
-    // Test code goes here
-    // Use assertions to verify the expected behavior
-    expect(2 + 2, equals(4));
+  testWidgets('NameConverter converts back and forth', (tester) async {
+    const name = 'helloworld1';
+    final value = NameConverter.nameToUint64(name);
+    final result = NameConverter.uint64ToName(value);
+    expect(result, equals(name));
   });
 }

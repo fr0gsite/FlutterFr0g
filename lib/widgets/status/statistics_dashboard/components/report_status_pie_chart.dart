@@ -4,16 +4,17 @@ import 'package:fr0gsite/chainactions/statisticactions.dart';
 import 'package:fr0gsite/config.dart';
 import 'package:fr0gsite/datatypes/report.dart';
 import 'package:fr0gsite/datatypes/statistics.dart';
+import 'dashboard_card.dart';
 // Für den einfachen Zugriff auf math Funktionen
 
-class StatisticReportStatusPieDiagramm extends StatefulWidget {
-  const StatisticReportStatusPieDiagramm({super.key});
+class ReportStatusPieChart extends StatefulWidget {
+  const ReportStatusPieChart({super.key});
 
   @override
-  State<StatisticReportStatusPieDiagramm> createState() => _StatisticReportStatusPieDiagrammState();
+  State<ReportStatusPieChart> createState() => _ReportStatusPieChartState();
 }
 
-class _StatisticReportStatusPieDiagrammState extends State<StatisticReportStatusPieDiagramm>
+class _ReportStatusPieChartState extends State<ReportStatusPieChart>
     with SingleTickerProviderStateMixin {
   List<Report> reportlist = [];
   late Future globalstatistics;
@@ -40,21 +41,17 @@ class _StatisticReportStatusPieDiagrammState extends State<StatisticReportStatus
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const Text("Action Pie", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-        Expanded(
-          child: FutureBuilder(
+    return DashboardCard(
+      child: Column(
+        children: [
+          const Text("Action Pie", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+          Expanded(
+            child: FutureBuilder(
             future: globalstatistics,
             builder: (BuildContext context, AsyncSnapshot snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 if (snapshot.hasData && snapshot.data.isNotEmpty) {
-                  return Card(
-                    elevation: 4,
-                    color: AppColor.niceblack,
-                    child: Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: AnimatedBuilder(
+                  return AnimatedBuilder(
                         animation: _rotationController,
                         builder: (context, child) {
                           final rotationDegrees = 360 * _rotationController.value;
@@ -86,9 +83,7 @@ class _StatisticReportStatusPieDiagrammState extends State<StatisticReportStatus
                             ),
                           );
                         },
-                      ),
-                    ),
-                  );
+                      );
                 } else {
                   return const Center(child: Text('No data available'));
                 }
@@ -99,7 +94,7 @@ class _StatisticReportStatusPieDiagrammState extends State<StatisticReportStatus
           ),
         ),
       ],
-    );
+      ));
   }
 
   Future<List<Statistics>> loadreportdata() async {
@@ -107,3 +102,4 @@ class _StatisticReportStatusPieDiagrammState extends State<StatisticReportStatus
     return statistics;
   }
 }
+
