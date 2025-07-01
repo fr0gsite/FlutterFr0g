@@ -6,6 +6,7 @@ import 'package:fr0gsite/datatypes/localuserconfig.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/foundation.dart';
 
 loginwhencredentialsarestored(context) async {
   if (Provider.of<GlobalStatus>(context, listen: false).isLoggedin) {
@@ -30,6 +31,30 @@ loginwhencredentialsarestored(context) async {
         debugPrint("No username found in secure storage");
       }
     });
+  }
+}
+
+/// Automatically log in when running in debug mode.
+///
+/// If [AppConfig.debugUsername] and [AppConfig.debugPKey] are set,
+/// the app will log in with these credentials when [kDebugMode] is true
+/// and no user is currently logged in.
+debugAutoLogin(context) async {
+  if (kDebugMode &&
+      !Provider.of<GlobalStatus>(context, listen: false).isLoggedin) {
+    if (AppConfig.debugUsername.isNotEmpty &&
+        AppConfig.debugPKey.isNotEmpty) {
+      debugPrint('Debug auto login for ${AppConfig.debugUsername}');
+      const secstorage = FlutterSecureStorage();
+      await secstorage.write(
+          key: AppConfig.secureStorageusername,
+          value: AppConfig.debugUsername);
+      await secstorage.write(
+          key: AppConfig.secureStoragePKey,
+          value: AppConfig.debugPKey);
+      Provider.of<GlobalStatus>(context, listen: false)
+          .login(AppConfig.debugUsername, AppConfig.debugPermission);
+    }
   }
 }
 
