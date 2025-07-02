@@ -102,7 +102,7 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                     ),
                     const SizedBox(height: 20),
                     SizedBox(
-                      height: 600,
+                      height: MediaQuery.of(context).size.height * 0.6,
                       child: SwipeItem(upload: upload)),
                     const SizedBox(height: 20),
                     Row(
@@ -136,7 +136,7 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                         final votes = votesSnapshot.data!;
 
                         return SizedBox(
-                          width: 600,
+                          width: double.infinity,
                           child: Table(
                             border: TableBorder.all(),
                             defaultColumnWidth: const FixedColumnWidth(100),
