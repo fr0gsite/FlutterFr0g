@@ -2,11 +2,60 @@ import 'package:flutter/material.dart';
 import 'package:fr0gsite/chainactions/chainactions.dart';
 import 'package:fr0gsite/datatypes/globalstatus.dart';
 import 'package:fr0gsite/datatypes/report.dart';
+import 'package:fr0gsite/ipfsactions.dart';
 import 'package:fr0gsite/widgets/truster/trustervotereportview.dart';
 import 'package:provider/provider.dart';
 import 'package:fr0gsite/l10n/app_localizations.dart';
+import 'dart:typed_data';
 
 // Angenommen, Report und getreports() sind bereits importiert
+
+class UploadThumb extends StatefulWidget {
+  final int uploadId;
+  const UploadThumb({super.key, required this.uploadId});
+
+  @override
+  State<UploadThumb> createState() => _UploadThumbState();
+}
+
+class _UploadThumbState extends State<UploadThumb> {
+  late Future<Uint8List> _thumbFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _thumbFuture = _loadThumb();
+  }
+
+  Future<Uint8List> _loadThumb() async {
+    try {
+      final upload = await Chainactions().getupload(widget.uploadId.toString());
+      return await IPFSActions.fetchipfsdata(context, upload.thumbipfshash);
+    } catch (_) {
+      return Uint8List(0);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<Uint8List>(
+      future: _thumbFuture,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done &&
+            snapshot.hasData &&
+            snapshot.data!.isNotEmpty) {
+          return Image.memory(
+            snapshot.data!,
+            width: 24,
+            height: 24,
+            fit: BoxFit.cover,
+          );
+        }
+        return const Icon(Icons.insert_drive_file);
+      },
+    );
+  }
+}
 
 class ReportsWidget extends StatelessWidget {
   const ReportsWidget({super.key});
@@ -108,7 +157,7 @@ class ReportsTable extends StatelessWidget {
                     child: Text('${report.violatedrule}'))),
                   DataCell(Row(
                     children: [
-                      const Icon(Icons.insert_drive_file),
+                      UploadThumb(uploadId: report.id),
                       const SizedBox(width: 4),
                       InkWell(
                         child: Text('${report.id}', style: const TextStyle(color: Colors.blue)),
