@@ -251,7 +251,7 @@ class _CustomConnectionIPFSState extends State<CustomConnectionIPFS> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
                         debugPrint("Test IPFS Node");
                         IPFSNode node = IPFSNode(
                             connectionname.text,
@@ -260,33 +260,31 @@ class _CustomConnectionIPFSState extends State<CustomConnectionIPFS> {
                             int.parse(connectionport.text),
                             connectionpath.text,
                             choosenmethode!.name);
-                        networkstatus.checkConnectionIPFS(node).then(
-                          (value) {
-                            if (value == -1) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(
-                                    AppLocalizations.of(context)!
-                                        .connectionfailed,
-                                    style: const TextStyle(color: Colors.white),
-                                  ),
-                                  backgroundColor: Colors.red,
-                                ),
-                              );
-                            } else {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(
-                                    AppLocalizations.of(context)!
-                                        .connectionsuccessfull,
-                                    style: const TextStyle(color: Colors.white),
-                                  ),
-                                  backgroundColor: Colors.green,
-                                ),
-                              );
-                            }
-                          },
-                        );
+                        final value =
+                            await networkstatus.checkConnectionIPFS(node);
+                        if (!mounted) return;
+                        if (value == -1) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                AppLocalizations.of(context)!.connectionfailed,
+                                style: const TextStyle(color: Colors.white),
+                              ),
+                              backgroundColor: Colors.red,
+                            ),
+                          );
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                AppLocalizations.of(context)!
+                                    .connectionsuccessfull,
+                                style: const TextStyle(color: Colors.white),
+                              ),
+                              backgroundColor: Colors.green,
+                            ),
+                          );
+                        }
                       },
                       child: Text(AppLocalizations.of(context)!.testhere),
                     ),
