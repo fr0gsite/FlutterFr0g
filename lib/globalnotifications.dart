@@ -2,7 +2,6 @@ import 'package:elegant_notification/elegant_notification.dart';
 import 'package:elegant_notification/resources/arrays.dart';
 import 'package:fr0gsite/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
-import 'package:fr0gsite/l10n/app_localizations.dart';
 
 class Globalnotifications {
   static void shownotification(

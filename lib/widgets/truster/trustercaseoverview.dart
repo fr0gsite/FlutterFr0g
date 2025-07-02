@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fr0gsite/chainactions/chainactions.dart';
+import 'package:fr0gsite/config.dart';
 import 'package:fr0gsite/datatypes/globalstatus.dart';
 import 'package:fr0gsite/datatypes/report.dart';
 import 'package:fr0gsite/ipfsactions.dart';
@@ -68,9 +69,18 @@ class ReportsWidget extends StatelessWidget {
         appBar: AppBar(
           title: Text(AppLocalizations.of(context)!.reports),
           bottom: TabBar(
+            labelColor: Colors.white,
+            indicator: gloabltabindicator,
+            dividerColor: Colors.white,
+            indicatorColor: Colors.white,
+            indicatorWeight: 2,
+            indicatorSize: TabBarIndicatorSize.tab,
+            unselectedLabelColor: Colors.white70,
+            unselectedLabelStyle: const TextStyle(fontSize: 14),
+            labelStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             tabs: [
-              Tab(text: AppLocalizations.of(context)!.forme),
-              Tab(text: AppLocalizations.of(context)!.allreports),
+              Tab(text: AppLocalizations.of(context)!.forme + " (${Provider.of<GlobalStatus>(context, listen: false).username})"),
+              Tab(text: AppLocalizations.of(context)!.allreports + " ()"),
               Tab(text: AppLocalizations.of(context)!.urgentreport),
             ],
           ),
@@ -178,28 +188,31 @@ class ReportsTable extends StatelessWidget {
                   Builder(
                     builder: (context) {
                       final now = DateTime.now();
-                      final deadline = report.reporttime.add(const Duration(hours: 24));
+                      final deadline = report.reporttime.add(const Duration(hours: 24)).add(now.timeZoneOffset);
                       final totalDuration = deadline.difference(report.reporttime).inSeconds;
                       final elapsedDuration = now.difference(report.reporttime).inSeconds;
                       final progress = (elapsedDuration / totalDuration).clamp(0.0, 1.0);
                       final timeLeft = deadline.difference(now);
 
-                      return Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          LinearProgressIndicator(
-                            value: progress,
-                            backgroundColor: Colors.green,
-                            color: timeLeft <= const Duration(hours: 2) ? Colors.red : Colors.grey,
-                            minHeight: 10,
-                          ),
-                          const SizedBox(height: 4),
-                          Text(
-                            '${(elapsedDuration / 3600).round()} / 24 h',
-                            style: const TextStyle(fontSize: 12),
-                          ),
-                        ],
+                      return Tooltip(
+                        message: '${timeLeft.inHours} h ${timeLeft.inMinutes.remainder(60)} min left\n ',
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            LinearProgressIndicator(
+                              value: progress,
+                              backgroundColor: Colors.green,
+                              color: timeLeft <= const Duration(hours: 2) ? Colors.red : Colors.grey,
+                              minHeight: 10,
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              '${(elapsedDuration / 3600).round() - now.timeZoneOffset.inHours} / 24 h',
+                              style: const TextStyle(fontSize: 12),
+                            ),
+                          ],
+                        ),
                       );
                     },
                   ),

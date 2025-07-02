@@ -2300,6 +2300,24 @@ abstract class AppLocalizations {
   /// **'Applyed successful'**
   String get applysuccessful;
 
+  /// No description provided for @criteriayear.
+  ///
+  /// In en, this message translates to:
+  /// **'Registered for at least one year'**
+  String get criteriayear;
+
+  /// No description provided for @criteriauploads.
+  ///
+  /// In en, this message translates to:
+  /// **'Has at least 20 uploads'**
+  String get criteriauploads;
+
+  /// No description provided for @criteriacomments.
+  ///
+  /// In en, this message translates to:
+  /// **'Has at least 20 comments'**
+  String get criteriacomments;
+
   /// No description provided for @urgentreport.
   ///
   /// In en, this message translates to:

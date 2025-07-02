@@ -1112,6 +1112,15 @@ class AppLocalizationsKo extends AppLocalizations {
   String get applysuccessful => '성공적으로 지원됨';
 
   @override
+  String get criteriayear => 'Registered for at least one year';
+
+  @override
+  String get criteriauploads => 'Has at least 20 uploads';
+
+  @override
+  String get criteriacomments => 'Has at least 20 comments';
+
+  @override
   String get urgentreport => '긴급';
 
   @override

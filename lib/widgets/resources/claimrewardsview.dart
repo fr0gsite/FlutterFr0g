@@ -111,7 +111,7 @@ class _ClaimRewardsViewState extends State<ClaimRewardsView> {
                     if (globalStatus.isLoggedin) {
                       if (widget.account.accountName == globalStatus.username) {
                         Chainactions()
-                          ..setusernameandpermission(
+                          .setusernameandpermission(
                               globalStatus.username, globalStatus.permission);
                         bool value = await Chainactions().claimreward(
                           widget.account.accountName,

@@ -33,10 +33,6 @@ migrate_working_dir/
 /build/
 /android/app/build/
 
-# Language
-#/lib/l10n/untranslated_messages.json
-/lib/l10n/app_localizations*
-
 # macOS
 **/Flutter/ephemeral/
 **/Pods/
@@ -107,3 +103,20 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+
+# Language
+/lib/l10n/untranslated_messages.json
+lib/l10n/app_localizations_ar.dart
+lib/l10n/app_localizations_ar.dart
+lib/l10n/app_localizations_cs.dart
+lib/l10n/app_localizations_es.dart
+lib/l10n/app_localizations_fr.dart
+lib/l10n/app_localizations_hi.dart
+lib/l10n/app_localizations_it.dart
+lib/l10n/app_localizations_ja.dart
+lib/l10n/app_localizations_ko.dart
+lib/l10n/app_localizations_pt.dart
+lib/l10n/app_localizations_ru.dart
+lib/l10n/app_localizations_uk.dart
+lib/l10n/app_localizations_zh.dart

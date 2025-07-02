@@ -1146,6 +1146,15 @@ class AppLocalizationsHi extends AppLocalizations {
   String get applysuccessful => 'लागू सफल';
 
   @override
+  String get criteriayear => 'Registered for at least one year';
+
+  @override
+  String get criteriauploads => 'Has at least 20 uploads';
+
+  @override
+  String get criteriacomments => 'Has at least 20 comments';
+
+  @override
   String get urgentreport => 'तत्काल';
 
   @override

@@ -194,7 +194,7 @@ class _ResourceBalanceState extends State<ResourceBalance>
                       padding: const EdgeInsets.all(12.0),
                       child: Text(
                         AppLocalizations.of(context)!.cpuexplain,
-                        style: TextStyle(fontSize: 13),
+                        style: const TextStyle(fontSize: 13),
                         maxLines: 3,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -246,7 +246,7 @@ class _ResourceBalanceState extends State<ResourceBalance>
                       padding: const EdgeInsets.all(12.0),
                       child: Text(
                         AppLocalizations.of(context)!.netexplain,
-                        style: TextStyle(fontSize: 13),
+                        style: const TextStyle(fontSize: 13),
                         maxLines: 3,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -344,7 +344,7 @@ class _ResourceBalanceState extends State<ResourceBalance>
               ],
             ),
             // RAM Section
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Padding(
@@ -373,7 +373,7 @@ class _ResourceBalanceState extends State<ResourceBalance>
                         padding: const EdgeInsets.all(12.0),
                         child: Text(
                           AppLocalizations.of(context)!.ramexplain,
-                          style: TextStyle(fontSize: 13),
+                          style: const TextStyle(fontSize: 13),
                           maxLines: 3,
                           overflow: TextOverflow.ellipsis,
                         ),
