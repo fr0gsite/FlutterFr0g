@@ -1155,6 +1155,15 @@ class AppLocalizationsDe extends AppLocalizations {
   String get applysuccessful => 'Erfolgreich beworben';
 
   @override
+  String get criteriayear => 'Seit mindestens einem Jahr angemeldet';
+
+  @override
+  String get criteriauploads => 'Hat mindestens 20 Uploads';
+
+  @override
+  String get criteriacomments => 'Hat mindestens 20 Kommentare';
+
+  @override
   String get urgentreport => 'Dringend';
 
   @override
