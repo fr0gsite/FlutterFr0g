@@ -44,7 +44,7 @@ dependencies:
   settings_ui: ^2.0.2
   another_xlider: ^3.0.1 #for audio adjustment in postviewer
   action_slider: ^0.7.0
-  fl_chart: ^0.68.0
+  fl_chart: ^0.71.0
   country_flags: ^3.0.0
   #easy_stepper: ^0.8.3
   easy_stepper:
