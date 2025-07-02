@@ -91,7 +91,7 @@
   "punishment5": "Bannissement à vie",
   "resources": "Ressources",
   "resourcesexplain": "Sont consommées lors des transactions avec la blockchain. Les ressources peuvent être réservées par staking.",
-  "staked": "Staké",
+  "staked": "Staked",
   "stake": "Stake",
   "unstake": "Déstaker",
   "stakedexplain": "Est entièrement restauré dans les 3 jours",
@@ -366,5 +366,5 @@
   "important": "Important",
   "selectedrule": "Règle sélectionnée",
   "votes": "Votes",
-  "stakedtotal": "Total misé"
+  "stakedtotal": "Total Staked"
 }

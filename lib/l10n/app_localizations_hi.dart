@@ -302,7 +302,7 @@ class AppLocalizationsHi extends AppLocalizations {
       'ब्लॉकचेन के साथ लेनदेन करते समय संसाधनों का उपभोग किया जाता है। संसाधनों को स्टेकिंग के माध्यम से आरक्षित किया जा सकता है।';
 
   @override
-  String get staked => 'स्टेक किया गया';
+  String get staked => 'Staked';
 
   @override
   String get stake => 'स्टेक करें';
@@ -1158,5 +1158,5 @@ class AppLocalizationsHi extends AppLocalizations {
   String get votes => 'वोट';
 
   @override
-  String get stakedtotal => 'कुल लगाया गया';
+  String get stakedtotal => 'Total Staked';
 }

@@ -91,7 +91,7 @@
   "punishment5": "حظر دائم",
   "resources": "الموارد",
   "resourcesexplain": "تُستهلك عند التعامل مع البلوكشين. يمكن حجز الموارد عبر الـStake.",
-  "staked": "مخصص",
+  "staked": "Staked",
   "stake": "تخصيص",
   "unstake": "إلغاء التخصيص",
   "stakedexplain": "يتم استعادتها بالكامل خلال 3 أيام",
@@ -366,5 +366,5 @@
   "important": "مهم",
   "selectedrule": "القاعدة المحددة",
   "votes": "التصويت",
-  "stakedtotal": "مجموع المراهنات"
+  "stakedtotal": "Total Staked"
 }

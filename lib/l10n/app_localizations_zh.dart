@@ -285,7 +285,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get resourcesexplain => '交易时消耗的资源。通过质押获得资源预留。';
 
   @override
-  String get staked => '已质押';
+  String get staked => 'Staked';
 
   @override
   String get stake => '质押';
@@ -1119,5 +1119,5 @@ class AppLocalizationsZh extends AppLocalizations {
   String get votes => '票数';
 
   @override
-  String get stakedtotal => '总质押';
+  String get stakedtotal => 'Total Staked';
 }

@@ -1151,5 +1151,5 @@ class AppLocalizationsCs extends AppLocalizations {
   String get votes => 'Hlasy';
 
   @override
-  String get stakedtotal => 'Celkově vsazeno';
+  String get stakedtotal => 'Total Staked';
 }

@@ -91,7 +91,7 @@
   "punishment5": "Блокировка навсегда",
   "resources": "Ресурсы",
   "resourcesexplain": "Используются при транзакциях с блокчейном. Ресурсы можно резервировать через стейкинг.",
-  "staked": "Стейкинг",
+  "staked": "Staked",
   "stake": "Стейк",
   "unstake": "Анстейк",
   "stakedexplain": "Восстанавливается полностью в течение 3 дней",
@@ -366,5 +366,5 @@
   "important": "Важно",
   "selectedrule": "Выбранное правило",
   "votes": "Голоса",
-  "stakedtotal": "Всего заложено"
+  "stakedtotal": "Total Staked"
 }
