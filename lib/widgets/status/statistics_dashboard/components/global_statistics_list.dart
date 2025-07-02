@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fr0gsite/chainactions/statisticactions.dart';
 import 'package:fr0gsite/datatypes/statistics.dart';
+import '../../../../config.dart';
 import 'dashboard_card.dart';
 
 class GlobalStatisticsList extends StatefulWidget {
@@ -33,22 +34,23 @@ class _GlobalStatisticsListState extends State<GlobalStatisticsList> {
                 if (snapshot.hasData && snapshot.data.isNotEmpty) {
                   return ListView.separated(
                     itemCount: snapshot.data.length,
-                    separatorBuilder: (context, index) => const Divider(),
+                    separatorBuilder: (context, index) => const SizedBox(height: 8),
                     itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              snapshot.data[index].int64number.toString(),
-                              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              snapshot.data[index].text,
-                              style: const TextStyle(fontSize: 16),
-                            ),
-                          ],
+                      final stat = snapshot.data[index];
+                      return Container(
+                        decoration: BoxDecoration(
+                          color: AppColor.nicegrey,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: ListTile(
+                          title: Text(
+                            stat.text,
+                            style: const TextStyle(fontSize: 16),
+                          ),
+                          trailing: Text(
+                            stat.int64number.toString(),
+                            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                          ),
                         ),
                       );
                     },
