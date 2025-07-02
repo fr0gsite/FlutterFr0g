@@ -91,7 +91,7 @@
   "punishment5": "Ban forever",
   "resources": "Ресурси",
   "resourcesexplain": "Використовуються при транзакціях з блокчейном. Ресурси можна резервувати через стейкінг.",
-  "staked": "Стейк",
+  "staked": "Staked",
   "stake": "Стейк",
   "unstake": "Відмінити стейк",
   "stakedexplain": "Повністю відновлюється протягом 3 днів",
@@ -366,5 +366,5 @@
   "important": "Важливий",
   "selectedrule": "Обране правило",
   "votes": "Голоси",
-  "stakedtotal": "Загальна ставка"
+  "stakedtotal": "Total Staked"
 }

@@ -304,7 +304,7 @@ class AppLocalizationsFr extends AppLocalizations {
       'Sont consommées lors des transactions avec la blockchain. Les ressources peuvent être réservées par staking.';
 
   @override
-  String get staked => 'Staké';
+  String get staked => 'Staked';
 
   @override
   String get stake => 'Stake';
@@ -1170,5 +1170,5 @@ class AppLocalizationsFr extends AppLocalizations {
   String get votes => 'Votes';
 
   @override
-  String get stakedtotal => 'Total misé';
+  String get stakedtotal => 'Total Staked';
 }

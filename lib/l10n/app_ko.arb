@@ -92,7 +92,7 @@
   "punishment5": "영구 정지",
   "resources": "자원",
   "resourcesexplain": "스테이크된 자원은 블록체인 거래에서 소비되며 3일 내에 완전히 복구됩니다",
-  "staked": "스테이크됨",
+  "staked": "Staked",
   "stake": "스테이크",
   "unstake": "언스테이크",
   "stakedexplain": "3일 내 완전히 복구됩니다",
@@ -367,5 +367,5 @@
   "important": "중요",
   "selectedrule": "선택한 규칙",
   "votes": "투표",
-  "stakedtotal": "총 예치 금액"
+  "stakedtotal": "Total Staked"
 }

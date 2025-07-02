@@ -91,7 +91,7 @@
   "punishment5": "永久封禁",
   "resources": "资源",
   "resourcesexplain": "交易时消耗的资源。通过质押获得资源预留。",
-  "staked": "已质押",
+  "staked": "Staked",
   "stake": "质押",
   "unstake": "取消质押",
   "stakedexplain": "在3天内完全恢复",
@@ -366,5 +366,5 @@
   "important": "重要",
   "selectedrule": "选择的规则",
   "votes": "票数",
-  "stakedtotal": "总质押"
+  "stakedtotal": "Total Staked"
 }

@@ -287,7 +287,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get resourcesexplain => '스테이크된 자원은 블록체인 거래에서 소비되며 3일 내에 완전히 복구됩니다';
 
   @override
-  String get staked => '스테이크됨';
+  String get staked => 'Staked';
 
   @override
   String get stake => '스테이크';
@@ -1124,5 +1124,5 @@ class AppLocalizationsKo extends AppLocalizations {
   String get votes => '투표';
 
   @override
-  String get stakedtotal => '총 예치 금액';
+  String get stakedtotal => 'Total Staked';
 }

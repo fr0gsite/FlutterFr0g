@@ -298,7 +298,7 @@ class AppLocalizationsAr extends AppLocalizations {
       'تُستهلك عند التعامل مع البلوكشين. يمكن حجز الموارد عبر الـStake.';
 
   @override
-  String get staked => 'مخصص';
+  String get staked => 'Staked';
 
   @override
   String get stake => 'تخصيص';
@@ -1148,5 +1148,5 @@ class AppLocalizationsAr extends AppLocalizations {
   String get votes => 'التصويت';
 
   @override
-  String get stakedtotal => 'مجموع المراهنات';
+  String get stakedtotal => 'Total Staked';
 }

@@ -288,7 +288,7 @@ class AppLocalizationsJa extends AppLocalizations {
       'ブロックチェーンとのトランザクションに使用される。リソースはステーキングによって予約できます。';
 
   @override
-  String get staked => 'ステーク済み';
+  String get staked => 'Staked';
 
   @override
   String get stake => 'ステーク';
@@ -1127,5 +1127,5 @@ class AppLocalizationsJa extends AppLocalizations {
   String get votes => '投票数';
 
   @override
-  String get stakedtotal => '合計ステーク';
+  String get stakedtotal => 'Total Staked';
 }

@@ -91,7 +91,7 @@
   "punishment5": "Ban per sempre",
   "resources": "Risorse",
   "resourcesexplain": "Vengono consumate nelle transazioni con la blockchain. Le risorse possono essere riservate tramite staking.",
-  "staked": "In staking",
+  "staked": "Staked",
   "stake": "Staking",
   "unstake": "Unstake",
   "stakedexplain": "Ripristinato completamente in 3 giorni",
@@ -366,5 +366,5 @@
   "important": "Importante",
   "selectedrule": "Regola selezionata",
   "votes": "Voti",
-  "stakedtotal": "Totale scommesso"
+  "stakedtotal": "Total Staked"
 }

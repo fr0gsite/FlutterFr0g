@@ -301,7 +301,7 @@ class AppLocalizationsUk extends AppLocalizations {
       'Використовуються при транзакціях з блокчейном. Ресурси можна резервувати через стейкінг.';
 
   @override
-  String get staked => 'Стейк';
+  String get staked => 'Staked';
 
   @override
   String get stake => 'Стейк';
@@ -1163,5 +1163,5 @@ class AppLocalizationsUk extends AppLocalizations {
   String get votes => 'Голоси';
 
   @override
-  String get stakedtotal => 'Загальна ставка';
+  String get stakedtotal => 'Total Staked';
 }

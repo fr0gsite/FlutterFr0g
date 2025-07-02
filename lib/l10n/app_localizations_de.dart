@@ -1167,5 +1167,5 @@ class AppLocalizationsDe extends AppLocalizations {
   String get votes => 'Stimmen';
 
   @override
-  String get stakedtotal => 'Gesamtwetteinsatz';
+  String get stakedtotal => 'Total Staked';
 }

@@ -91,7 +91,7 @@
   "punishment5": "Banir permanentemente",
   "resources": "Recursos",
   "resourcesexplain": "São consumidos em transações com a blockchain. Recursos podem ser reservados por meio de staking.",
-  "staked": "Apostado",
+  "staked": "Staked",
   "stake": "Apostar",
   "unstake": "Desapostar",
   "stakedexplain": "É restaurado completamente dentro de 3 dias",
@@ -366,5 +366,5 @@
   "important": "Importante",
   "selectedrule": "Regra Selecionada",
   "votes": "Votos",
-  "stakedtotal": "Total Apostado"
+  "stakedtotal": "Total Staked"
 }
