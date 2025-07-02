@@ -1,6 +1,7 @@
 import 'package:fr0gsite/config.dart';
 import 'package:fr0gsite/widgets/truster/trustercaseoverview.dart';
 import 'package:fr0gsite/widgets/truster/trusterconfigview.dart';
+import 'package:fr0gsite/widgets/truster/actionboard.dart';
 import 'package:flutter/material.dart';
 
 class TrusterView extends StatefulWidget {
@@ -77,6 +78,11 @@ class TrusterViewState extends State<TrusterView> {
                           height: 600,
                           width: 600,
                           child: StatusOverview(),
+                        ),
+                        SizedBox(
+                          height: 220,
+                          width: 600,
+                          child: ActionBoard(),
                         ),
                       ],
                     ),
