@@ -66,28 +66,34 @@ class ApplyTrusterroleViewState extends State<ApplyTrusterroleView> {
                       ),
                       onPressed: () async {
                         if (Provider.of<GlobalStatus>(context, listen: false).isLoggedin) {
-                          String username = Provider.of<GlobalStatus>(context, listen: false).username;
-                          String permission = Provider.of<GlobalStatus>(context, listen: false).permission;
-                          Chainactions chainactions = Chainactions();
+                          final username = Provider.of<GlobalStatus>(context, listen: false).username;
+                          final permission = Provider.of<GlobalStatus>(context, listen: false).permission;
+                          final chainactions = Chainactions();
                           chainactions.setusernameandpermission(username, permission);
-                          await chainactions.applyfortrusterrole(username).then(
-                            (value) {
-                              if (value) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(content: Text(AppLocalizations.of(context)!.applysuccessful)),
-                                );
-                              } else {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(content: Text(AppLocalizations.of(context)!.sorrysomethingwentwrong)),
-                                );
-                              }
+
+                          // Obtain resources that rely on context before the async gap
+                          final messenger = ScaffoldMessenger.of(context);
+                          final localizations = AppLocalizations.of(context)!;
+
+                          try {
+                            final value = await chainactions.applyfortrusterrole(username);
+                            if (!mounted) return;
+                            if (value) {
+                              messenger.showSnackBar(
+                                SnackBar(content: Text(localizations.applysuccessful)),
+                              );
+                            } else {
+                              messenger.showSnackBar(
+                                SnackBar(content: Text(localizations.sorrysomethingwentwrong)),
+                              );
                             }
-                          ).catchError((error) {
-                            debugPrint("Error applying for Truster Role: $error");
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text("Error: $error")),
+                          } catch (error) {
+                            debugPrint('Error applying for Truster Role: $error');
+                            if (!mounted) return;
+                            messenger.showSnackBar(
+                              SnackBar(content: Text('Error: $error')),
                             );
-                          });
+                          }
                         }
                       },
                     ),
