@@ -1177,4 +1177,16 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get stakedtotal => 'Total Staked';
+
+  @override
+  String get actionboard => 'Aktionsübersicht';
+
+  @override
+  String get actionboardreviewdesc => 'Zeigt alle offenen Meldungen';
+
+  @override
+  String get actionboardstatusdesc => 'Aktuellen Status ansehen';
+
+  @override
+  String get actionboardsettingsdesc => 'Truster-Einstellungen öffnen';
 }

@@ -415,6 +415,10 @@
     "important":"Important",
     "selectedrule":"Selected Rule",
     "votes":"Votes",
-    "stakedtotal":"Total Staked"
+    "stakedtotal":"Total Staked",
+    "actionboard":"Action Board",
+    "actionboardreviewdesc":"See all open reports",
+    "actionboardstatusdesc":"View your current status",
+    "actionboardsettingsdesc":"Open truster settings"
 
 }

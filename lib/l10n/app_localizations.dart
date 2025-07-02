@@ -2347,6 +2347,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Total Staked'**
   String get stakedtotal;
+
+  /// No description provided for @actionboard.
+  ///
+  /// In en, this message translates to:
+  /// **'Action Board'**
+  String get actionboard;
+
+  /// No description provided for @actionboardreviewdesc.
+  ///
+  /// In en, this message translates to:
+  /// **'See all open reports'**
+  String get actionboardreviewdesc;
+
+  /// No description provided for @actionboardstatusdesc.
+  ///
+  /// In en, this message translates to:
+  /// **'View your current status'**
+  String get actionboardstatusdesc;
+
+  /// No description provided for @actionboardsettingsdesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Open truster settings'**
+  String get actionboardsettingsdesc;
 }
 
 class _AppLocalizationsDelegate

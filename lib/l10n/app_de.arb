@@ -369,5 +369,9 @@
   "important": "Wichtig",
   "selectedrule": "Ausgewählte Regel",
   "votes": "Stimmen",
-  "stakedtotal": "Total Staked"
+  "stakedtotal": "Total Staked",
+  "actionboard": "Aktionsübersicht",
+  "actionboardreviewdesc": "Zeigt alle offenen Meldungen",
+  "actionboardstatusdesc": "Aktuellen Status ansehen",
+  "actionboardsettingsdesc": "Truster-Einstellungen öffnen"
 }
