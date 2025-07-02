@@ -285,20 +285,21 @@ class _ResourceBalanceState extends State<ResourceBalance>
                             borderRadius: BorderRadius.circular(8),
                             ),
                           ),
-                          onPressed: () {
-                            showDialog(
-                                context: context,
-                                barrierDismissible: true,
-                                barrierColor: Colors.black.withOpacity(0.5),
-                                builder: (BuildContext context) {
-                                  return Dialog(
-                                    child: StakeorUnstake(
-                                        action: "Stake", account: widget.account),
-                                  );
-                                }).then((value) {
-                              debugPrint("Dialog closed");
-                              widget.callback();
-                            });
+                          onPressed: () async {
+                            await showDialog(
+                              context: context,
+                              barrierDismissible: true,
+                              barrierColor: Colors.black.withOpacity(0.5),
+                              builder: (BuildContext context) {
+                                return Dialog(
+                                  child: StakeorUnstake(
+                                      action: "Stake", account: widget.account),
+                                );
+                              },
+                            );
+                            if (!mounted) return;
+                            debugPrint("Dialog closed");
+                            widget.callback();
                           },
                           child: Text(AppLocalizations.of(context)!.stake,
                               overflow: TextOverflow.ellipsis,
@@ -317,21 +318,21 @@ class _ResourceBalanceState extends State<ResourceBalance>
                             borderRadius: BorderRadius.circular(8),
                             ),
                           ),
-                          onPressed: () {
-                            showDialog(
-                                context: context,
-                                barrierDismissible: true,
-                                barrierColor: Colors.black.withOpacity(0.5),
-                                builder: (BuildContext context) {
-                                  return Dialog(
-                                    child: StakeorUnstake(
-                                        action: "Unstake",
-                                        account: widget.account),
-                                  );
-                                }).then((value) {
-                              debugPrint("Dialog closed");
-                              widget.callback();
-                            });
+                          onPressed: () async {
+                            await showDialog(
+                              context: context,
+                              barrierDismissible: true,
+                              barrierColor: Colors.black.withOpacity(0.5),
+                              builder: (BuildContext context) {
+                                return Dialog(
+                                  child: StakeorUnstake(
+                                      action: "Unstake", account: widget.account),
+                                );
+                              },
+                            );
+                            if (!mounted) return;
+                            debugPrint("Dialog closed");
+                            widget.callback();
                           },
                           child: Text(AppLocalizations.of(context)!.unstake,
                               overflow: TextOverflow.ellipsis,
