@@ -4,6 +4,7 @@ import 'package:fr0gsite/config.dart';
 import 'package:fr0gsite/datatypes/globalstatus.dart';
 import 'package:fr0gsite/datatypes/report.dart';
 import 'package:fr0gsite/ipfsactions.dart';
+import 'package:fr0gsite/widgets/postviewer/postviewer.dart';
 import 'package:fr0gsite/widgets/truster/trustervotereportview.dart';
 import 'package:provider/provider.dart';
 import 'package:fr0gsite/l10n/app_localizations.dart';
@@ -200,9 +201,17 @@ class ReportsTable extends StatelessWidget {
                       UploadThumb(uploadId: report.id),
                       const SizedBox(width: 4),
                       InkWell(
-                        child: Text('${report.id}', style: const TextStyle(color: Colors.blue)),
+                        child: Text('${report.id}',
+                            style: const TextStyle(color: Colors.blue)),
                         onTap: () {
-                          // Link zum Upload
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Postviewer(
+                                  id: report.id.toString(),
+                                  showUploadInfo: true),
+                            ),
+                          );
                         },
                       ),
                     ],

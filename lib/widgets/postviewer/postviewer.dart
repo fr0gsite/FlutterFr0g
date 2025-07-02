@@ -10,6 +10,7 @@ import 'package:fr0gsite/widgets/postviewer/postvieweranimation.dart';
 import 'package:fr0gsite/widgets/postviewer/tagbarview.dart';
 import 'package:fr0gsite/widgets/postviewer/overlaywidgetbasic.dart';
 import 'package:fr0gsite/widgets/postviewer/comment/commentbar.dart';
+import 'package:fr0gsite/widgets/postviewer/comment/uploadinfo.dart';
 import 'package:fr0gsite/widgets/postviewer/postviewertopbar.dart';
 import 'package:fr0gsite/widgets/postviewer/swipeitem.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
@@ -24,7 +25,8 @@ import 'postviewerbottombar.dart';
 
 class Postviewer extends StatefulWidget {
   final String? id;
-  const Postviewer({super.key, this.id});
+  final bool showUploadInfo;
+  const Postviewer({super.key, this.id, this.showUploadInfo = false});
 
   @override
   PostviewerState createState() => PostviewerState();
@@ -195,8 +197,16 @@ class PostviewerState extends State<Postviewer> {
                                     ),
                             );
                           }),
-                          const SizedBox(
-                              height: 60, child: PostViewerBottomBar()),
+                          widget.showUploadInfo
+                              ? SizedBox(
+                                  height: 200,
+                                  child: Consumer<PostviewerStatus>(
+                                      builder: (context, status, child) {
+                                    return UploadInfo(
+                                        upload: status.currentupload);
+                                  }))
+                              : const SizedBox(
+                                  height: 60, child: PostViewerBottomBar()),
                         ],
                       ),
                     ),
