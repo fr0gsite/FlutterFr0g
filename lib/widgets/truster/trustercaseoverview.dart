@@ -58,49 +58,79 @@ class _UploadThumbState extends State<UploadThumb> {
   }
 }
 
-class ReportsWidget extends StatelessWidget {
+class ReportsWidget extends StatefulWidget {
   const ReportsWidget({super.key});
 
   @override
+  State<ReportsWidget> createState() => _ReportsWidgetState();
+}
+
+class _ReportsWidgetState extends State<ReportsWidget> {
+  late Future<int> _reportCount;
+
+  Future<int> _loadReportCount() async {
+    final reports = await Chainactions().getreports();
+    return reports.length;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _reportCount = _loadReportCount();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 3,
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(AppLocalizations.of(context)!.reports),
-          bottom: TabBar(
-            labelColor: Colors.white,
-            indicator: gloabltabindicator,
-            dividerColor: Colors.white,
-            indicatorColor: Colors.white,
-            indicatorWeight: 2,
-            indicatorSize: TabBarIndicatorSize.tab,
-            unselectedLabelColor: Colors.white70,
-            unselectedLabelStyle: const TextStyle(fontSize: 14),
-            labelStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-            tabs: [
-              Tab(text: AppLocalizations.of(context)!.forme + " (${Provider.of<GlobalStatus>(context, listen: false).username})"),
-              Tab(text: AppLocalizations.of(context)!.allreports + " ()"),
-              Tab(text: AppLocalizations.of(context)!.urgentreport),
-            ],
-          ),
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.filter_list),
-              onPressed: () {
-                // Filterfunktion hier implementieren
-              },
+    return FutureBuilder<int>(
+      future: _reportCount,
+      builder: (context, snapshot) {
+        final allReportsText = snapshot.hasData
+            ? '${AppLocalizations.of(context)!.allreports} (${snapshot.data})'
+            : '${AppLocalizations.of(context)!.allreports} (...)';
+
+        return DefaultTabController(
+          length: 3,
+          child: Scaffold(
+            appBar: AppBar(
+              title: Text(AppLocalizations.of(context)!.reports),
+              bottom: TabBar(
+                labelColor: Colors.white,
+                indicator: gloabltabindicator,
+                dividerColor: Colors.white,
+                indicatorColor: Colors.white,
+                indicatorWeight: 2,
+                indicatorSize: TabBarIndicatorSize.tab,
+                unselectedLabelColor: Colors.white70,
+                unselectedLabelStyle: const TextStyle(fontSize: 14),
+                labelStyle:
+                    const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                tabs: [
+                  Tab(
+                      text: AppLocalizations.of(context)!.forme +
+                          " (${Provider.of<GlobalStatus>(context, listen: false).username})"),
+                  Tab(text: allReportsText),
+                  Tab(text: AppLocalizations.of(context)!.urgentreport),
+                ],
+              ),
+              actions: [
+                IconButton(
+                  icon: const Icon(Icons.filter_list),
+                  onPressed: () {
+                    // Filterfunktion hier implementieren
+                  },
+                ),
+              ],
             ),
-          ],
-        ),
-        body: const TabBarView(
-          children: [
-            ReportsTable(mode: "forme"),
-            ReportsTable(mode: "all"),
-            ReportsTable(mode: "urgent"),
-          ],
-        ),
-      ),
+            body: const TabBarView(
+              children: [
+                ReportsTable(mode: "forme"),
+                ReportsTable(mode: "all"),
+                ReportsTable(mode: "urgent"),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }
