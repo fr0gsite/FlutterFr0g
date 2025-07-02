@@ -4,7 +4,6 @@ import 'package:fr0gsite/config.dart';
 import 'package:fr0gsite/widgets/status/statistics_dashboard/components/global_statistics_list.dart';
 import 'package:fr0gsite/widgets/status/statistics_dashboard/components/report_status_pie_chart.dart';
 import 'package:fr0gsite/widgets/status/statistics_dashboard/components/truster_statistics.dart';
-import 'package:fr0gsite/widgets/status/statistics_dashboard/components/world_map_statistics.dart';
 
 class StatisticsDashboard extends StatelessWidget {
   const StatisticsDashboard({super.key});
@@ -26,7 +25,6 @@ class StatisticsDashboard extends StatelessWidget {
                   TrusterStatistics(),
                   ReportStatusPieChart(),
                   GlobalStatisticsList(),
-                  WorldMapStatistics(),
                 ],
               ),
             ),
