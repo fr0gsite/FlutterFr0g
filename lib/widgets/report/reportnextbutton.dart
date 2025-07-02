@@ -49,78 +49,51 @@ class _ReportNextButtonState extends State<ReportNextButton> {
       Padding(
         padding: const EdgeInsets.all(8.0),
         child: TextButton(
-          onPressed: () {
+          onPressed: () async {
             int currentstep =
                 Provider.of<ReportStatus>(context, listen: false).currentStep;
             if (currentstep == 2) {
-              int selectedprovider = Provider.of<ReportStatus>(context, listen: false).selectedprovider;
-              int selectedrule = Provider.of<ReportStatus>(context, listen: false).selectedrule;
-              String reporttext =Provider.of<ReportStatus>(context, listen: false).reporttext;
-              int contentid =Provider.of<ReportStatus>(context, listen: false).contentid;
-              int reporttype = Provider.of<ReportStatus>(context, listen: false).reporttype;
-              String selectedusername =Provider.of<ReportStatus>(context, listen: false).selectedusername;
+              final reportStatus = Provider.of<ReportStatus>(context, listen: false);
+              int selectedprovider = reportStatus.selectedprovider;
+              int selectedrule = reportStatus.selectedrule;
+              String reporttext = reportStatus.reporttext;
+              int contentid = reportStatus.contentid;
+              int reporttype = reportStatus.reporttype;
+              String selectedusername = reportStatus.selectedusername;
 
               if (selectedprovider != -1 && selectedrule != -1) {
+                bool value = false;
                 if (selectedprovider == 1) {
                   String username =
-                      Provider.of<GlobalStatus>(context, listen: false)
-                          .username;
+                      Provider.of<GlobalStatus>(context, listen: false).username;
                   String permission =
-                      Provider.of<GlobalStatus>(context, listen: false)
-                          .permission;
-                  Chainactions()
-                    ..setusernameandpermission(username, permission)
-                    ..addreport(selectedusername, reporttype, contentid, selectedrule,
-                            reporttext)
-                        .then((value) {
-                      if (value) {
-                        //OK
-                        debugPrint("OK");
-                        Globalnotifications.shownotification(
-                            context,
-                            AppLocalizations.of(context)!.thankyou,
-                            AppLocalizations.of(context)!
-                                .reportuploadedsuccessfully,
-                            "success");
-                        Navigator.pop(context);
-                      } else {
-                        //ERROR
-                        debugPrint("ERROR");
-                        Globalnotifications.shownotification(
-                            context,
-                            AppLocalizations.of(context)!.error,
-                            AppLocalizations.of(context)!.reportuploadedfailed,
-                            "error");
-                      }
-                    });
+                      Provider.of<GlobalStatus>(context, listen: false).permission;
+                  final chain = Chainactions();
+                  chain.setusernameandpermission(username, permission);
+                  value = await chain.addreport(
+                      selectedusername, reporttype, contentid, selectedrule, reporttext);
                 } else {
-                  ReportStatus reportStatus =
-                      Provider.of<ReportStatus>(context, listen: false);
-                  Chainactions()
-                      .reportuploadwithcommunity(reportStatus)
-                      .then((value) {
-                    if (value) {
-                      //OK
-                      debugPrint("OK");
-                      Globalnotifications.shownotification(
-                          context,
-                          AppLocalizations.of(context)!.thankyou,
-                          AppLocalizations.of(context)!
-                              .reportuploadedsuccessfully,
-                          "success");
-                      Navigator.pop(context);
-                    } else {
-                      debugPrint("ERROR");
-                      Globalnotifications.shownotification(
-                          context,
-                          AppLocalizations.of(context)!.error,
-                          AppLocalizations.of(context)!.reportuploadedfailed,
-                          "error");
-                    }
-                  });
+                  value = await Chainactions().reportuploadwithcommunity(reportStatus);
+                }
+                if (!mounted) return;
+                if (value) {
+                  debugPrint("OK");
+                  Globalnotifications.shownotification(
+                      context,
+                      AppLocalizations.of(context)!.thankyou,
+                      AppLocalizations.of(context)!.reportuploadedsuccessfully,
+                      "success");
+                  Navigator.pop(context);
+                } else {
+                  debugPrint("ERROR");
+                  Globalnotifications.shownotification(
+                      context,
+                      AppLocalizations.of(context)!.error,
+                      AppLocalizations.of(context)!.reportuploadedfailed,
+                      "error");
                 }
               }
-            } else {}
+            }
             Provider.of<ReportStatus>(context, listen: false).nextStep();
           },
           child: Container(
