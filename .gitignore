@@ -35,6 +35,7 @@ migrate_working_dir/
 
 # Language
 #/lib/l10n/untranslated_messages.json
+/lib/l10n/app_localizations*
 
 # macOS
 **/Flutter/ephemeral/

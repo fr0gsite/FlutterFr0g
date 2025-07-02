@@ -10,6 +10,13 @@ class Search extends StatefulWidget {
   State<Search> createState() => _SearchState();
 }
 
+//Note:
+// get tags list to filter by tag
+// get username list to filter by user
+// upper downer value x
+// cum of tags, comments
+// search between x and y in upload date
+
 class _SearchState extends State<Search> {
   List<String> countries = [];
 
