@@ -59,25 +59,25 @@ class _ReportStatusPieChartState extends State<ReportStatusPieChart>
                           return PieChart(
                             PieChartData(
                               startDegreeOffset: rotationDegrees,
-                              centerSpaceRadius: 80,
+                              centerSpaceRadius: 120,
                               sections: [
                                 PieChartSectionData(
                                   color: AppColor.uploadcolor,
                                   value: snapshot.data[1].int64number.toDouble(),
                                   title: "${snapshot.data[1].text} \n ${snapshot.data[1].int64number.toString()}",
-                                  radius: 50,
+                                  radius: 80,
                                 ),
                                 PieChartSectionData(
                                   color: AppColor.commentcolor,
                                   value: snapshot.data[2].int64number.toDouble(),
                                   title: "${snapshot.data[2].text} \n ${snapshot.data[2].int64number.toString()}",
-                                  radius: 50,
+                                  radius: 80,
                                 ),
                                 PieChartSectionData(
                                   color: AppColor.tagcolor,
                                   value: snapshot.data[3].int64number.toDouble(),
                                   title: "${snapshot.data[3].text} \n ${snapshot.data[3].int64number.toString()}",
-                                  radius: 50,
+                                  radius: 80,
                                 ),
                               ],
                             ),
