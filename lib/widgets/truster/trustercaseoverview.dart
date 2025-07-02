@@ -105,9 +105,7 @@ class _ReportsWidgetState extends State<ReportsWidget> {
                 labelStyle:
                     const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 tabs: [
-                  Tab(
-                      text: AppLocalizations.of(context)!.forme +
-                          " (${Provider.of<GlobalStatus>(context, listen: false).username})"),
+                  Tab(text: "${AppLocalizations.of(context)!.forme} (${Provider.of<GlobalStatus>(context, listen: false).username})"),
                   Tab(text: allReportsText),
                   Tab(text: AppLocalizations.of(context)!.urgentreport),
                 ],
@@ -159,6 +157,7 @@ class ReportsTable extends StatelessWidget {
         switch (mode) {
           case "forme":
             filteredReports = reports.where((r) => r.reportername == username).toList();
+            debugPrint("Filtered reports for $username: ${filteredReports.length}");
             break;
           case "all":
             filteredReports = reports;

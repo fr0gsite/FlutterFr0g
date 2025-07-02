@@ -1168,4 +1168,16 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get stakedtotal => 'Total Staked';
+
+  @override
+  String get actionboard => 'Action Board';
+
+  @override
+  String get actionboardreviewdesc => 'See all open reports';
+
+  @override
+  String get actionboardstatusdesc => 'View your current status';
+
+  @override
+  String get actionboardsettingsdesc => 'Open truster settings';
 }

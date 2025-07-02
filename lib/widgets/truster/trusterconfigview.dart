@@ -14,16 +14,19 @@ class StatusOverview extends StatelessWidget {
         side: const BorderSide(color: Colors.white, width: 2),
       ),
       child: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(8.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text(
-              AppLocalizations.of(context)!.status,
-              style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold),
+            Align(
+              alignment: Alignment.center,
+              child: Text(
+                AppLocalizations.of(context)!.status,
+                style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold),
+              ),
             ),
             const SizedBox(height: 12),
             Align(
@@ -31,12 +34,13 @@ class StatusOverview extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.redAccent,
+                  backgroundColor: Colors.blue,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(8),
                   ),
                 ),
-                child: Text(AppLocalizations.of(context)!.changestatus),
+                child: Text(AppLocalizations.of(context)!.changestatus, 
+                    style: const TextStyle(color: Colors.white)),
               ),
             ),
             const SizedBox(height: 20),
@@ -73,14 +77,18 @@ class StatusOverview extends StatelessWidget {
                       Row(
                         children: [
                           const Expanded(child: Text('743 TRUST')),
-                          Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                            decoration: BoxDecoration(
-                              color: Colors.grey.shade900,
-                              borderRadius: BorderRadius.circular(12),
+                            ElevatedButton(
+                            onPressed: () {},
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.blue,
+                              shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              ),
+                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                             ),
                             child: const Text('Reward', style: TextStyle(color: Colors.white)),
-                          ),
+                            )
+                        
                         ],
                       ),
                       const Text('744 System Token'),
@@ -93,7 +101,7 @@ class StatusOverview extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                             decoration: BoxDecoration(
                               color: Colors.green.shade700,
-                              borderRadius: BorderRadius.circular(12),
+                              borderRadius: BorderRadius.circular(8),
                             ),
                             child: const Text('Active', style: TextStyle(color: Colors.white)),
                           ),
@@ -101,8 +109,14 @@ class StatusOverview extends StatelessWidget {
                           const Text('72'),
                           const SizedBox(width: 8),
                           ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.blue,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                            ),
                             onPressed: () {},
-                            child: const Text('Set'),
+                            child: const Text('Set', style: TextStyle(color: Colors.white)),
                           ),
                         ],
                       ),
@@ -114,9 +128,9 @@ class StatusOverview extends StatelessWidget {
                           ElevatedButton(
                             onPressed: () {},
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.grey.shade900,
+                              backgroundColor: Colors.blue,
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12),
+                                borderRadius: BorderRadius.circular(8),
                               ),
                             ),
                             child: const Text('Edit', style: TextStyle(color: Colors.white)),

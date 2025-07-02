@@ -2,72 +2,120 @@
   "ar": [
     "criteriayear",
     "criteriauploads",
-    "criteriacomments"
+    "criteriacomments",
+    "actionboard",
+    "actionboardreviewdesc",
+    "actionboardstatusdesc",
+    "actionboardsettingsdesc"
   ],
 
   "cs": [
     "criteriayear",
     "criteriauploads",
-    "criteriacomments"
+    "criteriacomments",
+    "actionboard",
+    "actionboardreviewdesc",
+    "actionboardstatusdesc",
+    "actionboardsettingsdesc"
   ],
 
   "es": [
     "criteriayear",
     "criteriauploads",
-    "criteriacomments"
+    "criteriacomments",
+    "actionboard",
+    "actionboardreviewdesc",
+    "actionboardstatusdesc",
+    "actionboardsettingsdesc"
   ],
 
   "fr": [
     "criteriayear",
     "criteriauploads",
-    "criteriacomments"
+    "criteriacomments",
+    "actionboard",
+    "actionboardreviewdesc",
+    "actionboardstatusdesc",
+    "actionboardsettingsdesc"
   ],
 
   "hi": [
     "criteriayear",
     "criteriauploads",
-    "criteriacomments"
+    "criteriacomments",
+    "actionboard",
+    "actionboardreviewdesc",
+    "actionboardstatusdesc",
+    "actionboardsettingsdesc"
   ],
 
   "it": [
     "criteriayear",
     "criteriauploads",
-    "criteriacomments"
+    "criteriacomments",
+    "actionboard",
+    "actionboardreviewdesc",
+    "actionboardstatusdesc",
+    "actionboardsettingsdesc"
   ],
 
   "ja": [
     "criteriayear",
     "criteriauploads",
-    "criteriacomments"
+    "criteriacomments",
+    "actionboard",
+    "actionboardreviewdesc",
+    "actionboardstatusdesc",
+    "actionboardsettingsdesc"
   ],
 
   "ko": [
     "criteriayear",
     "criteriauploads",
-    "criteriacomments"
+    "criteriacomments",
+    "actionboard",
+    "actionboardreviewdesc",
+    "actionboardstatusdesc",
+    "actionboardsettingsdesc"
   ],
 
   "pt": [
     "criteriayear",
     "criteriauploads",
-    "criteriacomments"
+    "criteriacomments",
+    "actionboard",
+    "actionboardreviewdesc",
+    "actionboardstatusdesc",
+    "actionboardsettingsdesc"
   ],
 
   "ru": [
     "criteriayear",
     "criteriauploads",
-    "criteriacomments"
+    "criteriacomments",
+    "actionboard",
+    "actionboardreviewdesc",
+    "actionboardstatusdesc",
+    "actionboardsettingsdesc"
   ],
 
   "uk": [
     "criteriayear",
     "criteriauploads",
-    "criteriacomments"
+    "criteriacomments",
+    "actionboard",
+    "actionboardreviewdesc",
+    "actionboardstatusdesc",
+    "actionboardsettingsdesc"
   ],
 
   "zh": [
     "criteriayear",
     "criteriauploads",
-    "criteriacomments"
+    "criteriacomments",
+    "actionboard",
+    "actionboardreviewdesc",
+    "actionboardstatusdesc",
+    "actionboardsettingsdesc"
   ]
 }
