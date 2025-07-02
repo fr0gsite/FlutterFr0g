@@ -105,68 +105,62 @@ class _ClaimRewardsViewState extends State<ClaimRewardsView> {
                     backgroundColor:
                         AppConfig.rewardtoken[i].color.withAlpha((0.2 * 255).toInt()),
                   ),
-                  onPressed: () {
-                    if (Provider.of<GlobalStatus>(context, listen: false)
-                        .isLoggedin) {
-                      if (widget.account.accountName ==
-                          Provider.of<GlobalStatus>(context, listen: false)
-                              .username) {
+                  onPressed: () async {
+                    final globalStatus =
+                        Provider.of<GlobalStatus>(context, listen: false);
+                    if (globalStatus.isLoggedin) {
+                      if (widget.account.accountName == globalStatus.username) {
                         Chainactions()
                           ..setusernameandpermission(
-                              Provider.of<GlobalStatus>(context, listen: false)
-                                  .username,
-                              Provider.of<GlobalStatus>(context, listen: false)
-                                  .permission)
-                          ..claimreward(
-                            widget.account.accountName,
-                            AppConfig.rewardtoken[i].symbol,
-                          ).then((value) {
-                            widget.callback();
-                            setState(() {
-                              getrewardinfo = getrewardinfofunc();
-                            });
-                            if (value) {
-                              if (Provider.of<GlobalStatus>(context,
-                                      listen: false)
-                                  .audionotifications) {
-                                AudioPlayer audioPlayer = AudioPlayer();
-                                audioPlayer.play(
-                                    DeviceFileSource("assets/sounds/wow.m4a"),
-                                    volume: 0.5);
-                              }
+                              globalStatus.username, globalStatus.permission);
+                        bool value = await Chainactions().claimreward(
+                          widget.account.accountName,
+                          AppConfig.rewardtoken[i].symbol,
+                        );
 
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Center(
-                                      child: Text(
-                                    AppLocalizations.of(context)!.claimsuccess,
-                                    style: const TextStyle(fontSize: 30),
-                                  )),
-                                  duration: const Duration(seconds: 5),
-                                ),
-                              );
-                            } else {
-                              if (Provider.of<GlobalStatus>(context,
-                                      listen: false)
-                                  .audionotifications) {
-                                AudioPlayer audioPlayer = AudioPlayer();
-                                audioPlayer.play(
-                                    DeviceFileSource("assets/sounds/fail.m4a"),
-                                    volume: 0.5);
-                              }
+                        if (!mounted) return;
 
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Center(
-                                      child: Text(
-                                    AppLocalizations.of(context)!.claimerror,
-                                    style: const TextStyle(fontSize: 30),
-                                  )),
-                                  duration: const Duration(seconds: 5),
-                                ),
-                              );
-                            }
-                          });
+                        widget.callback();
+                        setState(() {
+                          getrewardinfo = getrewardinfofunc();
+                        });
+                        if (value) {
+                          if (globalStatus.audionotifications) {
+                            AudioPlayer audioPlayer = AudioPlayer();
+                            audioPlayer.play(
+                                DeviceFileSource("assets/sounds/wow.m4a"),
+                                volume: 0.5);
+                          }
+
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Center(
+                                  child: Text(
+                                AppLocalizations.of(context)!.claimsuccess,
+                                style: const TextStyle(fontSize: 30),
+                              )),
+                              duration: const Duration(seconds: 5),
+                            ),
+                          );
+                        } else {
+                          if (globalStatus.audionotifications) {
+                            AudioPlayer audioPlayer = AudioPlayer();
+                            audioPlayer.play(
+                                DeviceFileSource("assets/sounds/fail.m4a"),
+                                volume: 0.5);
+                          }
+
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Center(
+                                  child: Text(
+                                AppLocalizations.of(context)!.claimerror,
+                                style: const TextStyle(fontSize: 30),
+                              )),
+                              duration: const Duration(seconds: 5),
+                            ),
+                          );
+                        }
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
@@ -210,10 +204,9 @@ class _ClaimRewardsViewState extends State<ClaimRewardsView> {
   Future getrewardinfofunc() async {
     RewardCalc result =
         await Chainactions().getrewardtokeninfo(widget.account.accountName);
+    if (!mounted) return;
     setState(() {
-      if (mounted) {
-        rewardinfo = result;
-      }
+      rewardinfo = result;
     });
   }
 }
