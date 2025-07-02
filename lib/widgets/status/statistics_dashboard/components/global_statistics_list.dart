@@ -39,7 +39,7 @@ class _GlobalStatisticsListState extends State<GlobalStatisticsList> {
                       final stat = snapshot.data[index];
                       return Container(
                         decoration: BoxDecoration(
-                          color: AppColor.nicegrey,
+                          color: Colors.white70,
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: ListTile(
