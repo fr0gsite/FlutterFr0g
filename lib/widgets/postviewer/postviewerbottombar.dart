@@ -160,67 +160,62 @@ class _PostViewerBottomParState extends State<PostViewerBottomBar> {
   }
 
   Future<bool> buttonpressfavorite(bool value) async {
-    if (Provider.of<GlobalStatus>(context, listen: false).isLoggedin) {
-      bool toogle = Provider.of<PostviewerStatus>(context, listen: false)
-          .getcurrentupload()
-          .buttonfavoriteliked;
-      if (!toogle) {
-        Chainactions()
-          ..setusernameandpermission(
-              Provider.of<GlobalStatus>(context, listen: false).username,
-              Provider.of<GlobalStatus>(context, listen: false).permission)
-          ..addfavoriteupload(
-              Provider.of<PostviewerStatus>(context, listen: false)
-                  .getcurrentupload()
-                  .uploadid.toString())
-          .then((value) {
-            if (value) {
-              debugPrint("addfavorite : $value");
+    final globalStatus = Provider.of<GlobalStatus>(context, listen: false);
+    final postviewerStatus =
+        Provider.of<PostviewerStatus>(context, listen: false);
 
-              // Save in Global Favorite list
-              int currentuploadid = Provider.of<PostviewerStatus>(context, listen: false).getcurrentupload().uploadid;
-              DateTime now = DateTime.now();
-              FavoriteUpload newfavorite = FavoriteUpload(uploadid: BigInt.parse(currentuploadid.toString()), creationtime: now);
-              Provider.of<GlobalStatus>(context, listen: false).addfavoriteupload(newfavorite);
+    if (globalStatus.isLoggedin) {
+      bool toggle =
+          postviewerStatus.getcurrentupload().buttonfavoriteliked;
 
-              // Update the current upload
-              Provider.of<PostviewerStatus>(context, listen: false).currentupload.buttonfavoriteliked = true;
-              Provider.of<PostviewerStatus>(context, listen: false).currentupload.numoffavorites += 1;
+      final chain = Chainactions()
+        ..setusernameandpermission(
+            globalStatus.username, globalStatus.permission);
 
-              setState(() {
-                favorite = favorite + 1;
-              });
+      if (!toggle) {
+        final result = await chain
+            .addfavoriteupload(postviewerStatus.getcurrentupload().uploadid.toString());
+        if (!mounted) return toggle;
+        if (result) {
+          debugPrint("addfavorite : $result");
 
-              return toogle;
-            }
+          final currentuploadid =
+              postviewerStatus.getcurrentupload().uploadid;
+          final now = DateTime.now();
+          final newfavorite = FavoriteUpload(
+              uploadid: BigInt.parse(currentuploadid.toString()),
+              creationtime: now);
+          globalStatus.addfavoriteupload(newfavorite);
+
+          postviewerStatus.currentupload.buttonfavoriteliked = true;
+          postviewerStatus.currentupload.numoffavorites += 1;
+
+          setState(() {
+            favorite = favorite + 1;
           });
+        }
       } else {
-        Chainactions()
-          ..setusernameandpermission(
-              Provider.of<GlobalStatus>(context, listen: false).username,
-              Provider.of<GlobalStatus>(context, listen: false).permission)
-          ..deletefavoriteupload(
-              Provider.of<PostviewerStatus>(context, listen: false)
-                  .getcurrentupload()
-                  .uploadid.toString())
-          .then((value) {
-            if (value) {
-              debugPrint("deletefavorite : $value");
-              int currentuploadid = Provider.of<PostviewerStatus>(context, listen: false).getcurrentupload().uploadid;
-              FavoriteUpload oldfavorite = FavoriteUpload(uploadid: BigInt.parse(currentuploadid.toString()), creationtime: DateTime.now());
-              Provider.of<GlobalStatus>(context, listen: false).delfavoriteupload(oldfavorite);
+        final result = await chain.deletefavoriteupload(
+            postviewerStatus.getcurrentupload().uploadid.toString());
+        if (!mounted) return toggle;
+        if (result) {
+          debugPrint("deletefavorite : $result");
+          final currentuploadid =
+              postviewerStatus.getcurrentupload().uploadid;
+          final oldfavorite = FavoriteUpload(
+              uploadid: BigInt.parse(currentuploadid.toString()),
+              creationtime: DateTime.now());
+          globalStatus.delfavoriteupload(oldfavorite);
 
-              Provider.of<PostviewerStatus>(context, listen: false).currentupload.buttonfavoriteliked = false;
-              Provider.of<PostviewerStatus>(context, listen: false).currentupload.numoffavorites -= 1;
+          postviewerStatus.currentupload.buttonfavoriteliked = false;
+          postviewerStatus.currentupload.numoffavorites -= 1;
 
-              setState(() {
-                favorite = favorite - 1;
-              });
-              return toogle;
-            }
+          setState(() {
+            favorite = favorite - 1;
           });
+        }
       }
-      return toogle;
+      return toggle;
     } else {
       showDialog(
           context: context,
@@ -233,49 +228,40 @@ class _PostViewerBottomParState extends State<PostViewerBottomBar> {
 
   Future<bool> buttonpressup(bool value) async {
     debugPrint("up");
-    if (Provider.of<GlobalStatus>(context, listen: false).isLoggedin) {
-      bool buttonupliked = Provider.of<PostviewerStatus>(context, listen: false)
-          .getcurrentupload()
-          .buttonupliked;
+    final globalStatus = Provider.of<GlobalStatus>(context, listen: false);
+    final postviewerStatus =
+        Provider.of<PostviewerStatus>(context, listen: false);
+
+    if (globalStatus.isLoggedin) {
+      bool buttonupliked = postviewerStatus.getcurrentupload().buttonupliked;
       bool buttondownliked =
-          Provider.of<PostviewerStatus>(context, listen: false)
-              .getcurrentupload()
-              .buttondownliked;
+          postviewerStatus.getcurrentupload().buttondownliked;
+
       if (!buttonupliked && !buttondownliked) {
-        int currentuploadid =
-            Provider.of<PostviewerStatus>(context, listen: false)
-                .getcurrentupload()
-                .uploadid;
-        Chainactions()
+        int currentuploadid = postviewerStatus.getcurrentupload().uploadid;
+
+        final chain = Chainactions()
           ..setusernameandpermission(
-              Provider.of<GlobalStatus>(context, listen: false).username,
-              Provider.of<GlobalStatus>(context, listen: false).permission)
-          ..voteupload(
-                  Provider.of<PostviewerStatus>(context, listen: false)
-                      .getcurrentupload()
-                      .uploadid,
-                  1)
-              .then((value) {
-            setState(() {
-              up = up + 1;
-            });
-            if (value) {
-              // ignore: use_build_context_synchronously
-              Provider.of<PostviewerStatus>(context, listen: false)
-                  .uploadlist
-                  .firstWhere((element) => element.uploadid == currentuploadid)
-                  .upvote();
-              // ignore: use_build_context_synchronously
-              Provider.of<GlobalStatus>(context, listen: false)
-                  .updateaccountinfo();
-              // ignore: use_build_context_synchronously
-              Provider.of<GlobalStatus>(context, listen: false)
-                  .updateuserconfig();
-            }
-          });
-        Provider.of<PostviewerStatus>(context, listen: false)
-            .currentupload
-            .buttonupliked = true;
+              globalStatus.username, globalStatus.permission);
+
+        final result = await chain
+            .voteupload(postviewerStatus.getcurrentupload().uploadid, 1);
+
+        if (!mounted) return false;
+
+        setState(() {
+          up = up + 1;
+        });
+
+        if (result) {
+          postviewerStatus.uploadlist
+              .firstWhere((element) => element.uploadid == currentuploadid)
+              .upvote();
+          globalStatus.updateaccountinfo();
+          globalStatus.updateuserconfig();
+        }
+
+        postviewerStatus.currentupload.buttonupliked = true;
       } else {
         return false;
       }
@@ -293,43 +279,36 @@ class _PostViewerBottomParState extends State<PostViewerBottomBar> {
 
   Future<bool> buttonpressdown(bool value) async {
     debugPrint("down");
-    if (Provider.of<GlobalStatus>(context, listen: false).isLoggedin) {
-      bool buttonupliked = Provider.of<PostviewerStatus>(context, listen: false)
-          .getcurrentupload()
-          .buttonupliked;
+    final globalStatus = Provider.of<GlobalStatus>(context, listen: false);
+    final postviewerStatus =
+        Provider.of<PostviewerStatus>(context, listen: false);
+
+    if (globalStatus.isLoggedin) {
+      bool buttonupliked = postviewerStatus.getcurrentupload().buttonupliked;
       bool buttondownliked =
-          Provider.of<PostviewerStatus>(context, listen: false)
-              .getcurrentupload()
-              .buttondownliked;
+          postviewerStatus.getcurrentupload().buttondownliked;
+
       if (!buttonupliked && !buttondownliked) {
-        int currentuploadid =
-            Provider.of<PostviewerStatus>(context, listen: false)
-                .getcurrentupload()
-                .uploadid;
-        Chainactions()
+        int currentuploadid = postviewerStatus.getcurrentupload().uploadid;
+
+        final chain = Chainactions()
           ..setusernameandpermission(
-              Provider.of<GlobalStatus>(context, listen: false).username,
-              Provider.of<GlobalStatus>(context, listen: false).permission)
-          ..voteupload(
-                  Provider.of<PostviewerStatus>(context, listen: false)
-                      .getcurrentupload()
-                      .uploadid,
-                  0)
-              .then((value) {
-            if (value) {
-              Provider.of<PostviewerStatus>(context, listen: false)
-                  .uploadlist
-                  .firstWhere((element) => element.uploadid == currentuploadid)
-                  .downvote();
-              Provider.of<GlobalStatus>(context, listen: false)
-                  .updateaccountinfo();
-              Provider.of<GlobalStatus>(context, listen: false)
-                  .updateuserconfig();
-            }
-          });
-        Provider.of<PostviewerStatus>(context, listen: false)
-            .currentupload
-            .buttondownliked = true;
+              globalStatus.username, globalStatus.permission);
+
+        final result = await chain
+            .voteupload(postviewerStatus.getcurrentupload().uploadid, 0);
+
+        if (!mounted) return false;
+
+        if (result) {
+          postviewerStatus.uploadlist
+              .firstWhere((element) => element.uploadid == currentuploadid)
+              .downvote();
+          globalStatus.updateaccountinfo();
+          globalStatus.updateuserconfig();
+        }
+
+        postviewerStatus.currentupload.buttondownliked = true;
       } else {
         return false;
       }
