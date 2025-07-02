@@ -1,10 +1,10 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:fr0gsite/chainactions/chainactions.dart';
 import 'package:fr0gsite/datatypes/globalstatus.dart';
 import 'package:fr0gsite/datatypes/userconfig.dart';
 import 'package:flutter/material.dart';
 import 'package:fr0gsite/l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:fr0gsite/widgets/resources/trustercriteriaview.dart';
 
 class ApplyTrusterroleView extends StatefulWidget {
   const ApplyTrusterroleView({super.key, required this.userconfig});
@@ -64,36 +64,12 @@ class ApplyTrusterroleViewState extends State<ApplyTrusterroleView> {
                         minFontSize: 20,
                         style: const TextStyle(color: Colors.white),
                       ),
-                      onPressed: () async {
+                      onPressed: () {
                         if (Provider.of<GlobalStatus>(context, listen: false).isLoggedin) {
-                          final username = Provider.of<GlobalStatus>(context, listen: false).username;
-                          final permission = Provider.of<GlobalStatus>(context, listen: false).permission;
-                          final chainactions = Chainactions();
-                          chainactions.setusernameandpermission(username, permission);
-
-                          // Obtain resources that rely on context before the async gap
-                          final messenger = ScaffoldMessenger.of(context);
-                          final localizations = AppLocalizations.of(context)!;
-
-                          try {
-                            final value = await chainactions.applyfortrusterrole(username);
-                            if (!mounted) return;
-                            if (value) {
-                              messenger.showSnackBar(
-                                SnackBar(content: Text(localizations.applysuccessful)),
-                              );
-                            } else {
-                              messenger.showSnackBar(
-                                SnackBar(content: Text(localizations.sorrysomethingwentwrong)),
-                              );
-                            }
-                          } catch (error) {
-                            debugPrint('Error applying for Truster Role: $error');
-                            if (!mounted) return;
-                            messenger.showSnackBar(
-                              SnackBar(content: Text('Error: $error')),
-                            );
-                          }
+                          showDialog(
+                            context: context,
+                            builder: (context) => const TrusterCriteriaView(),
+                          );
                         }
                       },
                     ),
