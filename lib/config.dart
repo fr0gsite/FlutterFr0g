@@ -164,6 +164,7 @@ class AppConfig {
   static int refreshuserfavoritecomment = 15; //in minutes
   static int refreshuserfavoritetags = 15; //in minutes
   static int refreshusersubscriptions = 15; //in minutes
+  static int refreshblacklist = 10; //in minutes
 
   // Vales from smart contract
   static int maxUploadText = 1024;

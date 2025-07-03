@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:fr0gsite/datatypes/ipfsnode.dart';
 import 'package:fr0gsite/datatypes/networkstatus.dart';
+import 'package:fr0gsite/datatypes/blackliststatus.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart';
 import 'package:provider/provider.dart';
@@ -9,6 +10,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 class IPFSActions {
   static Future<Uint8List> fetchipfsdata(context, ipfshashToMediafile) async {
     debugPrint("Request IPFS Media with Hash: $ipfshashToMediafile");
+
+    // Check blacklist
+    var blacklist = Provider.of<BlacklistStatus>(context, listen: false);
+    await blacklist.ensure();
+    if (blacklist.isBlacklisted(ipfshashToMediafile)) {
+      debugPrint("IPFS hash $ipfshashToMediafile is blacklisted");
+      return Uint8List.fromList([]);
+    }
 
     //Cache config for Platform
     if (kIsWeb) {
