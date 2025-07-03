@@ -18,6 +18,7 @@ import 'package:fr0gsite/datatypes/tag.dart';
 import 'package:fr0gsite/datatypes/truster.dart';
 import 'package:fr0gsite/datatypes/usersubscription.dart';
 import 'package:fr0gsite/datatypes/userupload.dart';
+import 'package:fr0gsite/datatypes/blacklistentry.dart';
 import 'package:fr0gsite/datatypes/withthistag.dart';
 import 'package:fr0gsite/nameconverter.dart';
 import 'package:fr0gsite/datatypes/favoriteupload.dart';
@@ -1163,6 +1164,18 @@ class Chainactions {
       reportvoteslist.add(ReportVotes.fromJson(response[index]));
     }
     return reportvoteslist;
+  }
+
+  Future<List<BlacklistEntry>> getblacklist() async {
+    debugPrint("Requesting blacklist");
+    var response = await geteosclient().getTableRows(
+        AppConfig.maincontract, AppConfig.maincontract, 'blacklist',
+        limit: 1000, json: true);
+    List<BlacklistEntry> list = [];
+    for (var index = 0; index < response.length; index++) {
+      list.add(BlacklistEntry.fromJson(response[index]));
+    }
+    return list;
   }
 
   Future<bool> claimreward(String accountName, String symbol) {

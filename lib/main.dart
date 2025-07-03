@@ -4,6 +4,7 @@ import 'package:fr0gsite/datatypes/globalstatus.dart';
 import 'package:fr0gsite/datatypes/locationandlanguage.dart';
 import 'package:fr0gsite/datatypes/networkstatus.dart';
 import 'package:fr0gsite/datatypes/trusterstatus.dart';
+import 'package:fr0gsite/datatypes/blackliststatus.dart';
 import 'package:fr0gsite/datatypes/walletstatus.dart';
 import 'package:fr0gsite/l10n/app_localizations.dart';
 import 'package:fr0gsite/localstorage.dart';
@@ -52,6 +53,8 @@ void main() {
             create: (context) => NetworkStatus()),
         ChangeNotifierProvider<TrusterStatus>(
             create: (context) => TrusterStatus()),
+        ChangeNotifierProvider<BlacklistStatus>(
+            create: (context) => BlacklistStatus()),
       ],
       builder: (context, child) {
         return const App();
