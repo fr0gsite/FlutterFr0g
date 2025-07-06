@@ -1168,14 +1168,12 @@ class Chainactions {
 
   Future<List<BlacklistEntry>> getblacklist() async {
     debugPrint("Requesting blacklist");
-    var response = await geteosclient().getTableRows(
-        AppConfig.maincontract, AppConfig.maincontract, 'blacklist',
-        limit: 1000, json: true);
-    List<BlacklistEntry> list = [];
-    for (var index = 0; index < response.length; index++) {
-      list.add(BlacklistEntry.fromJson(response[index]));
-    }
-    return list;
+    //var response = await geteosclient().getTableRows(AppConfig.maincontract, AppConfig.maincontract, 'blacklist',limit: 1000, json: true);
+    //List<BlacklistEntry> list = [];
+    //for (var index = 0; index < response.length; index++) {
+    //  list.add(BlacklistEntry.fromJson(response[index]));
+    //}
+    return [];
   }
 
   Future<bool> claimreward(String accountName, String symbol) {
