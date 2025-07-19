@@ -7,7 +7,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/foundation.dart';
 
-loginwhencredentialsarestored(context) async {
+Future<void> loginwhencredentialsarestored(context) async {
   if (Provider.of<GlobalStatus>(context, listen: false).isLoggedin) {
     debugPrint("Already logged in");
   } else {
@@ -38,7 +38,7 @@ loginwhencredentialsarestored(context) async {
 /// If [AppConfig.debugUsername] and [AppConfig.debugPKey] are set,
 /// the app will log in with these credentials when [kDebugMode] is true
 /// and no user is currently logged in.
-debugAutoLogin(context) async {
+Future<void> debugAutoLogin(context) async {
   if (kDebugMode &&
       !Provider.of<GlobalStatus>(context, listen: false).isLoggedin) {
     if (AppConfig.debugUsername.isNotEmpty &&

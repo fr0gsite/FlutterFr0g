@@ -23,7 +23,7 @@ class TimeDifferenceWidgetState extends State<TimeDifferenceWidget> {
     inputDateTime = DateTime.parse(widget.dateTimeString).toLocal();
   }
 
-  calculateTimeDifference() {
+  void calculateTimeDifference() {
     final currentDateTime = DateTime.now().toLocal();
     final differenceInSeconds =
         currentDateTime.difference(dateTime).inSeconds;

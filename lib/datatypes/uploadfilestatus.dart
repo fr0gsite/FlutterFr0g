@@ -35,7 +35,7 @@ class CommunityNodeCheckuserResponse {
   int slots;
   bool freeslots;
 
-  get userslots => slots;
+  int get userslots => slots;
 
   CommunityNodeCheckuserResponse(this.slots, this.freeslots);
 

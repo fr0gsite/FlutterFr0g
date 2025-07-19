@@ -12,7 +12,7 @@ class TrusterView extends StatefulWidget {
 }
 
 class TrusterViewState extends State<TrusterView> {
-  get countries => null;
+  Null get countries => null;
 
   @override
   Widget build(BuildContext context) {

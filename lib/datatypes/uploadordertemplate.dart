@@ -81,7 +81,7 @@ abstract class UploadOrderTemplate {
     return currentuploadid;
   }
 
-  showpictures(bool value) {
+  void showpictures(bool value) {
     showpicture = value;
     if (value) {
       debugPrint("showpictures");
@@ -112,7 +112,7 @@ abstract class UploadOrderTemplate {
     }
   }
 
-  showvideos(bool value) {
+  void showvideos(bool value) {
     showvideo = value;
     if (value) {
       debugPrint("showvideos");
@@ -143,7 +143,7 @@ abstract class UploadOrderTemplate {
     }
   }
 
-  removeduplicates() {
+  void removeduplicates() {
     List<int> uploadids = [];
     currentviewuploadlist.removeWhere((element) {
       if (uploadids.contains(element.uploadid)) {

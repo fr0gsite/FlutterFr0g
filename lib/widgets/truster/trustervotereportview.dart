@@ -205,7 +205,7 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
     }
   }
 
-Rule getrule(type, violatedrule, context) {
+Rule getrule(int type, violatedrule, context) {
   switch (type) {
     case 1:
       return Rules().getUploadRules(context).firstWhere((element) => element.ruleNr == violatedrule);

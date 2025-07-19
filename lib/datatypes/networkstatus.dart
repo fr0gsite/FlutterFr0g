@@ -172,7 +172,7 @@ class NetworkStatus extends ChangeNotifier {
     return currentipfsnode;
   }
 
-  choooseBlockchainNode() {
+  void choooseBlockchainNode() {
     if (automaticblockchainnode) {
       currentblockchainnode = getbestblockchainnode();
     }

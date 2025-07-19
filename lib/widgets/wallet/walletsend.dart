@@ -366,7 +366,7 @@ class _WalletSendState extends State<WalletSend> {
     );
   }
 
-  transactioncallback() {
+  void transactioncallback() {
     updatebalance();
   }
 

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fr0gsite/chainactions/statisticactions.dart';
 import 'package:fr0gsite/datatypes/statistics.dart';
-import '../../../../config.dart';
 import 'dashboard_card.dart';
 
 class GlobalStatisticsList extends StatefulWidget {
