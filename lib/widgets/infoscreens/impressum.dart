@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
-class ImpressumPage extends StatefulWidget {
-  const ImpressumPage({super.key});
+import '../../config.dart';
+
+/// Popup dialog displaying the contents of the local `impressum.txt` file.
+class ImpressumView extends StatefulWidget {
+  const ImpressumView({super.key});
 
   @override
-  State<ImpressumPage> createState() => _ImpressumPageState();
+  State<ImpressumView> createState() => _ImpressumViewState();
 }
 
-class _ImpressumPageState extends State<ImpressumPage> {
+class _ImpressumViewState extends State<ImpressumView> {
   String _content = '';
 
   @override
@@ -22,7 +25,8 @@ class _ImpressumPageState extends State<ImpressumPage> {
       _content = await rootBundle.loadString('assets/impressum.txt');
     } catch (_) {
       try {
-        _content = await rootBundle.loadString('assets/impressum.template.txt');
+        _content =
+            await rootBundle.loadString('assets/impressum.template.txt');
       } catch (_) {
         _content = 'Impressum konnte nicht geladen werden.';
       }
@@ -32,16 +36,55 @@ class _ImpressumPageState extends State<ImpressumPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Impressum'),
-      ),
-      body: _content.isEmpty
-          ? const Center(child: CircularProgressIndicator())
-          : Padding(
-              padding: const EdgeInsets.all(16),
-              child: SingleChildScrollView(child: Text(_content)),
+    return Stack(
+      children: [
+        GestureDetector(
+          onTap: () => Navigator.pop(context),
+          child: Container(
+            color: Colors.black38,
+            width: double.infinity,
+            height: double.infinity,
+          ),
+        ),
+        Center(
+          child: SizedBox(
+            width: 600,
+            height: 600,
+            child: Material(
+              color: AppColor.nicegrey,
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                side: BorderSide(
+                    color: Colors.white, width: 6, strokeAlign: 4.0),
+              ),
+              child: Scaffold(
+                backgroundColor: Colors.transparent,
+                appBar: AppBar(
+                  backgroundColor: AppColor.nicegrey,
+                  elevation: 0,
+                  automaticallyImplyLeading: false,
+                  leading: IconButton(
+                    icon: const Icon(Icons.close, color: Colors.white),
+                    onPressed: () => Navigator.pop(context),
+                  ),
+                  title: const Text('Impressum'),
+                  centerTitle: true,
+                ),
+                body: _content.isEmpty
+                    ? const Center(child: CircularProgressIndicator())
+                    : Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: SingleChildScrollView(
+                            child: Text(
+                          _content,
+                          style: const TextStyle(color: Colors.white),
+                        )),
+                      ),
+              ),
             ),
+          ),
+        ),
+      ],
     );
   }
 }
