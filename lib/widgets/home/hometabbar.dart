@@ -7,10 +7,8 @@ import 'package:lottie/lottie.dart';
 import 'package:fr0gsite/l10n/app_localizations.dart';
 
 class HomeTabBar extends StatefulWidget {
-  const HomeTabBar(
-      {super.key, required this.callback, required this.initialindex});
-  final Function(int) callback;
-  final int initialindex;
+  const HomeTabBar({super.key, required this.controller});
+  final TabController controller;
   @override
   State<HomeTabBar> createState() => _HomeTabBarState();
 }
@@ -51,16 +49,12 @@ class _HomeTabBarState extends State<HomeTabBar> with TickerProviderStateMixin {
       showanimation = false;
     }
 
-    return DefaultTabController(
-      initialIndex: widget.initialindex,
-      length: 4,
-      child: TabBar(
+    return TabBar(
+          controller: widget.controller,
           onTap: (value) {
             setState(() {
               playAnimation();
             });
-
-            widget.callback(value);
           },
           dividerColor: Colors.transparent,
           unselectedLabelColor: Colors.grey[500],

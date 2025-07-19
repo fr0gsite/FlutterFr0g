@@ -19,25 +19,26 @@ class Home extends StatefulWidget {
   State<Home> createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> {
+class _HomeState extends State<Home> with TickerProviderStateMixin {
   int currenttabindex = 0;
+  late TabController tabController;
   ScrollController homescrollcontroller = ScrollController();
 
   @override
   void initState() {
     super.initState();
-    Provider.of<GlobalStatus>(context, listen: false).expandhomenavigationbar =
-        true;
-  }
-
-  void tabbarPressed(int index) {
-    if(index == currenttabindex) {
-      return; // No need to update the state if the same tab is pressed again
-    }
-    setState(() {
-      currenttabindex = index;
+    Provider.of<GlobalStatus>(context, listen: false).expandhomenavigationbar = true;
+    tabController = TabController(length: 4, vsync: this);
+    tabController.addListener(() {
+      if (tabController.indexIsChanging) return;
+      if (currenttabindex != tabController.index) {
+        setState(() {
+          currenttabindex = tabController.index;
+        });
+      }
     });
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -61,8 +62,17 @@ class _HomeState extends State<Home> {
             SizedBox(
               height: 1000,
               child: Container(
-                  color: AppColor.nicegrey,
-                  child: HomeCubeList(currenttabindex: currenttabindex)),
+                color: AppColor.nicegrey,
+                child: TabBarView(
+                  controller: tabController,
+                  children: const [
+                    HomeCubeList(currenttabindex: 0),
+                    HomeCubeList(currenttabindex: 1),
+                    HomeCubeList(currenttabindex: 2),
+                    HomeCubeList(currenttabindex: 3),
+                  ],
+                ),
+              ),
             ),
           ],
         ),
@@ -78,8 +88,7 @@ class _HomeState extends State<Home> {
           Expanded(
             child: Container(
               color: AppColor.nicegrey,
-              child: HomeTabBar(
-                  initialindex: currenttabindex, callback: tabbarPressed),
+              child: HomeTabBar(controller: tabController),
             ),
           ),
           const SizedBox(
@@ -96,5 +105,12 @@ class _HomeState extends State<Home> {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    tabController.dispose();
+    homescrollcontroller.dispose();
+    super.dispose();
   }
 }
