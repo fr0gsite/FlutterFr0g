@@ -6,6 +6,7 @@ import 'package:fr0gsite/l10n/app_localizations.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../config.dart';
 import '../../datatypes/globalstatus.dart';
+import 'impressum.dart';
 
 class Informations extends StatefulWidget {
   const Informations({super.key});
@@ -114,7 +115,10 @@ class _InformationsState extends State<Informations> {
                       title: const Text('Impressum'),
                       leading: const Icon(Icons.info_outline),
                       onPressed: (BuildContext context) {
-                        Navigator.pushNamed(context, '/impressum');
+                        showDialog(
+                          context: context,
+                          builder: (_) => const ImpressumView(),
+                        );
                       },
                     ),
                   ],
