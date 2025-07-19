@@ -74,7 +74,7 @@ class PostviewerStatus extends ChangeNotifier {
     //delete duplicates if there are any
   }
 
-  removeDuplicates() {
+  void removeDuplicates() {
     final ids = <int>{};
     List<Upload> temp = [];
     for (var upload in uploadlist) {

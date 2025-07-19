@@ -23,31 +23,31 @@ class RewardCalc {
       this.usersupplyACT,
       this.cbasedsystemtokens);
 
-  settotalsupplyFAME(double value) {
+  void settotalsupplyFAME(double value) {
     totalsupplyFAME = value;
   }
 
-  settotalsupplyTRUST(double value) {
+  void settotalsupplyTRUST(double value) {
     totalsupplyTRUST = value;
   }
 
-  settotalsupplyACT(double value) {
+  void settotalsupplyACT(double value) {
     totalsupplyACT = value;
   }
 
-  setusersupplyFAME(double value) {
+  void setusersupplyFAME(double value) {
     usersupplyFAME = value;
   }
 
-  setusersupplyTRUST(double value) {
+  void setusersupplyTRUST(double value) {
     usersupplyTRUST = value;
   }
 
-  setusersupplyACT(double value) {
+  void setusersupplyACT(double value) {
     usersupplyACT = value;
   }
 
-  setcbasedsystemtokens(double value) {
+  void setcbasedsystemtokens(double value) {
     cbasedsystemtokens = value;
   }
 

@@ -130,9 +130,11 @@ class _TransactionTimelineState extends State<TransactionTimeline> {
                   ? lineChartBarData1.spots.removeAt(0)
                   : null;
               plotcounter++;
-              lineChartData.minX = plotcounter.toDouble() - range;
-              lineChartData.maxX = plotcounter.toDouble();
-              lineChartData.maxY = maxYspot + 1;
+              lineChartData = lineChartData.copyWith(
+                minX: plotcounter.toDouble() - range,
+                maxX: plotcounter.toDouble(),
+                maxY: maxYspot + 1,
+              );
               debugPrint(
                   "current Block: $lastblocknr, Transactions: $transactionsinblock");
             });

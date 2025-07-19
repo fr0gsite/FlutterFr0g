@@ -30,7 +30,7 @@ class IPFSNode {
     return "$protokoll://$address:$port$path";
   }
 
-  newrequest(bool success, int time) {
+  void newrequest(bool success, int time) {
     sumrequesttime += time;
     if (success) {
       requestSuccessCount++;

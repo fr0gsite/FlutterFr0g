@@ -29,7 +29,7 @@ class Uploadstatus extends ChangeNotifier {
   bool testedipfshash = false;
   bool testedipfsthumb = false;
 
-  void nextStep(context) {
+  void nextStep(BuildContext context) {
     if (_currentStep <= 4) {
       switch (_currentStep) {
         case 0:
@@ -51,7 +51,7 @@ class Uploadstatus extends ChangeNotifier {
           _currentStep++;
           break;
         case 4:
-          initaddupload(context);
+          initAddUpload(context);
         default:
       }
 
@@ -69,7 +69,7 @@ class Uploadstatus extends ChangeNotifier {
     notifyListeners();
   }
 
-  newStep(int index) {
+  void newStep(int index) {
     _currentStep = index;
     notifyListeners();
   }
@@ -99,7 +99,7 @@ class Uploadstatus extends ChangeNotifier {
     notifyListeners();
   }
 
-  void initaddupload(context) {
+  Future<void> initAddUpload(BuildContext context) async {
     if (selecteduploadfiletype != "" &&
         selectedthumbfiletype != "" &&
         selectedlanguage != "" &&
@@ -118,28 +118,34 @@ class Uploadstatus extends ChangeNotifier {
       ContentFlag flag = selectedflag;
       String languageiso639 = getlanguage(selectedlanguage);
 
+      final navigator = Navigator.of(context);
+      final scaffoldContext = context;
+
       Chainactions()
-        ..setusernameandpermission(username, permission)
-        ..adduploadaction(
-                username,
-                textfieldipfshash.text,
-                textfieldipfsthumb.text,
-                textfielduploadtext.text,
-                languageiso639,
-                selecteduploadfiletype,
-                selectedthumbfiletype,
-                flag)
-            .then((value) {
-          if (value) {
-            Navigator.pop(context);
-            //Show success Dialog
-            showDialog(
-                context: context,
-                builder: ((context) {
-                  return const SuccessUpload();
-                }));
-          } else {}
-        });
+        .setusernameandpermission(username, permission);
+
+      final value = await Chainactions().adduploadaction(
+        username,
+        textfieldipfshash.text,
+        textfieldipfsthumb.text,
+        textfielduploadtext.text,
+        languageiso639,
+        selecteduploadfiletype,
+        selectedthumbfiletype,
+        flag,
+      );
+
+      if (!navigator.mounted) return;
+
+      if (value) {
+        navigator.pop();
+        //Show success Dialog
+        showDialog(
+            context: scaffoldContext,
+            builder: ((context) {
+              return const SuccessUpload();
+            }));
+      }
     } else {
       debugPrint("not all fields are filled");
 
@@ -151,7 +157,7 @@ class Uploadstatus extends ChangeNotifier {
     }
   }
 
-  static getlanguage(String language) {
+  static String getlanguage(String language) {
     String languagelowercase = language.toLowerCase();
     switch (languagelowercase) {
       case "international/none":
@@ -165,7 +171,7 @@ class Uploadstatus extends ChangeNotifier {
       case "spanish":
         return "es";
       default:
-        return 0;
+        return "";
     }
   }
 }

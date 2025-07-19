@@ -15,7 +15,7 @@ class FavoriteComment {
     );
   }
 
-  setCommentText(String text) {
+  void setCommentText(String text) {
     commenttext = text;
   }
 }
