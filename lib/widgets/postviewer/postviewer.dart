@@ -268,6 +268,8 @@ class PostviewerState extends State<Postviewer> {
       debugPrint("Index of current upload in swiper: $indexofcurrentuploadinswiper");
       pagecontroller = PageController(initialPage: indexofcurrentuploadinswiper);
 
+      preloadMedia(indexofcurrentuploadinswiper);
+
       fristrun = false;
     }
     return 0;
@@ -293,7 +295,7 @@ class PostviewerState extends State<Postviewer> {
 
     Provider.of<PostviewerStatus>(context, listen: false).setcurrentupload(swipeItemList[value].upload);
 
-    preloadVideos(value);
+    preloadMedia(value);
 
     // Update the URL for web
     if (kIsWeb) {
@@ -302,7 +304,7 @@ class PostviewerState extends State<Postviewer> {
     }
   }
 
-  void preloadVideos(int index) {
+  void preloadMedia(int index) {
     // Previous Previous Video
     if (index > 0) {
       swipeItemList[index - 1].upload.loadContent(context);
