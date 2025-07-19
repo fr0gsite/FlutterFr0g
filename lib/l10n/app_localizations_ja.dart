@@ -1027,6 +1027,12 @@ class AppLocalizationsJa extends AppLocalizations {
   String get linktoupdown => 'updown.io ステータスページ';
 
   @override
+  String get impressum => 'インプリント';
+
+  @override
+  String get impressumloadfailed => 'インプリントを読み込めませんでした';
+
+  @override
   String get information => '情報';
 
   @override

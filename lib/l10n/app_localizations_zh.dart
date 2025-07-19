@@ -1019,6 +1019,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get linktoupdown => 'updown.io 状态页面';
 
   @override
+  String get impressum => '法律信息';
+
+  @override
+  String get impressumloadfailed => '无法加载法律信息';
+
+  @override
   String get information => '信息';
 
   @override

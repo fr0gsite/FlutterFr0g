@@ -1048,6 +1048,12 @@ class AppLocalizationsAr extends AppLocalizations {
   String get linktoupdown => 'صفحة حالة updown.io';
 
   @override
+  String get impressum => 'البيانات القانونية';
+
+  @override
+  String get impressumloadfailed => 'تعذر تحميل البيانات القانونية';
+
+  @override
   String get information => 'معلومات';
 
   @override

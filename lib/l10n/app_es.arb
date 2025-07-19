@@ -333,6 +333,8 @@
   "whitepaper": "WhitePaper",
   "linktodocumentation": "Documentación",
   "linktoupdown": "Página de estado de updown.io",
+  "impressum": "Aviso legal",
+  "impressumloadfailed": "No se pudo cargar el aviso legal",
   "information": "Información",
   "links": "Enlaces",
   "rules": "Reglas",

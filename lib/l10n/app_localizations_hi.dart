@@ -1058,6 +1058,12 @@ class AppLocalizationsHi extends AppLocalizations {
   String get linktoupdown => 'updown.io स्थिति पृष्ठ';
 
   @override
+  String get impressum => 'कानूनी सूचना';
+
+  @override
+  String get impressumloadfailed => 'कानूनी सूचना लोड नहीं हो सकी';
+
+  @override
   String get information => 'जानकारी';
 
   @override

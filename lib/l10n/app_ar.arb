@@ -333,6 +333,8 @@
   "whitepaper": "الورقة البيضاء",
   "linktodocumentation": "الوثائق",
   "linktoupdown": "صفحة حالة updown.io",
+  "impressum": "البيانات القانونية",
+  "impressumloadfailed": "تعذر تحميل البيانات القانونية",
   "information": "معلومات",
   "links": "روابط",
   "rules": "القواعد",

@@ -112,7 +112,7 @@ class _InformationsState extends State<Informations> {
                       },
                     ),
                     SettingsTile(
-                      title: const Text('Impressum'),
+                      title: Text(AppLocalizations.of(context)!.impressum),
                       leading: const Icon(Icons.info_outline),
                       onPressed: (BuildContext context) {
                         showDialog(
