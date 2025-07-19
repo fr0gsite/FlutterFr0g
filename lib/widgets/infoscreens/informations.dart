@@ -110,6 +110,13 @@ class _InformationsState extends State<Informations> {
                         launchUrl(Uri.parse(whitepaperurl));
                       },
                     ),
+                    SettingsTile(
+                      title: const Text('Impressum'),
+                      leading: const Icon(Icons.info_outline),
+                      onPressed: (BuildContext context) {
+                        Navigator.pushNamed(context, '/impressum');
+                      },
+                    ),
                   ],
                 ),
                 SettingsSection(
