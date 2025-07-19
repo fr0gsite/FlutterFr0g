@@ -52,3 +52,7 @@ Feel free to translate parts of the application in your language.
 
 If you find an bug you can report [here]()
 
+
+## Impressum
+To keep your Impressum details private, create a local file `assets/impressum.txt` containing your legal information. This file is ignored by git (see `.gitignore`). An example is provided in `assets/impressum.template.txt`.
+

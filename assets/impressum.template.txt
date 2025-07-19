@@ -1,0 +1,8 @@
+Name der Firma
+Musterstrasse 1
+12345 Musterstadt
+
+Email: info@example.com
+Telefon: +49 123 456789
+
+Verantwortlich: Max Mustermann
