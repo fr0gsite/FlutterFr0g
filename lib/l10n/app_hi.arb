@@ -333,6 +333,8 @@
   "whitepaper": "श्वेतपत्र",
   "linktodocumentation": "प्रलेखन",
   "linktoupdown": "updown.io स्थिति पृष्ठ",
+  "impressum": "कानूनी सूचना",
+  "impressumloadfailed": "कानूनी सूचना लोड नहीं हो सकी",
   "information": "जानकारी",
   "links": "लिंक",
   "rules": "नियम",

@@ -1066,6 +1066,12 @@ class AppLocalizationsDe extends AppLocalizations {
   String get linktoupdown => 'updown.io Statusseite';
 
   @override
+  String get impressum => 'Impressum';
+
+  @override
+  String get impressumloadfailed => 'Impressum konnte nicht geladen werden.';
+
+  @override
   String get information => 'Informationen';
 
   @override

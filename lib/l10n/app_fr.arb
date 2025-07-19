@@ -333,6 +333,8 @@
   "whitepaper": "Livre blanc",
   "linktodocumentation": "Documentation",
   "linktoupdown": "Page d’état updown.io",
+  "impressum": "Mentions légales",
+  "impressumloadfailed": "Impossible de charger les mentions légales",
   "information": "Informations",
   "links": "Liens",
   "rules": "Règles",

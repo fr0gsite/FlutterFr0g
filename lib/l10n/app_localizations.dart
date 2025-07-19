@@ -2126,6 +2126,18 @@ abstract class AppLocalizations {
   /// **'updown.io Status Page'**
   String get linktoupdown;
 
+  /// No description provided for @impressum.
+  ///
+  /// In en, this message translates to:
+  /// **'Legal notice'**
+  String get impressum;
+
+  /// No description provided for @impressumloadfailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load legal notice'**
+  String get impressumloadfailed;
+
   /// No description provided for @information.
   ///
   /// In en, this message translates to:

@@ -1067,6 +1067,12 @@ class AppLocalizationsPt extends AppLocalizations {
   String get linktoupdown => 'Página de status do updown.io';
 
   @override
+  String get impressum => 'Aviso legal';
+
+  @override
+  String get impressumloadfailed => 'Não foi possível carregar o aviso legal';
+
+  @override
   String get information => 'Informações';
 
   @override

@@ -1024,6 +1024,12 @@ class AppLocalizationsKo extends AppLocalizations {
   String get linktoupdown => 'updown.io 상태 페이지';
 
   @override
+  String get impressum => '법적 고지';
+
+  @override
+  String get impressumloadfailed => '법적 고지를 불러올 수 없습니다';
+
+  @override
   String get information => '정보';
 
   @override

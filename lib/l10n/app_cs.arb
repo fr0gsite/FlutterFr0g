@@ -333,6 +333,8 @@
   "whitepaper": "WhitePaper",
   "linktodocumentation": "Dokumentace",
   "linktoupdown": "Statusová stránka updown.io",
+  "impressum": "Tiráž",
+  "impressumloadfailed": "Nelze načíst tiráž",
   "information": "Informace",
   "links": "Odkazy",
   "rules": "Pravidla",

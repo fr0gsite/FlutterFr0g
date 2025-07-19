@@ -1061,6 +1061,12 @@ class AppLocalizationsRu extends AppLocalizations {
   String get linktoupdown => 'Страница статуса updown.io';
 
   @override
+  String get impressum => 'Правовая информация';
+
+  @override
+  String get impressumloadfailed => 'Не удалось загрузить правовую информацию';
+
+  @override
   String get information => 'Информация';
 
   @override
