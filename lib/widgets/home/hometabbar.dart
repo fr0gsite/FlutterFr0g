@@ -143,7 +143,7 @@ class _HomeTabBarState extends State<HomeTabBar> with TickerProviderStateMixin {
               ],
             ),
           ],
-          labelColor: Colors.white),
+          labelColor: Colors.white,
     );
   }
 
