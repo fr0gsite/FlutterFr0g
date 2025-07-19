@@ -1051,6 +1051,12 @@ class AppLocalizationsCs extends AppLocalizations {
   String get linktoupdown => 'Statusová stránka updown.io';
 
   @override
+  String get impressum => 'Tiráž';
+
+  @override
+  String get impressumloadfailed => 'Nelze načíst tiráž';
+
+  @override
   String get information => 'Informace';
 
   @override

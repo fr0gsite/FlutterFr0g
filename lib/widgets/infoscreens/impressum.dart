@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
 import '../../config.dart';
+import '../../l10n/app_localizations.dart';
 
 /// Popup dialog displaying the contents of the local `impressum.txt` file.
 class ImpressumView extends StatefulWidget {
@@ -28,7 +29,7 @@ class _ImpressumViewState extends State<ImpressumView> {
         _content =
             await rootBundle.loadString('assets/impressum.template.txt');
       } catch (_) {
-        _content = 'Impressum konnte nicht geladen werden.';
+        _content = AppLocalizations.of(context)!.impressumloadfailed;
       }
     }
     if (mounted) setState(() {});
@@ -67,7 +68,7 @@ class _ImpressumViewState extends State<ImpressumView> {
                     icon: const Icon(Icons.close, color: Colors.white),
                     onPressed: () => Navigator.pop(context),
                   ),
-                  title: const Text('Impressum'),
+                  title: Text(AppLocalizations.of(context)!.impressum),
                   centerTitle: true,
                 ),
                 body: _content.isEmpty

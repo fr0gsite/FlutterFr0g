@@ -333,6 +333,8 @@
   "whitepaper": "ホワイトペーパー",
   "linktodocumentation": "ドキュメンテーション",
   "linktoupdown": "updown.io ステータスページ",
+  "impressum": "インプリント",
+  "impressumloadfailed": "インプリントを読み込めませんでした",
   "information": "情報",
   "links": "リンク",
   "rules": "ルール",

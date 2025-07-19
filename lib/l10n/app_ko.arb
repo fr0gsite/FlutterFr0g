@@ -334,6 +334,8 @@
   "whitepaper": "백서",
   "linktodocumentation": "문서",
   "linktoupdown": "updown.io 상태 페이지",
+  "impressum": "법적 고지",
+  "impressumloadfailed": "법적 고지를 불러올 수 없습니다",
   "information": "정보",
   "links": "링크",
   "rules": "규칙",

@@ -333,6 +333,8 @@
   "whitepaper": "WhitePaper",
   "linktodocumentation": "Документація",
   "linktoupdown": "Сторінка статусу updown.io",
+  "impressum": "Правова інформація",
+  "impressumloadfailed": "Не вдалося завантажити правову інформацію",
   "information": "Інформація",
   "links": "Посилання",
   "rules": "Правила",

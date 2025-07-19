@@ -379,6 +379,8 @@
     "whitepaper": "WhitePaper",
     "linktodocumentation": "Documentation",
     "linktoupdown": "updown.io Status Page",
+    "impressum": "Legal notice",
+    "impressumloadfailed": "Could not load legal notice",
     "information": "Information",
     "links": "Links",
     "rules": "Rules",
