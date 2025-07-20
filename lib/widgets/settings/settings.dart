@@ -3,6 +3,7 @@ import 'package:fr0gsite/datatypes/globalstatus.dart';
 import 'package:fr0gsite/globalnotifications.dart';
 import 'package:fr0gsite/widgets/login/login.dart';
 import 'package:fr0gsite/widgets/settings/setlanguageview.dart';
+import 'package:fr0gsite/widgets/infoscreens/impressum.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:settings_ui/settings_ui.dart';
@@ -251,6 +252,16 @@ class Settings extends StatelessWidget {
                 leading: const Icon(Icons.cloud_circle),
                 onPressed: (BuildContext context) {
                   launchUrl(Uri.parse(Documentation.url));
+                },
+              ),
+              SettingsTile(
+                title: Text(AppLocalizations.of(context)!.impressum),
+                leading: const Icon(Icons.info_outline),
+                onPressed: (BuildContext context) {
+                  showDialog(
+                    context: context,
+                    builder: (_) => const ImpressumView(),
+                  );
                 },
               )
             ],
