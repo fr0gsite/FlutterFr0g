@@ -50,6 +50,20 @@ flutter build apk
 Feel free to translate parts of the application in your language.
 > The language files are here: **lib\l10n**
 
+### Running Web Integration Tests
+To execute the integration test in a browser you need Chrome or Chromium
+installed. Then run:
+
+```bash
+flutter drive \
+  --driver=test_driver/integration_test.dart \
+  --target=integration_test/web_app_test.dart \
+  -d chrome
+```
+
+This will launch the app in Chrome and perform basic interactions such as
+clicking the disclaimer button.
+
 If you find an bug you can report [here]()
 
 
