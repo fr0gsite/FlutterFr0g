@@ -119,57 +119,66 @@ class _GlobalTagTopBarState extends State<GlobalTagTopBar> {
                               globaltag.numofuploads.toString()),
                         ],
                       ),
-                      if (hiderating)
-                        Padding(
-                          padding: const EdgeInsets.only(top: 8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              LinearPercentIndicator(
-                                width: 350,
-                                lineHeight: 40.0,
-                                barRadius: const Radius.elliptical(5, 5),
-                                percent: int.parse(globaltag.up.toString()) == 0 &&
-                                        int.parse(globaltag.down.toString()) == 0
-                                    ? 0.5
-                                    : percentageof(globaltag.up, globaltag.up + globaltag.down),
-                                center: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                  children: [
-                                    Text(
-                                      globaltag.up.toString(),
-                                      style:
-                                          const TextStyle(color: Colors.white, fontSize: 15),
-                                    ),
-                                    Text(
-                                      globaltag.down.toString(),
-                                      style:
-                                          const TextStyle(color: Colors.white, fontSize: 15),
-                                    ),
-                                  ],
-                                ),
-                                progressColor: Colors.green,
-                                backgroundColor: Colors.red,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  "${AppLocalizations.of(context)!.trendingvalue}: ${globaltag.trend}",
-                                  style:
-                                      const TextStyle(color: Colors.white, fontSize: 15),
-                                ),
-                              ),
-                              Text(
-                                "${AppLocalizations.of(context)!.createdon}: ${DateFormat.yMMMMd(Localizations.localeOf(context).toString()).add_jm().format(globaltag.creationtime.add(Duration(seconds: globaltag.creationtime.timeZoneOffset.inSeconds)))}",
-                                style:
-                                    const TextStyle(color: Colors.white, fontSize: 15),
-                              ),
-                            ],
-                          ),
-                        ),
                     ],
                   ),
                 ),
+                if (hiderating)
+                  SizedBox(
+                    width: 50,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 8.0),
+                          child: LinearPercentIndicator(
+                            width: 350,
+                            lineHeight: 40.0,
+                            barRadius: const Radius.elliptical(5, 5),
+                            percent: int.parse(globaltag.up.toString()) == 0 &&
+                                    int.parse(globaltag.down.toString()) == 0
+                                ? 0.5
+                                : percentageof(globaltag.up, globaltag.up + globaltag.down),
+                            center: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Text(
+                                  globaltag.up.toString(),
+                                  style:
+                                      const TextStyle(color: Colors.white, fontSize: 15),
+                                ),
+                                Text(
+                                  globaltag.down.toString(),
+                                  style:
+                                      const TextStyle(color: Colors.white, fontSize: 15),
+                                ),
+                              ],
+                            ),
+                            progressColor: Colors.green,
+                            backgroundColor: Colors.red,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            "${AppLocalizations.of(context)!.trendingvalue}: ${globaltag.trend}",
+                            style:
+                                const TextStyle(color: Colors.white, fontSize: 15),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                          child: Text(
+                            "${AppLocalizations.of(context)!.createdon}: ${DateFormat.yMMMMd(Localizations.localeOf(context).toString()).add_jm().format(globaltag.creationtime.add(Duration(seconds: globaltag.creationtime.timeZoneOffset.inSeconds)))}",
+                            style:
+                                const TextStyle(color: Colors.white, fontSize: 15),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 const Spacer(),
                 Container(),
               ],
