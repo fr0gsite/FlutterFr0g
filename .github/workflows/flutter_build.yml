@@ -6,7 +6,38 @@ on:
 #      - main
 
 jobs:
+  check_version:
+    runs-on: ubuntu-latest
+    outputs:
+      should_run: ${{ steps.compare.outputs.should_run }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: current-version
+        uses: NiklasLehnfeld/flutter-version-number-action@v1
+        with:
+          file-path: pubspec.yaml
+      - id: previous-version
+        run: |
+          if git rev-parse --verify HEAD^ >/dev/null 2>&1; then
+            prev=$(git show HEAD^:pubspec.yaml | grep '^version:' | awk '{print $2}')
+          else
+            prev=0.0.0
+          fi
+          echo "version=$prev" >> "$GITHUB_OUTPUT"
+      - id: compare
+        run: |
+          curr="${{ steps.current-version.outputs.version-number }}"
+          prev="${{ steps.previous-version.outputs.version }}"
+          echo "current: $curr previous: $prev"
+          if [ "$(printf '%s\n' "$prev" "$curr" | sort -V | tail -n1)" = "$curr" ] && [ "$curr" != "$prev" ]; then
+            echo "should_run=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "should_run=false" >> "$GITHUB_OUTPUT"
+          fi
+
   test_and_build:
+    needs: check_version
+    if: needs.check_version.outputs.should_run == 'true'
     runs-on: ubuntu-latest
 
     steps:
