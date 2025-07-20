@@ -4,7 +4,6 @@ import 'package:fr0gsite/widgets/home/homecubelist.dart';
 import 'package:fr0gsite/widgets/home/hometabbar.dart';
 import 'package:fr0gsite/widgets/home/populartags.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/gestures.dart';
 import 'package:provider/provider.dart';
 
 const double headlinesize = 30;
@@ -24,19 +23,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   int currenttabindex = 0;
   late TabController tabController;
   ScrollController homescrollcontroller = ScrollController();
-
-  void _handlePointerSignal(PointerSignalEvent event) {
-    if (event is PointerScrollEvent) {
-      final dx = event.scrollDelta.dx;
-      if (dx.abs() > event.scrollDelta.dy.abs()) {
-        if (dx > 0 && tabController.index > 0) {
-          tabController.animateTo(tabController.index - 1);
-        } else if (dx < 0 && tabController.index < tabController.length - 1) {
-          tabController.animateTo(tabController.index + 1);
-        }
-      }
-    }
-  }
 
   @override
   void initState() {
@@ -78,7 +64,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
               child: Container(
                 color: AppColor.nicegrey,
                 child: Listener(
-                  onPointerSignal: _handlePointerSignal,
                   child: TabBarView(
                     controller: tabController,
                     children: const [
