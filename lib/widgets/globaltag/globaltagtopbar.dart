@@ -49,23 +49,25 @@ class _GlobalTagTopBarState extends State<GlobalTagTopBar> {
                   color: Colors.white.withAlpha((0.1 * 255).toInt()),
                   borderRadius: BorderRadius.circular(10),
                 ),
+                padding: const EdgeInsets.all(8.0),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Wrap(
-                      crossAxisAlignment: WrapCrossAlignment.center,
-                      spacing: 10,
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: TagButton(text: globaltag.text, globaltagid: globaltag.globaltagid),
+                          padding: const EdgeInsets.all(8.0),
+                          child: TagButton(
+                              text: globaltag.text, globaltagid: globaltag.globaltagid),
                         ),
                         Tooltip(
-                            message:
-                                AppLocalizations.of(context)!.addtofavorite,
-                            child: LikeButton(
+                          message: AppLocalizations.of(context)!.addtofavorite,
+                          child: LikeButton(
                             size: 30,
                             isLiked: istagfavorited,
-                            circleColor: const CircleColor(start: Colors.red, end: Colors.red),
+                            circleColor:
+                                const CircleColor(start: Colors.red, end: Colors.red),
                             bubblesColor: const BubblesColor(
                               dotPrimaryColor: Colors.red,
                               dotSecondaryColor: Colors.red,
@@ -78,8 +80,8 @@ class _GlobalTagTopBarState extends State<GlobalTagTopBar> {
                               );
                             },
                             onTap: (bool istagfavorited) async {
-                              bool isLoggedin =
-                                  Provider.of<GlobalStatus>(context, listen: false).isLoggedin;
+                              bool isLoggedin = Provider.of<GlobalStatus>(context, listen: false)
+                                  .isLoggedin;
                               if (isLoggedin) {
                                 String username =
                                     Provider.of<GlobalStatus>(context, listen: false).username;
@@ -104,59 +106,44 @@ class _GlobalTagTopBarState extends State<GlobalTagTopBar> {
                               }
                               return !istagfavorited;
                             },
-                          )),
+                          ),
+                        ),
                       ],
                     ),
-                    Wrap(
+                    Row(
                       children: [
-                        textfortagmetadata(
-                            AppLocalizations.of(context)!.favoritedby,
+                        textfortagmetadata(AppLocalizations.of(context)!.favoritedby,
                             globaltag.numoffavorites.toString()),
-                        textfortagmetadata(
-                            AppLocalizations.of(context)!.uploads,
+                        textfortagmetadata(AppLocalizations.of(context)!.uploads,
                             globaltag.numofuploads.toString()),
                       ],
                     ),
-                  ],
-                ),
-              ),
-              const SizedBox(width: 10),
-              hiderating
-                  ? Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white.withAlpha((0.1 * 255).toInt()),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
+                    if (hiderating)
+                      Padding(
+                        padding: const EdgeInsets.only(top: 8.0),
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            //up and down
                             LinearPercentIndicator(
                               width: 350,
                               lineHeight: 40.0,
                               barRadius: const Radius.elliptical(5, 5),
-                              percent: int.parse(globaltag.up.toString()) ==
-                                          0 &&
+                              percent: int.parse(globaltag.up.toString()) == 0 &&
                                       int.parse(globaltag.down.toString()) == 0
                                   ? 0.5
-                                  : percentageof(globaltag.up,
-                                      globaltag.up + globaltag.down),
+                                  : percentageof(globaltag.up, globaltag.up + globaltag.down),
                               center: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
                                 children: [
                                   Text(
                                     globaltag.up.toString(),
-                                    style: const TextStyle(
-                                        color: Colors.white, fontSize: 15),
+                                    style:
+                                        const TextStyle(color: Colors.white, fontSize: 15),
                                   ),
                                   Text(
                                     globaltag.down.toString(),
-                                    style: const TextStyle(
-                                        color: Colors.white, fontSize: 15),
+                                    style:
+                                        const TextStyle(color: Colors.white, fontSize: 15),
                                   ),
                                 ],
                               ),
@@ -167,20 +154,21 @@ class _GlobalTagTopBarState extends State<GlobalTagTopBar> {
                               padding: const EdgeInsets.all(8.0),
                               child: Text(
                                 "${AppLocalizations.of(context)!.trendingvalue}: ${globaltag.trend}",
-                                style: const TextStyle(
-                                    color: Colors.white, fontSize: 15),
+                                style:
+                                    const TextStyle(color: Colors.white, fontSize: 15),
                               ),
                             ),
                             Text(
                               "${AppLocalizations.of(context)!.createdon}: ${DateFormat.yMMMMd(Localizations.localeOf(context).toString()).add_jm().format(globaltag.creationtime.add(Duration(seconds: globaltag.creationtime.timeZoneOffset.inSeconds)))}",
-                              style: const TextStyle(
-                                  color: Colors.white, fontSize: 15),
+                              style:
+                                  const TextStyle(color: Colors.white, fontSize: 15),
                             ),
                           ],
                         ),
                       ),
-                    )
-                  : Container(),
+                  ],
+                ),
+              ),
               const Spacer(),
               Container(),
             ],
