@@ -1073,7 +1073,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get impressum => 'Mentions légales';
 
   @override
-  String get impressumloadfailed => 'Impossible de charger les mentions légales';
+  String get impressumloadfailed =>
+      'Impossible de charger les mentions légales';
 
   @override
   String get information => 'Informations';
