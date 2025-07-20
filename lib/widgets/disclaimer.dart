@@ -145,8 +145,8 @@ class _GlobalDisclaimerState extends State<GlobalDisclaimer>
                                           .audionotifications) {
                                         AudioPlayer audioPlayer = AudioPlayer();
                                         audioPlayer.play(
-                                            DeviceFileSource(
-                                                "assets/sounds/boing.mp3"),
+                                            AssetSource(
+                                                "sounds/boing.mp3"),
                                             volume: 0.5,
                                             mode: PlayerMode.lowLatency);
                                       }

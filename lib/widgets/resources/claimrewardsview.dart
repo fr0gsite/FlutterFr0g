@@ -128,7 +128,7 @@ class _ClaimRewardsViewState extends State<ClaimRewardsView> {
                           if (globalStatus.audionotifications) {
                             AudioPlayer audioPlayer = AudioPlayer();
                             audioPlayer.play(
-                                DeviceFileSource("assets/sounds/wow.m4a"),
+                                AssetSource("sounds/wow.m4a"),
                                 volume: 0.5);
                           }
 
@@ -146,7 +146,7 @@ class _ClaimRewardsViewState extends State<ClaimRewardsView> {
                           if (globalStatus.audionotifications) {
                             AudioPlayer audioPlayer = AudioPlayer();
                             audioPlayer.play(
-                                DeviceFileSource("assets/sounds/fail.m4a"),
+                                AssetSource("sounds/fail.m4a"),
                                 volume: 0.5);
                           }
 
