@@ -1,6 +1,7 @@
 import 'package:fr0gsite/datatypes/comment.dart';
 import 'package:fr0gsite/datatypes/upload.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
 
 class PostviewerStatus extends ChangeNotifier {
   Upload currentupload = Upload.demo();
@@ -35,7 +36,12 @@ class PostviewerStatus extends ChangeNotifier {
   void setcurrentupload(Upload upload) {
     currentupload =
         uploadlist.firstWhere((element) => element.uploadid == upload.uploadid);
-    notifyListeners();
+    if (WidgetsBinding.instance.schedulerPhase == SchedulerPhase.persistentCallbacks ||
+        WidgetsBinding.instance.schedulerPhase == SchedulerPhase.transientCallbacks) {
+      WidgetsBinding.instance.addPostFrameCallback((_) => notifyListeners());
+    } else {
+      notifyListeners();
+    }
   }
 
   Upload getcurrentupload() {
