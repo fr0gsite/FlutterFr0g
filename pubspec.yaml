@@ -89,7 +89,7 @@ dependencies:
   convert: any
   http_parser: any
   image: any
-  flutter_gen: ^5.10.0
+  flutter_gen: ^5.11.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
