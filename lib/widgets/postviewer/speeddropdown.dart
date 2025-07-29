@@ -10,10 +10,10 @@ class SpeedDropdown extends StatefulWidget {
 }
 
 class _SpeedDropdownState extends State<SpeedDropdown> {
-  // Liste mit möglichen Geschwindigkeiten
+  // List of possible playback speeds
   final List<double> _speeds = [0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0];
 
-  // Aktuell ausgewählte Geschwindigkeit
+  // Currently selected speed
   late double _selectedSpeed;
 
   @override

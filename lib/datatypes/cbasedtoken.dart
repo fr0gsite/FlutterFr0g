@@ -49,5 +49,5 @@ class Asset {
     );
   }
 
-  // Zusätzliche Methoden oder Logik für Asset...
+  // Additional methods or logic for Asset...
 }

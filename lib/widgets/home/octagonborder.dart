@@ -17,7 +17,7 @@ class OctagonBorder extends ShapeBorder {
   Path getOuterPath(Rect rect, {TextDirection? textDirection}) {
     double flatSize = 5.0;
     final Path path = Path()
-      ..moveTo(rect.left + flatSize, rect.top) // Startpunkt
+      ..moveTo(rect.left + flatSize, rect.top) // Starting point
       ..lineTo(rect.right - flatSize, rect.top)
       ..lineTo(rect.right, rect.top + flatSize)
       ..lineTo(rect.right, rect.bottom - flatSize)
@@ -25,7 +25,7 @@ class OctagonBorder extends ShapeBorder {
       ..lineTo(rect.left + flatSize, rect.bottom)
       ..lineTo(rect.left, rect.bottom - flatSize)
       ..lineTo(rect.left, rect.top + flatSize)
-      ..close(); // Schließt den Pfad
+      ..close(); // Closes the path
 
     return path;
   }
