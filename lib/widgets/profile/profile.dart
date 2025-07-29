@@ -282,7 +282,7 @@ class _ProfileState extends State<Profile> {
                 onPressed: () {
                   if (Provider.of<GlobalStatus>(context, listen: false)
                       .isLoggedin) {
-                    //Wenn eingeloggt
+                    //If logged in
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text(AppLocalizations.of(context)!
