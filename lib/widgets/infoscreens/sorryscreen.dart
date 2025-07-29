@@ -35,7 +35,7 @@ class Sorryscreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(18.0),
                           side: const BorderSide(color: Colors.white)))),
               onPressed: () {
-                //Navigator.of(context).pop(); // Navigieren Sie zur vorherigen Seite oder zum Startbildschirm
+                //Navigator.of(context).pop(); // Navigate back to the previous page or to the home screen
                 Navigator.pushReplacementNamed(context, '/home');
               },
               child: AutoSizeText(

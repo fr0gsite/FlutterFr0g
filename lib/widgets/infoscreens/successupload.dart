@@ -27,7 +27,7 @@ class SuccessUploadState extends State<SuccessUpload> {
 
   void _startTimer() {
     _timer = Timer(const Duration(seconds: 6), () {
-      Navigator.of(context).pop(); // Schließt das Widget nach 5 Sekunden
+      Navigator.of(context).pop(); // Closes the widget after 5 seconds
     });
   }
 

@@ -6,19 +6,19 @@ import 'package:file_picker/file_picker.dart';
 
 
 Future<Uint8List> generateVideoThumbnail(PlatformFile videoFile) async {
-  // Erstelle eine temporäre Datei
+  // Create a temporary file
   final tempDir = await getTemporaryDirectory();
   final tempPath = '${tempDir.path}/${DateTime.now().millisecondsSinceEpoch}.${videoFile.extension}';
   final file = File(tempPath);
   await file.writeAsBytes(videoFile.bytes!);
 
-  // Erzeuge das Thumbnail
+  // Generate the thumbnail
   final Uint8List? thumbnailBytes = await VideoThumbnail.thumbnailData(
     video: file.path,
     imageFormat: ImageFormat.JPEG,
-    maxWidth: 128, // Beispielbreite
-    maxHeight: 128, // Beispielhöhe
-    quality: 75, // Qualitätswert zwischen 0-100
+    maxWidth: 128, // Example width
+    maxHeight: 128, // Example height
+    quality: 75, // Quality value between 0-100
   );
 
   return thumbnailBytes ?? Uint8List(0);

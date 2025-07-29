@@ -138,7 +138,7 @@ class _CreateGridState extends State<CreateGrid> {
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.white.withAlpha((0.6 * 255).toInt()),
               shadowColor: Colors.transparent,
-              // Für mehr "Glas"-Feeling ggf. ohne Schatten
+              // For more "glass" feeling, possibly without shadow
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
               ),

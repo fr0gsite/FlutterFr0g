@@ -5,7 +5,7 @@ import 'package:fr0gsite/config.dart';
 import 'package:fr0gsite/datatypes/report.dart';
 import 'package:fr0gsite/datatypes/statistics.dart';
 import 'dashboard_card.dart';
-// Für den einfachen Zugriff auf math Funktionen
+// For easy access to math functions
 
 class ReportStatusPieChart extends StatefulWidget {
   const ReportStatusPieChart({super.key});
@@ -19,7 +19,7 @@ class _ReportStatusPieChartState extends State<ReportStatusPieChart>
   List<Report> reportlist = [];
   late Future globalstatistics;
 
-  // AnimationController für die Rotation
+  // AnimationController for rotation
   late AnimationController _rotationController;
 
   @override

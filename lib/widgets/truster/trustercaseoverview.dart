@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:fr0gsite/l10n/app_localizations.dart';
 import 'dart:typed_data';
 
-// Angenommen, Report und getreports() sind bereits importiert
+// Assuming Report and getreports() are already imported
 
 class UploadThumb extends StatefulWidget {
   final int uploadId;
@@ -114,7 +114,7 @@ class _ReportsWidgetState extends State<ReportsWidget> {
                 IconButton(
                   icon: const Icon(Icons.filter_list),
                   onPressed: () {
-                    // Filterfunktion hier implementieren
+                      // Implement filter function here
                   },
                 ),
               ],
@@ -201,7 +201,7 @@ class ReportsTable extends StatelessWidget {
                       InkWell(
                         child: Text('${report.id}', style: const TextStyle(color: Colors.blue)),
                         onTap: () {
-                          // Link zum Upload
+                          // Link to the upload
                         },
                       ),
                     ],

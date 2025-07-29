@@ -57,8 +57,8 @@ class _CommentWidgetState extends State<CommentWidget> {
         decoration: BoxDecoration(
           border: Border(
             left: BorderSide(
-              width: widget.level > 1 ? 4.0 : 0, // Die Dicke der Linie
-              color: commentLevelColor[widget.level], // Die Farbe der Linie
+              width: widget.level > 1 ? 4.0 : 0, // Line thickness
+              color: commentLevelColor[widget.level], // Line color
             ),
           ),
         ),

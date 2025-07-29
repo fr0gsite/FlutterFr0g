@@ -19,7 +19,7 @@ class NotFoundPageState extends State<NotFoundPage>
     super.initState();
     controller = AnimationController(vsync: this)
       ..duration = const Duration(
-          seconds: 6) // Die Dauer der Animation entsprechend einstellen
+          seconds: 6) // Adjust the animation duration accordingly
       ..addListener(() {
         if (controller.isCompleted && !reverse) {
           reverse = true;
@@ -29,7 +29,7 @@ class NotFoundPageState extends State<NotFoundPage>
           controller.forward();
         }
       });
-    controller.forward(); // Starten Sie die Animation
+    controller.forward(); // Start the animation
   }
 
   @override
@@ -46,7 +46,7 @@ class NotFoundPageState extends State<NotFoundPage>
             }),
       ),
       body: Container(
-        color: Colors.black, // Ändern Sie dies entsprechend Ihrer AppColor
+        color: Colors.black, // Change this according to your AppColor
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -84,7 +84,7 @@ class NotFoundPageState extends State<NotFoundPage>
                             borderRadius: BorderRadius.circular(18.0),
                             side: const BorderSide(color: Colors.white)))),
                 onPressed: () {
-                  //Navigator.of(context).pop(); // Navigieren Sie zur vorherigen Seite oder zum Startbildschirm
+                  //Navigator.of(context).pop(); // Navigate back to the previous page or to the home screen
                   Navigator.pushReplacementNamed(context, '/home');
                 },
                 child: Text(AppLocalizations.of(context)!.goback),

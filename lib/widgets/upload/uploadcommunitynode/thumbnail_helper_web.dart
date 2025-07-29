@@ -4,45 +4,45 @@ import 'package:file_picker/file_picker.dart';
 import 'package:universal_html/html.dart' as html;
 
 Future<Uint8List> generateVideoThumbnail(PlatformFile file) async {
-  // Hol dir die Bytes aus dem PlatformFile
+  // Obtain the bytes from the PlatformFile
   final videoBytes = file.bytes;
   if (videoBytes == null) {
     return Uint8List(0);
   }
 
-  // 1. Erzeuge Blob-Objekt und eine Blob-URL für das Video
+  // 1. Create a Blob object and a Blob URL for the video
   final blob = html.Blob([videoBytes], 'video/mp4');
   final url = html.Url.createObjectUrl(blob);
 
-  // 2. <video>-Element erstellen
+  // 2. Create the <video> element
   final video = html.VideoElement()
     ..src = url
     ..autoplay = false
     ..controls = false
     ..muted = true;
 
-  // 3. Warten, bis die Metadaten des Videos geladen sind
+  // 3. Wait for the video metadata to load
   await video.onLoadedMetadata.first;
 
-  // 4. Springe z.B. zu Sekunde 1.0 für ein Standbild
+  // 4. Jump e.g. to second 1.0 for a still frame
   video.currentTime = 1.0;
   await video.onSeeked.first;
 
-  // 5. Erstelle ein 128×128 Canvas
+  // 5. Create a 128×128 canvas
   final canvas = html.CanvasElement(width: 128, height: 128);
   final ctx = canvas.context2D;
 
-  // 6. Zeichne (skaliere) das Videobild in das Canvas
-  //    Hier wird alles auf 128x128 zusammengepresst
+  // 6. Draw (scale) the video image onto the canvas
+  //    Everything is squeezed into 128x128 here
   ctx.drawImageScaled(video, 0, 0, 128, 128);
 
-  // 7. Erzeuge ein JPEG-Bild aus dem Canvas
+  // 7. Create a JPEG image from the canvas
   final dataUrl = canvas.toDataUrl('image/jpeg');
 
-  // 8. Blob-URL wieder freigeben
+  // 8. Release the Blob URL again
   html.Url.revokeObjectUrl(url);
 
-  // 9. DataURL in Bytes konvertieren
+  // 9. Convert the DataURL to bytes
   //    Format: "data:image/jpeg;base64,<ENCODED>"
   const base64Header = 'data:image/jpeg;base64,';
   if (dataUrl.startsWith(base64Header)) {
