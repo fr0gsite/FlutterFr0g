@@ -54,6 +54,15 @@ class _GridFilterButtonState extends State<GridFilterButton> {
           ),
           _buildFilterButton(
             context,
+            label: 'Classic',
+            icon: Icons.view_list,
+            isActive: Provider.of<GridStatus>(context, listen: true).showclassic,
+            onPressed: () {
+              Provider.of<GridStatus>(context, listen: false).toggleclassic();
+            },
+          ),
+          _buildFilterButton(
+            context,
             label: AppLocalizations.of(context)!.info,
             icon: Icons.info_sharp,
             isActive: Provider.of<GridStatus>(context, listen: true).showinfowithouthover,
@@ -94,6 +103,9 @@ class _GridFilterButtonState extends State<GridFilterButton> {
                 Provider.of<GridStatus>(context, listen: false).togglevideo();
                 widget.uploadorder.showvideos(Provider.of<GridStatus>(context, listen: false).showvideo);
                 break;
+              case "classic":
+                Provider.of<GridStatus>(context, listen: false).toggleclassic();
+                break;
               case "info":
                 Provider.of<GridStatus>(context, listen: false).toggleinfowithouthover();
                 break;
@@ -107,6 +119,7 @@ class _GridFilterButtonState extends State<GridFilterButton> {
           itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
             _buildMenuItem("pictures", AppLocalizations.of(context)!.pictures, Icons.photo_size_select_actual_rounded, Provider.of<GridStatus>(context, listen: false).showpicture),
             _buildMenuItem("videos", AppLocalizations.of(context)!.videos, Icons.video_camera_back_sharp, Provider.of<GridStatus>(context, listen: false).showvideo),
+            _buildMenuItem("classic", 'Classic', Icons.view_list, Provider.of<GridStatus>(context, listen: false).showclassic),
             _buildMenuItem("info", AppLocalizations.of(context)!.info, Icons.info_sharp, Provider.of<GridStatus>(context, listen: false).showinfowithouthover),
             _buildMenuItem("filter", AppLocalizations.of(context)!.filter, Icons.sort,  true),
           ],

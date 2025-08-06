@@ -2,6 +2,8 @@ import 'package:fr0gsite/config.dart';
 import 'package:fr0gsite/datatypes/globalstatus.dart';
 import 'package:fr0gsite/datatypes/upload.dart';
 import 'package:fr0gsite/widgets/cube/cube.dart';
+import 'package:fr0gsite/widgets/cube/classicitem.dart';
+import 'package:fr0gsite/datatypes/gridstatus.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -19,15 +21,21 @@ class CreateGrid extends StatefulWidget {
 class _CreateGridState extends State<CreateGrid> {
   List<Widget> items = [];
   int minRow = 1;
+  bool lastclassic = false;
   final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
+    lastclassic = Provider.of<GridStatus>(context, listen: false).showclassic;
     for (var upload in widget.uploadlist) {
-      items.add(Cube(
-        upload: upload,
-      ));
+      items.add(lastclassic
+          ? ClassicItem(
+              upload: upload,
+            )
+          : Cube(
+              upload: upload,
+            ));
     }
     _scrollController.addListener(_scrollListenerLoadMore);
     _scrollController.addListener(_scrollListenerExpandNavigationBar);
@@ -68,11 +76,14 @@ class _CreateGridState extends State<CreateGrid> {
 
   @override
   Widget build(BuildContext context) {
+    bool showclassic = Provider.of<GridStatus>(context, listen: true).showclassic;
     checkforupdates();
-    checkGridRows();
+    if (!showclassic) {
+      checkGridRows();
+    }
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: getgridview(),
+      child: showclassic ? getlistview() : getgridview(),
     );
   }
 
@@ -83,13 +94,19 @@ class _CreateGridState extends State<CreateGrid> {
   }
 
   void checkforupdates() {
-    if (items.length != widget.uploadlist.length) {
+    bool showclassic = Provider.of<GridStatus>(context, listen: false).showclassic;
+    if (items.length != widget.uploadlist.length || showclassic != lastclassic) {
       setState(() {
+        lastclassic = showclassic;
         items = [];
         for (var upload in widget.uploadlist) {
-          items.add(Cube(
-            upload: upload,
-          ));
+          items.add(showclassic
+              ? ClassicItem(
+                  upload: upload,
+                )
+              : Cube(
+                  upload: upload,
+                ));
         }
       });
     }
@@ -161,6 +178,53 @@ class _CreateGridState extends State<CreateGrid> {
       ),
     );
     return grid;
+  }
+
+  ScrollConfiguration getlistview() {
+    var list = ScrollConfiguration(
+      behavior: AppScrollBehavior(),
+      child: Stack(
+        children: [
+          ListView.builder(
+            controller: _scrollController,
+            itemCount: items.length,
+            itemBuilder: (context, index) {
+              return Container(
+                decoration: const BoxDecoration(
+                    border: Border(
+                        bottom: BorderSide(color: Colors.grey, width: 0.1))),
+                child: items[index],
+              );
+            },
+          ),
+          Positioned(
+            right: 10,
+            top: 10,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.white.withAlpha((0.6 * 255).toInt()),
+                shadowColor: Colors.transparent,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+              onPressed: () {
+                scrollToTop();
+              },
+              child: const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Icon(
+                  Icons.arrow_upward,
+                  color: Colors.white,
+                  size: 20,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+    return list;
   }
 }
 
