@@ -190,6 +190,7 @@ class _CreateGridState extends State<CreateGrid> {
             itemCount: items.length,
             itemBuilder: (context, index) {
               return Container(
+                margin: const EdgeInsets.symmetric(vertical: 12),
                 decoration: const BoxDecoration(
                     border: Border(
                         bottom: BorderSide(color: Colors.grey, width: 0.1))),
