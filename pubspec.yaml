@@ -38,7 +38,7 @@ dependencies:
   toggle_switch: ^2.0.1
   auto_size_text: ^3.0.0
   like_button: ^2.0.5
-  file_picker: ^8.1.2
+  file_picker: ^10.2.4
   percent_indicator: ^4.2.3
   elegant_notification: ^2.5.1
   settings_ui: ^2.0.2
