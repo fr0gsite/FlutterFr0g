@@ -23,13 +23,6 @@ This is the interface to **Fr0g**. Single codebase to web, android, ios.
 
 > You can download the [Andoid]() and [iOS]() App for free.
 
-<a href="http://www.google.com" target="_blank">
-<img src="https://cdn.pixabay.com/photo/2017/01/11/08/31/icon-1971128_1280.png" alt="drawing" width="100" href="https://google.de">
-</a>
-<a href="http://www.google.com" target="_blank">
-<img src="https://cdn.pixabay.com/photo/2016/06/28/20/44/apple-1485458_1280.png" alt="drawing" width="100" href="https://google.de">
-</a>
-
 
 
 
