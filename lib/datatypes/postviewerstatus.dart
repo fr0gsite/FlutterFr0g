@@ -12,6 +12,7 @@ class PostviewerStatus extends ChangeNotifier {
   double soundvolume = 0.0;
   List<Comment> commentlist = [];
   bool updatecommentbar = false;
+  bool fullscreen = false;
   
   bool _isPlaying = true;
   bool get isPlaying => _isPlaying;
@@ -110,6 +111,11 @@ class PostviewerStatus extends ChangeNotifier {
 
   List<Comment> getcommentlist() {
     return commentlist;
+  }
+
+  void togglefullscreen() {
+    fullscreen = !fullscreen;
+    notifyListeners();
   }
 
 
