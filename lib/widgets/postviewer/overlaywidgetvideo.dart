@@ -25,15 +25,18 @@ class _OverlayWidgetVideoState extends State<OverlayWidgetVideo> {
     return GestureDetector(
         behavior: HitTestBehavior.translucent,
         onTap: () {
+          if (Provider.of<PostviewerStatus>(context, listen: false)
+              .consumeIgnoreVideoTap()) {
+            return;
+          }
           setState(() {
-            if(widget.controller.value.isPlaying){
+            if (widget.controller.value.isPlaying) {
               widget.controller.pause();
               Provider.of<PostviewerStatus>(context, listen: false).pause();
-            } else{
+            } else {
               widget.controller.play();
               Provider.of<PostviewerStatus>(context, listen: false).resume();
             }
-                
           });
         },
         child: Material(

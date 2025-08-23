@@ -12,16 +12,28 @@ class PostviewerStatus extends ChangeNotifier {
   double soundvolume = 0.0;
   List<Comment> commentlist = [];
   bool updatecommentbar = false;
+  bool fullscreen = false;
+  bool _ignoreNextVideoTap = false;
   
   bool _isPlaying = true;
   bool get isPlaying => _isPlaying;
   void pause() {
     _isPlaying = false;
     notifyListeners();
-  } 
+  }
   void resume() {
     _isPlaying = true;
     //notifyListeners();
+  }
+
+  void ignoreNextVideoTap() {
+    _ignoreNextVideoTap = true;
+  }
+
+  bool consumeIgnoreVideoTap() {
+    final shouldIgnore = _ignoreNextVideoTap;
+    _ignoreNextVideoTap = false;
+    return shouldIgnore;
   }
 
   void showedpostviewerfirsttime() {
@@ -110,6 +122,11 @@ class PostviewerStatus extends ChangeNotifier {
 
   List<Comment> getcommentlist() {
     return commentlist;
+  }
+
+  void togglefullscreen() {
+    fullscreen = !fullscreen;
+    notifyListeners();
   }
 
 

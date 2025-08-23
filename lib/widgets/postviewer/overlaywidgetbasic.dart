@@ -148,6 +148,36 @@ Widget showTagsButton(function, int numoftags, context) {
   );
 }
 
+Widget fullscreenButton(context) {
+  return Consumer<PostviewerStatus>(
+    builder: (context, postviewerstatus, child) {
+      return GestureDetector(
+        onTap: () {
+          postviewerstatus.ignoreNextVideoTap();
+          postviewerstatus.togglefullscreen();
+        },
+        child: Tooltip(
+          message:
+              postviewerstatus.fullscreen ? "Exit fullscreen" : "Fullscreen",
+          child: Container(
+            decoration: BoxDecoration(
+              color: AppColor.nicegrey.withAlpha((0.5 * 255).toInt()),
+              borderRadius: BorderRadius.circular(50),
+            ),
+            child: Icon(
+              postviewerstatus.fullscreen
+                  ? Icons.fullscreen_exit
+                  : Icons.fullscreen,
+              color: Colors.white.withAlpha((0.5 * 255).toInt()),
+              size: 40,
+            ),
+          ),
+        ),
+      );
+    },
+  );
+}
+
 Widget reportButton(context) {
   return GestureDetector(
       onTap: () {
@@ -250,30 +280,3 @@ Widget shareButton(context) {
   );
 }
 
-void fullscreen() {
-  debugPrint("fullscreen");
-}
-
-void comment() {
-  debugPrint("comment");
-}
-
-void upvote() {
-  debugPrint("upvote");
-}
-
-void downvote() {
-  debugPrint("downvote");
-}
-
-void tip() {
-  debugPrint("tip");
-}
-
-void report() {
-  debugPrint("report");
-}
-
-void share() {
-  debugPrint("share");
-}
