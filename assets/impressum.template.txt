@@ -1,8 +1,10 @@
-Name der Firma
-Musterstrasse 1
-12345 Musterstadt
+# Impressum template
+# Add your own contact information here
+Company Name
+Street Address
+ZIP Code City
 
-Email: info@example.com
-Telefon: +49 123 456789
+Email:
+Phone:
 
-Verantwortlich: Max Mustermann
+Responsible:
