@@ -33,6 +33,7 @@ class CommentListState extends State<CommentList> {
         ],
         builder: (context, child) {
           return Column(children: [
+            const SizedBox(height: 8),
             CommentBarTop(comment: widget.comments),
             Expanded(
               child: widget.comments.isNotEmpty ? buildCommentTree() : empty(),

@@ -75,6 +75,7 @@ class _CommentBarTopState extends State<CommentBarTop> {
                     0.5),
               ),
               //Sort Button
+              const SizedBox(width: 8),
               FloatingActionButton.extended(
                 heroTag: null,
                 onPressed: () {
