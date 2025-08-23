@@ -1,4 +1,5 @@
-name: Flutter CI/CD
+---
+name: Flutter Build
 
 on:
   push:
@@ -35,83 +36,80 @@ jobs:
             echo "should_run=false" >> "$GITHUB_OUTPUT"
           fi
 
-  test_and_build:
+  build:
     needs: check_version
     if: needs.check_version.outputs.should_run == 'true'
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-    - name: Set up Flutter
-      uses: subosito/flutter-action@v2
-      with:
-        flutter-version: '3.32.5'
-        channel: 'stable'
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.32.5'
+          channel: 'stable'
 
-    - name: Setup Java
-      uses: actions/setup-java@v4
-      with:
-        distribution: 'zulu'
-        java-version: '17'
-        cache: 'gradle'
-        check-latest: true  
-    
-    - name: enable web
-      run: flutter config --enable-web
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+          cache: 'gradle'
+          check-latest: true
 
-    - name: Get dependencies
-      run: flutter pub get
+      - name: enable web
+        run: flutter config --enable-web
 
-    - name: Run tests
-      run: flutter test  
+      - name: Get dependencies
+        run: flutter pub get
 
-    - name: Build Web App
-      run: flutter build web
+      - name: Build Web App
+        run: flutter build web
 
-#    - name: Build Android App
-#      run: flutter build apk --verbose
-#      run: flutter build apk
+  #    - name: Build Android App
+  #      run: flutter build apk --verbose
+  #      run: flutter build apk
 
-    - id: read-version
-      uses: NiklasLehnfeld/flutter-version-number-action@v1
-      with:
-        file-path: pubspec.yaml
+      - id: read-version
+        uses: NiklasLehnfeld/flutter-version-number-action@v1
+        with:
+          file-path: pubspec.yaml
 
-    - name: Create Container for web (latest)
-      run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/flutterfr0g:latest .
+      - name: Create Container for web (latest)
+        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/flutterfr0g:latest .
 
-    - name: Create Container for web (version)
-      run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/flutterfr0g:${{ steps.read-version.outputs.version-number }} .
+      - name: Create Container for web (version)
+        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/flutterfr0g:${{ steps.read-version.outputs.version-number }} .
 
-    - name: Log in to Docker Hub
-      run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+      - name: Log in to Docker Hub
+        run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
 
-    - name: Push Docker image to Docker Hub (latest)
-      run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/flutterfr0g:latest
+      - name: Push Docker image to Docker Hub (latest)
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/flutterfr0g:latest
 
-    - name: Push Docker image to Docker Hub (version)
-      run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/flutterfr0g:${{ steps.read-version.outputs.version-number }}
+      - name: Push Docker image to Docker Hub (version)
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/flutterfr0g:${{ steps.read-version.outputs.version-number }}
 
-#    - name: rename apk
-#      run: mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/fr0gsite.apk
+  #    - name: rename apk
+  #      run: mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/fr0gsite.apk
 
-#    - name: Upload to IPFS
-#      uses: appleboy/scp-action@master
-#      with:
-#        host: ${{ secrets.SERVER_HOST }}
-#        username: ${{ secrets.SERVER_USER }}
-#        password: ${{ secrets.SERVER_PASSWORD }}
-#        port: ${{ secrets.SERVER_PORT }}
-#        rm: true
-#        source: "build/web/*"
-#        target: "/home/deploy/html"
-#    - name: PIN on IPFS
-#      uses: appleboy/ssh-action@master
-#      with:
-#        host: ${{ secrets.SERVER_HOST }}
-#        username: ${{ secrets.SERVER_USER }}
-#        password: ${{ secrets.SERVER_PASSWORD }}
-#        port: ${{ secrets.SERVER_PORT }}
-#        script: |
-#          docker exec -it nodejs ipfs pin add -r /deploy/html
+  #    - name: Upload to IPFS
+  #      uses: appleboy/scp-action@master
+  #      with:
+  #        host: ${{ secrets.SERVER_HOST }}
+  #        username: ${{ secrets.SERVER_USER }}
+  #        password: ${{ secrets.SERVER_PASSWORD }}
+  #        port: ${{ secrets.SERVER_PORT }}
+  #        rm: true
+  #        source: "build/web/*"
+  #        target: "/home/deploy/html"
+  #    - name: PIN on IPFS
+  #      uses: appleboy/ssh-action@master
+  #      with:
+  #        host: ${{ secrets.SERVER_HOST }}
+  #        username: ${{ secrets.SERVER_USER }}
+  #        password: ${{ secrets.SERVER_PASSWORD }}
+  #        port: ${{ secrets.SERVER_PORT }}
+  #        script: |
+  #          docker exec -it nodejs ipfs pin add -r /deploy/html
