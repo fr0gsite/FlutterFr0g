@@ -12,16 +12,16 @@ import 'package:fr0gsite/ipfsactions.dart';
 import 'package:fr0gsite/widgets/login/login.dart';
 import 'package:provider/provider.dart';
 
-class ClassicItem extends StatefulWidget {
-  const ClassicItem({super.key, required this.upload});
+class ListItem extends StatefulWidget {
+  const ListItem({super.key, required this.upload});
 
   final Upload upload;
 
   @override
-  State<ClassicItem> createState() => _ClassicItemState();
+  State<ListItem> createState() => _ListItemState();
 }
 
-class _ClassicItemState extends State<ClassicItem> {
+class _ListItemState extends State<ListItem> {
   late Future _imageFuture;
   Uint8List _imageBytes = Uint8List.fromList([]);
 

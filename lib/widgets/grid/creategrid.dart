@@ -2,7 +2,7 @@ import 'package:fr0gsite/config.dart';
 import 'package:fr0gsite/datatypes/globalstatus.dart';
 import 'package:fr0gsite/datatypes/upload.dart';
 import 'package:fr0gsite/widgets/cube/cube.dart';
-import 'package:fr0gsite/widgets/cube/classicitem.dart';
+import 'package:fr0gsite/widgets/cube/listitem.dart';
 import 'package:fr0gsite/datatypes/gridstatus.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -21,16 +21,16 @@ class CreateGrid extends StatefulWidget {
 class _CreateGridState extends State<CreateGrid> {
   List<Widget> items = [];
   int minRow = 1;
-  bool lastclassic = false;
+  bool lastlist = false;
   final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
-    lastclassic = Provider.of<GridStatus>(context, listen: false).showclassic;
+    lastlist = Provider.of<GridStatus>(context, listen: false).showlist;
     for (var upload in widget.uploadlist) {
-      items.add(lastclassic
-          ? ClassicItem(
+      items.add(lastlist
+          ? ListItem(
               upload: upload,
             )
           : Cube(
@@ -76,14 +76,14 @@ class _CreateGridState extends State<CreateGrid> {
 
   @override
   Widget build(BuildContext context) {
-    bool showclassic = Provider.of<GridStatus>(context, listen: true).showclassic;
+    bool showlist = Provider.of<GridStatus>(context, listen: true).showlist;
     checkforupdates();
-    if (!showclassic) {
+    if (!showlist) {
       checkGridRows();
     }
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: showclassic ? getlistview() : getgridview(),
+      child: showlist ? getlistview() : getgridview(),
     );
   }
 
@@ -94,14 +94,14 @@ class _CreateGridState extends State<CreateGrid> {
   }
 
   void checkforupdates() {
-    bool showclassic = Provider.of<GridStatus>(context, listen: false).showclassic;
-    if (items.length != widget.uploadlist.length || showclassic != lastclassic) {
+    bool showlist = Provider.of<GridStatus>(context, listen: false).showlist;
+    if (items.length != widget.uploadlist.length || showlist != lastlist) {
       setState(() {
-        lastclassic = showclassic;
+        lastlist = showlist;
         items = [];
         for (var upload in widget.uploadlist) {
-          items.add(showclassic
-              ? ClassicItem(
+          items.add(showlist
+              ? ListItem(
                   upload: upload,
                 )
               : Cube(

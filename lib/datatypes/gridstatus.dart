@@ -5,7 +5,7 @@ class GridStatus extends ChangeNotifier {
   bool showpicture = true;
   bool showvideo = true;
   bool showinfowithouthover = true;
-  bool showclassic = false;
+  bool showlist = false;
 
   bool filterstatus = false;
   double filterminvalue = 0;
@@ -45,14 +45,14 @@ class GridStatus extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setshowclassic(bool value) {
-    showclassic = value;
+  void setshowlist(bool value) {
+    showlist = value;
     notifyListeners();
   }
 
-  void toggleclassic() {
-    showclassic = !showclassic;
-    debugPrint("GridStatus: toggleclassic: $showclassic");
+  void togglelist() {
+    showlist = !showlist;
+    debugPrint("GridStatus: togglelist: $showlist");
     notifyListeners();
   }
 
