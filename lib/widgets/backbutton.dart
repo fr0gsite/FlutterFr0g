@@ -1,5 +1,7 @@
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:fr0gsite/config.dart';
+import 'package:universal_html/html.dart' as html;
 
 Widget backButton(context) {
     return Padding(
@@ -17,9 +19,12 @@ Widget backButton(context) {
             size: 25,
           ),
           onPressed: () {
-            if (Navigator.canPop(context)) {
-              //Provider.of<PostviewerStatus>(context, listen: false).pause();
+            final bool canPop = Navigator.canPop(context);
+            final bool hasHistory = !kIsWeb || html.window.history.length > 1;
+            if (canPop && hasHistory) {
               Navigator.pop(context);
+            } else {
+              Navigator.pushReplacementNamed(context, '/home');
             }
           },
         ),
