@@ -1,10 +1,12 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:fr0gsite/config.dart';
 import 'package:fr0gsite/datatypes/postviewerstatus.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:fr0gsite/widgets/postviewer/subscriptionicon.dart';
 import 'package:fr0gsite/widgets/topbar/topbar.dart';
 import 'package:provider/provider.dart';
+import 'package:universal_html/html.dart' as html;
 
 import '../resources/resourceviewertopbar.dart';
 
@@ -45,7 +47,9 @@ class _PostViewerTopBarState extends State<PostViewerTopBar> {
                         size: 25,
                       ),
                       onPressed: () {
-                        if (Navigator.canPop(context)) {
+                        final bool canPop = Navigator.canPop(context);
+                        final bool hasHistory = !kIsWeb || html.window.history.length > 1;
+                        if (canPop && hasHistory) {
                           Navigator.pop(context);
                         } else {
                           Navigator.pushReplacementNamed(context, '/home');
