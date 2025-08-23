@@ -11,6 +11,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:fr0gsite/l10n/app_localizations.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:universal_html/html.dart' as html;
 
 import '../../datatypes/postviewerstatus.dart';
 import '../report/report.dart';
@@ -225,23 +226,28 @@ Widget shareButton(context) {
               Provider.of<PostviewerStatus>(context, listen: false)
                   .getcurrentupload();
           String posturl = "$postviewerurl/${uploadtoshare.uploadid}";
-          if (kIsWeb) {
-            SharePlus.instance.share(ShareParams(text: posturl));
-            return;
-          }
           //Check if file is downloaded completely
           debugPrint("data: ${uploadtoshare.data}");
           if (uploadtoshare.data.length < 1000) {
             debugPrint("File not downloaded completely");
             return;
           }
-          final tempDir = await getTemporaryDirectory();
-          final tempPath = tempDir.path;
           DateTime now = DateTime.now();
           String formattedDate =
               "${now.year.toString().padLeft(4, '0')}${now.month.toString().padLeft(2, '0')}${now.day.toString().padLeft(2, '0')}";
           String filename =
               "${AppConfig.appname}_${formattedDate}_${uploadtoshare.uploadid}.${uploadtoshare.uploadipfshashfiletyp}";
+          if (kIsWeb) {
+            final blob = html.Blob([uploadtoshare.data]);
+            final url = html.Url.createObjectUrlFromBlob(blob);
+            final anchor = html.AnchorElement(href: url)
+              ..download = filename
+              ..click();
+            html.Url.revokeObjectUrl(url);
+            return;
+          }
+          final tempDir = await getTemporaryDirectory();
+          final tempPath = tempDir.path;
           String filetext = "Check this out: $posturl";
 
           try {
