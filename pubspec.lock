@@ -946,10 +946,10 @@ packages:
     dependency: "direct main"
     description:
       name: searchfield
-      sha256: "14388e9a4b640f7f24b1291e83e1a625b2ba144103e1b73b993f3035814af818"
+      sha256: "10c209ca54b8fc085866319fb57ae04f6a1d5789390a2bf757823f2445d025da"
       url: "https://pub.dev"
     source: hosted
-    version: "1.3.2"
+    version: "1.3.3"
   settings_ui:
     dependency: "direct main"
     description:
