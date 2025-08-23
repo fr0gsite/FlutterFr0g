@@ -113,7 +113,16 @@ class PostviewerState extends State<Postviewer> {
                       flex: 2,
                       child: Column(
                         children: [
-                          const SizedBox(height: 60, child: PostViewerTopBar()),
+                          Consumer<PostviewerStatus>(
+                              builder: (context, postviewerstatus, child) {
+                            return AnimatedContainer(
+                              duration: const Duration(milliseconds: 300),
+                              height: postviewerstatus.fullscreen ? 0 : 60,
+                              child: postviewerstatus.fullscreen
+                                  ? null
+                                  : const PostViewerTopBar(),
+                            );
+                          }),
                           Expanded(
                               flex: 10,
                               child: Stack(
@@ -141,6 +150,10 @@ class PostviewerState extends State<Postviewer> {
                                       bottom: 10,
                                       right: 10,
                                       child: reportButton(context)),
+                                  Positioned(
+                                      bottom: 70,
+                                      right: 10,
+                                      child: fullscreenButton(context)),
                                   Positioned(
                                     right: 10,
                                     child: shareButton(context),
@@ -184,19 +197,35 @@ class PostviewerState extends State<Postviewer> {
                                   ),
                                 ],
                               )),
-                          Consumer<GlobalStatus>(
-                              builder: (context, userstatus, child) {
+                          Consumer<PostviewerStatus>(
+                              builder: (context, postviewerstatus, child) {
+                            return Consumer<GlobalStatus>(
+                                builder: (context, userstatus, child) {
+                              return AnimatedContainer(
+                                duration: const Duration(milliseconds: 300),
+                                height: postviewerstatus.fullscreen
+                                    ? 0
+                                    : (userstatus.expandedtagview ? 60 : 0),
+                                child: postviewerstatus.fullscreen
+                                    ? null
+                                    : userstatus.expandedtagview
+                                        ? const TagBarView()
+                                        : Container(
+                                            color: AppColor.niceblack,
+                                          ),
+                              );
+                            });
+                          }),
+                          Consumer<PostviewerStatus>(
+                              builder: (context, postviewerstatus, child) {
                             return AnimatedContainer(
                               duration: const Duration(milliseconds: 300),
-                              height: userstatus.expandedtagview ? 60 : 0,
-                              child: userstatus.expandedtagview
-                                  ? const TagBarView() : Container(
-                                      color: AppColor.niceblack,
-                                    ),
+                              height: postviewerstatus.fullscreen ? 0 : 60,
+                              child: postviewerstatus.fullscreen
+                                  ? null
+                                  : const PostViewerBottomBar(),
                             );
                           }),
-                          const SizedBox(
-                              height: 60, child: PostViewerBottomBar()),
                         ],
                       ),
                     ),
