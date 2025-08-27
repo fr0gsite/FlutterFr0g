@@ -1,3 +1,4 @@
+import 'package:fr0gsite/datatypes/AppLanguage.dart';
 import 'package:fr0gsite/datatypes/game.dart';
 import 'package:fr0gsite/datatypes/ipfsnode.dart';
 import 'package:fr0gsite/datatypes/ipfsuploadnode.dart';
@@ -197,29 +198,22 @@ class AppConfig {
   ];
 
   static List<AppLanguage> applanguage = [
-    AppLanguage("international/none", "none"),
-    AppLanguage("Deutsch", "de"),
-    AppLanguage("English", "en"),
-    AppLanguage("Français", "fr"),
-    AppLanguage("Español", "es"),
-    AppLanguage("Português", "pt"),
-    AppLanguage("Русский", "ru"),
-    AppLanguage("Українська", "uk"),
-    AppLanguage("中文", "zh"),
-    AppLanguage("日本語", "ja"),
-    AppLanguage("اللغة العربية", "ar"),
-    AppLanguage("हिन्दी", "hi"),
-    AppLanguage("Italiano", "it"),
-    AppLanguage("Čeština", "cs"),
-    AppLanguage("한국어", "ko"),
+    AppLanguage(0, "international/none", "none"),
+    AppLanguage(1, "Deutsch", "de"),
+    AppLanguage(2, "English", "en"),
+    AppLanguage(3, "Français", "fr"),
+    AppLanguage(4, "Español", "es"),
+    AppLanguage(5, "Português", "pt"),
+    AppLanguage(6, "Русский", "ru"),
+    AppLanguage(7, "Українська", "uk"),
+    AppLanguage(8, "中文", "zh"),
+    AppLanguage(9, "日本語", "ja"),
+    AppLanguage(10, "اللغة العربية", "ar"),
+    AppLanguage(11, "हिन्दी", "hi"),
+    AppLanguage(12, "Italiano", "it"),
+    AppLanguage(13, "Čeština", "cs"),
+    AppLanguage(14, "한국어", "ko"),
   ];
-}
-
-class AppLanguage {
-  final String languagename;
-  final String countrycode;
-
-  AppLanguage(this.languagename, this.countrycode);
 }
 
 enum ContentFlag { sfw, erotic, brutal, none }

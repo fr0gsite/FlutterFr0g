@@ -14,4 +14,8 @@ class LocationandLanguage with ChangeNotifier {
     _locale = null;
     notifyListeners();
   }
+
+  Locale getCurrentLocale() {
+    return _locale ?? Locale('en', 'US');
+  }
 }
