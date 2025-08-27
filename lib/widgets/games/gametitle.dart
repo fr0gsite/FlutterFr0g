@@ -3,6 +3,7 @@ import 'package:fr0gsite/config.dart';
 import 'package:fr0gsite/datatypes/game.dart';
 import 'package:flutter/material.dart';
 import 'package:fr0gsite/l10n/app_localizations.dart';
+import 'package:fr0gsite/widgets/games/slot_machine.dart';
 
 class GameTitle extends StatefulWidget {
   final int index;
@@ -22,7 +23,19 @@ class _GameTitleState extends State<GameTitle> {
       child: Stack(
         children: [
           InkWell(
-            onTap: () {},
+            onTap: () {
+              final game = gamelist.elementAt(widget.index);
+              if (!game.active) {
+                return;
+              }
+              if (game.name == 'How Lucky') {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const SlotMachine()),
+                );
+              }
+            },
             child: Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
