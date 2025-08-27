@@ -279,10 +279,10 @@ class GameConfig {
         active: false),
     Game(
         name: "How Lucky",
-        description: "",
+        description: "Spin the one-armed bandit and test your luck.",
         imagepath: "assets/images/game_howlucky.png",
         link: "",
-        active: false),
+        active: true),
     Game(
         name: "Place",
         description: "",
