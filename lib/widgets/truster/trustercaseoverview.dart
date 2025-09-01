@@ -121,6 +121,7 @@ class _ReportsWidgetState extends State<ReportsWidget> {
             ),
             body: const TabBarView(
               children: [
+                // Do not translate in AppLocalizations
                 ReportsTable(mode: "forme"),
                 ReportsTable(mode: "all"),
                 ReportsTable(mode: "urgent"),
@@ -172,12 +173,13 @@ class ReportsTable extends StatelessWidget {
         return SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: DataTable(
+            showCheckboxColumn: false,
             columns: [
               const DataColumn(label: Text('Nr')),
               DataColumn(label: Text(AppLocalizations.of(context)!.rule)),
               DataColumn(label: Text(AppLocalizations.of(context)!.upload)),
               DataColumn(label: Text(AppLocalizations.of(context)!.votes)),
-              const DataColumn(label: Text("Time Left")),
+              DataColumn(label: Text(AppLocalizations.of(context)!.timeleft)),
             ],
             rows: filteredReports.map((report) {
               return DataRow(
@@ -186,7 +188,6 @@ class ReportsTable extends StatelessWidget {
                     InkWell(
                       child: Text('${report.reportid}', style: const TextStyle(color: Colors.blue)),
                       onTap: () {
-                        // Open TrusterVoteReportView
                         Navigator.push(context, MaterialPageRoute(builder: (context) => TrusterVoteReportView(reportid: report.reportid)));
                       },
                     ),
@@ -224,7 +225,7 @@ class ReportsTable extends StatelessWidget {
                       final timeLeft = deadline.difference(now);
 
                       return Tooltip(
-                        message: '${timeLeft.inHours} h ${timeLeft.inMinutes.remainder(60)} min left\n ',
+                        message: '${timeLeft.inHours} h ${timeLeft.inMinutes.remainder(60)} min ',
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -248,6 +249,24 @@ class ReportsTable extends StatelessWidget {
                 ),
 
                 ],
+                onSelectChanged: (selected) {
+                  if (selected != null && selected) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => TrusterVoteReportView(reportid: report.reportid),
+                      ),
+                    );
+                  }
+                },
+                color: WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
+                  if (report.outstandingvotes == 0) {
+                    return Colors.transparent;
+                  } else if (report.reporttime.isBefore(DateTime.now().subtract(const Duration(hours: 23)))) {
+                    return Colors.red.shade500;
+                  }
+                  return null; // Use default value for other states and rows
+                }),
               );
             }).toList(),
           ),

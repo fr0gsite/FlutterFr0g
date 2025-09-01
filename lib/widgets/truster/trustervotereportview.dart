@@ -38,7 +38,7 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Report Vote')),
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.reportvote)),
       body: FutureBuilder<Report>(
         future: futureReport,
         builder: (context, reportSnapshot) {
@@ -74,54 +74,52 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                         Container(
                           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                           color: statusColor(report.status),
-                          child: Text(statusText(report.status)),
+                          child: Text(statusText(report.status, context)),
                         ),
                       ],
                     ),
                     const SizedBox(height: 12),
-                    Row(
-                      children: [
-                        Container(
-                          width: 180,
-                          height: 180,
-                          color: Colors.grey.shade400,
-                          child: Cube(upload: upload),
-                        ),
-                        const SizedBox(width: 12),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text('Reported by: ${NameConverter.uint64ToName(BigInt.parse(report.reportername))}', style: const TextStyle(fontWeight: FontWeight.bold)),
-                              Text('Uploaded by: ${upload.autor}'),
-                              Text('Rule: ${report.violatedrule}: ${getrule(report.type,report.violatedrule, context)}'),
-                            ],
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          Container(
+                            width: 180,
+                            height: 180,
+                            color: Colors.grey.shade400,
+                            child: Cube(upload: upload),
                           ),
-                        ),
-                      ],
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text("${AppLocalizations.of(context)!.reportedby} ${NameConverter.uint64ToName(BigInt.parse(report.reportername))}", style: const TextStyle(fontWeight: FontWeight.bold)),
+                                Text("${AppLocalizations.of(context)!.uploadedby} ${upload.autor}"),
+                                Text('${AppLocalizations.of(context)!.rule}: ${report.violatedrule}: ${getrule(report.type,report.violatedrule, context)}'),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                    const SizedBox(height: 20),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.3,
-                      child: SwipeItem(upload: upload)),
-                    const SizedBox(height: 20),
                     Row(
                       children: [
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
                           onPressed: () {},
-                          child: const Text('Verstoß'),
+                          child: Text(AppLocalizations.of(context)!.violation),
                         ),
                         const SizedBox(width: 10),
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
                           onPressed: () {},
-                          child: const Text('In Ordnung'),
+                          child: Text(AppLocalizations.of(context)!.inlinewiththerules),
                         ),
                       ],
                     ),
                     const SizedBox(height: 20),
-                    const Text('Voting Übersicht:', style: TextStyle(fontSize: 18)),
+                    Text(AppLocalizations.of(context)!.votingoverview, style: TextStyle(fontSize: 18)),
                     const SizedBox(height: 12),
                     FutureBuilder<List<ReportVotes>>(
                       future: futureReportVotes,
@@ -130,7 +128,7 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                           return const Center(child: CircularProgressIndicator());
                         }
                         if (votesSnapshot.hasError) {
-                          return Center(child: Text('Fehler: ${votesSnapshot.error}'));
+                          return Center(child: Text('${AppLocalizations.of(context)!.error}: ${votesSnapshot.error}'));
                         }
 
                         final votes = votesSnapshot.data!;
@@ -148,7 +146,7 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                             ...votes.map((vote) {
                               return TableRow(children: [
                               Padding(padding: const EdgeInsets.all(4.0), child: Text(NameConverter.uint64ToName(BigInt.parse(vote.trustername)))),
-                              Padding(padding: const EdgeInsets.all(4.0), child: Text(votestatus(vote.vote))),
+                              Padding(padding: const EdgeInsets.all(4.0), child: Text(votestatus(vote.vote, context))),
                               ]);
                             }),
                             ],
@@ -166,16 +164,16 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
     );
   }
 
-  String statusText(int status) {
+  String statusText(int status, context) {
     switch (status) {
       case 0:
-        return 'Offen';
+        return AppLocalizations.of(context)!.open;
       case 1:
-        return 'Geschlossen';
+        return AppLocalizations.of(context)!.closed;
       case 2:
-        return 'Dringend';
+        return AppLocalizations.of(context)!.urgent;
       default:
-        return 'Unbekannt';
+        return AppLocalizations.of(context)!.unknown;
     }
   }
   Color statusColor(int status) {
@@ -192,16 +190,16 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
   }
 }
 
-  String votestatus(int status) {
+  String votestatus(int status, context) {
     switch (status) {
       case 0:
-        return 'Offen';
+        return AppLocalizations.of(context)!.open;
       case 1:
-        return 'In Ordnung';
+        return AppLocalizations.of(context)!.inorder;
       case -1:
-        return 'Verstoß';
+        return AppLocalizations.of(context)!.violation;
       default:
-        return 'Unbekannt';
+        return AppLocalizations.of(context)!.unknown;
     }
   }
 

@@ -1147,4 +1147,40 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get actionboardsettingsdesc => 'Open truster settings';
+
+  @override
+  String get violation => 'Violation';
+
+  @override
+  String get inlinewiththerules => 'In line with the rules';
+
+  @override
+  String get reportedby => 'Reported by';
+
+  @override
+  String get uploadedby => 'Uploaded by';
+
+  @override
+  String get votingoverview => 'Overview about voting';
+
+  @override
+  String get reportvote => 'Report Vote';
+
+  @override
+  String get open => 'Open';
+
+  @override
+  String get closed => 'Closed';
+
+  @override
+  String get urgent => 'Urgent';
+
+  @override
+  String get unknown => 'Unknown';
+
+  @override
+  String get inorder => 'In line';
+
+  @override
+  String get timeleft => 'Time left';
 }
