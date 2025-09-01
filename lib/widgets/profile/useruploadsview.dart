@@ -68,8 +68,9 @@ class _UserUploadViewState extends State<UserUploadView> {
                       return Column(
                         children: [
                           Center(
-                            child: Text(AppLocalizations.of(context)!.nouploadsfound,
-                                style: const TextStyle(color: AppColor.nicewhite)),
+                            child: Text(
+                                AppLocalizations.of(context)!.nouploadsfound,
+                                style: TextStyle(color: AppColor.nicewhite)),
                           ),
                         ],
                       );
@@ -79,9 +80,9 @@ class _UserUploadViewState extends State<UserUploadView> {
                       loadmorecallback: loadmorecallback,
                     );
                   } else {
-                    return const Center(
+                    return Center(
                       child: CircularProgressIndicator(
-                        color: Colors.white,
+                        color: AppColor.textcolor,
                         strokeWidth: 15,
                       ),
                     );

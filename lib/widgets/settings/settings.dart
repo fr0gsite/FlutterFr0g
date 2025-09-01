@@ -6,6 +6,7 @@ import 'package:fr0gsite/widgets/settings/setlanguageview.dart';
 import 'package:fr0gsite/widgets/infoscreens/impressum.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:fr0gsite/datatypes/themestatus.dart';
 import 'package:settings_ui/settings_ui.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:fr0gsite/l10n/app_localizations.dart';
@@ -20,10 +21,11 @@ class Settings extends StatelessWidget {
         platform: DevicePlatform.web,
         lightTheme: SettingsThemeData(
             settingsListBackground: AppColor.nicegrey,
-            titleTextColor: Colors.white,
-            settingsSectionBackground: Colors.white.withAlpha((0.8 * 255).toInt())),
+            titleTextColor: AppColor.textcolor,
+            settingsSectionBackground:
+                AppColor.niceblack.withAlpha((0.8 * 255).toInt())),
         darkTheme:
-            const SettingsThemeData(settingsListBackground: AppColor.nicegrey),
+            SettingsThemeData(settingsListBackground: AppColor.nicegrey),
         sections: [
           SettingsSection(
             title: Text(AppLocalizations.of(context)!.settingcommon),
@@ -201,23 +203,16 @@ class Settings extends StatelessWidget {
                       builder: (_) => const SetLanguageView());
                 },
               ),
-              SettingsTile(
+              SettingsTile.switchTile(
                 title: Text(AppLocalizations.of(context)!.theme),
                 description: Text(AppLocalizations.of(context)!.lightordark),
                 leading: const Icon(Icons.format_paint),
-                onPressed: (BuildContext context) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Center(
-                          child: Text(
-                        AppLocalizations.of(context)!
-                            .thisfeatureisnotavailableyet,
-                        style: const TextStyle(fontSize: 30),
-                      )),
-                      duration: const Duration(seconds: 1),
-                    ),
-                  );
+                onToggle: (value) {
+                  Provider.of<ThemeStatus>(context, listen: false)
+                      .toggleTheme(value);
                 },
+                initialValue:
+                    Provider.of<ThemeStatus>(context, listen: true).isDarkMode,
               )
             ],
           ),

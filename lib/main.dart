@@ -23,6 +23,7 @@ import 'package:url_strategy/url_strategy.dart';
 
 import 'config.dart';
 import 'datatypes/postviewerstatus.dart';
+import 'datatypes/themestatus.dart';
 import 'l10n/l10n.dart';
 import 'widgets/favorite/favorite.dart';
 import 'widgets/follow/follow.dart';
@@ -55,6 +56,8 @@ void main() {
             create: (context) => TrusterStatus()),
         ChangeNotifierProvider<BlacklistStatus>(
             create: (context) => BlacklistStatus()),
+        ChangeNotifierProvider<ThemeStatus>(
+            create: (context) => ThemeStatus()),
       ],
       builder: (context, child) {
         return const App();
@@ -80,14 +83,39 @@ class _MyAppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
+    final themeStatus = Provider.of<ThemeStatus>(context);
     return MaterialApp(
         title: 'Fr0gsite',
         debugShowCheckedModeBanner: false,
+        themeMode: themeStatus.themeMode,
         theme: ThemeData(
           brightness: Brightness.light,
           primarySwatch: Colors.blue,
-          scaffoldBackgroundColor: AppColor.niceblack,
+          scaffoldBackgroundColor: Colors.white,
           appBarTheme: const AppBarTheme(
+            backgroundColor: Colors.white,
+            foregroundColor: Colors.black,
+            elevation: 0,
+            centerTitle: true,
+          ),
+          useMaterial3: true,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+          textSelectionTheme: const TextSelectionThemeData(
+            selectionColor: Colors.blue,
+          ),
+          scrollbarTheme: ScrollbarThemeData(
+            thumbColor: WidgetStateProperty.all(Colors.black),
+          ),
+          textTheme: GoogleFonts.mitrTextTheme().apply(
+            bodyColor: Colors.black,
+            displayColor: Colors.black,
+          ),
+        ),
+        darkTheme: ThemeData(
+          brightness: Brightness.dark,
+          primarySwatch: Colors.blue,
+          scaffoldBackgroundColor: AppColor.niceblack,
+          appBarTheme: AppBarTheme(
             backgroundColor: AppColor.niceblack,
             foregroundColor: Colors.white,
             elevation: 0,

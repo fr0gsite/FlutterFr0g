@@ -58,18 +58,18 @@ class _InformationsState extends State<Informations> {
               platform: DevicePlatform.web,
               lightTheme: SettingsThemeData(
                 settingsListBackground: AppColor.nicegrey,
-                titleTextColor: Colors.white,
+                titleTextColor: AppColor.textcolor,
                 settingsSectionBackground:
-                    Colors.white.withAlpha((0.8 * 255).toInt()),
+                    AppColor.niceblack.withAlpha((0.8 * 255).toInt()),
               ),
               darkTheme:
-                  const SettingsThemeData(settingsListBackground: AppColor.nicegrey),
+                  SettingsThemeData(settingsListBackground: AppColor.nicegrey),
               sections: [
                 SettingsSection(
                   title: Text(
                     AppLocalizations.of(context)!.links,
-                    style: const TextStyle(
-                        color: Colors.white,
+                    style: TextStyle(
+                        color: AppColor.textcolor,
                         fontSize: 20,
                         fontWeight: FontWeight.w500),
                   ),
@@ -126,8 +126,8 @@ class _InformationsState extends State<Informations> {
                 SettingsSection(
                   title: Text(
                     AppLocalizations.of(context)!.rulesandguidelines,
-                    style: const TextStyle(
-                        color: Colors.white,
+                    style: TextStyle(
+                        color: AppColor.textcolor,
                         fontSize: 20,
                         fontWeight: FontWeight.w500),
                   ),

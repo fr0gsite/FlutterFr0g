@@ -116,7 +116,7 @@ class _ProfileState extends State<Profile> {
               children: [
                 profiletopbar(),
                 Divider(
-                  color: Colors.white.withAlpha((0.5 * 255).toInt()),
+                  color: AppColor.nicewhite.withAlpha((0.5 * 255).toInt()),
                   height: 2,
                 ),
                 AnimatedContainer(
@@ -157,7 +157,7 @@ class _ProfileState extends State<Profile> {
 
   Widget profiletopbar() {
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         color: AppColor.niceblack,
       ),
       child: Row(
@@ -166,13 +166,13 @@ class _ProfileState extends State<Profile> {
             width: 50,
             child: IconButton(
               icon: const Icon(Icons.backspace_rounded),
-              color: Colors.white,
+              color: AppColor.nicewhite,
               onPressed: () {
-                if(Navigator.canPop(context)){
+                if (Navigator.canPop(context)) {
                   Navigator.pop(context);
-                }else{
+                } else {
                   Navigator.pushNamed(context, "/");
-                }                
+                }
               },
             ),
           ),

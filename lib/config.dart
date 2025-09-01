@@ -6,13 +6,27 @@ import 'package:fr0gsite/datatypes/rewardtoken.dart';
 import 'package:fr0gsite/datatypes/blockchainnode.dart';
 import 'package:flutter/material.dart';
 
+/// Collection of application wide colors.
+///
+/// The colors change depending on whether the app runs in dark or light mode.
+/// Call [updateTheme] whenever the theme changes so widgets using these colors
+/// automatically switch their appearance.
 class AppColor {
-  static const Color nicewhite = Color.fromARGB(255, 230, 230, 230);
-  //static const Color niceblack = Color(0xFF060716);
-  static const Color niceblack = Color(0xFF060716);
-  //static const Color nicegrey = Color(0xFF161722);
-  static const Color nicegrey = Color(0xFF161722);
-  static const Color textcolor = Color(0xFFFFFFFF);
+  static bool _isDarkMode = true;
+
+  static void updateTheme(bool isDark) {
+    _isDarkMode = isDark;
+  }
+
+  static Color get nicewhite =>
+      _isDarkMode ? const Color.fromARGB(255, 230, 230, 230) : Colors.black;
+  static Color get niceblack =>
+      _isDarkMode ? const Color(0xFF060716) : Colors.white;
+  static Color get nicegrey =>
+      _isDarkMode ? const Color(0xFF161722) : const Color(0xFFE0E0E0);
+  static Color get textcolor =>
+      _isDarkMode ? const Color(0xFFFFFFFF) : Colors.black;
+
   static Color tagcolor = Colors.blue;
   static Color uploadcolor = Colors.green;
   static Color commentcolor = Colors.red;
@@ -61,12 +75,17 @@ class Ressourcecolor {
   static const Color act = Colors.green;
 }
 
-const defauldtextstyle = TextStyle(color: AppColor.textcolor, fontSize: 20);
-const textstyleTitle = TextStyle(color: AppColor.textcolor, fontSize: 30);
-const textstyleNormal = TextStyle(color: AppColor.textcolor, fontSize: 20);
-const textstyleSmall = TextStyle(color: AppColor.textcolor, fontSize: 10);
+TextStyle get defauldtextstyle =>
+    TextStyle(color: AppColor.textcolor, fontSize: 20);
+TextStyle get textstyleTitle =>
+    TextStyle(color: AppColor.textcolor, fontSize: 30);
+TextStyle get textstyleNormal =>
+    TextStyle(color: AppColor.textcolor, fontSize: 20);
+TextStyle get textstyleSmall =>
+    TextStyle(color: AppColor.textcolor, fontSize: 10);
 
-const cubetextstyle = TextStyle(color: AppColor.textcolor, fontSize: 15);
+TextStyle get cubetextstyle =>
+    TextStyle(color: AppColor.textcolor, fontSize: 15);
 
 //Postviwer
 const iconsize = 55.0;

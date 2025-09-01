@@ -176,7 +176,7 @@ class _StakeorUnstakeState extends State<StakeorUnstake> {
                   border: TableBorder.all(color: Colors.grey),
                   children: [
                     TableRow(
-                        decoration: const BoxDecoration(
+                        decoration: BoxDecoration(
                           color: AppColor.nicegrey,
                         ),
                         children: [
@@ -184,10 +184,10 @@ class _StakeorUnstakeState extends State<StakeorUnstake> {
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
                               AppLocalizations.of(context)!.resources,
-                              style: const TextStyle(
+                              style: TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.white),
+                                  color: AppColor.textcolor),
                             ),
                           ),
                           const Padding(

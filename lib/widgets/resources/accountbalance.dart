@@ -179,7 +179,7 @@ class _AccountBalanceState extends State<AccountBalance> {
                 ],
               ),
               TableRow(
-                decoration: const BoxDecoration(color: AppColor.niceblack),
+                decoration: BoxDecoration(color: AppColor.niceblack),
                 children: [
                   TableCell(
                     child: Tooltip(
