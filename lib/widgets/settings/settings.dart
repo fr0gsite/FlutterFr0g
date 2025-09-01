@@ -3,6 +3,7 @@ import 'package:fr0gsite/datatypes/globalstatus.dart';
 import 'package:fr0gsite/globalnotifications.dart';
 import 'package:fr0gsite/widgets/login/login.dart';
 import 'package:fr0gsite/widgets/settings/setlanguageview.dart';
+import 'package:fr0gsite/widgets/settings/privacyandsecurityview.dart';
 import 'package:fr0gsite/widgets/infoscreens/impressum.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -63,17 +64,9 @@ class Settings extends StatelessWidget {
                     .settingprivacyandsecuritydescription),
                 leading: const Icon(Icons.security),
                 onPressed: (BuildContext context) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Center(
-                        child: Text(
-                          AppLocalizations.of(context)!
-                              .thisfeatureisnotavailableyet,
-                          style: const TextStyle(fontSize: 30),
-                        ),
-                      ),
-                      duration: const Duration(seconds: 1),
-                    ),
+                  showDialog(
+                    context: context,
+                    builder: (_) => const PrivacyAndSecurityView(),
                   );
                 },
               ),
