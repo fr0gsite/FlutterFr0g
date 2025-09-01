@@ -16,11 +16,17 @@ class WalletConfirmTransaction extends StatefulWidget {
       required this.callback,
       required this.sendtoaccount,
       required this.amount,
-      required this.memo});
+      required this.memo,
+      required this.token,
+      required this.contract,
+      required this.tokendecimals});
   final Function callback;
   final String sendtoaccount;
   final String amount;
   final String memo;
+  final String token;
+  final String contract;
+  final int tokendecimals;
 
   @override
   State<WalletConfirmTransaction> createState() =>
@@ -53,7 +59,7 @@ class _WalletConfirmTransactionState extends State<WalletConfirmTransaction> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: AutoSizeText(
-                    "${widget.amount} ${AppConfig.systemtoken} -> ${widget.sendtoaccount}",
+                    "${widget.amount} ${widget.token} -> ${widget.sendtoaccount}",
                     style: const TextStyle(
                       color: Colors.white,
                     ),
@@ -85,7 +91,7 @@ class _WalletConfirmTransactionState extends State<WalletConfirmTransaction> {
                       double parsedamount = double.parse(widget.amount);
 
                       String amountinformat =
-                          "${parsedamount.toStringAsFixed(AppConfig.systemtokendecimalafterdot)} ${AppConfig.systemtoken}";
+                          "${parsedamount.toStringAsFixed(widget.tokendecimals)} ${widget.token}";
 
                       Chainactions()
                         ..setusernameandpermission(
@@ -94,6 +100,7 @@ class _WalletConfirmTransactionState extends State<WalletConfirmTransaction> {
                             Provider.of<GlobalStatus>(context, listen: false)
                                 .permission)
                         ..sendtoken(
+                                widget.contract,
                                 Provider.of<GlobalStatus>(context,
                                         listen: false)
                                     .username,

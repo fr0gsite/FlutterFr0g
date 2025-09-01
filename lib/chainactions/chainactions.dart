@@ -564,10 +564,10 @@ class Chainactions {
   }
 
   Future<bool> sendtoken(
-      String from, String to, String amount, String memo) async {
+      String contract, String from, String to, String amount, String memo) async {
     actionsbeforetransaction();
     List<Action> actions =
-        sendtokenlistaction(from, to, amount, memo, getauth());
+        sendtokenlistaction(contract, from, to, amount, memo, getauth());
     return transactionHandler(actions);
   }
 

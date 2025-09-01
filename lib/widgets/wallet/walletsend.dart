@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:fr0gsite/chainactions/chainactions.dart';
 import 'package:fr0gsite/config.dart';
 import 'package:fr0gsite/datatypes/globalstatus.dart';
+import 'package:fr0gsite/datatypes/usertoken.dart';
 import 'package:fr0gsite/datatypes/walletstatus.dart';
 import 'package:fr0gsite/widgets/resources/accountbalance.dart';
 import 'package:fr0gsite/widgets/wallet/walletconfirmtransaction.dart';
@@ -26,6 +27,8 @@ class _WalletSendState extends State<WalletSend> {
   TextEditingController amounttextcontroller = TextEditingController();
   TextEditingController memotextcontroller = TextEditingController();
   final MobileScannerController controller = MobileScannerController();
+  List<UserToken> usertokens = [];
+  UserToken? selectedToken;
 
   @override
   void initState() {
@@ -37,12 +40,73 @@ class _WalletSendState extends State<WalletSend> {
         Provider.of<WalletStatus>(context, listen: false).amount;
     memotextcontroller.text =
         Provider.of<WalletStatus>(context, listen: false).memo;
+    loadtokens();
   }
 
   void updatebalance() {
     setState(() {
       getaccount = getAccount().then((value) => currentaccount = value);
     });
+    loadtokens();
+  }
+
+  Future<void> loadtokens() async {
+    String username =
+        Provider.of<GlobalStatus>(context, listen: false).username;
+    List<UserToken> tokens = [];
+    try {
+      Account accinfo = await Chainactions().getaccountinfo(username);
+      String symbol =
+          accinfo.coreLiquidBalance?.currency ?? AppConfig.systemtoken;
+      tokens.add(UserToken(
+          symbol: symbol,
+          contract: AppConfig.blockchainsystemtokencontract,
+          decimals: AppConfig.systemtokendecimalafterdot));
+    } catch (e) {
+      tokens.add(UserToken(
+          symbol: AppConfig.systemtoken,
+          contract: AppConfig.blockchainsystemtokencontract,
+          decimals: AppConfig.systemtokendecimalafterdot));
+    }
+    try {
+      var rows = await Chainactions().geteosclient().getTableRows(
+            AppConfig.cbasedtokencontract,
+            username,
+            'accounts',
+            limit: 999,
+          );
+      for (var element in rows) {
+        String balance = element['balance'].toString();
+        List<String> parts = balance.split(' ');
+        if (parts.length >= 2) {
+          double amount = double.tryParse(parts[0]) ?? 0;
+          if (amount > 0) {
+            int decimals = 0;
+            if (parts[0].contains('.')) {
+              decimals = parts[0].split('.')[1].length;
+            }
+            tokens.add(UserToken(
+                symbol: parts[1],
+                contract: AppConfig.cbasedtokencontract,
+                decimals: decimals));
+          }
+        }
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+    setState(() {
+      usertokens = tokens;
+      selectedToken = tokens.isNotEmpty ? tokens.first : null;
+    });
+    if (selectedToken != null) {
+      Provider.of<WalletStatus>(context, listen: false).tokenselected =
+          selectedToken!.symbol;
+      Provider.of<WalletStatus>(context, listen: false).tokencontract =
+          selectedToken!.contract;
+      Provider.of<WalletStatus>(context, listen: false).tokendecimalafterdot =
+          selectedToken!.decimals;
+    }
   }
 
   @override
@@ -200,6 +264,45 @@ class _WalletSendState extends State<WalletSend> {
           child: Wrap(
             alignment: WrapAlignment.center,
             children: [
+              AutoSizeText(
+                "${AppLocalizations.of(context)!.token}: ",
+                style:
+                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              DropdownButton<UserToken>(
+                value: selectedToken,
+                dropdownColor: Colors.blueGrey,
+                underline: Container(),
+                style: const TextStyle(
+                    color: Colors.white, fontWeight: FontWeight.bold),
+                items: usertokens
+                    .map((e) => DropdownMenuItem<UserToken>(
+                          value: e,
+                          child: Text(e.symbol),
+                        ))
+                    .toList(),
+                onChanged: (UserToken? value) {
+                  setState(() {
+                    selectedToken = value;
+                  });
+                  if (value != null) {
+                    Provider.of<WalletStatus>(context, listen: false)
+                        .tokenselected = value.symbol;
+                    Provider.of<WalletStatus>(context, listen: false)
+                        .tokencontract = value.contract;
+                    Provider.of<WalletStatus>(context, listen: false)
+                        .tokendecimalafterdot = value.decimals;
+                  }
+                },
+              )
+            ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Wrap(
+            alignment: WrapAlignment.center,
+            children: [
               ConstrainedBox(
                 constraints: const BoxConstraints(maxWidth: 500),
                 child: TextField(
@@ -209,7 +312,9 @@ class _WalletSendState extends State<WalletSend> {
                       (oldValue, newValue) {
                         final text = newValue.text;
                         final regExp = RegExp(r'^\d*(\.?\d{0,' +
-                            AppConfig.systemtokendecimalafterdot.toString() +
+                            (selectedToken?.decimals ??
+                                    AppConfig.systemtokendecimalafterdot)
+                                .toString() +
                             r'})?$');
                         if (regExp.hasMatch(text)) {
                           return newValue;
@@ -221,7 +326,8 @@ class _WalletSendState extends State<WalletSend> {
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                       labelText: AppLocalizations.of(context)!.amount,
-                      suffixText: AppConfig.systemtoken,
+                      suffixText:
+                          selectedToken?.symbol ?? AppConfig.systemtoken,
                       hintText:
                           "${AppLocalizations.of(context)!.forexample} 6.9420",
                       labelStyle: const TextStyle(color: Colors.white),
@@ -328,7 +434,7 @@ class _WalletSendState extends State<WalletSend> {
                   Provider.of<WalletStatus>(context, listen: false).amount =
                       amounttextcontroller.text;
 
-                  showDialog(
+                      showDialog(
                     context: context,
                     builder: (context) {
                       return WalletConfirmTransaction(
@@ -342,7 +448,16 @@ class _WalletSendState extends State<WalletSend> {
                                   .amount,
                           memo:
                               Provider.of<WalletStatus>(context, listen: false)
-                                  .memo);
+                                  .memo,
+                          token:
+                              Provider.of<WalletStatus>(context, listen: false)
+                                  .tokenselected,
+                          contract:
+                              Provider.of<WalletStatus>(context, listen: false)
+                                  .tokencontract,
+                          tokendecimals:
+                              Provider.of<WalletStatus>(context, listen: false)
+                                  .tokendecimalafterdot);
                     },
                   );
                 }
