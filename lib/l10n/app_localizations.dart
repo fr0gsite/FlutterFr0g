@@ -2383,6 +2383,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Open truster settings'**
   String get actionboardsettingsdesc;
+
+  /// No description provided for @violation.
+  ///
+  /// In en, this message translates to:
+  /// **'Violation'**
+  String get violation;
+
+  /// No description provided for @inlinewiththerules.
+  ///
+  /// In en, this message translates to:
+  /// **'In line with the rules'**
+  String get inlinewiththerules;
+
+  /// No description provided for @reportedby.
+  ///
+  /// In en, this message translates to:
+  /// **'Reported by'**
+  String get reportedby;
+
+  /// No description provided for @uploadedby.
+  ///
+  /// In en, this message translates to:
+  /// **'Uploaded by'**
+  String get uploadedby;
+
+  /// No description provided for @votingoverview.
+  ///
+  /// In en, this message translates to:
+  /// **'Overview about voting'**
+  String get votingoverview;
+
+  /// No description provided for @reportvote.
+  ///
+  /// In en, this message translates to:
+  /// **'Report Vote'**
+  String get reportvote;
+
+  /// No description provided for @open.
+  ///
+  /// In en, this message translates to:
+  /// **'Open'**
+  String get open;
+
+  /// No description provided for @closed.
+  ///
+  /// In en, this message translates to:
+  /// **'Closed'**
+  String get closed;
+
+  /// No description provided for @urgent.
+  ///
+  /// In en, this message translates to:
+  /// **'Urgent'**
+  String get urgent;
+
+  /// No description provided for @unknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown'**
+  String get unknown;
+
+  /// No description provided for @inorder.
+  ///
+  /// In en, this message translates to:
+  /// **'In line'**
+  String get inorder;
+
+  /// No description provided for @timeleft.
+  ///
+  /// In en, this message translates to:
+  /// **'Time left'**
+  String get timeleft;
 }
 
 class _AppLocalizationsDelegate

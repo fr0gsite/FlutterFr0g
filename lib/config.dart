@@ -155,8 +155,8 @@ class AppConfig {
   // Debug login credentials
   // Provide values here if you want the app to automatically
   // log in while running in debug mode.
-  static const String debugUsername = ""; // e.g. "testuser"
-  static const String debugPKey = ""; // private key of debug account
+  static const String debugUsername = "user1"; // e.g. "testuser"
+  static const String debugPKey = "5KFBoCQJoVA2cUF3uSwyrxfJ5KuuZqsC4oRS6Rju8mNYkCmJJeH"; // private key of debug account
   static const String debugPermission = "active";
 
   static const connectioncheckinterval = 60; //in seconds

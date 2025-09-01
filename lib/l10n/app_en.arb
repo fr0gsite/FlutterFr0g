@@ -421,6 +421,18 @@
     "actionboard":"Action Board",
     "actionboardreviewdesc":"See all open reports",
     "actionboardstatusdesc":"View your current status",
-    "actionboardsettingsdesc":"Open truster settings"
+    "actionboardsettingsdesc":"Open truster settings",
+    "violation":"Violation",
+    "inlinewiththerules":"In line with the rules",
+    "reportedby":"Reported by",
+    "uploadedby":"Uploaded by",
+    "votingoverview":"Overview about voting",
+    "reportvote":"Report Vote",
+    "open":"Open",
+    "closed":"Closed",
+    "urgent":"Urgent",
+    "unknown":"Unknown",
+    "inorder":"In line",
+    "timeleft":"Time left"
 
 }

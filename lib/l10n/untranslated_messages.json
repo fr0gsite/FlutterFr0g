@@ -6,7 +6,19 @@
     "actionboard",
     "actionboardreviewdesc",
     "actionboardstatusdesc",
-    "actionboardsettingsdesc"
+    "actionboardsettingsdesc",
+    "violation",
+    "inlinewiththerules",
+    "reportedby",
+    "uploadedby",
+    "votingoverview",
+    "reportvote",
+    "open",
+    "closed",
+    "urgent",
+    "unknown",
+    "inorder",
+    "timeleft"
   ],
 
   "cs": [
@@ -16,7 +28,34 @@
     "actionboard",
     "actionboardreviewdesc",
     "actionboardstatusdesc",
-    "actionboardsettingsdesc"
+    "actionboardsettingsdesc",
+    "violation",
+    "inlinewiththerules",
+    "reportedby",
+    "uploadedby",
+    "votingoverview",
+    "reportvote",
+    "open",
+    "closed",
+    "urgent",
+    "unknown",
+    "inorder",
+    "timeleft"
+  ],
+
+  "de": [
+    "violation",
+    "inlinewiththerules",
+    "reportedby",
+    "uploadedby",
+    "votingoverview",
+    "reportvote",
+    "open",
+    "closed",
+    "urgent",
+    "unknown",
+    "inorder",
+    "timeleft"
   ],
 
   "es": [
@@ -26,7 +65,19 @@
     "actionboard",
     "actionboardreviewdesc",
     "actionboardstatusdesc",
-    "actionboardsettingsdesc"
+    "actionboardsettingsdesc",
+    "violation",
+    "inlinewiththerules",
+    "reportedby",
+    "uploadedby",
+    "votingoverview",
+    "reportvote",
+    "open",
+    "closed",
+    "urgent",
+    "unknown",
+    "inorder",
+    "timeleft"
   ],
 
   "fr": [
@@ -36,7 +87,19 @@
     "actionboard",
     "actionboardreviewdesc",
     "actionboardstatusdesc",
-    "actionboardsettingsdesc"
+    "actionboardsettingsdesc",
+    "violation",
+    "inlinewiththerules",
+    "reportedby",
+    "uploadedby",
+    "votingoverview",
+    "reportvote",
+    "open",
+    "closed",
+    "urgent",
+    "unknown",
+    "inorder",
+    "timeleft"
   ],
 
   "hi": [
@@ -46,7 +109,19 @@
     "actionboard",
     "actionboardreviewdesc",
     "actionboardstatusdesc",
-    "actionboardsettingsdesc"
+    "actionboardsettingsdesc",
+    "violation",
+    "inlinewiththerules",
+    "reportedby",
+    "uploadedby",
+    "votingoverview",
+    "reportvote",
+    "open",
+    "closed",
+    "urgent",
+    "unknown",
+    "inorder",
+    "timeleft"
   ],
 
   "it": [
@@ -56,7 +131,19 @@
     "actionboard",
     "actionboardreviewdesc",
     "actionboardstatusdesc",
-    "actionboardsettingsdesc"
+    "actionboardsettingsdesc",
+    "violation",
+    "inlinewiththerules",
+    "reportedby",
+    "uploadedby",
+    "votingoverview",
+    "reportvote",
+    "open",
+    "closed",
+    "urgent",
+    "unknown",
+    "inorder",
+    "timeleft"
   ],
 
   "ja": [
@@ -66,7 +153,19 @@
     "actionboard",
     "actionboardreviewdesc",
     "actionboardstatusdesc",
-    "actionboardsettingsdesc"
+    "actionboardsettingsdesc",
+    "violation",
+    "inlinewiththerules",
+    "reportedby",
+    "uploadedby",
+    "votingoverview",
+    "reportvote",
+    "open",
+    "closed",
+    "urgent",
+    "unknown",
+    "inorder",
+    "timeleft"
   ],
 
   "ko": [
@@ -76,7 +175,19 @@
     "actionboard",
     "actionboardreviewdesc",
     "actionboardstatusdesc",
-    "actionboardsettingsdesc"
+    "actionboardsettingsdesc",
+    "violation",
+    "inlinewiththerules",
+    "reportedby",
+    "uploadedby",
+    "votingoverview",
+    "reportvote",
+    "open",
+    "closed",
+    "urgent",
+    "unknown",
+    "inorder",
+    "timeleft"
   ],
 
   "pt": [
@@ -86,7 +197,19 @@
     "actionboard",
     "actionboardreviewdesc",
     "actionboardstatusdesc",
-    "actionboardsettingsdesc"
+    "actionboardsettingsdesc",
+    "violation",
+    "inlinewiththerules",
+    "reportedby",
+    "uploadedby",
+    "votingoverview",
+    "reportvote",
+    "open",
+    "closed",
+    "urgent",
+    "unknown",
+    "inorder",
+    "timeleft"
   ],
 
   "ru": [
@@ -96,7 +219,19 @@
     "actionboard",
     "actionboardreviewdesc",
     "actionboardstatusdesc",
-    "actionboardsettingsdesc"
+    "actionboardsettingsdesc",
+    "violation",
+    "inlinewiththerules",
+    "reportedby",
+    "uploadedby",
+    "votingoverview",
+    "reportvote",
+    "open",
+    "closed",
+    "urgent",
+    "unknown",
+    "inorder",
+    "timeleft"
   ],
 
   "uk": [
@@ -106,7 +241,19 @@
     "actionboard",
     "actionboardreviewdesc",
     "actionboardstatusdesc",
-    "actionboardsettingsdesc"
+    "actionboardsettingsdesc",
+    "violation",
+    "inlinewiththerules",
+    "reportedby",
+    "uploadedby",
+    "votingoverview",
+    "reportvote",
+    "open",
+    "closed",
+    "urgent",
+    "unknown",
+    "inorder",
+    "timeleft"
   ],
 
   "zh": [
@@ -116,6 +263,18 @@
     "actionboard",
     "actionboardreviewdesc",
     "actionboardstatusdesc",
-    "actionboardsettingsdesc"
+    "actionboardsettingsdesc",
+    "violation",
+    "inlinewiththerules",
+    "reportedby",
+    "uploadedby",
+    "votingoverview",
+    "reportvote",
+    "open",
+    "closed",
+    "urgent",
+    "unknown",
+    "inorder",
+    "timeleft"
   ]
 }
