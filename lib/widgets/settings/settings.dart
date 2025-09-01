@@ -26,7 +26,13 @@ class Settings extends StatelessWidget {
             const SettingsThemeData(settingsListBackground: AppColor.nicegrey),
         sections: [
           SettingsSection(
-            title: Text(AppLocalizations.of(context)!.settingcommon),
+            title: Text(
+              AppLocalizations.of(context)!.settingcommon,
+              style: const TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             tiles: [
               SettingsTile(
                 title: Text(AppLocalizations.of(context)!.profile),
@@ -157,7 +163,13 @@ class Settings extends StatelessWidget {
             ],
           ),
           SettingsSection(
-            title: Text(AppLocalizations.of(context)!.notifications),
+            title: Text(
+              AppLocalizations.of(context)!.notifications,
+              style: const TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             tiles: [
               SettingsTile.switchTile(
                 onToggle: (value) {
@@ -190,7 +202,13 @@ class Settings extends StatelessWidget {
             ],
           ),
           SettingsSection(
-            title: Text(AppLocalizations.of(context)!.userinterface),
+            title: Text(
+              AppLocalizations.of(context)!.userinterface,
+              style: const TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             tiles: [
               SettingsTile(
                 title: Text(AppLocalizations.of(context)!.thelanguage),
@@ -222,7 +240,13 @@ class Settings extends StatelessWidget {
             ],
           ),
           SettingsSection(
-            title: Text(AppLocalizations.of(context)!.about),
+            title: Text(
+              AppLocalizations.of(context)!.about,
+              style: const TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             tiles: [
               SettingsTile(
                 title: const Text('App version'),
