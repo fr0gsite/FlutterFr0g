@@ -40,92 +40,90 @@ class _GlobalTagTopBarState extends State<GlobalTagTopBar> {
     return FutureBuilder(
         future: futuregetglobaltag,
         builder: (context, snapshot) {
-          return Container(
-            decoration: BoxDecoration(
-                    color: Colors.white.withAlpha((0.1 * 255).toInt()),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-            child: Row(
-              children: [
-                backButton(context),
-                const Spacer(),
-                Container(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: TagButton(
-                                text: globaltag.text, globaltagid: globaltag.globaltagid),
-                          ),
-                          Tooltip(
-                            message: AppLocalizations.of(context)!.addtofavorite,
-                            child: LikeButton(
-                              size: 30,
-                              isLiked: istagfavorited,
-                              circleColor:
-                                  const CircleColor(start: Colors.red, end: Colors.red),
-                              bubblesColor: const BubblesColor(
-                                dotPrimaryColor: Colors.red,
-                                dotSecondaryColor: Colors.red,
-                              ),
-                              likeBuilder: (bool istagfavorited) {
-                                return Icon(
-                                  Icons.favorite,
-                                  color: istagfavorited ? Colors.red : Colors.grey,
-                                  size: 30,
-                                );
-                              },
-                              onTap: (bool istagfavorited) async {
-                                bool isLoggedin = Provider.of<GlobalStatus>(context, listen: false)
-                                    .isLoggedin;
-                                if (isLoggedin) {
-                                  String username =
-                                      Provider.of<GlobalStatus>(context, listen: false).username;
-                                  String permission =
-                                      Provider.of<GlobalStatus>(context, listen: false).permission;
-                                  Chainactions tempChainactions = Chainactions();
-                                  tempChainactions.setusernameandpermission(username, permission);
-                                  if (istagfavorited) {
-                                    await tempChainactions
-                                        .deletefavoritetag(widget.globaltagid.toString());
-                                  } else {
-                                    await tempChainactions
-                                        .addfavoritetag(widget.globaltagid.toString());
-                                  }
-                                } else {
-                                  showDialog(
-                                      context: context,
-                                      builder: ((context) {
-                                        return const Login();
-                                      }));
-                                  return false;
-                                }
-                                return !istagfavorited;
-                              },
+          return SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white.withAlpha((0.1 * 255).toInt()),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Row(
+                children: [
+                  backButton(context),
+                  Container(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: TagButton(
+                                  text: globaltag.text, globaltagid: globaltag.globaltagid),
                             ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          textfortagmetadata(AppLocalizations.of(context)!.favoritedby,
-                              globaltag.numoffavorites.toString()),
-                          textfortagmetadata(AppLocalizations.of(context)!.uploads,
-                              globaltag.numofuploads.toString()),
-                        ],
-                      ),
-                    ],
+                            Tooltip(
+                              message: AppLocalizations.of(context)!.addtofavorite,
+                              child: LikeButton(
+                                size: 30,
+                                isLiked: istagfavorited,
+                                circleColor:
+                                    const CircleColor(start: Colors.red, end: Colors.red),
+                                bubblesColor: const BubblesColor(
+                                  dotPrimaryColor: Colors.red,
+                                  dotSecondaryColor: Colors.red,
+                                ),
+                                likeBuilder: (bool istagfavorited) {
+                                  return Icon(
+                                    Icons.favorite,
+                                    color: istagfavorited ? Colors.red : Colors.grey,
+                                    size: 30,
+                                  );
+                                },
+                                onTap: (bool istagfavorited) async {
+                                  bool isLoggedin = Provider.of<GlobalStatus>(context, listen: false)
+                                      .isLoggedin;
+                                  if (isLoggedin) {
+                                    String username =
+                                        Provider.of<GlobalStatus>(context, listen: false).username;
+                                    String permission =
+                                        Provider.of<GlobalStatus>(context, listen: false).permission;
+                                    Chainactions tempChainactions = Chainactions();
+                                    tempChainactions.setusernameandpermission(username, permission);
+                                    if (istagfavorited) {
+                                      await tempChainactions
+                                          .deletefavoritetag(widget.globaltagid.toString());
+                                    } else {
+                                      await tempChainactions
+                                          .addfavoritetag(widget.globaltagid.toString());
+                                    }
+                                  } else {
+                                    showDialog(
+                                        context: context,
+                                        builder: ((context) {
+                                          return const Login();
+                                        }));
+                                    return false;
+                                  }
+                                  return !istagfavorited;
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            textfortagmetadata(AppLocalizations.of(context)!.favoritedby,
+                                globaltag.numoffavorites.toString()),
+                            textfortagmetadata(AppLocalizations.of(context)!.uploads,
+                                globaltag.numofuploads.toString()),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                if (hiderating)
-                  SizedBox(
-                    width: 50,
-                  ),
+                  if (hiderating) const SizedBox(width: 50),
                   Padding(
                     padding: const EdgeInsets.only(top: 8.0),
                     child: Column(
@@ -146,13 +144,11 @@ class _GlobalTagTopBarState extends State<GlobalTagTopBar> {
                               children: [
                                 Text(
                                   globaltag.up.toString(),
-                                  style:
-                                      const TextStyle(color: Colors.white, fontSize: 15),
+                                  style: const TextStyle(color: Colors.white, fontSize: 15),
                                 ),
                                 Text(
                                   globaltag.down.toString(),
-                                  style:
-                                      const TextStyle(color: Colors.white, fontSize: 15),
+                                  style: const TextStyle(color: Colors.white, fontSize: 15),
                                 ),
                               ],
                             ),
@@ -164,24 +160,21 @@ class _GlobalTagTopBarState extends State<GlobalTagTopBar> {
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
                             "${AppLocalizations.of(context)!.trendingvalue}: ${globaltag.trend}",
-                            style:
-                                const TextStyle(color: Colors.white, fontSize: 15),
+                            style: const TextStyle(color: Colors.white, fontSize: 15),
                           ),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(left: 8.0, right: 8.0),
                           child: Text(
                             "${AppLocalizations.of(context)!.createdon}: ${DateFormat.yMMMMd(Localizations.localeOf(context).toString()).add_jm().format(globaltag.creationtime.add(Duration(seconds: globaltag.creationtime.timeZoneOffset.inSeconds)))}",
-                            style:
-                                const TextStyle(color: Colors.white, fontSize: 15),
+                            style: const TextStyle(color: Colors.white, fontSize: 15),
                           ),
                         ),
                       ],
                     ),
                   ),
-                const Spacer(),
-                Container(),
-              ],
+                ],
+              ),
             ),
           );
         });
