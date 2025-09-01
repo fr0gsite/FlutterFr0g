@@ -5,6 +5,7 @@ import 'package:fr0gsite/widgets/favorite/favoritetagsview.dart';
 import 'package:fr0gsite/widgets/favorite/favoriteuploadview.dart';
 import 'package:fr0gsite/widgets/infoscreens/pleaselogin.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/gestures.dart';
 import 'package:fr0gsite/l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
@@ -65,8 +66,11 @@ class _FavoriteState extends State<Favorite> {
             Expanded(child: Consumer<GlobalStatus>(
               builder: (context, userstatus, child) {
                 if (userstatus.isLoggedin) {
-                  return TabBarView(
-                    children: tabBarViews,
+                  return ScrollConfiguration(
+                    behavior: AppScrollBehavior(),
+                    child: TabBarView(
+                      children: tabBarViews,
+                    ),
                   );
                 } else {
                   return Padding(
@@ -95,4 +99,12 @@ class _FavoriteState extends State<Favorite> {
       ),
     );
   }
+}
+
+class AppScrollBehavior extends MaterialScrollBehavior {
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+      };
 }
