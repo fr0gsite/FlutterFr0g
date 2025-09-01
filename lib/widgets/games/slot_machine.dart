@@ -86,15 +86,27 @@ class _SlotMachineState extends State<SlotMachine>
       appBar: AppBar(
         title: const Text('How Lucky'),
       ),
-      body: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ...List.generate(3, (i) => _buildReel(_reels[i])),
-            const SizedBox(width: 40),
-            _buildLever(),
-          ],
+      body: Stack(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/games/howlucky/automate.png'),
+                fit: BoxFit.fitHeight,
+              ),
+            ),
+          ),
+          Center(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ...List.generate(3, (i) => _buildReel(_reels[i])),
+              const SizedBox(width: 40),
+              _buildLever(),
+            ],
+          ),
         ),
+        ]
       ),
     );
   }
