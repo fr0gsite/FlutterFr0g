@@ -29,7 +29,7 @@ class Settings extends StatelessWidget {
             title: Text(
               AppLocalizations.of(context)!.settingcommon,
               style: const TextStyle(
-                fontSize: 24,
+                fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -166,7 +166,7 @@ class Settings extends StatelessWidget {
             title: Text(
               AppLocalizations.of(context)!.notifications,
               style: const TextStyle(
-                fontSize: 24,
+                fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -205,7 +205,7 @@ class Settings extends StatelessWidget {
             title: Text(
               AppLocalizations.of(context)!.userinterface,
               style: const TextStyle(
-                fontSize: 24,
+                fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -243,7 +243,7 @@ class Settings extends StatelessWidget {
             title: Text(
               AppLocalizations.of(context)!.about,
               style: const TextStyle(
-                fontSize: 24,
+                fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),
             ),
