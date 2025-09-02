@@ -433,6 +433,7 @@
     "urgent":"Urgent",
     "unknown":"Unknown",
     "inorder":"In line",
-    "timeleft":"Time left"
+    "timeleft":"Time left",
+    "allreports":"All"
 
 }

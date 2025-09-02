@@ -180,6 +180,7 @@ class ReportsTable extends StatelessWidget {
               DataColumn(label: Text(AppLocalizations.of(context)!.upload)),
               DataColumn(label: Text(AppLocalizations.of(context)!.votes)),
               DataColumn(label: Text(AppLocalizations.of(context)!.timeleft)),
+              DataColumn(label: Text(AppLocalizations.of(context)!.status))
             ],
             rows: filteredReports.map((report) {
               return DataRow(
@@ -248,6 +249,20 @@ class ReportsTable extends StatelessWidget {
                   ),
                 ),
 
+                // DataCell(Text(report.status.toString())),
+                // Using config
+                
+                DataCell(
+                  Tooltip(
+                  message: statusText(report.status, context),
+                  child: Container(
+                    color: statusColor(report.status),
+                    width: 12,
+                    height: 12,
+                  ),
+                  ),
+                ),
+
                 ],
                 onSelectChanged: (selected) {
                   if (selected != null && selected) {
@@ -260,12 +275,7 @@ class ReportsTable extends StatelessWidget {
                   }
                 },
                 color: WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
-                  if (report.outstandingvotes == 0) {
-                    return Colors.transparent;
-                  } else if (report.reporttime.isBefore(DateTime.now().subtract(const Duration(hours: 23)))) {
-                    return Colors.red.shade500;
-                  }
-                  return null; // Use default value for other states and rows
+                  return Colors.transparent;
                 }),
               );
             }).toList(),
