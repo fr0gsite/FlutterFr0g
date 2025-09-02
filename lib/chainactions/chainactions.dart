@@ -1166,6 +1166,23 @@ class Chainactions {
     return reportvoteslist;
   }
 
+  //Handle Violations
+  Future<bool> trustervote(String reportid, int vote) async {
+    debugPrint("Handling violation for report $reportid");
+    List<Action> actions = [
+      Action()
+        ..account = AppConfig.maincontract
+        ..name = "trustervote"
+        ..authorization = getauth()
+        ..data = {
+          "trustername": username,
+          "reportid" : reportid,
+          "vote" : vote
+        }
+    ];
+    return transactionHandler(actions);
+  }
+
   Future<List<BlacklistEntry>> getblacklist() async {
     debugPrint("Requesting blacklist");
     //var response = await geteosclient().getTableRows(AppConfig.maincontract, AppConfig.maincontract, 'blacklist',limit: 1000, json: true);

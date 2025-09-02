@@ -1130,7 +1130,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get forme => 'For me';
 
   @override
-  String get allreports => 'All reports';
+  String get allreports => 'All';
 
   @override
   String get changestatus => 'Change Status';

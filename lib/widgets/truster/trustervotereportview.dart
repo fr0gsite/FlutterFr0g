@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:fr0gsite/chainactions/chainactions.dart';
+import 'package:fr0gsite/config.dart';
+import 'package:fr0gsite/datatypes/globalstatus.dart';
 
 import 'package:fr0gsite/datatypes/report.dart';
 import 'package:fr0gsite/datatypes/reportvotes.dart';
 import 'package:fr0gsite/datatypes/rule.dart';
 import 'package:fr0gsite/datatypes/rules.dart';
 import 'package:fr0gsite/datatypes/upload.dart';
+import 'package:fr0gsite/globalnotifications.dart';
 import 'package:fr0gsite/nameconverter.dart';
 import 'package:fr0gsite/widgets/cube/cube.dart';
 import 'package:fr0gsite/widgets/postviewer/swipeitem.dart';
 import 'package:fr0gsite/l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 class TrusterVoteReportView extends StatefulWidget {
   final int reportid;
@@ -107,13 +111,76 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                       children: [
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-                          onPressed: () {},
+                          onPressed: () {
+                            // Implement violation handling
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  backgroundColor: AppColor.niceblack,
+                                  title: Text(AppLocalizations.of(context)!.confirm),
+                                  content: Text("${AppLocalizations.of(context)!.violation}?"),
+                                  actions: [
+                                    TextButton(
+                                      style: TextButton.styleFrom(foregroundColor: Colors.white),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: Text(AppLocalizations.of(context)!.cancel),
+                                    ),
+                                    TextButton(
+                                      style: TextButton.styleFrom(foregroundColor: Colors.white),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                        Chainactions().trustervote(report.id.toString(), 1); //TODO: Right?
+                                      },
+                                      child: Text(AppLocalizations.of(context)!.confirm),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          },
                           child: Text(AppLocalizations.of(context)!.violation),
                         ),
                         const SizedBox(width: 10),
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
-                          onPressed: () {},
+                          onPressed: () {
+                            showDialog(context: context, builder: (context) {
+                              return AlertDialog(
+                                backgroundColor: AppColor.niceblack,
+                                title: Text(AppLocalizations.of(context)!.confirm),
+                                content: Text("${AppLocalizations.of(context)!.inlinewiththerules}?"),
+                                actions: [
+                                  TextButton(
+                                    style: TextButton.styleFrom(foregroundColor: Colors.white),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: Text(AppLocalizations.of(context)!.cancel),
+                                  ),
+                                  TextButton(
+                                    style: TextButton.styleFrom(foregroundColor: Colors.white),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                      Chainactions ca = Chainactions();
+                                      String username = Provider.of<GlobalStatus>(context, listen: false).username;
+                                      String permission = Provider.of<GlobalStatus>(context, listen: false).permission;
+                                      ca.setusernameandpermission(username, permission);
+                                      debugPrint("Username: $username, Permission: $permission");
+                                      ca.trustervote(report.reportid.toString(), 0).then((result) {
+                                        if (result) {
+                                          Globalnotifications.shownotification(context, "title", "message",  "success");
+                                        }
+                                      });
+                                    },
+                                    child: Text(AppLocalizations.of(context)!.confirm),
+                                  ),
+                                ],
+                              );
+                            });
+                          },
                           child: Text(AppLocalizations.of(context)!.inlinewiththerules),
                         ),
                       ],

@@ -5,6 +5,7 @@ import 'package:fr0gsite/datatypes/reportnode.dart';
 import 'package:fr0gsite/datatypes/rewardtoken.dart';
 import 'package:fr0gsite/datatypes/blockchainnode.dart';
 import 'package:flutter/material.dart';
+import 'package:fr0gsite/l10n/app_localizations.dart';
 
 class AppColor {
   static const Color nicewhite = Color.fromARGB(255, 230, 230, 230);
@@ -309,5 +310,30 @@ class GameConfig {
         active: false)
   ];
 }
+
+  String statusText(int status, context) {
+    switch (status) {
+      case 0:
+        return AppLocalizations.of(context)!.open;
+      case 1:
+        return AppLocalizations.of(context)!.closed;
+      case 2:
+        return AppLocalizations.of(context)!.urgent;
+      default:
+        return AppLocalizations.of(context)!.unknown;
+    }
+  }
+  Color statusColor(int status) {
+    switch (status) {
+      case 0:
+        return Colors.green;
+      case 1:
+        return Colors.grey;
+      case 2:
+        return Colors.red;
+      default:
+        return Colors.grey;
+    }
+  }
 
 

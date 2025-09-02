@@ -2273,7 +2273,7 @@ abstract class AppLocalizations {
   /// No description provided for @allreports.
   ///
   /// In en, this message translates to:
-  /// **'All reports'**
+  /// **'All'**
   String get allreports;
 
   /// No description provided for @changestatus.
