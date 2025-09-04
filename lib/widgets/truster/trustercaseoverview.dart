@@ -4,6 +4,7 @@ import 'package:fr0gsite/config.dart';
 import 'package:fr0gsite/datatypes/globalstatus.dart';
 import 'package:fr0gsite/datatypes/report.dart';
 import 'package:fr0gsite/ipfsactions.dart';
+import 'package:fr0gsite/nameconverter.dart';
 import 'package:fr0gsite/widgets/truster/trustervotereportview.dart';
 import 'package:provider/provider.dart';
 import 'package:fr0gsite/l10n/app_localizations.dart';
@@ -157,7 +158,8 @@ class ReportsTable extends StatelessWidget {
         var filteredReports = reports;
         switch (mode) {
           case "forme":
-            filteredReports = reports.where((r) => r.reportername == username).toList();
+            filteredReports = reports;
+            // TODO: Implement filtering for "forme"
             debugPrint("Filtered reports for $username: ${filteredReports.length}");
             break;
           case "all":

@@ -18,7 +18,7 @@ import 'package:provider/provider.dart';
 class TrusterVoteReportView extends StatefulWidget {
   final int reportid;
 
-  const TrusterVoteReportView({super.key, required this.reportid});
+  const  TrusterVoteReportView({super.key, required this.reportid});
 
   @override
   State<TrusterVoteReportView> createState() => _TrusterVoteReportViewState();
@@ -131,9 +131,18 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                                     TextButton(
                                       style: TextButton.styleFrom(foregroundColor: Colors.white),
                                       onPressed: () {
-                                        Navigator.of(context).pop();
-                                        Chainactions().trustervote(report.id.toString(), 1); //TODO: Right?
-                                      },
+                                      Chainactions ca = Chainactions();
+                                      String username = Provider.of<GlobalStatus>(context, listen: false).username;
+                                      String permission = Provider.of<GlobalStatus>(context, listen: false).permission;
+                                      ca.setusernameandpermission(username, permission);
+                                      debugPrint("Username: $username, Permission: $permission");
+                                      ca.trustervote(report.reportid.toString(), 0).then((result) {
+                                        if (result) {
+                                          Globalnotifications.shownotification(context, "title", "message",  "success");
+                                          Navigator.of(context).pop();
+                                        }
+                                      });
+                                    },
                                       child: Text(AppLocalizations.of(context)!.confirm),
                                     ),
                                   ],
@@ -163,15 +172,15 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                                   TextButton(
                                     style: TextButton.styleFrom(foregroundColor: Colors.white),
                                     onPressed: () {
-                                      Navigator.of(context).pop();
                                       Chainactions ca = Chainactions();
                                       String username = Provider.of<GlobalStatus>(context, listen: false).username;
                                       String permission = Provider.of<GlobalStatus>(context, listen: false).permission;
                                       ca.setusernameandpermission(username, permission);
                                       debugPrint("Username: $username, Permission: $permission");
-                                      ca.trustervote(report.reportid.toString(), 0).then((result) {
+                                      ca.trustervote(report.reportid.toString(), 1).then((result) {
                                         if (result) {
                                           Globalnotifications.shownotification(context, "title", "message",  "success");
+                                          Navigator.of(context).pop();
                                         }
                                       });
                                     },
