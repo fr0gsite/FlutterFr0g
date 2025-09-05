@@ -1,12 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:fr0gsite/chainactions/chainactions.dart';
+import 'package:fr0gsite/datatypes/globalstatus.dart';
+import 'package:fr0gsite/datatypes/rewardcalc.dart';
+import 'package:fr0gsite/datatypes/truster.dart';
 import 'package:fr0gsite/l10n/app_localizations.dart';
 import 'package:fr0gsite/config.dart';
+import 'package:provider/provider.dart';
 
-class StatusOverview extends StatelessWidget {
+class StatusOverview extends StatefulWidget {
   const StatusOverview({super.key});
 
   @override
+  State<StatusOverview> createState() => _StatusOverviewState();
+}
+
+class _StatusOverviewState extends State<StatusOverview> {
+  bool dorefresh = true;
+  late Future<RewardCalc> getRewardToken;
+  late Future<List<Truster>> getTrusterInfo;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    GlobalStatus globalStatus = Provider.of<GlobalStatus>(context);
+    if (dorefresh) {
+      getRewardToken = Chainactions().getrewardtokeninfo(
+        globalStatus.username,
+      );
+      getTrusterInfo = Chainactions().gettrusters();
+      dorefresh = false;
+    }
+
     return Card(
       color: AppColor.niceblack,
       shape: RoundedRectangleBorder(
@@ -55,16 +83,22 @@ class StatusOverview extends StatelessWidget {
                       SectionHeader(title: AppLocalizations.of(context)!.claim),
                       const SizedBox(height: 8),
                       Text(AppLocalizations.of(context)!.claimable),
-                      Text(AppLocalizations.of(context)!.token),
-                      Text(AppLocalizations.of(context)!.price),
                       const SizedBox(height: 16),
                       const SectionHeader(title: 'Truster'),
                       const SizedBox(height: 8),
-                      const Text("Karma"),
-                      Text(AppLocalizations.of(context)!.vacation),
-                      Text(AppLocalizations.of(context)!.openreport),
+                      Text("Karma"),
+                      const SizedBox(height: 8),
+                      Text("In Vacation"),
+                      const SizedBox(height: 8),
+                      Text("Vacation Days"),
+                      const SizedBox(height: 8),
+                      Text("Open Reports"),
+                      const SizedBox(height: 8),
                       Text(AppLocalizations.of(context)!.closedreports),
+                      const SizedBox(height: 8),
                       Text(AppLocalizations.of(context)!.language),
+                      const SizedBox(height: 16),
+                      const SectionHeader(title: 'Settings')
                     ],
                   ),
                 ),
@@ -74,54 +108,41 @@ class StatusOverview extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const SizedBox(height: 28),
-                      Row(
-                        children: [
-                          const Expanded(child: Text('743 TRUST')),
-                            ElevatedButton(
-                            onPressed: () {},
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.blue,
-                              shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              ),
-                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                            ),
-                            child: const Text('Reward', style: TextStyle(color: Colors.white)),
-                            )
-                        
-                        ],
-                      ),
-                      const Text('744 System Token'),
-                      const Text('43\$'),
-                      const SizedBox(height: 16),
-                      const Text('600'),
-                      Row(
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                            decoration: BoxDecoration(
-                              color: Colors.green.shade700,
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: const Text('Active', style: TextStyle(color: Colors.white)),
-                          ),
-                          const SizedBox(width: 8),
-                          const Text('72'),
-                          const SizedBox(width: 8),
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.blue,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                            ),
-                            onPressed: () {},
-                            child: const Text('Set', style: TextStyle(color: Colors.white)),
-                          ),
-                        ],
-                      ),
-                      const Text('2'),
-                      const Text('43'),
+                      FutureBuilder(future: getRewardToken, builder: (context, snapshot) {
+                        if (snapshot.connectionState == ConnectionState.waiting) {
+                          return Text('Loading...', style: const TextStyle(color: Colors.white));
+                        } else if (snapshot.hasError) {
+                          return Text('Error');
+                        } else {
+                          return Text('${snapshot.data!.usersupplyTRUST} TRUST', style: const TextStyle(color: Colors.white));
+                        }
+                      }),
+                      const SizedBox(height: 50),
+
+                      FutureBuilder(future: getTrusterInfo, builder: (context, snapshot) {
+                        if (snapshot.connectionState == ConnectionState.waiting) {
+                          return Text('Loading...', style: const TextStyle(color: Colors.white));
+                        } else if (snapshot.hasError) {
+                          return Text('Error');
+                        } else {
+                          Truster? truster = snapshot.data!.firstWhere(
+                            (t) => t.trustername == globalStatus.username,
+                            orElse: () => Truster.dummy(),
+                          );
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('${truster.karma}', style: const TextStyle(color: Colors.white)),
+                              Text(truster.invacation ? AppLocalizations.of(context)!.yes : AppLocalizations.of(context)!.no, style: const TextStyle(color: Colors.white)),
+                              Text('${truster.vacationdays}', style: const TextStyle(color: Colors.white)),
+                              Text('${truster.numofopenreports}', style: const TextStyle(color: Colors.white)),
+                              Text('${truster.numofclosedreports}', style: const TextStyle(color: Colors.white)),
+                              Text(truster.language, style: const TextStyle(color: Colors.white)),
+                            ],
+                          );
+                        }
+                      }),
+                      
                       Row(
                         children: [
                           const Expanded(child: Text('Deutsch/Englisch')),

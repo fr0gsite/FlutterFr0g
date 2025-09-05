@@ -6,6 +6,9 @@ class Truster {
   late int numofopenreports;
   late int numofclosedreports;
   late DateTime electiondate;
+  int vacationdays = 0;
+  bool invacation = false;
+  String language = "de/en";
 
   Truster({
     required this.trustername,
@@ -39,7 +42,7 @@ class Truster {
   }
   
   Truster.dummy() {
-    trustername = "dummytruster";
+    trustername = "truster";
     karma = 0;
     status = 0;
     numofopenreports = 0;
