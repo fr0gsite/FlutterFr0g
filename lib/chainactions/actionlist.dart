@@ -163,10 +163,10 @@ List<Action> newaccount(String creator, String newusername, String ownerpubkey,
 }
 
 List<Action> sendtokenlistaction(
-    String from, String to, String amount, String memo, auth) {
+    String contract, String from, String to, String amount, String memo, auth) {
   List<Action> actions = [
     Action()
-      ..account = AppConfig.blockchainsystemtokencontract
+      ..account = contract
       ..data = {"from": from, "to": to, "quantity": amount, "memo": memo}
       ..name = "transfer"
       ..authorization = auth,
