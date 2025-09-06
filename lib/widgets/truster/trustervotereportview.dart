@@ -11,7 +11,6 @@ import 'package:fr0gsite/datatypes/upload.dart';
 import 'package:fr0gsite/globalnotifications.dart';
 import 'package:fr0gsite/nameconverter.dart';
 import 'package:fr0gsite/widgets/cube/cube.dart';
-import 'package:fr0gsite/widgets/postviewer/swipeitem.dart';
 import 'package:fr0gsite/l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
@@ -67,51 +66,78 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
 
               final upload = uploadSnapshot.data!;
 
-              return Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: ListView(
-                  children: [
-                    Row(
-                      children: [
-                        Text('Nr. ${report.reportid}', style: const TextStyle(fontSize: 18)),
-                        const SizedBox(width: 16),
-                        Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                          color: statusColor(report.status),
-                          child: Text(statusText(report.status, context)),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 12),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
+              return Center(
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 900),
+                  child: ListView(
+                    padding: const EdgeInsets.all(16),
+                    children: [
+                      Row(
                         children: [
-                          Container(
-                            width: 180,
-                            height: 180,
-                            color: Colors.grey.shade400,
-                            child: Cube(upload: upload),
+                          Text(
+                            'Nr. ${report.reportid}',
+                            style: Theme.of(context).textTheme.titleMedium,
                           ),
-                          const SizedBox(width: 12),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("${AppLocalizations.of(context)!.reportedby} ${NameConverter.uint64ToName(BigInt.parse(report.reportername))}", style: const TextStyle(fontWeight: FontWeight.bold)),
-                                Text("${AppLocalizations.of(context)!.uploadedby} ${upload.autor}"),
-                                Text('${AppLocalizations.of(context)!.rule}: ${report.violatedrule}: ${getrule(report.type,report.violatedrule, context)}'),
-                              ],
-                            ),
+                          const SizedBox(width: 16),
+                          Chip(
+                            label: Text(statusText(report.status, context)),
+                            backgroundColor: statusColor(report.status),
                           ),
                         ],
                       ),
-                    ),
-                    Row(
-                      children: [
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-                          onPressed: () {
+                      const SizedBox(height: 24),
+                      LayoutBuilder(
+                        builder: (context, constraints) {
+                          final isWide = constraints.maxWidth > 600;
+                          final postViewer = SizedBox(
+                            width: 200,
+                            height: 200,
+                            child: Cube(upload: upload),
+                          );
+                          final infoColumn = Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "${AppLocalizations.of(context)!.reportedby} ${NameConverter.uint64ToName(BigInt.parse(report.reportername))}",
+                                style: const TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              const SizedBox(height: 8),
+                              Text("${AppLocalizations.of(context)!.uploadedby} ${upload.autor}"),
+                              const SizedBox(height: 8),
+                              Text(
+                                '${AppLocalizations.of(context)!.rule}: ${report.violatedrule}: ${getrule(report.type, report.violatedrule, context)}',
+                              ),
+                            ],
+                          );
+
+                          if (isWide) {
+                            return Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Expanded(child: Center(child: postViewer)),
+                                const SizedBox(width: 24),
+                                Expanded(child: infoColumn),
+                              ],
+                            );
+                          } else {
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Center(child: postViewer),
+                                const SizedBox(height: 16),
+                                infoColumn,
+                              ],
+                            );
+                          }
+                        },
+                      ),
+                      const SizedBox(height: 24),
+                      Row(
+                        children: [
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+                            onPressed: () {
                             // Implement violation handling
                             showDialog(
                               context: context,
@@ -209,23 +235,30 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
 
                         final votes = votesSnapshot.data!;
 
-                        return SizedBox(
-                          width: double.infinity,
-                          child: Table(
-                            border: TableBorder.all(),
-                            defaultColumnWidth: const FixedColumnWidth(100),
-                            children: [
-                            TableRow(children: [
-                              Padding(padding: const EdgeInsets.all(4.0), child: Text(AppLocalizations.of(context)!.username, style: const TextStyle(fontWeight: FontWeight.bold))),
-                              Padding(padding: const EdgeInsets.all(4.0), child: Text(AppLocalizations.of(context)!.vote, style: const TextStyle(fontWeight: FontWeight.bold))),
-                            ]),
-                            ...votes.map((vote) {
-                              return TableRow(children: [
-                              Padding(padding: const EdgeInsets.all(4.0), child: Text(NameConverter.uint64ToName(BigInt.parse(vote.trustername)))),
-                              Padding(padding: const EdgeInsets.all(4.0), child: Text(votestatus(vote.vote, context))),
-                              ]);
-                            }),
+                        return SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: DataTable(
+                            columns: [
+                              DataColumn(
+                                label: Text(AppLocalizations.of(context)!.username,
+                                    style: const TextStyle(fontWeight: FontWeight.bold)),
+                              ),
+                              DataColumn(
+                                label: Text(AppLocalizations.of(context)!.vote,
+                                    style: const TextStyle(fontWeight: FontWeight.bold)),
+                              ),
                             ],
+                            rows: votes
+                                .map(
+                                  (vote) => DataRow(
+                                    cells: [
+                                      DataCell(Text(NameConverter.uint64ToName(
+                                          BigInt.parse(vote.trustername)))),
+                                      DataCell(Text(votestatus(vote.vote, context))),
+                                    ],
+                                  ),
+                                )
+                                .toList(),
                           ),
                         );
                       },
