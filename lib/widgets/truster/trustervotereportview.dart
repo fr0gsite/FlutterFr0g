@@ -11,7 +11,6 @@ import 'package:fr0gsite/datatypes/upload.dart';
 import 'package:fr0gsite/globalnotifications.dart';
 import 'package:fr0gsite/nameconverter.dart';
 import 'package:fr0gsite/widgets/cube/cube.dart';
-import 'package:fr0gsite/widgets/postviewer/swipeitem.dart';
 import 'package:fr0gsite/l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
@@ -67,171 +66,521 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
 
               final upload = uploadSnapshot.data!;
 
-              return Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: ListView(
-                  children: [
-                    Row(
-                      children: [
-                        Text('Nr. ${report.reportid}', style: const TextStyle(fontSize: 18)),
-                        const SizedBox(width: 16),
-                        Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                          color: statusColor(report.status),
-                          child: Text(statusText(report.status, context)),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 12),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        children: [
-                          Container(
-                            width: 180,
-                            height: 180,
-                            color: Colors.grey.shade400,
-                            child: Cube(upload: upload),
-                          ),
-                          const SizedBox(width: 12),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("${AppLocalizations.of(context)!.reportedby} ${NameConverter.uint64ToName(BigInt.parse(report.reportername))}", style: const TextStyle(fontWeight: FontWeight.bold)),
-                                Text("${AppLocalizations.of(context)!.uploadedby} ${upload.autor}"),
-                                Text('${AppLocalizations.of(context)!.rule}: ${report.violatedrule}: ${getrule(report.type,report.violatedrule, context)}'),
-                              ],
+              return Center(
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 900),
+                  child: ListView(
+                    padding: const EdgeInsets.all(16),
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color: AppColor.niceblack,
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(color: Colors.white.withOpacity(0.3), width: 1),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.3),
+                              blurRadius: 8,
+                              offset: const Offset(0, 4),
                             ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-                          onPressed: () {
-                            // Implement violation handling
-                            showDialog(
-                              context: context,
-                              builder: (context) {
-                                return AlertDialog(
-                                  backgroundColor: AppColor.niceblack,
-                                  title: Text(AppLocalizations.of(context)!.confirm),
-                                  content: Text("${AppLocalizations.of(context)!.violation}?"),
-                                  actions: [
-                                    TextButton(
-                                      style: TextButton.styleFrom(foregroundColor: Colors.white),
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                      child: Text(AppLocalizations.of(context)!.cancel),
-                                    ),
-                                    TextButton(
-                                      style: TextButton.styleFrom(foregroundColor: Colors.white),
-                                      onPressed: () {
-                                      Chainactions ca = Chainactions();
-                                      String username = Provider.of<GlobalStatus>(context, listen: false).username;
-                                      String permission = Provider.of<GlobalStatus>(context, listen: false).permission;
-                                      ca.setusernameandpermission(username, permission);
-                                      debugPrint("Username: $username, Permission: $permission");
-                                      ca.trustervote(report.reportid.toString(), 0).then((result) {
-                                        if (result) {
-                                          Globalnotifications.shownotification(context, "title", "message",  "success");
-                                          Navigator.of(context).pop();
-                                        }
-                                      });
-                                    },
-                                      child: Text(AppLocalizations.of(context)!.confirm),
-                                    ),
-                                  ],
-                                );
-                              },
-                            );
-                          },
-                          child: Text(AppLocalizations.of(context)!.violation),
+                          ],
                         ),
-                        const SizedBox(width: 10),
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
-                          onPressed: () {
-                            showDialog(context: context, builder: (context) {
-                              return AlertDialog(
-                                backgroundColor: AppColor.niceblack,
-                                title: Text(AppLocalizations.of(context)!.confirm),
-                                content: Text("${AppLocalizations.of(context)!.inlinewiththerules}?"),
-                                actions: [
-                                  TextButton(
-                                    style: TextButton.styleFrom(foregroundColor: Colors.white),
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                    child: Text(AppLocalizations.of(context)!.cancel),
+                        child: Row(
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                border: Border.all(color: Colors.white.withOpacity(0.2), width: 1),
+                              ),
+                              child: Text(
+                                'Nr. ${report.reportid}',
+                                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 16),
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                border: Border.all(color: Colors.white.withOpacity(0.3), width: 1),
+                              ),
+                              child: Chip(
+                                label: Text(
+                                  statusText(report.status, context),
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w600,
                                   ),
-                                  TextButton(
-                                    style: TextButton.styleFrom(foregroundColor: Colors.white),
-                                    onPressed: () {
-                                      Chainactions ca = Chainactions();
-                                      String username = Provider.of<GlobalStatus>(context, listen: false).username;
-                                      String permission = Provider.of<GlobalStatus>(context, listen: false).permission;
-                                      ca.setusernameandpermission(username, permission);
-                                      debugPrint("Username: $username, Permission: $permission");
-                                      ca.trustervote(report.reportid.toString(), 1).then((result) {
-                                        if (result) {
-                                          Globalnotifications.shownotification(context, "title", "message",  "success");
-                                          Navigator.of(context).pop();
-                                        }
-                                      });
-                                    },
-                                    child: Text(AppLocalizations.of(context)!.confirm),
+                                ),
+                                backgroundColor: statusColor(report.status),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 24),
+                      Container(
+                        padding: const EdgeInsets.all(20),
+                        decoration: BoxDecoration(
+                          color: AppColor.niceblack,
+                          borderRadius: BorderRadius.circular(16),
+                          border: Border.all(color: Colors.white.withOpacity(0.3), width: 1),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.3),
+                              blurRadius: 8,
+                              offset: const Offset(0, 4),
+                            ),
+                          ],
+                        ),
+                        child: LayoutBuilder(
+                          builder: (context, constraints) {
+                            final isWide = constraints.maxWidth > 600;
+                            final postViewer = Container(
+                              width: 200,
+                              height: 200,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(12),
+                                border: Border.all(color: Colors.white.withOpacity(0.4), width: 2),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.white.withOpacity(0.1),
+                                    blurRadius: 4,
+                                    offset: const Offset(0, 2),
                                   ),
                                 ],
+                              ),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(10),
+                                child: Cube(upload: upload),
+                              ),
+                            );
+                            final infoColumn = Container(
+                              padding: const EdgeInsets.all(16),
+                              decoration: BoxDecoration(
+                                color: Colors.white.withOpacity(0.05),
+                                borderRadius: BorderRadius.circular(12),
+                                border: Border.all(color: Colors.white.withOpacity(0.2), width: 1),
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                                    decoration: BoxDecoration(
+                                      color: Colors.blue.withOpacity(0.2),
+                                      borderRadius: BorderRadius.circular(8),
+                                      border: Border.all(color: Colors.blue.withOpacity(0.4), width: 1),
+                                    ),
+                                    child: Text(
+                                      "${AppLocalizations.of(context)!.reportedby} ${NameConverter.uint64ToName(BigInt.parse(report.reportername))}",
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 12),
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                                    decoration: BoxDecoration(
+                                      color: Colors.green.withOpacity(0.2),
+                                      borderRadius: BorderRadius.circular(8),
+                                      border: Border.all(color: Colors.green.withOpacity(0.4), width: 1),
+                                    ),
+                                    child: Text(
+                                      "${AppLocalizations.of(context)!.uploadedby} ${upload.autor}",
+                                      style: const TextStyle(color: Colors.white),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 12),
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                                    decoration: BoxDecoration(
+                                      color: Colors.orange.withOpacity(0.2),
+                                      borderRadius: BorderRadius.circular(8),
+                                      border: Border.all(color: Colors.orange.withOpacity(0.4), width: 1),
+                                    ),
+                                    child: Text(
+                                      '${AppLocalizations.of(context)!.rule} ${report.violatedrule}: ${getrule(report.type, report.violatedrule, context).ruleName} ',
+                                      style: const TextStyle(color: Colors.white),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+
+                            if (isWide) {
+                              return Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Expanded(child: Center(child: postViewer)),
+                                  const SizedBox(width: 24),
+                                  Expanded(child: infoColumn),
+                                ],
                               );
-                            });
+                            } else {
+                              return Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Center(child: postViewer),
+                                  const SizedBox(height: 16),
+                                  infoColumn,
+                                ],
+                              );
+                            }
                           },
-                          child: Text(AppLocalizations.of(context)!.inlinewiththerules),
                         ),
-                      ],
-                    ),
-                    const SizedBox(height: 20),
-                    Text(AppLocalizations.of(context)!.votingoverview, style: TextStyle(fontSize: 18)),
-                    const SizedBox(height: 12),
-                    FutureBuilder<List<ReportVotes>>(
-                      future: futureReportVotes,
-                      builder: (context, votesSnapshot) {
-                        if (votesSnapshot.connectionState == ConnectionState.waiting) {
-                          return const Center(child: CircularProgressIndicator());
-                        }
-                        if (votesSnapshot.hasError) {
-                          return Center(child: Text('${AppLocalizations.of(context)!.error}: ${votesSnapshot.error}'));
-                        }
+                      ),
+                      const SizedBox(height: 24),
+                      Container(
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color: AppColor.niceblack,
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(color: Colors.white.withOpacity(0.3), width: 1),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.3),
+                              blurRadius: 8,
+                              offset: const Offset(0, 4),
+                            ),
+                          ],
+                        ),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Container(
+                                margin: const EdgeInsets.only(right: 8),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  border: Border.all(color: Colors.red.withOpacity(0.5), width: 1),
+                                ),
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.red,
+                                    foregroundColor: Colors.white,
+                                    elevation: 4,
+                                    shadowColor: Colors.red.withOpacity(0.3),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    // Implement violation handling
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return AlertDialog(
+                                          backgroundColor: AppColor.niceblack,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(16),
+                                            side: BorderSide(color: Colors.white.withOpacity(0.3), width: 1),
+                                          ),
+                                          title: Text(
+                                            AppLocalizations.of(context)!.confirm,
+                                            style: const TextStyle(color: Colors.white),
+                                          ),
+                                          content: Text(
+                                            "${AppLocalizations.of(context)!.violation}?",
+                                            style: const TextStyle(color: Colors.white70),
+                                          ),
+                                          actions: [
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(8),
+                                                border: Border.all(color: Colors.white.withOpacity(0.3), width: 1),
+                                              ),
+                                              child: TextButton(
+                                                style: TextButton.styleFrom(foregroundColor: Colors.white),
+                                                onPressed: () {
+                                                  Navigator.of(context).pop();
+                                                },
+                                                child: Text(AppLocalizations.of(context)!.cancel),
+                                              ),
+                                            ),
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(8),
+                                                border: Border.all(color: Colors.red.withOpacity(0.5), width: 1),
+                                              ),
+                                              child: TextButton(
+                                                style: TextButton.styleFrom(
+                                                  foregroundColor: Colors.white,
+                                                  backgroundColor: Colors.red.withOpacity(0.2),
+                                                ),
+                                                onPressed: () {
+                                                  Chainactions ca = Chainactions();
+                                                  String username = Provider.of<GlobalStatus>(context, listen: false).username;
+                                                  String permission = Provider.of<GlobalStatus>(context, listen: false).permission;
+                                                  ca.setusernameandpermission(username, permission);
+                                                  debugPrint("Username: $username, Permission: $permission");
+                                                  ca.trustervote(report.reportid.toString(), 0).then((result) {
+                                                    if (result) {
+                                                      Globalnotifications.shownotification(context, "title", "message",  "success");
+                                                      Navigator.of(context).pop();
+                                                    }
+                                                  });
+                                                },
+                                                child: Text(AppLocalizations.of(context)!.confirm),
+                                              ),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
+                                  },
+                                  child: Text(AppLocalizations.of(context)!.violation),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 10),
+                            Expanded(
+                              child: Container(
+                                margin: const EdgeInsets.only(left: 8),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  border: Border.all(color: Colors.green.withOpacity(0.5), width: 1),
+                                ),
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.green,
+                                    foregroundColor: Colors.white,
+                                    elevation: 4,
+                                    shadowColor: Colors.green.withOpacity(0.3),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    showDialog(context: context, builder: (context) {
+                                      return AlertDialog(
+                                        backgroundColor: AppColor.niceblack,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(16),
+                                          side: BorderSide(color: Colors.white.withOpacity(0.3), width: 1),
+                                        ),
+                                        title: Text(
+                                          AppLocalizations.of(context)!.confirm,
+                                          style: const TextStyle(color: Colors.white),
+                                        ),
+                                        content: Text(
+                                          "${AppLocalizations.of(context)!.inlinewiththerules}?",
+                                          style: const TextStyle(color: Colors.white70),
+                                        ),
+                                        actions: [
+                                          Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(8),
+                                              border: Border.all(color: Colors.white.withOpacity(0.3), width: 1),
+                                            ),
+                                            child: TextButton(
+                                              style: TextButton.styleFrom(foregroundColor: Colors.white),
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                              child: Text(AppLocalizations.of(context)!.cancel),
+                                            ),
+                                          ),
+                                          Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(8),
+                                              border: Border.all(color: Colors.green.withOpacity(0.5), width: 1),
+                                            ),
+                                            child: TextButton(
+                                              style: TextButton.styleFrom(
+                                                foregroundColor: Colors.white,
+                                                backgroundColor: Colors.green.withOpacity(0.2),
+                                              ),
+                                              onPressed: () {
+                                                Chainactions ca = Chainactions();
+                                                String username = Provider.of<GlobalStatus>(context, listen: false).username;
+                                                String permission = Provider.of<GlobalStatus>(context, listen: false).permission;
+                                                ca.setusernameandpermission(username, permission);
+                                                debugPrint("Username: $username, Permission: $permission");
+                                                ca.trustervote(report.reportid.toString(), 1).then((result) {
+                                                  if (result) {
+                                                    Globalnotifications.shownotification(context, "title", "message",  "success");
+                                                    Navigator.of(context).pop();
+                                                  }
+                                                });
+                                              },
+                                              child: Text(AppLocalizations.of(context)!.confirm),
+                                            ),
+                                          ),
+                                        ],
+                                      );
+                                    });
+                                  },
+                                  child: Text(AppLocalizations.of(context)!.inlinewiththerules),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      Container(
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color: AppColor.niceblack,
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(color: Colors.white.withOpacity(0.3), width: 1),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.3),
+                              blurRadius: 8,
+                              offset: const Offset(0, 4),
+                            ),
+                          ],
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                              decoration: BoxDecoration(
+                                color: Colors.purple.withOpacity(0.2),
+                                borderRadius: BorderRadius.circular(8),
+                                border: Border.all(color: Colors.purple.withOpacity(0.4), width: 1),
+                              ),
+                              child: Text(
+                                AppLocalizations.of(context)!.votingoverview,
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 12),
+                            FutureBuilder<List<ReportVotes>>(
+                              future: futureReportVotes,
+                              builder: (context, votesSnapshot) {
+                                if (votesSnapshot.connectionState == ConnectionState.waiting) {
+                                  return const Center(child: CircularProgressIndicator());
+                                }
+                                if (votesSnapshot.hasError) {
+                                  return Center(child: Text('${AppLocalizations.of(context)!.error}: ${votesSnapshot.error}'));
+                                }
 
-                        final votes = votesSnapshot.data!;
+                                final votes = votesSnapshot.data!;
 
-                        return SizedBox(
-                          width: double.infinity,
-                          child: Table(
-                            border: TableBorder.all(),
-                            defaultColumnWidth: const FixedColumnWidth(100),
-                            children: [
-                            TableRow(children: [
-                              Padding(padding: const EdgeInsets.all(4.0), child: Text(AppLocalizations.of(context)!.username, style: const TextStyle(fontWeight: FontWeight.bold))),
-                              Padding(padding: const EdgeInsets.all(4.0), child: Text(AppLocalizations.of(context)!.vote, style: const TextStyle(fontWeight: FontWeight.bold))),
-                            ]),
-                            ...votes.map((vote) {
-                              return TableRow(children: [
-                              Padding(padding: const EdgeInsets.all(4.0), child: Text(NameConverter.uint64ToName(BigInt.parse(vote.trustername)))),
-                              Padding(padding: const EdgeInsets.all(4.0), child: Text(votestatus(vote.vote, context))),
-                              ]);
-                            }),
-                            ],
-                          ),
-                        );
-                      },
-                    ),
+                                return Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.white.withOpacity(0.05),
+                                    borderRadius: BorderRadius.circular(8),
+                                    border: Border.all(color: Colors.white.withOpacity(0.2), width: 1),
+                                  ),
+                                  child: SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: DataTable(
+                                      headingRowColor: MaterialStateColor.resolveWith(
+                                        (states) => Colors.white.withOpacity(0.1),
+                                      ),
+                                      border: TableBorder.all(
+                                        color: Colors.white.withOpacity(0.2),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      columns: [
+                                        DataColumn(
+                                          label: Container(
+                                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                            child: Text(
+                                              AppLocalizations.of(context)!.username,
+                                              style: const TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        DataColumn(
+                                          label: Container(
+                                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                            child: Text(
+                                              AppLocalizations.of(context)!.vote,
+                                              style: const TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                      rows: votes
+                                          .map(
+                                            (vote) => DataRow(
+                                              color: MaterialStateColor.resolveWith(
+                                                (states) => Colors.white.withOpacity(0.02),
+                                              ),
+                                              cells: [
+                                                DataCell(
+                                                  Container(
+                                                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.blue.withOpacity(0.1),
+                                                      borderRadius: BorderRadius.circular(4),
+                                                      border: Border.all(color: Colors.blue.withOpacity(0.3), width: 1),
+                                                    ),
+                                                    child: Text(
+                                                      NameConverter.uint64ToName(BigInt.parse(vote.trustername)),
+                                                      style: const TextStyle(color: Colors.white),
+                                                    ),
+                                                  ),
+                                                ),
+                                                DataCell(
+                                                  Container(
+                                                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                                    decoration: BoxDecoration(
+                                                      color: vote.vote == 1 
+                                                          ? Colors.green.withOpacity(0.1)
+                                                          : vote.vote == -1 
+                                                              ? Colors.red.withOpacity(0.1)
+                                                              : Colors.grey.withOpacity(0.1),
+                                                      borderRadius: BorderRadius.circular(4),
+                                                      border: Border.all(
+                                                        color: vote.vote == 1 
+                                                            ? Colors.green.withOpacity(0.3)
+                                                            : vote.vote == -1 
+                                                                ? Colors.red.withOpacity(0.3)
+                                                                : Colors.grey.withOpacity(0.3),
+                                                        width: 1,
+                                                      ),
+                                                    ),
+                                                    child: Text(
+                                                      votestatus(vote.vote, context),
+                                                      style: TextStyle(
+                                                        color: vote.vote == 1 
+                                                            ? Colors.green.shade300
+                                                            : vote.vote == -1 
+                                                                ? Colors.red.shade300
+                                                                : Colors.grey.shade300,
+                                                        fontWeight: FontWeight.w600,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          )
+                                          .toList(),
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
                   ],
                 ),
+              ),
               );
             },
           );
