@@ -9,7 +9,6 @@ import 'package:fr0gsite/datatypes/rule.dart';
 import 'package:fr0gsite/datatypes/rules.dart';
 import 'package:fr0gsite/datatypes/upload.dart';
 import 'package:fr0gsite/globalnotifications.dart';
-import 'package:fr0gsite/main.dart';
 import 'package:fr0gsite/nameconverter.dart';
 import 'package:fr0gsite/widgets/cube/cube.dart';
 import 'package:fr0gsite/l10n/app_localizations.dart';
@@ -31,19 +30,22 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
   bool _isVoteOverviewExpanded = true;
   bool _uservoted = false;
 
-  // Rules
-  // Punishment for breaking the rules
-
   @override
   void initState() {
     super.initState();
     futureReport = Chainactions().getreport(widget.reportid.toString());
     futureReportVotes = Chainactions().getreportvotes(widget.reportid.toString());
-    futureReportVotes.asStream().listen((votes) {
-      String currentUsername = Provider.of<GlobalStatus>(context, listen: false).username;
-      setState(() {
-        _uservoted = votes.any((vote) => vote.trustername == currentUsername && vote.vote != 0);
-      });
+    
+    // Überprüfe den User-Vote-Status beim Laden
+    futureReportVotes.then((votes) {
+      if (mounted) {
+        String currentUsername = Provider.of<GlobalStatus>(context, listen: false).username;
+        setState(() {
+          _uservoted = votes.any((vote) => vote.trustername == currentUsername && vote.vote != 0);
+        });
+      }
+    }).catchError((error) {
+      debugPrint("Error loading vote data: $error");
     });
   }
 
@@ -181,9 +183,8 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                                   Container(
                                     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                                     decoration: BoxDecoration(
-                                      color: Colors.blue.withAlpha((0.2 * 255).toInt()),
                                       borderRadius: BorderRadius.circular(8),
-                                      border: Border.all(color: Colors.blue.withAlpha((0.4 * 255).toInt()), width: 1),
+                                      border: Border.all(color: Colors.white.withAlpha((0.3 * 255).toInt()), width: 1),
                                     ),
                                     child: Text(
                                       "${AppLocalizations.of(context)!.reportedby} ${NameConverter.uint64ToName(BigInt.parse(report.reportername))}",
@@ -197,26 +198,45 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                                   Container(
                                     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                                     decoration: BoxDecoration(
-                                      color: Colors.green.withAlpha((0.2 * 255).toInt()),
                                       borderRadius: BorderRadius.circular(8),
-                                      border: Border.all(color: Colors.green.withAlpha((0.4 * 255).toInt()), width: 1),
+                                      border: Border.all(color: Colors.white.withAlpha((0.3 * 255).toInt()), width: 1),
                                     ),
                                     child: Text(
                                       "${AppLocalizations.of(context)!.uploadedby} ${upload.autor}",
-                                      style: const TextStyle(color: Colors.white),
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                      ),
                                     ),
                                   ),
                                   const SizedBox(height: 12),
                                   Container(
                                     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                                     decoration: BoxDecoration(
-                                      color: Colors.orange.withAlpha((0.2 * 255).toInt()),
                                       borderRadius: BorderRadius.circular(8),
-                                      border: Border.all(color: Colors.orange.withAlpha((0.4 * 255).toInt()), width: 1),
+                                      border: Border.all(color: Colors.white.withAlpha((0.3 * 255).toInt()), width: 1),
                                     ),
                                     child: Text(
                                       '${AppLocalizations.of(context)!.rule} ${report.violatedrule}: ${getrule(report.type, report.violatedrule, context).ruleName} ',
-                                      style: const TextStyle(color: Colors.white),
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 12),
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(8),
+                                      border: Border.all(color: Colors.white.withAlpha((0.3 * 255).toInt()), width: 1),
+                                    ),
+                                    child: Text(
+                                      '${AppLocalizations.of(context)!.punishment}: ${getrule(report.type, report.violatedrule, context).rulePunishment}',
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -308,82 +328,51 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                                 margin: const EdgeInsets.only(right: 8),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8),
-                                  border: Border.all(color: Colors.red.withAlpha((0.5 * 255).toInt()), width: 1),
+                                  border: Border.all(color: Colors.red.withAlpha(_uservoted ? (0.2 * 255).toInt() : (0.5 * 255).toInt()), width: 1),
                                 ),
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                    backgroundColor: _uservoted ? Colors.red.withAlpha((0.1 * 255).toInt()) : Colors.red,
-                                    foregroundColor: Colors.white,
-                                    elevation: 4,
+                                    backgroundColor: _uservoted ? Colors.red.withAlpha((0.3 * 255).toInt()) : Colors.red,
+                                    foregroundColor: _uservoted ? Colors.white.withAlpha((0.5 * 255).toInt()) : Colors.white,
+                                    elevation: _uservoted ? 0 : 4,
                                     shadowColor: Colors.red.withAlpha((0.3 * 255).toInt()),
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(8),
                                     ),
                                   ),
-                                  onPressed: () {
-                                    // Implement violation handling
-                                    showDialog(
-                                      context: context,
-                                      builder: (context) {
-                                        return AlertDialog(
-                                          backgroundColor: AppColor.niceblack,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(16),
-                                            side: BorderSide(color: Colors.white.withAlpha((0.3 * 255).toInt()), width: 1),
-                                          ),
-                                          title: Text(
-                                            AppLocalizations.of(context)!.confirm,
-                                            style: const TextStyle(color: Colors.white),
-                                          ),
-                                          content: Text(
-                                            "${AppLocalizations.of(context)!.violation}?",
-                                            style: const TextStyle(color: Colors.white70),
-                                          ),
-                                          actions: [
-                                            Container(
-                                              decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.circular(8),
-                                                border: Border.all(color: Colors.white.withAlpha((0.3 * 255).toInt()), width: 1),
-                                              ),
-                                              child: TextButton(
-                                                style: TextButton.styleFrom(foregroundColor: Colors.white),
-                                                onPressed: () {
-                                                  Navigator.of(context).pop();
-                                                },
-                                                child: Text(AppLocalizations.of(context)!.cancel),
-                                              ),
-                                            ),
-                                            Container(
-                                              decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.circular(8),
-                                                border: Border.all(color: Colors.red.withAlpha((0.5 * 255).toInt()), width: 1),
-                                              ),
-                                              child: TextButton(
-                                                style: TextButton.styleFrom(
-                                                  foregroundColor: Colors.white,
-                                                  backgroundColor: Colors.red.withAlpha((0.2 * 255).toInt()),
-                                                ),
-                                                onPressed: () {
-                                                  Chainactions ca = Chainactions();
-                                                  String username = Provider.of<GlobalStatus>(context, listen: false).username;
-                                                  String permission = Provider.of<GlobalStatus>(context, listen: false).permission;
-                                                  ca.setusernameandpermission(username, permission);
-                                                  debugPrint("Username: $username, Permission: $permission");
-                                                  ca.trustervote(report.reportid.toString(), 0).then((result) {
-                                                    if (result) {
-                                                      Globalnotifications.shownotification(context, "title", "message",  "success");
-                                                      callbackfunction();
-                                                      Navigator.of(context).pop();
-                                                    }
-                                                  });
-                                                },
-                                                child: Text(AppLocalizations.of(context)!.confirm),
-                                              ),
-                                            ),
-                                          ],
-                                        );
-                                      },
-                                    );
+                                  onPressed: _uservoted ? null : () async {
+                                    // Direct violation handling without dialog
+                                    setState(() {
+                                      _uservoted = true; // Sofortige UI-Aktualisierung
+                                    });
+                                    
+                                    Chainactions ca = Chainactions();
+                                    String username = Provider.of<GlobalStatus>(context, listen: false).username;
+                                    String permission = Provider.of<GlobalStatus>(context, listen: false).permission;
+                                    ca.setusernameandpermission(username, permission);
+                                    debugPrint("Username: $username, Permission: $permission");
+                                    
+                                    try {
+                                      bool result = await ca.trustervote(report.reportid.toString(), 0);
+                                      if (result) {
+                                        Globalnotifications.shownotification(context, "title", "message", "success");
+                                        // Aktualisiere die futureReportVotes für sofortige Progressbar-Aktualisierung
+                                        setState(() {
+                                          futureReportVotes = Chainactions().getreportvotes(widget.reportid.toString());
+                                        });
+                                      } else {
+                                        // Bei Fehler _uservoted zurücksetzen
+                                        setState(() {
+                                          _uservoted = false;
+                                        });
+                                      }
+                                    } catch (error) {
+                                      debugPrint("Error voting: $error");
+                                      // Bei Fehler _uservoted zurücksetzen
+                                      setState(() {
+                                        _uservoted = false;
+                                      });
+                                    }
                                   },
                                   child: Text(AppLocalizations.of(context)!.violation),
                                 ),
@@ -395,77 +384,51 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                                 margin: const EdgeInsets.only(left: 8),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8),
-                                  border: Border.all(color: Colors.green.withAlpha((0.5 * 255).toInt()), width: 1),
+                                  border: Border.all(color: Colors.green.withAlpha(_uservoted ? (0.2 * 255).toInt() : (0.5 * 255).toInt()), width: 1),
                                 ),
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                    backgroundColor: _uservoted ? Colors.green.withAlpha((0.1 * 255).toInt()) : Colors.green,
-                                    foregroundColor: Colors.white,
-                                    elevation: 4,
+                                    backgroundColor: _uservoted ? Colors.green.withAlpha((0.3 * 255).toInt()) : Colors.green,
+                                    foregroundColor: _uservoted ? Colors.white.withAlpha((0.5 * 255).toInt()) : Colors.white,
+                                    elevation: _uservoted ? 0 : 4,
                                     shadowColor: Colors.green.withAlpha((0.3 * 255).toInt()),
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(8),
                                     ),
                                   ),
-                                  onPressed: () {
-                                    showDialog(context: context, builder: (context) {
-                                      return AlertDialog(
-                                        backgroundColor: AppColor.niceblack,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(16),
-                                          side: BorderSide(color: Colors.white.withAlpha((0.3 * 255).toInt()), width: 1),
-                                        ),
-                                        title: Text(
-                                          AppLocalizations.of(context)!.confirm,
-                                          style: const TextStyle(color: Colors.white),
-                                        ),
-                                        content: Text(
-                                          "${AppLocalizations.of(context)!.inlinewiththerules}?",
-                                          style: const TextStyle(color: Colors.white70),
-                                        ),
-                                        actions: [
-                                          Container(
-                                            decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(8),
-                                              border: Border.all(color: Colors.white.withAlpha((0.3 * 255).toInt()), width: 1),
-                                            ),
-                                            child: TextButton(
-                                              style: TextButton.styleFrom(foregroundColor: Colors.white),
-                                              onPressed: () {
-                                                Navigator.of(context).pop();
-                                              },
-                                              child: Text(AppLocalizations.of(context)!.cancel),
-                                            ),
-                                          ),
-                                          Container(
-                                            decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(8),
-                                              border: Border.all(color: Colors.green.withAlpha((0.5 * 255).toInt()), width: 1),
-                                            ),
-                                            child: TextButton(
-                                              style: TextButton.styleFrom(
-                                                foregroundColor: Colors.white,
-                                                backgroundColor: Colors.green.withAlpha((0.2 * 255).toInt()),
-                                              ),
-                                              onPressed: () {
-                                                Chainactions ca = Chainactions();
-                                                String username = Provider.of<GlobalStatus>(context, listen: false).username;
-                                                String permission = Provider.of<GlobalStatus>(context, listen: false).permission;
-                                                ca.setusernameandpermission(username, permission);
-                                                debugPrint("Username: $username, Permission: $permission");
-                                                ca.trustervote(report.reportid.toString(), 1).then((result) {
-                                                  if (result) {
-                                                    Globalnotifications.shownotification(context, "title", "message",  "success");
-                                                    Navigator.of(context).pop();
-                                                  }
-                                                });
-                                              },
-                                              child: Text(AppLocalizations.of(context)!.confirm),
-                                            ),
-                                          ),
-                                        ],
-                                      );
+                                  onPressed: _uservoted ? null : () async {
+                                    // Direct approval handling without dialog
+                                    setState(() {
+                                      _uservoted = true; // Sofortige UI-Aktualisierung
                                     });
+                                    
+                                    Chainactions ca = Chainactions();
+                                    String username = Provider.of<GlobalStatus>(context, listen: false).username;
+                                    String permission = Provider.of<GlobalStatus>(context, listen: false).permission;
+                                    ca.setusernameandpermission(username, permission);
+                                    debugPrint("Username: $username, Permission: $permission");
+                                    
+                                    try {
+                                      bool result = await ca.trustervote(report.reportid.toString(), 1);
+                                      if (result) {
+                                        Globalnotifications.shownotification(context, "title", "message", "success");
+                                        // Aktualisiere die futureReportVotes für sofortige Progressbar-Aktualisierung
+                                        setState(() {
+                                          futureReportVotes = Chainactions().getreportvotes(widget.reportid.toString());
+                                        });
+                                      } else {
+                                        // Bei Fehler _uservoted zurücksetzen
+                                        setState(() {
+                                          _uservoted = false;
+                                        });
+                                      }
+                                    } catch (error) {
+                                      debugPrint("Error voting: $error");
+                                      // Bei Fehler _uservoted zurücksetzen
+                                      setState(() {
+                                        _uservoted = false;
+                                      });
+                                    }
                                   },
                                   child: Text(AppLocalizations.of(context)!.inlinewiththerules),
                                 ),
@@ -746,13 +709,15 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                                                       Container(
                                                         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                                                         decoration: BoxDecoration(
-                                                          color: Colors.blue.withAlpha((0.1 * 255).toInt()),
                                                           borderRadius: BorderRadius.circular(4),
-                                                          border: Border.all(color: Colors.blue.withAlpha((0.3 * 255).toInt()), width: 1),
+                                                          border: Border.all(color: Colors.white.withAlpha((0.3 * 255).toInt()), width: 1),
                                                         ),
                                                         child: Text(
                                                           vote.trustername,
-                                                          style: const TextStyle(color: Colors.white),
+                                                          style: const TextStyle(
+                                                            fontWeight: FontWeight.bold,
+                                                            color: Colors.white,
+                                                          ),
                                                         ),
                                                       ),
                                                     ),
@@ -760,18 +725,9 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                                                       Container(
                                                         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                                                         decoration: BoxDecoration(
-                                                          color: vote.vote == 1 
-                                                              ? Colors.green.withAlpha((0.1 * 255).toInt())
-                                                              : vote.vote == -1 
-                                                                  ? Colors.red.withAlpha((0.1 * 255).toInt())
-                                                                  : Colors.grey.withAlpha((0.1 * 255).toInt()),
                                                           borderRadius: BorderRadius.circular(4),
                                                           border: Border.all(
-                                                            color: vote.vote == 1 
-                                                                ? Colors.green.withAlpha((0.3 * 255).toInt())
-                                                                : vote.vote == -1 
-                                                                    ? Colors.red.withAlpha((0.3 * 255).toInt())
-                                                                    : Colors.grey.withAlpha((0.3 * 255).toInt()),
+                                                            color: Colors.white.withAlpha((0.3 * 255).toInt()),
                                                             width: 1,
                                                           ),
                                                         ),
@@ -783,7 +739,7 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                                                                 : vote.vote == -1 
                                                                     ? Colors.red.shade300
                                                                     : Colors.grey.shade300,
-                                                            fontWeight: FontWeight.w600,
+                                                            fontWeight: FontWeight.bold,
                                                           ),
                                                         ),
                                                       ),
@@ -818,11 +774,11 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
   }
 
   void callbackfunction() {
+    // Diese Funktion ist nicht mehr notwendig, da die Aktualisierung 
+    // jetzt direkt in den Button-Callbacks erfolgt
     setState(() {
-    futureReport = Chainactions().getreport(widget.reportid.toString());
-    futureReportVotes = Chainactions().getreportvotes(widget.reportid.toString());
-    _uservoted = false;
-  });
+      _uservoted = true;
+    });
   }
 
   String statusText(int status, context) {
