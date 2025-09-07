@@ -1,9 +1,10 @@
+import 'package:flutter/widgets.dart';
 import 'package:fr0gsite/datatypes/rule.dart';
 import 'package:fr0gsite/l10n/app_localizations.dart';
 
 class Rules {
 
-  List<Rule> getUploadRules(context) {
+  List<Rule> getUploadRules(BuildContext context) {
     List<Rule> uploadRules = [];
       uploadRules.add(Rule(1, AppLocalizations.of(context)!.rule1,  AppLocalizations.of(context)!.punishment5));
       uploadRules.add(Rule(2, AppLocalizations.of(context)!.rule2,  AppLocalizations.of(context)!.punishment5));
@@ -18,7 +19,7 @@ class Rules {
     return uploadRules;
   }
 
-  List<Rule> getCommentRules(context) {
+  List<Rule> getCommentRules(BuildContext context) {
      List<Rule> uploadRules = getUploadRules(context);
     List<Rule> commentRules = [];
     commentRules.add(uploadRules[0]);
@@ -30,7 +31,7 @@ class Rules {
     return commentRules;
   }
 
-  List<Rule> getTagRules(context) {
+  List<Rule> getTagRules(BuildContext context) {
     List<Rule> tagRules = [];
     tagRules.add(Rule(1, "Wenlink to website",  AppLocalizations.of(context)!.punishment3));
     tagRules.add(Rule(2, "Spamming",  AppLocalizations.of(context)!.punishment3));

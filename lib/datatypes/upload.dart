@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:flutter/material.dart';
 import 'package:fr0gsite/datatypes/tag.dart';
 import 'package:fr0gsite/ipfsactions.dart';
 
@@ -123,7 +124,7 @@ class Upload {
   //   }
   // }
 
-  void loadContent(context) async{
+  void loadContent(BuildContext context) async{
     // User IPFS to get the data
     if(!havedata()){
       data = await IPFSActions.fetchipfsdata(context, uploadipfshash);

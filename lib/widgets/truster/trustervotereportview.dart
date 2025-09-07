@@ -77,10 +77,10 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                         decoration: BoxDecoration(
                           color: AppColor.niceblack,
                           borderRadius: BorderRadius.circular(12),
-                          border: Border.all(color: Colors.white.withOpacity(0.3), width: 1),
+                          border: Border.all(color: Colors.white.withAlpha((0.3 * 255).toInt()), width: 1),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.black.withOpacity(0.3),
+                              color: Colors.black.withAlpha((0.3 * 255).toInt()),
                               blurRadius: 8,
                               offset: const Offset(0, 4),
                             ),
@@ -92,7 +92,7 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
-                                border: Border.all(color: Colors.white.withOpacity(0.2), width: 1),
+                                border: Border.all(color: Colors.white.withAlpha((0.2 * 255).toInt()), width: 1),
                               ),
                               child: Text(
                                 'Nr. ${report.reportid}',
@@ -106,7 +106,7 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                             Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
-                                border: Border.all(color: Colors.white.withOpacity(0.3), width: 1),
+                                border: Border.all(color: Colors.white.withAlpha((0.3 * 255).toInt()), width: 1),
                               ),
                               child: Chip(
                                 label: Text(
@@ -128,10 +128,10 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                         decoration: BoxDecoration(
                           color: AppColor.niceblack,
                           borderRadius: BorderRadius.circular(16),
-                          border: Border.all(color: Colors.white.withOpacity(0.3), width: 1),
+                          border: Border.all(color: Colors.white.withAlpha((0.3 * 255).toInt()), width: 1),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.black.withOpacity(0.3),
+                              color: Colors.black.withAlpha((0.3 * 255).toInt()),
                               blurRadius: 8,
                               offset: const Offset(0, 4),
                             ),
@@ -145,10 +145,10 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                               height: 200,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(12),
-                                border: Border.all(color: Colors.white.withOpacity(0.4), width: 2),
+                                border: Border.all(color: Colors.white.withAlpha((0.4 * 255).toInt()), width: 2),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Colors.white.withOpacity(0.1),
+                                    color: Colors.white.withAlpha((0.1 * 255).toInt()),
                                     blurRadius: 4,
                                     offset: const Offset(0, 2),
                                   ),
@@ -162,9 +162,9 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                             final infoColumn = Container(
                               padding: const EdgeInsets.all(16),
                               decoration: BoxDecoration(
-                                color: Colors.white.withOpacity(0.05),
+                                color: Colors.white.withAlpha((0.05 * 255).toInt()),
                                 borderRadius: BorderRadius.circular(12),
-                                border: Border.all(color: Colors.white.withOpacity(0.2), width: 1),
+                                border: Border.all(color: Colors.white.withAlpha((0.2 * 255).toInt()), width: 1),
                               ),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -172,9 +172,9 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                                   Container(
                                     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                                     decoration: BoxDecoration(
-                                      color: Colors.blue.withOpacity(0.2),
+                                      color: Colors.blue.withAlpha((0.2 * 255).toInt()),
                                       borderRadius: BorderRadius.circular(8),
-                                      border: Border.all(color: Colors.blue.withOpacity(0.4), width: 1),
+                                      border: Border.all(color: Colors.blue.withAlpha((0.4 * 255).toInt()), width: 1),
                                     ),
                                     child: Text(
                                       "${AppLocalizations.of(context)!.reportedby} ${NameConverter.uint64ToName(BigInt.parse(report.reportername))}",
@@ -188,9 +188,9 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                                   Container(
                                     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                                     decoration: BoxDecoration(
-                                      color: Colors.green.withOpacity(0.2),
+                                      color: Colors.green.withAlpha((0.2 * 255).toInt()),
                                       borderRadius: BorderRadius.circular(8),
-                                      border: Border.all(color: Colors.green.withOpacity(0.4), width: 1),
+                                      border: Border.all(color: Colors.green.withAlpha((0.4 * 255).toInt()), width: 1),
                                     ),
                                     child: Text(
                                       "${AppLocalizations.of(context)!.uploadedby} ${upload.autor}",
@@ -201,9 +201,9 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                                   Container(
                                     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                                     decoration: BoxDecoration(
-                                      color: Colors.orange.withOpacity(0.2),
+                                      color: Colors.orange.withAlpha((0.2 * 255).toInt()),
                                       borderRadius: BorderRadius.circular(8),
-                                      border: Border.all(color: Colors.orange.withOpacity(0.4), width: 1),
+                                      border: Border.all(color: Colors.orange.withAlpha((0.4 * 255).toInt()), width: 1),
                                     ),
                                     child: Text(
                                       '${AppLocalizations.of(context)!.rule} ${report.violatedrule}: ${getrule(report.type, report.violatedrule, context).ruleName} ',
@@ -243,10 +243,10 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                         decoration: BoxDecoration(
                           color: AppColor.niceblack,
                           borderRadius: BorderRadius.circular(12),
-                          border: Border.all(color: Colors.white.withOpacity(0.3), width: 1),
+                          border: Border.all(color: Colors.white.withAlpha((0.3 * 255).toInt()), width: 1),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.black.withOpacity(0.3),
+                              color: Colors.black.withAlpha((0.3 * 255).toInt()),
                               blurRadius: 8,
                               offset: const Offset(0, 4),
                             ),
@@ -259,14 +259,14 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                                 margin: const EdgeInsets.only(right: 8),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8),
-                                  border: Border.all(color: Colors.red.withOpacity(0.5), width: 1),
+                                  border: Border.all(color: Colors.red.withAlpha((0.5 * 255).toInt()), width: 1),
                                 ),
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.red,
                                     foregroundColor: Colors.white,
                                     elevation: 4,
-                                    shadowColor: Colors.red.withOpacity(0.3),
+                                    shadowColor: Colors.red.withAlpha((0.3 * 255).toInt()),
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(8),
                                     ),
@@ -280,7 +280,7 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                                           backgroundColor: AppColor.niceblack,
                                           shape: RoundedRectangleBorder(
                                             borderRadius: BorderRadius.circular(16),
-                                            side: BorderSide(color: Colors.white.withOpacity(0.3), width: 1),
+                                            side: BorderSide(color: Colors.white.withAlpha((0.3 * 255).toInt()), width: 1),
                                           ),
                                           title: Text(
                                             AppLocalizations.of(context)!.confirm,
@@ -294,7 +294,7 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                                             Container(
                                               decoration: BoxDecoration(
                                                 borderRadius: BorderRadius.circular(8),
-                                                border: Border.all(color: Colors.white.withOpacity(0.3), width: 1),
+                                                border: Border.all(color: Colors.white.withAlpha((0.3 * 255).toInt()), width: 1),
                                               ),
                                               child: TextButton(
                                                 style: TextButton.styleFrom(foregroundColor: Colors.white),
@@ -307,12 +307,12 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                                             Container(
                                               decoration: BoxDecoration(
                                                 borderRadius: BorderRadius.circular(8),
-                                                border: Border.all(color: Colors.red.withOpacity(0.5), width: 1),
+                                                border: Border.all(color: Colors.red.withAlpha((0.5 * 255).toInt()), width: 1),
                                               ),
                                               child: TextButton(
                                                 style: TextButton.styleFrom(
                                                   foregroundColor: Colors.white,
-                                                  backgroundColor: Colors.red.withOpacity(0.2),
+                                                  backgroundColor: Colors.red.withAlpha((0.2 * 255).toInt()),
                                                 ),
                                                 onPressed: () {
                                                   Chainactions ca = Chainactions();
@@ -345,14 +345,14 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                                 margin: const EdgeInsets.only(left: 8),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8),
-                                  border: Border.all(color: Colors.green.withOpacity(0.5), width: 1),
+                                  border: Border.all(color: Colors.green.withAlpha((0.5 * 255).toInt()), width: 1),
                                 ),
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.green,
                                     foregroundColor: Colors.white,
                                     elevation: 4,
-                                    shadowColor: Colors.green.withOpacity(0.3),
+                                    shadowColor: Colors.green.withAlpha((0.3 * 255).toInt()),
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(8),
                                     ),
@@ -363,7 +363,7 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                                         backgroundColor: AppColor.niceblack,
                                         shape: RoundedRectangleBorder(
                                           borderRadius: BorderRadius.circular(16),
-                                          side: BorderSide(color: Colors.white.withOpacity(0.3), width: 1),
+                                          side: BorderSide(color: Colors.white.withAlpha((0.3 * 255).toInt()), width: 1),
                                         ),
                                         title: Text(
                                           AppLocalizations.of(context)!.confirm,
@@ -377,7 +377,7 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                                           Container(
                                             decoration: BoxDecoration(
                                               borderRadius: BorderRadius.circular(8),
-                                              border: Border.all(color: Colors.white.withOpacity(0.3), width: 1),
+                                              border: Border.all(color: Colors.white.withAlpha((0.3 * 255).toInt()), width: 1),
                                             ),
                                             child: TextButton(
                                               style: TextButton.styleFrom(foregroundColor: Colors.white),
@@ -390,12 +390,12 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                                           Container(
                                             decoration: BoxDecoration(
                                               borderRadius: BorderRadius.circular(8),
-                                              border: Border.all(color: Colors.green.withOpacity(0.5), width: 1),
+                                              border: Border.all(color: Colors.green.withAlpha((0.5 * 255).toInt()), width: 1),
                                             ),
                                             child: TextButton(
                                               style: TextButton.styleFrom(
                                                 foregroundColor: Colors.white,
-                                                backgroundColor: Colors.green.withOpacity(0.2),
+                                                backgroundColor: Colors.green.withAlpha((0.2 * 255).toInt()),
                                               ),
                                               onPressed: () {
                                                 Chainactions ca = Chainactions();
@@ -430,10 +430,10 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                         decoration: BoxDecoration(
                           color: AppColor.niceblack,
                           borderRadius: BorderRadius.circular(12),
-                          border: Border.all(color: Colors.white.withOpacity(0.3), width: 1),
+                          border: Border.all(color: Colors.white.withAlpha((0.3 * 255).toInt()), width: 1),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.black.withOpacity(0.3),
+                              color: Colors.black.withAlpha((0.3 * 255).toInt()),
                               blurRadius: 8,
                               offset: const Offset(0, 4),
                             ),
@@ -445,9 +445,9 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                             Container(
                               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                               decoration: BoxDecoration(
-                                color: Colors.purple.withOpacity(0.2),
+                                color: Colors.purple.withAlpha((0.2 * 255).toInt()),
                                 borderRadius: BorderRadius.circular(8),
-                                border: Border.all(color: Colors.purple.withOpacity(0.4), width: 1),
+                                border: Border.all(color: Colors.purple.withAlpha((0.4 * 255).toInt()), width: 1),
                               ),
                               child: Text(
                                 AppLocalizations.of(context)!.votingoverview,
@@ -473,18 +473,18 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
 
                                 return Container(
                                   decoration: BoxDecoration(
-                                    color: Colors.white.withOpacity(0.05),
+                                    color: Colors.white.withAlpha((0.05 * 255).toInt()),
                                     borderRadius: BorderRadius.circular(8),
-                                    border: Border.all(color: Colors.white.withOpacity(0.2), width: 1),
+                                    border: Border.all(color: Colors.white.withAlpha((0.2 * 255).toInt()), width: 1),
                                   ),
                                   child: SingleChildScrollView(
                                     scrollDirection: Axis.horizontal,
                                     child: DataTable(
-                                      headingRowColor: MaterialStateColor.resolveWith(
-                                        (states) => Colors.white.withOpacity(0.1),
+                                      headingRowColor: WidgetStateColor.resolveWith(
+                                        (states) => Colors.white.withAlpha((0.1 * 255).toInt()),
                                       ),
                                       border: TableBorder.all(
-                                        color: Colors.white.withOpacity(0.2),
+                                        color: Colors.white.withAlpha((0.2 * 255).toInt()),
                                         borderRadius: BorderRadius.circular(8),
                                       ),
                                       columns: [
@@ -516,8 +516,8 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                                       rows: votes
                                           .map(
                                             (vote) => DataRow(
-                                              color: MaterialStateColor.resolveWith(
-                                                (states) => Colors.white.withOpacity(0.02),
+                                              color: WidgetStateColor.resolveWith(
+                                                (states) => Colors.white.withAlpha((0.02 * 255).toInt()),
                                               ),
                                               cells: [
                                                 DataCell(
@@ -539,17 +539,17 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                                                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                                                     decoration: BoxDecoration(
                                                       color: vote.vote == 1 
-                                                          ? Colors.green.withOpacity(0.1)
+                                                          ? Colors.green.withAlpha((0.1 * 255).toInt())
                                                           : vote.vote == -1 
-                                                              ? Colors.red.withOpacity(0.1)
-                                                              : Colors.grey.withOpacity(0.1),
+                                                              ? Colors.red.withAlpha((0.1 * 255).toInt())
+                                                              : Colors.grey.withAlpha((0.1 * 255).toInt()),
                                                       borderRadius: BorderRadius.circular(4),
                                                       border: Border.all(
                                                         color: vote.vote == 1 
-                                                            ? Colors.green.withOpacity(0.3)
+                                                            ? Colors.green.withAlpha((0.3 * 255).toInt())
                                                             : vote.vote == -1 
-                                                                ? Colors.red.withOpacity(0.3)
-                                                                : Colors.grey.withOpacity(0.3),
+                                                                ? Colors.red.withAlpha((0.3 * 255).toInt())
+                                                                : Colors.grey.withAlpha((0.3 * 255).toInt()),
                                                         width: 1,
                                                       ),
                                                     ),

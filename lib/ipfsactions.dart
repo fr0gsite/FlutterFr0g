@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:fr0gsite/datatypes/ipfsnode.dart';
 import 'package:fr0gsite/datatypes/networkstatus.dart';
 import 'package:fr0gsite/datatypes/blackliststatus.dart';
@@ -8,7 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class IPFSActions {
-  static Future<Uint8List> fetchipfsdata(context, ipfshashToMediafile) async {
+  static Future<Uint8List> fetchipfsdata(BuildContext context, ipfshashToMediafile) async {
     debugPrint("Request IPFS Media with Hash: $ipfshashToMediafile");
 
     // Check blacklist

@@ -121,7 +121,7 @@ Widget expandButton(VoidCallback function, int numofcomments, BuildContext conte
   );
 }
 
-Widget showTagsButton(function, int numoftags, context) {
+Widget showTagsButton(VoidCallback function, int numoftags, BuildContext context) {
   return GestureDetector(
     onTap: function,
     child: Tooltip(
@@ -149,7 +149,7 @@ Widget showTagsButton(function, int numoftags, context) {
   );
 }
 
-Widget fullscreenButton(context) {
+Widget fullscreenButton(BuildContext context) {
   return Consumer<PostviewerStatus>(
     builder: (context, postviewerstatus, child) {
       return GestureDetector(
@@ -178,7 +178,7 @@ Widget fullscreenButton(context) {
   );
 }
 
-Widget reportButton(context) {
+Widget reportButton(BuildContext context) {
   return GestureDetector(
       onTap: () {
         Provider.of<PostviewerStatus>(context, listen: false).pause();
@@ -206,7 +206,7 @@ Widget reportButton(context) {
     );
 }
 
-Widget shareButton(context) {
+Widget shareButton(BuildContext context) {
   return Container(
     decoration: BoxDecoration(
       color: AppColor.nicegrey.withAlpha((0.5 * 255).toInt()),
