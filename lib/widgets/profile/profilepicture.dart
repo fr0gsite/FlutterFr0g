@@ -124,7 +124,7 @@ class _ProfilepictureState extends State<Profilepicture> {
     );
   }
 
-  Future<Uint8List> getProfilePicture(context, String username) async {
+  Future<Uint8List> getProfilePicture(BuildContext context, String username) async {
     BigInt userid = NameConverter.nameToUint64(username);
     bool foundexisting = false;
     late UserConfig userconfig;

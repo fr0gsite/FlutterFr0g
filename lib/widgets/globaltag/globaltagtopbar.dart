@@ -192,7 +192,7 @@ class _GlobalTagTopBarState extends State<GlobalTagTopBar> {
     return true;
   }
 
-  Widget backButton(context) {
+  Widget backButton(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(

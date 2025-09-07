@@ -74,7 +74,6 @@ class _SearchState extends State<Search> {
                         color: AppColor.nicegrey,
                         border: Border.all(color: Colors.white, width: 0.5),
                       ),
-                      hint: "Search",
                       suggestions: countries.map<SearchFieldListItem>((e) {
                         return SearchFieldListItem(
                           e,

@@ -289,7 +289,7 @@ class _ResourceBalanceState extends State<ResourceBalance>
                             await showDialog(
                               context: context,
                               barrierDismissible: true,
-                              barrierColor: Colors.black.withOpacity(0.5),
+                              barrierColor: Colors.black.withAlpha((0.5 * 255).toInt()),
                               builder: (BuildContext context) {
                                 return Dialog(
                                   child: StakeorUnstake(
@@ -322,7 +322,7 @@ class _ResourceBalanceState extends State<ResourceBalance>
                             await showDialog(
                               context: context,
                               barrierDismissible: true,
-                              barrierColor: Colors.black.withOpacity(0.5),
+                              barrierColor: Colors.black.withAlpha((0.5 * 255).toInt()),
                               builder: (BuildContext context) {
                                 return Dialog(
                                   child: StakeorUnstake(

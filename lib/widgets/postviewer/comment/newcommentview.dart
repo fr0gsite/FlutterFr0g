@@ -125,7 +125,7 @@ class _NewCommentViewState extends State<NewCommentView> {
     super.dispose();
   }
 
-  Future<void> performNetworkRequest(thecontext) async {
+  Future<void> performNetworkRequest(BuildContext thecontext) async {
     if (mounted) {
       setState(() {
         isLoading = true;

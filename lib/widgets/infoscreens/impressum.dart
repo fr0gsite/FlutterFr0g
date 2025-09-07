@@ -29,6 +29,7 @@ class _ImpressumViewState extends State<ImpressumView> {
         _content =
             await rootBundle.loadString('assets/impressum.template.txt');
       } catch (_) {
+        if (!mounted) return;
         _content = AppLocalizations.of(context)!.impressumloadfailed;
       }
     }

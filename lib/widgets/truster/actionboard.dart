@@ -70,7 +70,7 @@ class ActionBoard extends StatelessWidget {
         ElevatedButton(
           onPressed: () => _notImplemented(context),
           style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.blue.withOpacity(0.3),
+            backgroundColor: Colors.blue.withAlpha((0.3 * 255).toInt()),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
             ),

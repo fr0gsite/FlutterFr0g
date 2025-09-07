@@ -73,7 +73,7 @@ class _ClaimRewardsViewState extends State<ClaimRewardsView> {
           for (var i = 0; i < AppConfig.rewardtoken.length; i++)
             TableRow(
               decoration: BoxDecoration(
-                color: AppConfig.rewardtoken[i].color.withOpacity(0.10),
+                color: AppConfig.rewardtoken[i].color.withAlpha((0.10 * 255).toInt()),
               ),
               children: [
                 Padding(

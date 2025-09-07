@@ -23,7 +23,7 @@ class _CommentReplyState extends State<CommentReply> {
   int textlength = 0;
   int maxtextlength = 500;
 
-  Future<void> performNetworkRequest(thecontext) async {
+  Future<void> performNetworkRequest(BuildContext thecontext) async {
     setState(() {
       isLoading = true;
     });

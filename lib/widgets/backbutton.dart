@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fr0gsite/config.dart';
 import 'package:universal_html/html.dart' as html;
 
-Widget backButton(context) {
+Widget backButton(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
