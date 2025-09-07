@@ -434,6 +434,9 @@
     "unknown":"Unknown",
     "inorder":"In line",
     "timeleft":"Time left",
-    "allreports":"All"
+    "allreports":"All",
+    "youhavevoted":"You have voted",
+    "reporttext":"Text to Report",
+    "noreporttext":"This Report have no text"
 
 }

@@ -1235,4 +1235,13 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get timeleft => 'Temps restant';
+
+  @override
+  String get youhavevoted => 'You have voted';
+
+  @override
+  String get reporttext => 'Text to Report';
+
+  @override
+  String get noreporttext => 'This Report have no text';
 }

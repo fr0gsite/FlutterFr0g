@@ -9,6 +9,7 @@ import 'package:fr0gsite/datatypes/rule.dart';
 import 'package:fr0gsite/datatypes/rules.dart';
 import 'package:fr0gsite/datatypes/upload.dart';
 import 'package:fr0gsite/globalnotifications.dart';
+import 'package:fr0gsite/main.dart';
 import 'package:fr0gsite/nameconverter.dart';
 import 'package:fr0gsite/widgets/cube/cube.dart';
 import 'package:fr0gsite/l10n/app_localizations.dart';
@@ -27,7 +28,8 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
   late Future<Report> futureReport;
   late Future<Upload> futureUpload;
   late Future<List<ReportVotes>> futureReportVotes;
-  bool _isVoteOverviewExpanded = false;
+  bool _isVoteOverviewExpanded = true;
+  bool _uservoted = false;
 
   // Rules
   // Punishment for breaking the rules
@@ -37,6 +39,12 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
     super.initState();
     futureReport = Chainactions().getreport(widget.reportid.toString());
     futureReportVotes = Chainactions().getreportvotes(widget.reportid.toString());
+    futureReportVotes.asStream().listen((votes) {
+      String currentUsername = Provider.of<GlobalStatus>(context, listen: false).username;
+      setState(() {
+        _uservoted = votes.any((vote) => vote.trustername == currentUsername && vote.vote != 0);
+      });
+    });
   }
 
   @override
@@ -238,7 +246,8 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                           },
                         ),
                       ),
-                      const SizedBox(height: 24),
+                      //Report text
+                      const SizedBox(height: 16),
                       Container(
                         padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(
@@ -253,7 +262,46 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                             ),
                           ],
                         ),
-                        child: Row(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              child: Text(
+                                AppLocalizations.of(context)!.reporttext,
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white70,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 12),
+                            Text(
+                              report.reporttext.isEmpty ? AppLocalizations.of(context)!.noreporttext : report.reporttext,
+                              style: const TextStyle(
+                                fontSize: 14,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 24),
+                      Container(
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color: _uservoted ? Colors.black : AppColor.niceblack,
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(color: Colors.white.withAlpha((0.3 * 255).toInt()), width: 1),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withAlpha((0.3 * 255).toInt()),
+                              blurRadius: 8,
+                              offset: const Offset(0, 4),
+                            ),
+                          ],
+                        ),
+                        child: !_uservoted ? Row(
                           children: [
                             Expanded(
                               child: Container(
@@ -264,7 +312,7 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                                 ),
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.red,
+                                    backgroundColor: _uservoted ? Colors.red.withAlpha((0.1 * 255).toInt()) : Colors.red,
                                     foregroundColor: Colors.white,
                                     elevation: 4,
                                     shadowColor: Colors.red.withAlpha((0.3 * 255).toInt()),
@@ -324,6 +372,7 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                                                   ca.trustervote(report.reportid.toString(), 0).then((result) {
                                                     if (result) {
                                                       Globalnotifications.shownotification(context, "title", "message",  "success");
+                                                      callbackfunction();
                                                       Navigator.of(context).pop();
                                                     }
                                                   });
@@ -350,7 +399,7 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                                 ),
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.green,
+                                    backgroundColor: _uservoted ? Colors.green.withAlpha((0.1 * 255).toInt()) : Colors.green,
                                     foregroundColor: Colors.white,
                                     elevation: 4,
                                     shadowColor: Colors.green.withAlpha((0.3 * 255).toInt()),
@@ -423,7 +472,7 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                               ),
                             ),
                           ],
-                        ),
+                        ): Center(child: Text(AppLocalizations.of(context)!.youhavevoted)),
                       ),
                       const SizedBox(height: 20),
                       Container(
@@ -443,23 +492,6 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                              decoration: BoxDecoration(
-                                color: Colors.purple.withAlpha((0.2 * 255).toInt()),
-                                borderRadius: BorderRadius.circular(8),
-                                border: Border.all(color: Colors.purple.withAlpha((0.4 * 255).toInt()), width: 1),
-                              ),
-                              child: Text(
-                                AppLocalizations.of(context)!.votingoverview,
-                                style: const TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 12),
                             FutureBuilder<List<ReportVotes>>(
                               future: futureReportVotes,
                               builder: (context, votesSnapshot) {
@@ -471,7 +503,7 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                                 }
 
                                 final votes = votesSnapshot.data!;
-                                
+
                                 // Vote Progress Bar
                                 final violationVotes = votes.where((vote) => vote.vote == -1).length;
                                 final inOrderVotes = votes.where((vote) => vote.vote == 1).length;
@@ -488,7 +520,7 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                                   ),
                                   child: totalVotes == 0 
                                     ? Text(
-                                        "Noch keine Abstimmungen",
+                                        AppLocalizations.of(context)!.sorrysomethingwentwrong,
                                         style: const TextStyle(
                                           color: Colors.white70,
                                           fontSize: 14,
@@ -632,7 +664,7 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(
-                                              "Abstimmungsübersicht",
+                                              AppLocalizations.of(context)!.votingoverview,
                                               style: const TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 16,
@@ -719,7 +751,7 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                                                           border: Border.all(color: Colors.blue.withAlpha((0.3 * 255).toInt()), width: 1),
                                                         ),
                                                         child: Text(
-                                                          NameConverter.uint64ToName(BigInt.parse(vote.trustername)),
+                                                          vote.trustername,
                                                           style: const TextStyle(color: Colors.white),
                                                         ),
                                                       ),
@@ -783,6 +815,14 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
         },
       ),
     );
+  }
+
+  void callbackfunction() {
+    setState(() {
+    futureReport = Chainactions().getreport(widget.reportid.toString());
+    futureReportVotes = Chainactions().getreportvotes(widget.reportid.toString());
+    _uservoted = false;
+  });
   }
 
   String statusText(int status, context) {

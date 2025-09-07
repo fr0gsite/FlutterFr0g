@@ -1222,4 +1222,13 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get timeleft => 'शेष समय';
+
+  @override
+  String get youhavevoted => 'You have voted';
+
+  @override
+  String get reporttext => 'Text to Report';
+
+  @override
+  String get noreporttext => 'This Report have no text';
 }

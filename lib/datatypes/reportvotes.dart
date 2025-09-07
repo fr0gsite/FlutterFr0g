@@ -1,3 +1,5 @@
+import 'package:fr0gsite/nameconverter.dart';
+
 class ReportVotes {
   String trustername;
   int vote;
@@ -9,7 +11,7 @@ class ReportVotes {
 
   factory ReportVotes.fromJson(Map<String, dynamic> json) {
     return ReportVotes(
-      trustername: json['trustername'],
+      trustername: NameConverter.uint64ToName(BigInt.parse(json['trustername'])),
       vote: json['vote'],
     );
   }

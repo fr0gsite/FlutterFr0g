@@ -1,1 +1,79 @@
-{}
+{
+  "ar": [
+    "youhavevoted",
+    "reporttext",
+    "noreporttext"
+  ],
+
+  "cs": [
+    "youhavevoted",
+    "reporttext",
+    "noreporttext"
+  ],
+
+  "de": [
+    "youhavevoted",
+    "reporttext",
+    "noreporttext"
+  ],
+
+  "es": [
+    "youhavevoted",
+    "reporttext",
+    "noreporttext"
+  ],
+
+  "fr": [
+    "youhavevoted",
+    "reporttext",
+    "noreporttext"
+  ],
+
+  "hi": [
+    "youhavevoted",
+    "reporttext",
+    "noreporttext"
+  ],
+
+  "it": [
+    "youhavevoted",
+    "reporttext",
+    "noreporttext"
+  ],
+
+  "ja": [
+    "youhavevoted",
+    "reporttext",
+    "noreporttext"
+  ],
+
+  "ko": [
+    "youhavevoted",
+    "reporttext",
+    "noreporttext"
+  ],
+
+  "pt": [
+    "youhavevoted",
+    "reporttext",
+    "noreporttext"
+  ],
+
+  "ru": [
+    "youhavevoted",
+    "reporttext",
+    "noreporttext"
+  ],
+
+  "uk": [
+    "youhavevoted",
+    "reporttext",
+    "noreporttext"
+  ],
+
+  "zh": [
+    "youhavevoted",
+    "reporttext",
+    "noreporttext"
+  ]
+}

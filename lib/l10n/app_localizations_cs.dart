@@ -1215,4 +1215,13 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get timeleft => 'Čas zbývá';
+
+  @override
+  String get youhavevoted => 'You have voted';
+
+  @override
+  String get reporttext => 'Text to Report';
+
+  @override
+  String get noreporttext => 'This Report have no text';
 }

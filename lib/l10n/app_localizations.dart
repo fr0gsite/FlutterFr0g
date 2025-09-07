@@ -2455,6 +2455,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Time left'**
   String get timeleft;
+
+  /// No description provided for @youhavevoted.
+  ///
+  /// In en, this message translates to:
+  /// **'You have voted'**
+  String get youhavevoted;
+
+  /// No description provided for @reporttext.
+  ///
+  /// In en, this message translates to:
+  /// **'Text to Report'**
+  String get reporttext;
+
+  /// No description provided for @noreporttext.
+  ///
+  /// In en, this message translates to:
+  /// **'This Report have no text'**
+  String get noreporttext;
 }
 
 class _AppLocalizationsDelegate
