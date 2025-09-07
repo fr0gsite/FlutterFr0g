@@ -1145,13 +1145,13 @@ class AppLocalizationsCs extends AppLocalizations {
   String get applysuccessful => 'Přihlášení úspěšné';
 
   @override
-  String get criteriayear => 'Registered for at least one year';
+  String get criteriayear => 'Registrováno po dobu nejméně jednoho roku';
 
   @override
-  String get criteriauploads => 'Has at least 20 uploads';
+  String get criteriauploads => 'Má nejméně 20 uploads';
 
   @override
-  String get criteriacomments => 'Has at least 20 comments';
+  String get criteriacomments => 'Má nejméně 20 komentářů';
 
   @override
   String get urgentreport => 'Urgentní';
@@ -1169,50 +1169,50 @@ class AppLocalizationsCs extends AppLocalizations {
   String get stakedtotal => 'Total Staked';
 
   @override
-  String get actionboard => 'Action Board';
+  String get actionboard => 'Akční deska';
 
   @override
-  String get actionboardreviewdesc => 'See all open reports';
+  String get actionboardreviewdesc => 'Podívejte se na všechny otevřené zprávy';
 
   @override
-  String get actionboardstatusdesc => 'View your current status';
+  String get actionboardstatusdesc => 'Zobrazit svůj aktuální stav';
 
   @override
-  String get actionboardsettingsdesc => 'Open truster settings';
+  String get actionboardsettingsdesc => 'Otevřete nastavení Truster';
 
   @override
-  String get violation => 'Violation';
+  String get violation => 'Porušení';
 
   @override
-  String get inlinewiththerules => 'In line with the rules';
+  String get inlinewiththerules => 'V souladu s pravidly';
 
   @override
-  String get reportedby => 'Reported by';
+  String get reportedby => 'Hlášeno';
 
   @override
-  String get uploadedby => 'Uploaded by';
+  String get uploadedby => 'Nahráno';
 
   @override
-  String get votingoverview => 'Overview about voting';
+  String get votingoverview => 'Přehled o hlasování';
 
   @override
-  String get reportvote => 'Report Vote';
+  String get reportvote => 'Zpráva Hlasujte';
 
   @override
-  String get open => 'Open';
+  String get open => 'OTEVŘENO';
 
   @override
-  String get closed => 'Closed';
+  String get closed => 'ZAVŘENO';
 
   @override
-  String get urgent => 'Urgent';
+  String get urgent => 'Naléhavé';
 
   @override
-  String get unknown => 'Unknown';
+  String get unknown => 'Neznámý';
 
   @override
-  String get inorder => 'In line';
+  String get inorder => 'V řadě';
 
   @override
-  String get timeleft => 'Time left';
+  String get timeleft => 'Čas zbývá';
 }

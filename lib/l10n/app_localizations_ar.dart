@@ -1142,13 +1142,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String get applysuccessful => 'تم التقديم بنجاح';
 
   @override
-  String get criteriayear => 'Registered for at least one year';
+  String get criteriayear => 'مسجل لمدة عام واحد على الأقل';
 
   @override
-  String get criteriauploads => 'Has at least 20 uploads';
+  String get criteriauploads => 'لديه 20 تحميل على الأقل';
 
   @override
-  String get criteriacomments => 'Has at least 20 comments';
+  String get criteriacomments => 'لديه 20 تعليق على الأقل';
 
   @override
   String get urgentreport => 'مستعجل';
@@ -1166,50 +1166,50 @@ class AppLocalizationsAr extends AppLocalizations {
   String get stakedtotal => 'Total Staked';
 
   @override
-  String get actionboard => 'Action Board';
+  String get actionboard => 'مجلس الإجراء';
 
   @override
-  String get actionboardreviewdesc => 'See all open reports';
+  String get actionboardreviewdesc => 'انظر جميع التقارير المفتوحة';
 
   @override
-  String get actionboardstatusdesc => 'View your current status';
+  String get actionboardstatusdesc => 'عرض حالتك الحالية';
 
   @override
-  String get actionboardsettingsdesc => 'Open truster settings';
+  String get actionboardsettingsdesc => 'فتحات ترستر مفتوحة';
 
   @override
-  String get violation => 'Violation';
+  String get violation => 'انتهاك';
 
   @override
-  String get inlinewiththerules => 'In line with the rules';
+  String get inlinewiththerules => 'تمشيا مع القواعد';
 
   @override
-  String get reportedby => 'Reported by';
+  String get reportedby => 'ذكرت من قبل';
 
   @override
-  String get uploadedby => 'Uploaded by';
+  String get uploadedby => 'تم الرفع بواسطة';
 
   @override
-  String get votingoverview => 'Overview about voting';
+  String get votingoverview => 'نظرة عامة حول التصويت';
 
   @override
-  String get reportvote => 'Report Vote';
+  String get reportvote => 'تقرير التصويت';
 
   @override
-  String get open => 'Open';
+  String get open => 'يفتح';
 
   @override
-  String get closed => 'Closed';
+  String get closed => 'مغلق';
 
   @override
-  String get urgent => 'Urgent';
+  String get urgent => 'عاجل';
 
   @override
-  String get unknown => 'Unknown';
+  String get unknown => 'مجهول';
 
   @override
-  String get inorder => 'In line';
+  String get inorder => 'في الخط';
 
   @override
-  String get timeleft => 'Time left';
+  String get timeleft => 'الوقت المتبقي';
 }

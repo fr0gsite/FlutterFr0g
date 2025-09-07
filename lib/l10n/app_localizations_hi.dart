@@ -1152,13 +1152,13 @@ class AppLocalizationsHi extends AppLocalizations {
   String get applysuccessful => 'लागू सफल';
 
   @override
-  String get criteriayear => 'Registered for at least one year';
+  String get criteriayear => 'कम से कम एक वर्ष के लिए पंजीकृत';
 
   @override
-  String get criteriauploads => 'Has at least 20 uploads';
+  String get criteriauploads => 'कम से कम 20 अपलोड हैं';
 
   @override
-  String get criteriacomments => 'Has at least 20 comments';
+  String get criteriacomments => 'कम से कम 20 टिप्पणियां हैं';
 
   @override
   String get urgentreport => 'तत्काल';
@@ -1176,50 +1176,50 @@ class AppLocalizationsHi extends AppLocalizations {
   String get stakedtotal => 'Total Staked';
 
   @override
-  String get actionboard => 'Action Board';
+  String get actionboard => 'एक्शन बोर्ड';
 
   @override
-  String get actionboardreviewdesc => 'See all open reports';
+  String get actionboardreviewdesc => 'सभी खुली रिपोर्ट देखें';
 
   @override
-  String get actionboardstatusdesc => 'View your current status';
+  String get actionboardstatusdesc => 'अपनी वर्तमान स्थिति देखें';
 
   @override
-  String get actionboardsettingsdesc => 'Open truster settings';
+  String get actionboardsettingsdesc => 'ट्रस्टर सेटिंग्स खोलें';
 
   @override
-  String get violation => 'Violation';
+  String get violation => 'उल्लंघन';
 
   @override
-  String get inlinewiththerules => 'In line with the rules';
+  String get inlinewiththerules => 'नियमों के अनुरूप';
 
   @override
-  String get reportedby => 'Reported by';
+  String get reportedby => 'के द्वारा रिपोर्ट किया गया';
 
   @override
-  String get uploadedby => 'Uploaded by';
+  String get uploadedby => 'द्वारा अपलोड किया गया';
 
   @override
-  String get votingoverview => 'Overview about voting';
+  String get votingoverview => 'वोटिंग के बारे में अवलोकन';
 
   @override
-  String get reportvote => 'Report Vote';
+  String get reportvote => 'रिपोर्ट मत';
 
   @override
-  String get open => 'Open';
+  String get open => 'खुला';
 
   @override
-  String get closed => 'Closed';
+  String get closed => 'बंद किया हुआ';
 
   @override
-  String get urgent => 'Urgent';
+  String get urgent => 'अति आवश्यक';
 
   @override
-  String get unknown => 'Unknown';
+  String get unknown => 'अज्ञात';
 
   @override
-  String get inorder => 'In line';
+  String get inorder => 'इन - लाइन';
 
   @override
-  String get timeleft => 'Time left';
+  String get timeleft => 'शेष समय';
 }

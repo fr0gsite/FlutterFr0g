@@ -93,7 +93,7 @@ class LoginButtonState extends State<LoginButton> {
   }
 }
 
-Widget expandButton(function, int numofcomments, context) {
+Widget expandButton(VoidCallback function, int numofcomments, BuildContext context) {
   return GestureDetector(
     onTap: function,
     child: Tooltip(

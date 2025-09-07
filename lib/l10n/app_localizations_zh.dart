@@ -1113,13 +1113,13 @@ class AppLocalizationsZh extends AppLocalizations {
   String get applysuccessful => '申请成功';
 
   @override
-  String get criteriayear => 'Registered for at least one year';
+  String get criteriayear => '注册至少一年';
 
   @override
-  String get criteriauploads => 'Has at least 20 uploads';
+  String get criteriauploads => '至少有20个上传';
 
   @override
-  String get criteriacomments => 'Has at least 20 comments';
+  String get criteriacomments => '至少有20条评论';
 
   @override
   String get urgentreport => '紧急';
@@ -1137,50 +1137,50 @@ class AppLocalizationsZh extends AppLocalizations {
   String get stakedtotal => 'Total Staked';
 
   @override
-  String get actionboard => 'Action Board';
+  String get actionboard => '动作板';
 
   @override
-  String get actionboardreviewdesc => 'See all open reports';
+  String get actionboardreviewdesc => '查看所有开放报告';
 
   @override
-  String get actionboardstatusdesc => 'View your current status';
+  String get actionboardstatusdesc => '查看您的当前状态';
 
   @override
-  String get actionboardsettingsdesc => 'Open truster settings';
+  String get actionboardsettingsdesc => '打开的TRUSTER设置';
 
   @override
-  String get violation => 'Violation';
+  String get violation => '违反';
 
   @override
-  String get inlinewiththerules => 'In line with the rules';
+  String get inlinewiththerules => '与规则一致';
 
   @override
-  String get reportedby => 'Reported by';
+  String get reportedby => '报告';
 
   @override
-  String get uploadedby => 'Uploaded by';
+  String get uploadedby => '上传';
 
   @override
-  String get votingoverview => 'Overview about voting';
+  String get votingoverview => '关于投票的概述';
 
   @override
-  String get reportvote => 'Report Vote';
+  String get reportvote => '报告投票';
 
   @override
-  String get open => 'Open';
+  String get open => '打开';
 
   @override
-  String get closed => 'Closed';
+  String get closed => '关闭';
 
   @override
-  String get urgent => 'Urgent';
+  String get urgent => '紧迫的';
 
   @override
-  String get unknown => 'Unknown';
+  String get unknown => '未知';
 
   @override
-  String get inorder => 'In line';
+  String get inorder => '排队';
 
   @override
-  String get timeleft => 'Time left';
+  String get timeleft => '剩余时间';
 }

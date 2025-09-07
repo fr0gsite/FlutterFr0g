@@ -1121,13 +1121,13 @@ class AppLocalizationsJa extends AppLocalizations {
   String get applysuccessful => '申請が成功しました';
 
   @override
-  String get criteriayear => 'Registered for at least one year';
+  String get criteriayear => '少なくとも1年間登録されています';
 
   @override
-  String get criteriauploads => 'Has at least 20 uploads';
+  String get criteriauploads => '少なくとも20のアップロードがあります';
 
   @override
-  String get criteriacomments => 'Has at least 20 comments';
+  String get criteriacomments => '少なくとも20のコメントがあります';
 
   @override
   String get urgentreport => '緊急';
@@ -1145,50 +1145,50 @@ class AppLocalizationsJa extends AppLocalizations {
   String get stakedtotal => 'Total Staked';
 
   @override
-  String get actionboard => 'Action Board';
+  String get actionboard => 'アクションボード';
 
   @override
-  String get actionboardreviewdesc => 'See all open reports';
+  String get actionboardreviewdesc => 'すべてのオープンレポートを参照してください';
 
   @override
-  String get actionboardstatusdesc => 'View your current status';
+  String get actionboardstatusdesc => '現在のステータスを表示します';
 
   @override
-  String get actionboardsettingsdesc => 'Open truster settings';
+  String get actionboardsettingsdesc => 'Truster設定を開きます';
 
   @override
-  String get violation => 'Violation';
+  String get violation => '違反';
 
   @override
-  String get inlinewiththerules => 'In line with the rules';
+  String get inlinewiththerules => 'ルールに沿って';
 
   @override
-  String get reportedby => 'Reported by';
+  String get reportedby => 'によって報告されています';
 
   @override
-  String get uploadedby => 'Uploaded by';
+  String get uploadedby => 'アップロードします';
 
   @override
-  String get votingoverview => 'Overview about voting';
+  String get votingoverview => '投票に関する概要';
 
   @override
-  String get reportvote => 'Report Vote';
+  String get reportvote => '報告投票';
 
   @override
-  String get open => 'Open';
+  String get open => '開ける';
 
   @override
-  String get closed => 'Closed';
+  String get closed => '閉じた';
 
   @override
-  String get urgent => 'Urgent';
+  String get urgent => '緊急';
 
   @override
-  String get unknown => 'Unknown';
+  String get unknown => '未知';
 
   @override
-  String get inorder => 'In line';
+  String get inorder => '列をなして';
 
   @override
-  String get timeleft => 'Time left';
+  String get timeleft => '残り時間';
 }

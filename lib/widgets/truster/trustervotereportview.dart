@@ -524,9 +524,9 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                                                   Container(
                                                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                                                     decoration: BoxDecoration(
-                                                      color: Colors.blue.withOpacity(0.1),
+                                                      color: Colors.blue.withAlpha((0.1 * 255).toInt()),
                                                       borderRadius: BorderRadius.circular(4),
-                                                      border: Border.all(color: Colors.blue.withOpacity(0.3), width: 1),
+                                                      border: Border.all(color: Colors.blue.withAlpha((0.3 * 255).toInt()), width: 1),
                                                     ),
                                                     child: Text(
                                                       NameConverter.uint64ToName(BigInt.parse(vote.trustername)),

@@ -1118,13 +1118,13 @@ class AppLocalizationsKo extends AppLocalizations {
   String get applysuccessful => '성공적으로 지원됨';
 
   @override
-  String get criteriayear => 'Registered for at least one year';
+  String get criteriayear => '최소 1 년 동안 등록되었습니다';
 
   @override
-  String get criteriauploads => 'Has at least 20 uploads';
+  String get criteriauploads => '최소 20 개의 업로드가 있습니다';
 
   @override
-  String get criteriacomments => 'Has at least 20 comments';
+  String get criteriacomments => '최소 20 개의 댓글이 있습니다';
 
   @override
   String get urgentreport => '긴급';
@@ -1142,50 +1142,50 @@ class AppLocalizationsKo extends AppLocalizations {
   String get stakedtotal => 'Total Staked';
 
   @override
-  String get actionboard => 'Action Board';
+  String get actionboard => '액션 보드';
 
   @override
-  String get actionboardreviewdesc => 'See all open reports';
+  String get actionboardreviewdesc => '모든 열린 보고서를 참조하십시오';
 
   @override
-  String get actionboardstatusdesc => 'View your current status';
+  String get actionboardstatusdesc => '현재 상태를보십시오';
 
   @override
-  String get actionboardsettingsdesc => 'Open truster settings';
+  String get actionboardsettingsdesc => '트러스터 설정을 열어줍니다';
 
   @override
-  String get violation => 'Violation';
+  String get violation => '위반';
 
   @override
-  String get inlinewiththerules => 'In line with the rules';
+  String get inlinewiththerules => '규칙에 따라';
 
   @override
-  String get reportedby => 'Reported by';
+  String get reportedby => '보고서';
 
   @override
-  String get uploadedby => 'Uploaded by';
+  String get uploadedby => '업로드';
 
   @override
-  String get votingoverview => 'Overview about voting';
+  String get votingoverview => '투표에 대한 개요';
 
   @override
-  String get reportvote => 'Report Vote';
+  String get reportvote => '보고서 투표';
 
   @override
-  String get open => 'Open';
+  String get open => '열려 있는';
 
   @override
-  String get closed => 'Closed';
+  String get closed => '닫은';
 
   @override
-  String get urgent => 'Urgent';
+  String get urgent => '긴급한';
 
   @override
-  String get unknown => 'Unknown';
+  String get unknown => '알려지지 않은';
 
   @override
-  String get inorder => 'In line';
+  String get inorder => '라인으로';
 
   @override
-  String get timeleft => 'Time left';
+  String get timeleft => '남은 시간';
 }

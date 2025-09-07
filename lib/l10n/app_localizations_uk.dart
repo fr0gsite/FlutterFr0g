@@ -1157,13 +1157,13 @@ class AppLocalizationsUk extends AppLocalizations {
   String get applysuccessful => 'Заява подана успішно';
 
   @override
-  String get criteriayear => 'Registered for at least one year';
+  String get criteriayear => 'Зареєстровано щонайменше на рік';
 
   @override
-  String get criteriauploads => 'Has at least 20 uploads';
+  String get criteriauploads => 'Має щонайменше 20 завантажень';
 
   @override
-  String get criteriacomments => 'Has at least 20 comments';
+  String get criteriacomments => 'Має щонайменше 20 коментарів';
 
   @override
   String get urgentreport => 'Терміновий';
@@ -1181,50 +1181,50 @@ class AppLocalizationsUk extends AppLocalizations {
   String get stakedtotal => 'Total Staked';
 
   @override
-  String get actionboard => 'Action Board';
+  String get actionboard => 'Дошка';
 
   @override
-  String get actionboardreviewdesc => 'See all open reports';
+  String get actionboardreviewdesc => 'Дивіться всі відкриті звіти';
 
   @override
-  String get actionboardstatusdesc => 'View your current status';
+  String get actionboardstatusdesc => 'Перегляньте свій поточний статус';
 
   @override
-  String get actionboardsettingsdesc => 'Open truster settings';
+  String get actionboardsettingsdesc => 'Відкриті налаштування Truster';
 
   @override
-  String get violation => 'Violation';
+  String get violation => 'Порушення';
 
   @override
-  String get inlinewiththerules => 'In line with the rules';
+  String get inlinewiththerules => 'Відповідно до правил';
 
   @override
-  String get reportedby => 'Reported by';
+  String get reportedby => 'Повідомлений';
 
   @override
-  String get uploadedby => 'Uploaded by';
+  String get uploadedby => 'Завантажено';
 
   @override
-  String get votingoverview => 'Overview about voting';
+  String get votingoverview => 'Огляд про голосування';
 
   @override
-  String get reportvote => 'Report Vote';
+  String get reportvote => 'Повідомити про голосування';
 
   @override
-  String get open => 'Open';
+  String get open => 'ВІДЧИНЕНО';
 
   @override
-  String get closed => 'Closed';
+  String get closed => 'ЗАЧИНЕНО';
 
   @override
-  String get urgent => 'Urgent';
+  String get urgent => 'Терміновий';
 
   @override
-  String get unknown => 'Unknown';
+  String get unknown => 'Невідомий';
 
   @override
-  String get inorder => 'In line';
+  String get inorder => 'У черзі';
 
   @override
-  String get timeleft => 'Time left';
+  String get timeleft => 'Залишив час';
 }

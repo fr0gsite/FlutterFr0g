@@ -1163,13 +1163,13 @@ class AppLocalizationsIt extends AppLocalizations {
   String get applysuccessful => 'Candidatura riuscita';
 
   @override
-  String get criteriayear => 'Registered for at least one year';
+  String get criteriayear => 'Registrato per almeno un anno';
 
   @override
-  String get criteriauploads => 'Has at least 20 uploads';
+  String get criteriauploads => 'Ha almeno 20 carichi';
 
   @override
-  String get criteriacomments => 'Has at least 20 comments';
+  String get criteriacomments => 'Ha almeno 20 commenti';
 
   @override
   String get urgentreport => 'Urgente';
@@ -1187,50 +1187,50 @@ class AppLocalizationsIt extends AppLocalizations {
   String get stakedtotal => 'Total Staked';
 
   @override
-  String get actionboard => 'Action Board';
+  String get actionboard => 'Consiglio d\'azione';
 
   @override
-  String get actionboardreviewdesc => 'See all open reports';
+  String get actionboardreviewdesc => 'Vedi tutti i rapporti aperti';
 
   @override
-  String get actionboardstatusdesc => 'View your current status';
+  String get actionboardstatusdesc => 'Visualizza il tuo stato attuale';
 
   @override
-  String get actionboardsettingsdesc => 'Open truster settings';
+  String get actionboardsettingsdesc => 'Apri le impostazioni del truster';
 
   @override
-  String get violation => 'Violation';
+  String get violation => 'Violazione';
 
   @override
-  String get inlinewiththerules => 'In line with the rules';
+  String get inlinewiththerules => 'In linea con le regole';
 
   @override
-  String get reportedby => 'Reported by';
+  String get reportedby => 'Riportato da';
 
   @override
-  String get uploadedby => 'Uploaded by';
+  String get uploadedby => 'Caricato da';
 
   @override
-  String get votingoverview => 'Overview about voting';
+  String get votingoverview => 'Panoramica del voto';
 
   @override
-  String get reportvote => 'Report Vote';
+  String get reportvote => 'Voto di relazione';
 
   @override
-  String get open => 'Open';
+  String get open => 'Aprire';
 
   @override
-  String get closed => 'Closed';
+  String get closed => 'Chiuso';
 
   @override
-  String get urgent => 'Urgent';
+  String get urgent => 'Urgente';
 
   @override
-  String get unknown => 'Unknown';
+  String get unknown => 'Sconosciuto';
 
   @override
-  String get inorder => 'In line';
+  String get inorder => 'In linea';
 
   @override
-  String get timeleft => 'Time left';
+  String get timeleft => 'Tempo rimasto';
 }

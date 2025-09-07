@@ -1197,38 +1197,38 @@ class AppLocalizationsDe extends AppLocalizations {
   String get actionboardsettingsdesc => 'Truster-Einstellungen öffnen';
 
   @override
-  String get violation => 'Violation';
+  String get violation => 'Verstoß';
 
   @override
-  String get inlinewiththerules => 'In line with the rules';
+  String get inlinewiththerules => 'In Übereinstimmung mit den Regeln';
 
   @override
-  String get reportedby => 'Reported by';
+  String get reportedby => 'Gemeldet von';
 
   @override
-  String get uploadedby => 'Uploaded by';
+  String get uploadedby => 'Hochgeladen von';
 
   @override
-  String get votingoverview => 'Overview about voting';
+  String get votingoverview => 'Übersicht über die Abstimmung';
 
   @override
-  String get reportvote => 'Report Vote';
+  String get reportvote => 'Berichtsabstimmung';
 
   @override
-  String get open => 'Open';
+  String get open => 'Offen';
 
   @override
-  String get closed => 'Closed';
+  String get closed => 'Geschlossen';
 
   @override
-  String get urgent => 'Urgent';
+  String get urgent => 'Dringend';
 
   @override
-  String get unknown => 'Unknown';
+  String get unknown => 'Unbekannt';
 
   @override
-  String get inorder => 'In line';
+  String get inorder => 'Im Einklang';
 
   @override
-  String get timeleft => 'Time left';
+  String get timeleft => 'Übrige Zeit';
 }
