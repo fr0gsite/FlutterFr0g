@@ -240,7 +240,7 @@ Widget shareButton(BuildContext context) {
           if (kIsWeb) {
             final blob = html.Blob([uploadtoshare.data]);
             final url = html.Url.createObjectUrlFromBlob(blob);
-            final anchor = html.AnchorElement(href: url)
+            html.AnchorElement(href: url)
               ..download = filename
               ..click();
             html.Url.revokeObjectUrl(url);

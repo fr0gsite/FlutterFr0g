@@ -42,7 +42,8 @@ class TrusterStatus with ChangeNotifier {
     Chainactions chainactions = Chainactions();
     reports = await chainactions.getreports().catchError((error) {
       debugPrint("Error fetching reports: $error");
-    }) ?? [];
+      return <Report>[];
+    });
     return reports;
   }
 
