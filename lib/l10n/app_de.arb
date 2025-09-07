@@ -375,5 +375,17 @@
   "actionboard": "Aktionsübersicht",
   "actionboardreviewdesc": "Zeigt alle offenen Meldungen",
   "actionboardstatusdesc": "Aktuellen Status ansehen",
-  "actionboardsettingsdesc": "Truster-Einstellungen öffnen"
+  "actionboardsettingsdesc": "Truster-Einstellungen öffnen",
+  "violation": "Verstoß",
+  "inlinewiththerules": "In Übereinstimmung mit den Regeln",
+  "reportedby": "Gemeldet von",
+  "uploadedby": "Hochgeladen von",
+  "votingoverview": "Übersicht über die Abstimmung",
+  "reportvote": "Berichtsabstimmung",
+  "open": "Offen",
+  "closed": "Geschlossen",
+  "urgent": "Dringend",
+  "unknown": "Unbekannt",
+  "inorder": "Im Einklang",
+  "timeleft": "Übrige Zeit"
 }
