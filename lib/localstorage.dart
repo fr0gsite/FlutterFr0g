@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:fr0gsite/config.dart';
 import 'package:fr0gsite/datatypes/globalstatus.dart';
 import 'package:fr0gsite/datatypes/localuserconfig.dart';
@@ -7,7 +8,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/foundation.dart';
 
-Future<void> loginwhencredentialsarestored(context) async {
+Future<void> loginwhencredentialsarestored(BuildContext context) async {
   if (Provider.of<GlobalStatus>(context, listen: false).isLoggedin) {
     debugPrint("Already logged in");
   } else {
@@ -38,7 +39,7 @@ Future<void> loginwhencredentialsarestored(context) async {
 /// If [AppConfig.debugUsername] and [AppConfig.debugPKey] are set,
 /// the app will log in with these credentials when [kDebugMode] is true
 /// and no user is currently logged in.
-Future<void> debugAutoLogin(context) async {
+Future<void> debugAutoLogin(BuildContext context) async {
   if (kDebugMode &&
       !Provider.of<GlobalStatus>(context, listen: false).isLoggedin) {
     if (AppConfig.debugUsername.isNotEmpty &&
@@ -65,7 +66,7 @@ Future<bool> savelocaluserconfig(LocalUserConfig userconfig) async {
   return true;
 }
 
-Future<bool> readlocaluserconfig(context) async {
+Future<bool> readlocaluserconfig(BuildContext context) async {
   const secstorage = FlutterSecureStorage();
   await secstorage
       .read(key: AppConfig.secureStorageUserConfig)

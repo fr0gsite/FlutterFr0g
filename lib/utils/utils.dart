@@ -1,11 +1,12 @@
 import 'dart:io';
 
+import 'package:flutter/material.dart';
 import 'package:fr0gsite/config.dart';
 import 'package:fr0gsite/datatypes/globalstatus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:provider/provider.dart';
 
-Platformdetectionstatus getPlatform(context) {
+Platformdetectionstatus getPlatform(BuildContext context) {
   if (Provider.of<GlobalStatus>(context, listen: false).platform ==
       Platformdetectionstatus.unknown) {
     Platformdetectionstatus platform;

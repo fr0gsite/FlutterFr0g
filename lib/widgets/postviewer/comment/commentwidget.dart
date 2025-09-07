@@ -223,7 +223,7 @@ class _CommentWidgetState extends State<CommentWidget> {
   }
 
 
-  void replycallback(value, String comment) {
+  void replycallback(bool value, String comment) {
     debugPrint("Reply callback called with $value");
     if (value) {
       Provider.of<PostviewerStatus>(context, listen: false)

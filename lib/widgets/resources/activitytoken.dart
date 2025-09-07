@@ -15,43 +15,41 @@ class ActivityToken extends StatefulWidget {
 class ActivityTokenState extends State<ActivityToken> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: AutoSizeText(
-              AppLocalizations.of(context)!.activitytoken,
-              minFontSize: 20,
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: AutoSizeText(
+            AppLocalizations.of(context)!.activitytoken,
+            minFontSize: 20,
+            style: const TextStyle(color: Colors.white),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 8, right: 8, bottom: 8),
+          child: AutoSizeText(
+            AppLocalizations.of(context)!.activitytokenexplain,
+            style: const TextStyle(color: Colors.white),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8),
+          child: LinearPercentIndicator(
+            animation: true,
+            animationDuration: 1000,
+            barRadius: const Radius.circular(15),
+            lineHeight: 30,
+            percent:
+                widget.userconfig.acttoken / widget.userconfig.acttokenmax,
+            backgroundColor: Ressourcecolor.background.withAlpha((0.5 * 255).toInt()),
+            progressColor: Ressourcecolor.act,
+            center: AutoSizeText(
+              "${widget.userconfig.acttoken}/${widget.userconfig.acttokenmax}",
               style: const TextStyle(color: Colors.white),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 8, right: 8, bottom: 8),
-            child: AutoSizeText(
-              AppLocalizations.of(context)!.activitytokenexplain,
-              style: const TextStyle(color: Colors.white),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8),
-            child: LinearPercentIndicator(
-              animation: true,
-              animationDuration: 1000,
-              barRadius: const Radius.circular(15),
-              lineHeight: 30,
-              percent:
-                  widget.userconfig.acttoken / widget.userconfig.acttokenmax,
-              backgroundColor: Ressourcecolor.background.withAlpha((0.5 * 255).toInt()),
-              progressColor: Ressourcecolor.act,
-              center: AutoSizeText(
-                "${widget.userconfig.acttoken}/${widget.userconfig.acttokenmax}",
-                style: const TextStyle(color: Colors.white),
-              ),
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
