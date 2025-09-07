@@ -27,6 +27,7 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
   late Future<Report> futureReport;
   late Future<Upload> futureUpload;
   late Future<List<ReportVotes>> futureReportVotes;
+  bool _isVoteOverviewExpanded = false;
 
   // Rules
   // Punishment for breaking the rules
@@ -470,108 +471,303 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                                 }
 
                                 final votes = votesSnapshot.data!;
-
-                                return Container(
+                                
+                                // Vote Progress Bar
+                                final violationVotes = votes.where((vote) => vote.vote == -1).length;
+                                final inOrderVotes = votes.where((vote) => vote.vote == 1).length;
+                                final pendingVotes = votes.where((vote) => vote.vote == 0).length;
+                                final totalVotes = violationVotes + inOrderVotes + pendingVotes;
+                                
+                                Widget progressBar = Container(
+                                  padding: const EdgeInsets.all(16),
+                                  margin: const EdgeInsets.only(bottom: 12),
                                   decoration: BoxDecoration(
                                     color: Colors.white.withAlpha((0.05 * 255).toInt()),
                                     borderRadius: BorderRadius.circular(8),
                                     border: Border.all(color: Colors.white.withAlpha((0.2 * 255).toInt()), width: 1),
                                   ),
-                                  child: SingleChildScrollView(
-                                    scrollDirection: Axis.horizontal,
-                                    child: DataTable(
-                                      headingRowColor: WidgetStateColor.resolveWith(
-                                        (states) => Colors.white.withAlpha((0.1 * 255).toInt()),
-                                      ),
-                                      border: TableBorder.all(
-                                        color: Colors.white.withAlpha((0.2 * 255).toInt()),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      columns: [
-                                        DataColumn(
-                                          label: Container(
-                                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                                            child: Text(
-                                              AppLocalizations.of(context)!.username,
-                                              style: const TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.white,
+                                  child: totalVotes == 0 
+                                    ? Text(
+                                        "Noch keine Abstimmungen",
+                                        style: const TextStyle(
+                                          color: Colors.white70,
+                                          fontSize: 14,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      )
+                                    : Column(
+                                        children: [
+                                          Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Container(
+                                                    width: 12,
+                                                    height: 12,
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.red,
+                                                      borderRadius: BorderRadius.circular(2),
+                                                    ),
+                                                  ),
+                                                  const SizedBox(width: 8),
+                                                  Text(
+                                                    "${AppLocalizations.of(context)!.violation}: $violationVotes",
+                                                    style: const TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 14,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              Row(
+                                                children: [
+                                                  Container(
+                                                    width: 12,
+                                                    height: 12,
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.orange,
+                                                      borderRadius: BorderRadius.circular(2),
+                                                    ),
+                                                  ),
+                                                  const SizedBox(width: 8),
+                                                  Text(
+                                                    "${AppLocalizations.of(context)!.open}: $pendingVotes",
+                                                    style: const TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 14,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    "${AppLocalizations.of(context)!.inorder}: $inOrderVotes",
+                                                    style: const TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 14,
+                                                    ),
+                                                  ),
+                                                  const SizedBox(width: 8),
+                                                  Container(
+                                                    width: 12,
+                                                    height: 12,
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.green,
+                                                      borderRadius: BorderRadius.circular(2),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                          const SizedBox(height: 12),
+                                          Container(
+                                            height: 8,
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(4),
+                                              border: Border.all(color: Colors.white.withAlpha((0.3 * 255).toInt()), width: 1),
+                                            ),
+                                            child: ClipRRect(
+                                              borderRadius: BorderRadius.circular(3),
+                                              child: Row(
+                                                children: [
+                                                  if (violationVotes > 0)
+                                                    Expanded(
+                                                      flex: violationVotes,
+                                                      child: Container(
+                                                        color: Colors.red,
+                                                      ),
+                                                    ),
+                                                  if (pendingVotes > 0)
+                                                    Expanded(
+                                                      flex: pendingVotes,
+                                                      child: Container(
+                                                        color: Colors.grey,
+                                                      ),
+                                                    ),
+                                                  if (inOrderVotes > 0)
+                                                    Expanded(
+                                                      flex: inOrderVotes,
+                                                      child: Container(
+                                                        color: Colors.green,
+                                                      ),
+                                                    ),
+                                                ],
                                               ),
                                             ),
                                           ),
-                                        ),
-                                        DataColumn(
-                                          label: Container(
-                                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                                            child: Text(
-                                              AppLocalizations.of(context)!.vote,
-                                              style: const TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.white,
-                                              ),
+                                          const SizedBox(height: 8),
+                                          Text(
+                                            "${(violationVotes / totalVotes * 100).toStringAsFixed(1)}% ${AppLocalizations.of(context)!.violation} | ${(pendingVotes / totalVotes * 100).toStringAsFixed(1)}% ${AppLocalizations.of(context)!.open} | ${(inOrderVotes / totalVotes * 100).toStringAsFixed(1)}% ${AppLocalizations.of(context)!.inorder}",
+                                            style: const TextStyle(
+                                              color: Colors.white70,
+                                              fontSize: 12,
                                             ),
+                                            textAlign: TextAlign.center,
                                           ),
+                                        ],
+                                      ),
+                                );
+
+                                return Column(
+                                  children: [
+                                    // Expandable Vote Overview Header
+                                    GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          _isVoteOverviewExpanded = !_isVoteOverviewExpanded;
+                                        });
+                                      },
+                                      child: Container(
+                                        padding: const EdgeInsets.all(16),
+                                        margin: const EdgeInsets.only(bottom: 8),
+                                        decoration: BoxDecoration(
+                                          color: Colors.white.withAlpha((0.08 * 255).toInt()),
+                                          borderRadius: BorderRadius.circular(8),
+                                          border: Border.all(color: Colors.white.withAlpha((0.2 * 255).toInt()), width: 1),
                                         ),
-                                      ],
-                                      rows: votes
-                                          .map(
-                                            (vote) => DataRow(
-                                              color: WidgetStateColor.resolveWith(
-                                                (states) => Colors.white.withAlpha((0.02 * 255).toInt()),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              "Abstimmungsübersicht",
+                                              style: const TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.bold,
                                               ),
-                                              cells: [
-                                                DataCell(
-                                                  Container(
-                                                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                                                    decoration: BoxDecoration(
-                                                      color: Colors.blue.withAlpha((0.1 * 255).toInt()),
-                                                      borderRadius: BorderRadius.circular(4),
-                                                      border: Border.all(color: Colors.blue.withAlpha((0.3 * 255).toInt()), width: 1),
-                                                    ),
-                                                    child: Text(
-                                                      NameConverter.uint64ToName(BigInt.parse(vote.trustername)),
-                                                      style: const TextStyle(color: Colors.white),
-                                                    ),
-                                                  ),
-                                                ),
-                                                DataCell(
-                                                  Container(
-                                                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                                                    decoration: BoxDecoration(
-                                                      color: vote.vote == 1 
-                                                          ? Colors.green.withAlpha((0.1 * 255).toInt())
-                                                          : vote.vote == -1 
-                                                              ? Colors.red.withAlpha((0.1 * 255).toInt())
-                                                              : Colors.grey.withAlpha((0.1 * 255).toInt()),
-                                                      borderRadius: BorderRadius.circular(4),
-                                                      border: Border.all(
-                                                        color: vote.vote == 1 
-                                                            ? Colors.green.withAlpha((0.3 * 255).toInt())
-                                                            : vote.vote == -1 
-                                                                ? Colors.red.withAlpha((0.3 * 255).toInt())
-                                                                : Colors.grey.withAlpha((0.3 * 255).toInt()),
-                                                        width: 1,
-                                                      ),
-                                                    ),
-                                                    child: Text(
-                                                      votestatus(vote.vote, context),
-                                                      style: TextStyle(
-                                                        color: vote.vote == 1 
-                                                            ? Colors.green.shade300
-                                                            : vote.vote == -1 
-                                                                ? Colors.red.shade300
-                                                                : Colors.grey.shade300,
-                                                        fontWeight: FontWeight.w600,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
                                             ),
-                                          )
-                                          .toList(),
+                                            Icon(
+                                              _isVoteOverviewExpanded 
+                                                ? Icons.keyboard_arrow_up 
+                                                : Icons.keyboard_arrow_down,
+                                              color: Colors.white70,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
                                     ),
-                                  ),
+                                    // Expandable Content
+                                    AnimatedContainer(
+                                      duration: const Duration(milliseconds: 300),
+                                      curve: Curves.easeInOut,
+                                      height: _isVoteOverviewExpanded ? null : 0,
+                                      child: AnimatedOpacity(
+                                        duration: const Duration(milliseconds: 300),
+                                        opacity: _isVoteOverviewExpanded ? 1.0 : 0.0,
+                                        child: _isVoteOverviewExpanded ? Column(
+                                          children: [
+                                            const SizedBox(height: 8),
+                                            progressBar,
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                color: Colors.white.withAlpha((0.05 * 255).toInt()),
+                                                borderRadius: BorderRadius.circular(8),
+                                                border: Border.all(color: Colors.white.withAlpha((0.2 * 255).toInt()), width: 1),
+                                              ),
+                                      child: SingleChildScrollView(
+                                        scrollDirection: Axis.horizontal,
+                                        child: DataTable(
+                                          headingRowColor: WidgetStateColor.resolveWith(
+                                            (states) => Colors.white.withAlpha((0.1 * 255).toInt()),
+                                          ),
+                                          border: TableBorder.all(
+                                            color: Colors.white.withAlpha((0.2 * 255).toInt()),
+                                            borderRadius: BorderRadius.circular(8),
+                                          ),
+                                          columns: [
+                                            DataColumn(
+                                              label: Container(
+                                                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                                child: Text(
+                                                  AppLocalizations.of(context)!.username,
+                                                  style: const TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            DataColumn(
+                                              label: Container(
+                                                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                                child: Text(
+                                                  AppLocalizations.of(context)!.vote,
+                                                  style: const TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                          rows: votes
+                                              .map(
+                                                (vote) => DataRow(
+                                                  color: WidgetStateColor.resolveWith(
+                                                    (states) => Colors.white.withAlpha((0.02 * 255).toInt()),
+                                                  ),
+                                                  cells: [
+                                                    DataCell(
+                                                      Container(
+                                                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                                        decoration: BoxDecoration(
+                                                          color: Colors.blue.withAlpha((0.1 * 255).toInt()),
+                                                          borderRadius: BorderRadius.circular(4),
+                                                          border: Border.all(color: Colors.blue.withAlpha((0.3 * 255).toInt()), width: 1),
+                                                        ),
+                                                        child: Text(
+                                                          NameConverter.uint64ToName(BigInt.parse(vote.trustername)),
+                                                          style: const TextStyle(color: Colors.white),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    DataCell(
+                                                      Container(
+                                                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                                        decoration: BoxDecoration(
+                                                          color: vote.vote == 1 
+                                                              ? Colors.green.withAlpha((0.1 * 255).toInt())
+                                                              : vote.vote == -1 
+                                                                  ? Colors.red.withAlpha((0.1 * 255).toInt())
+                                                                  : Colors.grey.withAlpha((0.1 * 255).toInt()),
+                                                          borderRadius: BorderRadius.circular(4),
+                                                          border: Border.all(
+                                                            color: vote.vote == 1 
+                                                                ? Colors.green.withAlpha((0.3 * 255).toInt())
+                                                                : vote.vote == -1 
+                                                                    ? Colors.red.withAlpha((0.3 * 255).toInt())
+                                                                    : Colors.grey.withAlpha((0.3 * 255).toInt()),
+                                                            width: 1,
+                                                          ),
+                                                        ),
+                                                        child: Text(
+                                                          votestatus(vote.vote, context),
+                                                          style: TextStyle(
+                                                            color: vote.vote == 1 
+                                                                ? Colors.green.shade300
+                                                                : vote.vote == -1 
+                                                                    ? Colors.red.shade300
+                                                                    : Colors.grey.shade300,
+                                                            fontWeight: FontWeight.w600,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              )
+                                              .toList(),
+                                        ),
+                                      ),
+                                    ),
+                                          ],
+                                        ) : const SizedBox.shrink(),
+                                      ),
+                                    ),
+                                  ],
                                 );
                               },
                             ),
