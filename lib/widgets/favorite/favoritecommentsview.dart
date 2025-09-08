@@ -43,7 +43,7 @@ class _FavoriteCommentsViewState extends State<FavoriteCommentsView> {
       if (userstatus.isLoggedin) {
         if (isLoading) {
           return const Center(
-            child: CircularProgressIndicator(),
+            child: CircularProgressIndicator(color:Colors.white),
           );
         }
 

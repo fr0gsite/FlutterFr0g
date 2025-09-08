@@ -190,7 +190,7 @@ class _DatabaseState extends State<Database> {
                                       ).toList(),
                                     );
                                   } else {
-                                    return const CircularProgressIndicator();
+                                    return const CircularProgressIndicator(color:Colors.white);
                                   }
                                 },
                               ),
@@ -198,9 +198,9 @@ class _DatabaseState extends State<Database> {
                       ],
                     )));
           } else if (snapshot.hasError) {
-            return const CircularProgressIndicator();
+            return const CircularProgressIndicator(color:Colors.white);
           }
-          return const CircularProgressIndicator();
+          return const CircularProgressIndicator(color:Colors.white);
         });
   }
 

@@ -60,7 +60,7 @@ class _GlobalStatisticsListState extends State<GlobalStatisticsList> {
               } else if (snapshot.hasError) {
                 return Center(child: Text('Error: ${snapshot.error}'));
               } else {
-                return const Center(child: CircularProgressIndicator());
+                return const Center(child: CircularProgressIndicator(color:Colors.white));
               }
             },
           ),

@@ -83,7 +83,7 @@ class _QuizState extends State<Quiz> {
                                 },
                               );
                             } else {
-                              return const Center(child: CircularProgressIndicator());
+                              return const Center(child: CircularProgressIndicator(color:Colors.white));
                             }
                           },
                         ),

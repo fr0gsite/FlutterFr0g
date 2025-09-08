@@ -73,7 +73,7 @@ class _ImpressumViewState extends State<ImpressumView> {
                   centerTitle: true,
                 ),
                 body: _content.isEmpty
-                    ? const Center(child: CircularProgressIndicator())
+                    ? const Center(child: CircularProgressIndicator(color:Colors.white))
                     : Padding(
                         padding: const EdgeInsets.all(16),
                         child: SingleChildScrollView(

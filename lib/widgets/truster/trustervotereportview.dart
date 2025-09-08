@@ -59,7 +59,7 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
         future: futureReport,
         builder: (context, reportSnapshot) {
           if (reportSnapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator(color:Colors.white));
           }
           if (reportSnapshot.hasError) {
             return Center(child: Text('Fehler: ${reportSnapshot.error}'));
@@ -71,7 +71,7 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
             future: futureUpload,
             builder: (context, uploadSnapshot) {
               if (uploadSnapshot.connectionState == ConnectionState.waiting) {
-                return const Center(child: CircularProgressIndicator());
+                return const Center(child: CircularProgressIndicator(color:Colors.white));
               }
               if (uploadSnapshot.hasError) {
                 return Center(child: Text('Fehler: ${uploadSnapshot.error}'));
@@ -472,7 +472,7 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                               future: futureReportVotes,
                               builder: (context, votesSnapshot) {
                                 if (votesSnapshot.connectionState == ConnectionState.waiting) {
-                                  return const Center(child: CircularProgressIndicator());
+                                  return const Center(child: CircularProgressIndicator(color:Colors.white));
                                 }
                                 if (votesSnapshot.hasError) {
                                   return Center(child: Text('${AppLocalizations.of(context)!.error}: ${votesSnapshot.error}'));

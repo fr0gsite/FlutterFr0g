@@ -155,7 +155,7 @@ class _FollowState extends State<Follow> with TickerProviderStateMixin {
                                   }
                                 } else {
                                   return const Center(
-                                      child: CircularProgressIndicator());
+                                      child: CircularProgressIndicator(color:Colors.white));
                                 }
                               },
                             ),
@@ -199,7 +199,7 @@ class _FollowState extends State<Follow> with TickerProviderStateMixin {
                               );
                             } else {
                               return const Center(
-                                  child: CircularProgressIndicator());
+                                  child: CircularProgressIndicator(color:Colors.white));
                             }
                           },
                         ),

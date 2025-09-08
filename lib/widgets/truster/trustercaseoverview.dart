@@ -145,7 +145,7 @@ class ReportsTable extends StatelessWidget {
       future: Chainactions().getreports(),
       builder: (context, snapshot) {
         if (snapshot.connectionState != ConnectionState.done) {
-          return const Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator(color:Colors.white));
         }
         if (snapshot.hasError) {
           return Center(child: Text('Error: ${snapshot.error}'));

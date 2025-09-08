@@ -78,7 +78,7 @@ class _TrusterCriteriaViewState extends State<TrusterCriteriaView> {
               ),
             ),
             body: _loading
-                ? const Center(child: CircularProgressIndicator())
+                ? const Center(child: CircularProgressIndicator(color:Colors.white))
                 : Column(
                     children: [
                       _buildRow(

@@ -30,7 +30,7 @@ class _FavoriteTagsViewState extends State<FavoriteTagsView> {
       if (userstatus.isLoggedin) {
         if (isLoading) {
           return const Center(
-            child: CircularProgressIndicator(),
+            child: CircularProgressIndicator(color:Colors.white),
           );
         }
 
