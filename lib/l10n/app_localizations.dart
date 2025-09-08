@@ -2473,6 +2473,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'This Report have no text'**
   String get noreporttext;
+
+  /// No description provided for @youarenotassignedtothisreport.
+  ///
+  /// In en, this message translates to:
+  /// **'You are not assigned to this report'**
+  String get youarenotassignedtothisreport;
 }
 
 class _AppLocalizationsDelegate

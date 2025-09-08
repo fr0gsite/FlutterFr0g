@@ -1230,4 +1230,8 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get noreporttext => 'This Report have no text';
+
+  @override
+  String get youarenotassignedtothisreport =>
+      'You are not assigned to this report';
 }

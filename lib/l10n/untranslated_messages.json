@@ -2,78 +2,91 @@
   "ar": [
     "youhavevoted",
     "reporttext",
-    "noreporttext"
+    "noreporttext",
+    "youarenotassignedtothisreport"
   ],
 
   "cs": [
     "youhavevoted",
     "reporttext",
-    "noreporttext"
+    "noreporttext",
+    "youarenotassignedtothisreport"
   ],
 
   "de": [
     "youhavevoted",
     "reporttext",
-    "noreporttext"
+    "noreporttext",
+    "youarenotassignedtothisreport"
   ],
 
   "es": [
     "youhavevoted",
     "reporttext",
-    "noreporttext"
+    "noreporttext",
+    "youarenotassignedtothisreport"
   ],
 
   "fr": [
     "youhavevoted",
     "reporttext",
-    "noreporttext"
+    "noreporttext",
+    "youarenotassignedtothisreport"
   ],
 
   "hi": [
     "youhavevoted",
     "reporttext",
-    "noreporttext"
+    "noreporttext",
+    "youarenotassignedtothisreport"
   ],
 
   "it": [
     "youhavevoted",
     "reporttext",
-    "noreporttext"
+    "noreporttext",
+    "youarenotassignedtothisreport"
   ],
 
   "ja": [
     "youhavevoted",
     "reporttext",
-    "noreporttext"
+    "noreporttext",
+    "youarenotassignedtothisreport"
   ],
 
   "ko": [
     "youhavevoted",
     "reporttext",
-    "noreporttext"
+    "noreporttext",
+    "youarenotassignedtothisreport"
   ],
 
   "pt": [
     "youhavevoted",
     "reporttext",
-    "noreporttext"
+    "noreporttext",
+    "youarenotassignedtothisreport"
   ],
 
   "ru": [
     "youhavevoted",
     "reporttext",
-    "noreporttext"
+    "noreporttext",
+    "youarenotassignedtothisreport"
   ],
 
   "uk": [
     "youhavevoted",
     "reporttext",
-    "noreporttext"
+    "noreporttext",
+    "youarenotassignedtothisreport"
   ],
 
   "zh": [
     "youhavevoted",
     "reporttext",
-    "noreporttext"
+    "noreporttext",
+    "youarenotassignedtothisreport"
   ]
 }

@@ -29,6 +29,7 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
   late Future<List<ReportVotes>> futureReportVotes;
   bool _isVoteOverviewExpanded = true;
   bool _uservoted = false;
+  bool _userisassignttoreport = false;
 
   @override
   void initState() {
@@ -42,6 +43,7 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
         String currentUsername = Provider.of<GlobalStatus>(context, listen: false).username;
         setState(() {
           _uservoted = votes.any((vote) => vote.trustername == currentUsername && vote.vote != 0);
+          _userisassignttoreport = votes.any((vote) => vote.trustername == currentUsername);
         });
       }
     }).catchError((error) {
@@ -76,6 +78,10 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
               }
 
               final upload = uploadSnapshot.data!;
+
+              final now = DateTime.now();
+              final deadline = report.reporttime.add(const Duration(hours: 24)).add(now.timeZoneOffset);
+              final timeLeft = deadline.difference(now);
 
               return Center(
                 child: ConstrainedBox(
@@ -128,6 +134,13 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                                   ),
                                 ),
                                 backgroundColor: statusColor(report.status),
+                              ),
+                            ),
+                            const Spacer(),
+                            Text('${AppLocalizations.of(context)!.timeleft}: ${timeLeft.inHours}h ${timeLeft.inMinutes.remainder(60)}m',
+                              style: const TextStyle(
+                                color: Colors.white70,
+                                fontWeight: FontWeight.w500,
                               ),
                             ),
                           ],
@@ -310,7 +323,7 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                       Container(
                         padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(
-                          color: _uservoted ? Colors.black : AppColor.niceblack,
+                          color: _uservoted || !_userisassignttoreport ? Colors.black : AppColor.niceblack,
                           borderRadius: BorderRadius.circular(12),
                           border: Border.all(color: Colors.white.withAlpha((0.3 * 255).toInt()), width: 1),
                           boxShadow: [
@@ -435,7 +448,7 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                               ),
                             ),
                           ],
-                        ): Center(child: Text(AppLocalizations.of(context)!.youhavevoted)),
+                        ): _userisassignttoreport ? Center(child: Text(AppLocalizations.of(context)!.youhavevoted)) : Center(child: Text(AppLocalizations.of(context)!.youarenotassignedtothisreport)),
                       ),
                       const SizedBox(height: 20),
                       Container(
@@ -595,7 +608,7 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                                           ),
                                           const SizedBox(height: 8),
                                           Text(
-                                            "${(violationVotes / totalVotes * 100).toStringAsFixed(1)}% ${AppLocalizations.of(context)!.violation} | ${(pendingVotes / totalVotes * 100).toStringAsFixed(1)}% ${AppLocalizations.of(context)!.open} | ${(inOrderVotes / totalVotes * 100).toStringAsFixed(1)}% ${AppLocalizations.of(context)!.inorder}",
+                                            "${(violationVotes / totalVotes * 100).toStringAsFixed(0)}% ${AppLocalizations.of(context)!.violation} | ${(pendingVotes / totalVotes * 100).toStringAsFixed(0)}% ${AppLocalizations.of(context)!.open} | ${(inOrderVotes / totalVotes * 100).toStringAsFixed(0)}% ${AppLocalizations.of(context)!.inorder}",
                                             style: const TextStyle(
                                               color: Colors.white70,
                                               fontSize: 12,

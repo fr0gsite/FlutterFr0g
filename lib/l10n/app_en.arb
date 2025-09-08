@@ -437,6 +437,7 @@
     "allreports":"All",
     "youhavevoted":"You have voted",
     "reporttext":"Text to Report",
-    "noreporttext":"This Report have no text"
+    "noreporttext":"This Report have no text",
+    "youarenotassignedtothisreport":"You are not assigned to this report"
 
 }

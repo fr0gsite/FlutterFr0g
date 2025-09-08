@@ -171,18 +171,22 @@ class ReportsTable extends StatelessWidget {
             filteredReports = reports;
         }
 
-        return SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: DataTable(
-            showCheckboxColumn: false,
-            columns: [
-              const DataColumn(label: Text('Nr')),
-              DataColumn(label: Text(AppLocalizations.of(context)!.rule)),
-              DataColumn(label: Text(AppLocalizations.of(context)!.upload)),
-              DataColumn(label: Text(AppLocalizations.of(context)!.votes)),
-              DataColumn(label: Text(AppLocalizations.of(context)!.timeleft)),
-              DataColumn(label: Text(AppLocalizations.of(context)!.status))
-            ],
+        return Scrollbar(
+          thumbVisibility: true,
+          child: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: DataTable(
+                showCheckboxColumn: false,
+                columns: [
+                  const DataColumn(label: Text('Nr')),
+                  DataColumn(label: Text(AppLocalizations.of(context)!.rule)),
+                  DataColumn(label: Text(AppLocalizations.of(context)!.upload)),
+                  DataColumn(label: Text(AppLocalizations.of(context)!.votes)),
+                  DataColumn(label: Text(AppLocalizations.of(context)!.timeleft)),
+                  DataColumn(label: Text(AppLocalizations.of(context)!.status))
+                ],
             rows: filteredReports.map((report) {
               return DataRow(
                 cells: [
@@ -281,7 +285,9 @@ class ReportsTable extends StatelessWidget {
               );
             }).toList(),
           ),
-        );
+        ),
+      ),
+    );
       },
     );
   }
