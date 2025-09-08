@@ -13,6 +13,13 @@ class TrusterView extends StatefulWidget {
 
 class TrusterViewState extends State<TrusterView> {
   Null get countries => null;
+  int _refreshId = 0;
+
+  void _refreshData() {
+    setState(() {
+      _refreshId++;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,8 +65,14 @@ class TrusterViewState extends State<TrusterView> {
                         fontWeight: FontWeight.bold),
                   ),
                   centerTitle: true,
+                  actions: [
+                    IconButton(
+                      icon: const Icon(Icons.refresh, color: Colors.white),
+                      onPressed: _refreshData,
+                    ),
+                  ],
                 ),
-                body: const SingleChildScrollView(
+                body: SingleChildScrollView(
                   child: Center(
                     child: Wrap(
                       alignment: WrapAlignment.spaceBetween,
@@ -72,14 +85,14 @@ class TrusterViewState extends State<TrusterView> {
                         SizedBox(
                           height: 600,
                           width: 600,
-                          child: ReportsWidget(), // Report Overview
+                          child: ReportsWidget(key: ValueKey('reports_$_refreshId')),
                         ),
                         SizedBox(
                           height: 600,
                           width: 600,
-                          child: StatusOverview(),
+                          child: StatusOverview(key: ValueKey('status_$_refreshId')),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 220,
                           width: 600,
                           child: ActionBoard(),
