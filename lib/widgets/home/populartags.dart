@@ -4,7 +4,7 @@ import 'package:fr0gsite/chainactions/chainactions.dart';
 import 'package:fr0gsite/datatypes/globaltags.dart';
 import 'package:fr0gsite/utils/utils.dart';
 import 'package:flutter/material.dart';
-import 'package:fr0gsite/widgets/home/tagbutton.dart';
+import 'package:fr0gsite/widgets/tagbutton.dart';
 
 class Populartags extends StatefulWidget {
   final int currenttabindex;

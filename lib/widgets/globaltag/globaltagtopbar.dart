@@ -3,7 +3,7 @@ import 'package:fr0gsite/config.dart';
 import 'package:fr0gsite/datatypes/globalstatus.dart';
 import 'package:fr0gsite/datatypes/globaltags.dart';
 import 'package:fr0gsite/datatypes/postviewerstatus.dart';
-import 'package:fr0gsite/widgets/home/tagbutton.dart';
+import 'package:fr0gsite/widgets/tagbutton.dart';
 import 'package:fr0gsite/widgets/login/login.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
