@@ -63,18 +63,35 @@ class _ReportNextButtonState extends State<ReportNextButton> {
 
               if (selectedprovider != -1 && selectedrule != -1) {
                 bool value = false;
-                if (selectedprovider == 1) {
-                  String username =
-                      Provider.of<GlobalStatus>(context, listen: false).username;
-                  String permission =
-                      Provider.of<GlobalStatus>(context, listen: false).permission;
-                  final chain = Chainactions();
-                  chain.setusernameandpermission(username, permission);
-                  value = await chain.addreport(
-                      selectedusername, reporttype, contentid, selectedrule, reporttext);
-                } else {
-                  value = await Chainactions().reportuploadwithcommunity(reportStatus);
+
+                // Show loading indicator while the report is being submitted
+                showDialog(
+                  context: context,
+                  barrierDismissible: false,
+                  builder: (context) => const Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                );
+
+                try {
+                  if (selectedprovider == 1) {
+                    String username =
+                        Provider.of<GlobalStatus>(context, listen: false).username;
+                    String permission =
+                        Provider.of<GlobalStatus>(context, listen: false).permission;
+                    final chain = Chainactions();
+                    chain.setusernameandpermission(username, permission);
+                    value = await chain.addreport(
+                        selectedusername, reporttype, contentid, selectedrule, reporttext);
+                  } else {
+                    value = await Chainactions().reportuploadwithcommunity(reportStatus);
+                  }
+                } finally {
+                  if (mounted) {
+                    Navigator.of(context, rootNavigator: true).pop();
+                  }
                 }
+
                 if (!mounted) return;
                 if (value) {
                   debugPrint("OK");
