@@ -69,7 +69,7 @@ class _ReportNextButtonState extends State<ReportNextButton> {
                   context: context,
                   barrierDismissible: false,
                   builder: (context) => const Center(
-                    child: CircularProgressIndicator(),
+                    child: CircularProgressIndicator(color: Colors.white,),
                   ),
                 );
 
