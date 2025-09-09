@@ -2,7 +2,6 @@ import 'package:fr0gsite/chainactions/chainactions.dart';
 import 'package:fr0gsite/config.dart';
 import 'package:fr0gsite/datatypes/comment.dart';
 import 'package:fr0gsite/datatypes/globalstatus.dart';
-import 'package:fr0gsite/widgets/infoscreens/cbcircularprogressindicator.dart';
 import 'package:flutter/material.dart';
 import 'package:fr0gsite/l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
@@ -153,7 +152,7 @@ class _CommentReplyState extends State<CommentReply> {
                       hoverColor: Colors.blue,
                       backgroundColor: Colors.blue.withAlpha((0.8 * 255).toInt()),
                       label: isLoading
-                          ? const CBCircularProgressIndicator()
+                          ? const CircularProgressIndicator(color: Colors.white,)
                           : Text(AppLocalizations.of(context)!.reply,
                               style: const TextStyle(color: Colors.white)),
                       icon: const Icon(Icons.reply, color: Colors.white),

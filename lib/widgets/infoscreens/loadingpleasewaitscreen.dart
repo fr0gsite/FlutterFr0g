@@ -39,12 +39,12 @@ class Loadingpleasewaitscreen extends StatelessWidget {
                         snapshot.hasData &&
                         snapshot.data!.isNotEmpty) {
                       return Image.memory(snapshot.data!,
-                          height: elementheight * 4);
+                          height: elementheight * 4 /2, fit: BoxFit.contain);
                     }
-                    return SizedBox(height: elementheight * 4);
+                    return SizedBox(height: elementheight * 4 /2);
                   }),
             Lottie.asset('assets/lottie/loadingdots.json',
-                repeat: true, animate: true, height: elementheight * 4),
+                repeat: true, animate: true, height: elementheight * 4 /2),
           ],
         ),
       ),

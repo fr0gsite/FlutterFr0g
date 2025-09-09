@@ -107,14 +107,32 @@ class _SwipeItemState extends State<SwipeItem> {
                         ))
                       ],
                     );
+                    } else {
+                    return FutureBuilder(
+                      future: Future.delayed(const Duration(seconds: 1)),
+                      builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        return Loadingpleasewaitscreen(
+                          thumbhash: widget.upload.thumbipfshash);
+                      } else {
+                        return Container(color: AppColor.nicegrey);
+                      }
+                      },
+                    );
+                    }
                   } else {
-                    return Loadingpleasewaitscreen(
+                    return FutureBuilder(
+                    future: Future.delayed(const Duration(seconds: 1)),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done) {
+                      return Loadingpleasewaitscreen(
                         thumbhash: widget.upload.thumbipfshash);
+                      } else {
+                      return Container(color: AppColor.nicegrey);
+                      }
+                    },
+                    );
                   }
-                } else {
-                  return Loadingpleasewaitscreen(
-                      thumbhash: widget.upload.thumbipfshash);
-                }
               });
         }),
       ]),
