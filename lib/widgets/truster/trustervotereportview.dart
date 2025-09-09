@@ -8,6 +8,7 @@ import 'package:fr0gsite/datatypes/reportvotes.dart';
 import 'package:fr0gsite/datatypes/rule.dart';
 import 'package:fr0gsite/datatypes/rules.dart';
 import 'package:fr0gsite/datatypes/upload.dart';
+import 'dart:convert';
 import 'package:fr0gsite/globalnotifications.dart';
 import 'package:fr0gsite/nameconverter.dart';
 import 'package:fr0gsite/widgets/cube/cube.dart';
@@ -78,6 +79,94 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
               }
 
               final upload = uploadSnapshot.data!;
+              Map<String, dynamic> reportData = {};
+              try {
+                reportData = jsonDecode(report.json);
+              } catch (_) {}
+              Widget postViewerWidget;
+              if (report.type == 1) {
+                postViewerWidget = Container(
+                  width: 200,
+                  height: 200,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(color: Colors.white.withAlpha((0.4 * 255).toInt()), width: 2),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.white.withAlpha((0.1 * 255).toInt()),
+                        blurRadius: 4,
+                        offset: const Offset(0, 2),
+                      ),
+                    ],
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Cube(upload: upload),
+                  ),
+                );
+              } else if (report.type == 2) {
+                final commentText = reportData['commenttext'] ?? reportData['comment'] ?? '';
+                postViewerWidget = GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/postviewer/${upload.uploadid}', arguments: upload);
+                  },
+                  child: Container(
+                    width: 200,
+                    height: 200,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: Colors.white.withAlpha((0.4 * 255).toInt()), width: 2),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.white.withAlpha((0.1 * 255).toInt()),
+                          blurRadius: 4,
+                          offset: const Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Container(
+                        color: Colors.black54,
+                        alignment: Alignment.center,
+                        padding: const EdgeInsets.all(8),
+                        child: Text(commentText, style: const TextStyle(color: Colors.white), textAlign: TextAlign.center),
+                      ),
+                    ),
+                  ),
+                );
+              } else {
+                final tagText = reportData['tagtext'] ?? reportData['tag'] ?? '';
+                postViewerWidget = GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/postviewer/${upload.uploadid}', arguments: upload);
+                  },
+                  child: Container(
+                    width: 200,
+                    height: 200,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: Colors.white.withAlpha((0.4 * 255).toInt()), width: 2),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.white.withAlpha((0.1 * 255).toInt()),
+                          blurRadius: 4,
+                          offset: const Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Container(
+                        color: Colors.black54,
+                        alignment: Alignment.center,
+                        padding: const EdgeInsets.all(8),
+                        child: Text(tagText, style: const TextStyle(color: Colors.white), textAlign: TextAlign.center),
+                      ),
+                    ),
+                  ),
+                );
+              }
 
               final now = DateTime.now();
               final deadline = report.reporttime.add(const Duration(hours: 24)).add(now.timeZoneOffset);
@@ -164,25 +253,6 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                         child: LayoutBuilder(
                           builder: (context, constraints) {
                             final isWide = constraints.maxWidth > 600;
-                            final postViewer = Container(
-                              width: 200,
-                              height: 200,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12),
-                                border: Border.all(color: Colors.white.withAlpha((0.4 * 255).toInt()), width: 2),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.white.withAlpha((0.1 * 255).toInt()),
-                                    blurRadius: 4,
-                                    offset: const Offset(0, 2),
-                                  ),
-                                ],
-                              ),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(10),
-                                child: Cube(upload: upload),
-                              ),
-                            );
                             final infoColumn = Container(
                               padding: const EdgeInsets.all(16),
                               decoration: BoxDecoration(
@@ -261,7 +331,7 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Expanded(child: Center(child: postViewer)),
+                                  Expanded(child: Center(child: postViewerWidget)),
                                   const SizedBox(width: 24),
                                   Expanded(child: infoColumn),
                                 ],
@@ -270,7 +340,7 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                               return Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Center(child: postViewer),
+                                  Center(child: postViewerWidget),
                                   const SizedBox(height: 16),
                                   infoColumn,
                                 ],
