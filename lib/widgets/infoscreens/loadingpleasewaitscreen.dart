@@ -1,9 +1,13 @@
+import 'dart:typed_data';
+
 import 'package:fr0gsite/config.dart';
+import 'package:fr0gsite/ipfsactions.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
 class Loadingpleasewaitscreen extends StatelessWidget {
-  const Loadingpleasewaitscreen({super.key});
+  final String? thumbhash;
+  const Loadingpleasewaitscreen({super.key, this.thumbhash});
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +31,20 @@ class Loadingpleasewaitscreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            if (thumbhash != null)
+              FutureBuilder<Uint8List>(
+                  future: IPFSActions.fetchipfsdata(context, thumbhash),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done &&
+                        snapshot.hasData &&
+                        snapshot.data!.isNotEmpty) {
+                      return Image.memory(snapshot.data!,
+                          height: elementheight * 4);
+                    }
+                    return SizedBox(height: elementheight * 4);
+                  }),
             Lottie.asset('assets/lottie/loadingdots.json',
-                repeat: true, animate: true, height: elementheight * 6),
+                repeat: true, animate: true, height: elementheight * 4),
           ],
         ),
       ),
