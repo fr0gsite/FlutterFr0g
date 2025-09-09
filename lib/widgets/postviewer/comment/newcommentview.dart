@@ -126,11 +126,10 @@ class _NewCommentViewState extends State<NewCommentView> {
   }
 
   Future<void> performNetworkRequest(BuildContext thecontext) async {
-    if (mounted) {
-      setState(() {
-        isLoading = true;
-      });
-    }
+    if (!mounted) return;
+    setState(() {
+      isLoading = true;
+    });
 
     String username =
         Provider.of<GlobalStatus>(thecontext, listen: false).username;
@@ -147,14 +146,15 @@ class _NewCommentViewState extends State<NewCommentView> {
     bool response = await tempChainactions.addcomment(
         username, textcontroller.text, uploadid, "de");
 
-    if (mounted) {
-      if (response) {
-        widget.callback(true, textcontroller.text);
-        Navigator.pop(thecontext);
-      } else {
-        widget.callback(false, "");
-      }
+    if (!mounted) return;
+    if (response) {
+      widget.callback(true, textcontroller.text);
+      Navigator.pop(thecontext);
+      return;
+    }
 
+    widget.callback(false, "");
+    if (mounted) {
       setState(() {
         isLoading = false;
       });

@@ -24,6 +24,7 @@ class _CommentReplyState extends State<CommentReply> {
   int maxtextlength = 500;
 
   Future<void> performNetworkRequest(BuildContext thecontext) async {
+    if (!mounted) return;
     setState(() {
       isLoading = true;
     });
@@ -39,16 +40,19 @@ class _CommentReplyState extends State<CommentReply> {
     bool response = await tempChainactions.addcommentreply(username,
         textcontroller.text, widget.comment.commentId.toString(), "de");
 
+    if (!mounted) return;
     if (response) {
       widget.callback(true, textcontroller.text);
       Navigator.pop(thecontext);
-    } else {
-      widget.callback(false, "");
+      return;
     }
 
-    setState(() {
-      isLoading = false;
-    });
+    widget.callback(false, "");
+    if (mounted) {
+      setState(() {
+        isLoading = false;
+      });
+    }
   }
 
   @override
