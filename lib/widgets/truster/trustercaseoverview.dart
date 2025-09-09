@@ -194,7 +194,7 @@ class ReportsTable extends StatelessWidget {
                     InkWell(
                       child: Text('${report.reportid}', style: const TextStyle(color: Colors.blue)),
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => TrusterVoteReportView(reportid: report.reportid)));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => TrusterVoteReportView(report: report)));
                       },
                     ),
                   ),
@@ -274,7 +274,7 @@ class ReportsTable extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => TrusterVoteReportView(reportid: report.reportid),
+                        builder: (context) => TrusterVoteReportView(report: report),
                       ),
                     );
                   }

@@ -15,16 +15,15 @@ import 'package:fr0gsite/l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 class TrusterVoteReportView extends StatefulWidget {
-  final int reportid;
+  final Report report;
 
-  const  TrusterVoteReportView({super.key, required this.reportid});
+  const  TrusterVoteReportView({super.key, required this.report});
 
   @override
   State<TrusterVoteReportView> createState() => _TrusterVoteReportViewState();
 }
 
 class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
-  late Future<Report> futureReport;
   late Future<Upload> futureUpload;
   late Future<List<ReportVotes>> futureReportVotes;
   bool _isVoteOverviewExpanded = true;
@@ -34,9 +33,8 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
   @override
   void initState() {
     super.initState();
-    futureReport = Chainactions().getreport(widget.reportid.toString());
-    futureReportVotes = Chainactions().getreportvotes(widget.reportid.toString());
-    
+    futureReportVotes = Chainactions().getreportvotes(widget.report.reportid.toString());
+
     // Überprüfe den User-Vote-Status beim Laden
     futureReportVotes.then((votes) {
       if (mounted) {
@@ -55,17 +53,9 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(AppLocalizations.of(context)!.reportvote)),
-      body: FutureBuilder<Report>(
-        future: futureReport,
-        builder: (context, reportSnapshot) {
-          if (reportSnapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator(color:Colors.white));
-          }
-          if (reportSnapshot.hasError) {
-            return Center(child: Text('Fehler: ${reportSnapshot.error}'));
-          }
-
-          final report = reportSnapshot.data!;
+      body: Builder(
+        builder: (context) {
+          final report = widget.report;
           futureUpload = Chainactions().getupload(report.id.toString());
           return FutureBuilder<Upload>(
             future: futureUpload,
@@ -371,7 +361,7 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                                         Globalnotifications.shownotification(context, "title", "message", "success");
                                         // Aktualisiere die futureReportVotes für sofortige Progressbar-Aktualisierung
                                         setState(() {
-                                          futureReportVotes = Chainactions().getreportvotes(widget.reportid.toString());
+                                          futureReportVotes = Chainactions().getreportvotes(widget.report.reportid.toString());
                                         });
                                       } else {
                                         // Bei Fehler _uservoted zurücksetzen
@@ -427,7 +417,7 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                                         Globalnotifications.shownotification(context, "title", "message", "success");
                                         // Aktualisiere die futureReportVotes für sofortige Progressbar-Aktualisierung
                                         setState(() {
-                                          futureReportVotes = Chainactions().getreportvotes(widget.reportid.toString());
+                                          futureReportVotes = Chainactions().getreportvotes(widget.report.reportid.toString());
                                         });
                                       } else {
                                         // Bei Fehler _uservoted zurücksetzen
