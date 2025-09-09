@@ -108,10 +108,12 @@ class _SwipeItemState extends State<SwipeItem> {
                       ],
                     );
                   } else {
-                    return const Loadingpleasewaitscreen();
+                    return Loadingpleasewaitscreen(
+                        thumbhash: widget.upload.thumbipfshash);
                   }
                 } else {
-                  return const Loadingpleasewaitscreen();
+                  return Loadingpleasewaitscreen(
+                      thumbhash: widget.upload.thumbipfshash);
                 }
               });
         }),
