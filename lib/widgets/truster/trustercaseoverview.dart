@@ -151,14 +151,14 @@ class ReportsTable extends StatefulWidget {
 }
 
 class _ReportsTableState extends State<ReportsTable> {
-  // Sortierung
+  // Sorting
   int _sortColumnIndex = 0;
   bool _sortAscending = true;
   
   // Filter
-  Set<int> _selectedStatuses = <int>{0, 2}; // 0 = Offen, 2 = Dringend
+  Set<int> _selectedStatuses = <int>{0, 2}; // 0 = Open, 2 = Urgent
   
-  // Daten-Cache
+  // Data Cache
   List<Report>? _cachedReports;
   Future<List<Report>>? _reportsFuture;
   
@@ -188,7 +188,7 @@ class _ReportsTableState extends State<ReportsTable> {
       dynamic bValue;
       
       switch (_sortColumnIndex) {
-        case 0: // Nr
+        case 0: // No
           aValue = a.reportid;
           bValue = b.reportid;
           break;
@@ -229,7 +229,7 @@ class _ReportsTableState extends State<ReportsTable> {
 
   List<Report> _filterReports(List<Report> reports) {
     return reports.where((report) {
-      // Status Filter - wenn nichts ausgewählt ist, zeige alle
+      // Status Filter - if nothing is selected, show all
       if (_selectedStatuses.isNotEmpty && !_selectedStatuses.contains(report.status)) {
         return false;
       }
@@ -255,9 +255,9 @@ class _ReportsTableState extends State<ReportsTable> {
             _selectedStatuses.add(status);
           } else {
             _selectedStatuses.remove(status);
-            // Wenn das der letzte ausgewählte Filter war, alle auswählen
+            // If this was the last selected filter, select all
             if (_selectedStatuses.isEmpty) {
-              _selectedStatuses.addAll({0, 1, 2}); // Alle Status auswählen
+              _selectedStatuses.addAll({0, 1, 2}); // Select all statuses
             }
           }
         });
@@ -265,7 +265,7 @@ class _ReportsTableState extends State<ReportsTable> {
       selectedColor: color.withAlpha((0.7 * 255).toInt()),
       backgroundColor: isSelected 
         ? color.withAlpha((0.3 * 255).toInt())
-        : Colors.grey.shade800, // Dunklerer Hintergrund für nicht ausgewählte
+        : Colors.grey.shade800, // Darker background for unselected
       checkmarkColor: Colors.white,
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
       visualDensity: VisualDensity.compact,
@@ -284,7 +284,7 @@ class _ReportsTableState extends State<ReportsTable> {
           return Center(child: Text('Error: ${snapshot.error}'));
         }
         
-        // Verwende gecachte Daten für Filter-Operationen
+        // Use cached data for filter operations
         final reports = _cachedReports!;
         String username = Provider.of<GlobalStatus>(context, listen: false).username;
         
@@ -306,7 +306,7 @@ class _ReportsTableState extends State<ReportsTable> {
             filteredReports = reports;
         }
 
-        // Wende Filter und Sortierung an
+        // Apply filter and sorting
         filteredReports = _filterReports(filteredReports);
         filteredReports = _sortReports(filteredReports);
 
@@ -318,7 +318,7 @@ class _ReportsTableState extends State<ReportsTable> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Status Filter Chips und Refresh Button
+                  // Status Filter Chips and Refresh Button
                   Row(
                     children: [
                       Text(
@@ -335,7 +335,7 @@ class _ReportsTableState extends State<ReportsTable> {
                       IconButton(
                         icon: const Icon(Icons.refresh, color: Colors.white),
                         onPressed: _refreshReports,
-                        tooltip: 'Daten aktualisieren',
+                        tooltip: 'Refresh data',
                       ),
                     ],
                   ),
@@ -343,7 +343,7 @@ class _ReportsTableState extends State<ReportsTable> {
               ),
             ),
 
-            // Tabelle
+            // Table
             Expanded(
               child: Scrollbar(
                 thumbVisibility: true,
@@ -353,7 +353,7 @@ class _ReportsTableState extends State<ReportsTable> {
                     scrollDirection: Axis.horizontal,
                     child: DataTable(
                       showCheckboxColumn: false,
-                      columnSpacing: 24.0, // Reduzierter Abstand zwischen Spalten (Standard: 56.0)
+                      columnSpacing: 24.0, // Reduced spacing between columns (default: 56.0)
                       sortColumnIndex: _sortColumnIndex,
                       sortAscending: _sortAscending,
                       columns: [
@@ -515,7 +515,7 @@ class _ReportsTableState extends State<ReportsTable> {
   }
 }
 
-// Hilfsfunktionen für Status
+// Helper functions for status
 String statusText(int status, BuildContext context) {
   switch (status) {
     case 0:
@@ -542,7 +542,7 @@ Color statusColor(int status) {
   }
 }
 
-// Import hinzufügen für Rules
+// Add import for Rules
 
 Rule getrule(int type, violatedrule, context) {
   switch (type) {
