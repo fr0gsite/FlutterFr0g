@@ -1140,7 +1140,16 @@ class AppLocalizationsHi extends AppLocalizations {
   String get vacation => 'छुट्टी';
 
   @override
+  String get vacationdays => 'Vacation days';
+
+  @override
   String get openreport => 'खुला';
+
+  @override
+  String get openreports => 'Open Reports';
+
+  @override
+  String get closedreport => 'Closed';
 
   @override
   String get closedreports => 'बंद';

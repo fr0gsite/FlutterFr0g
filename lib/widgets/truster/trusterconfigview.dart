@@ -104,10 +104,9 @@ class _StatusOverviewState extends State<StatusOverview> {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return Column(
                           children: [
-                            _buildInfoRow('Karma', 'Loading...', isLoading: true),
-                            _buildInfoRow('In Vacation', 'Loading...', isLoading: true),
-                            _buildInfoRow('Vacation Days', 'Loading...', isLoading: true),
-                            _buildInfoRow('Open Reports', 'Loading...', isLoading: true),
+                            _buildInfoRow("Karma", 'Loading...', isLoading: true),
+                            _buildInfoRow(AppLocalizations.of(context)!.vacationdays, 'Loading...', isLoading: true),
+                            _buildInfoRow(AppLocalizations.of(context)!.openreports, 'Loading...', isLoading: true),
                             _buildInfoRow(AppLocalizations.of(context)!.closedreports, 'Loading...', isLoading: true),
                             _buildInfoRow(AppLocalizations.of(context)!.language, 'Loading...', isLoading: true),
                           ],
@@ -121,10 +120,9 @@ class _StatusOverviewState extends State<StatusOverview> {
                         );
                         return Column(
                           children: [
-                            _buildInfoRow('Karma', '${truster.karma}'),
-                            _buildInfoRow('In Vacation', truster.invacation ? AppLocalizations.of(context)!.yes : AppLocalizations.of(context)!.no),
-                            _buildInfoRow('Vacation Days', '${truster.vacationdays}'),
-                            _buildInfoRow('Open Reports', '${truster.numofopenreports}'),
+                            _buildInfoRow("Karma", '${truster.karma}'),
+                            _buildInfoRow(AppLocalizations.of(context)!.vacationdays, '${truster.vacationdays}'),
+                            _buildInfoRow(AppLocalizations.of(context)!.openreports, '${truster.numofopenreports}'),
                             _buildInfoRow(AppLocalizations.of(context)!.closedreports, '${truster.numofclosedreports}'),
                             _buildInfoRow(AppLocalizations.of(context)!.language, truster.language),
                           ],

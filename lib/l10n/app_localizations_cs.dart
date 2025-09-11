@@ -1133,7 +1133,16 @@ class AppLocalizationsCs extends AppLocalizations {
   String get vacation => 'Dovolená';
 
   @override
+  String get vacationdays => 'Vacation days';
+
+  @override
   String get openreport => 'Otevřít';
+
+  @override
+  String get openreports => 'Open Reports';
+
+  @override
+  String get closedreport => 'Closed';
 
   @override
   String get closedreports => 'Uzavřená hlášení';

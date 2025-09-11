@@ -1,5 +1,8 @@
 {
   "ar": [
+    "vacationdays",
+    "openreports",
+    "closedreport",
     "youhavevoted",
     "reporttext",
     "noreporttext",
@@ -7,6 +10,9 @@
   ],
 
   "cs": [
+    "vacationdays",
+    "openreports",
+    "closedreport",
     "youhavevoted",
     "reporttext",
     "noreporttext",
@@ -14,6 +20,7 @@
   ],
 
   "de": [
+    "vacationdays",
     "youhavevoted",
     "reporttext",
     "noreporttext",
@@ -21,6 +28,9 @@
   ],
 
   "es": [
+    "vacationdays",
+    "openreports",
+    "closedreport",
     "youhavevoted",
     "reporttext",
     "noreporttext",
@@ -28,6 +38,9 @@
   ],
 
   "fr": [
+    "vacationdays",
+    "openreports",
+    "closedreport",
     "youhavevoted",
     "reporttext",
     "noreporttext",
@@ -35,6 +48,9 @@
   ],
 
   "hi": [
+    "vacationdays",
+    "openreports",
+    "closedreport",
     "youhavevoted",
     "reporttext",
     "noreporttext",
@@ -42,6 +58,9 @@
   ],
 
   "it": [
+    "vacationdays",
+    "openreports",
+    "closedreport",
     "youhavevoted",
     "reporttext",
     "noreporttext",
@@ -49,6 +68,9 @@
   ],
 
   "ja": [
+    "vacationdays",
+    "openreports",
+    "closedreport",
     "youhavevoted",
     "reporttext",
     "noreporttext",
@@ -56,6 +78,9 @@
   ],
 
   "ko": [
+    "vacationdays",
+    "openreports",
+    "closedreport",
     "youhavevoted",
     "reporttext",
     "noreporttext",
@@ -63,6 +88,9 @@
   ],
 
   "pt": [
+    "vacationdays",
+    "openreports",
+    "closedreport",
     "youhavevoted",
     "reporttext",
     "noreporttext",
@@ -70,6 +98,9 @@
   ],
 
   "ru": [
+    "vacationdays",
+    "openreports",
+    "closedreport",
     "youhavevoted",
     "reporttext",
     "noreporttext",
@@ -77,6 +108,9 @@
   ],
 
   "uk": [
+    "vacationdays",
+    "openreports",
+    "closedreport",
     "youhavevoted",
     "reporttext",
     "noreporttext",
@@ -84,6 +118,9 @@
   ],
 
   "zh": [
+    "vacationdays",
+    "openreports",
+    "closedreport",
     "youhavevoted",
     "reporttext",
     "noreporttext",

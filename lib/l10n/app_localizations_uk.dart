@@ -1145,7 +1145,16 @@ class AppLocalizationsUk extends AppLocalizations {
   String get vacation => 'У відпустці';
 
   @override
+  String get vacationdays => 'Vacation days';
+
+  @override
   String get openreport => 'Відкрити';
+
+  @override
+  String get openreports => 'Open Reports';
+
+  @override
+  String get closedreport => 'Closed';
 
   @override
   String get closedreports => 'Закриті';

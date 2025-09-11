@@ -1143,7 +1143,16 @@ class AppLocalizationsRu extends AppLocalizations {
   String get vacation => 'Отпуск';
 
   @override
+  String get vacationdays => 'Vacation days';
+
+  @override
   String get openreport => 'Открыть';
+
+  @override
+  String get openreports => 'Open Reports';
+
+  @override
+  String get closedreport => 'Closed';
 
   @override
   String get closedreports => 'Закрытые отчеты';

@@ -1151,7 +1151,16 @@ class AppLocalizationsIt extends AppLocalizations {
   String get vacation => 'Vacanza';
 
   @override
+  String get vacationdays => 'Vacation days';
+
+  @override
   String get openreport => 'Apri';
+
+  @override
+  String get openreports => 'Open Reports';
+
+  @override
+  String get closedreport => 'Closed';
 
   @override
   String get closedreports => 'Chiuso';

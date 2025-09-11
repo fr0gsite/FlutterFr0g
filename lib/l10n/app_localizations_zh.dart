@@ -1101,7 +1101,16 @@ class AppLocalizationsZh extends AppLocalizations {
   String get vacation => '休假';
 
   @override
+  String get vacationdays => 'Vacation days';
+
+  @override
   String get openreport => '打开';
+
+  @override
+  String get openreports => 'Open Reports';
+
+  @override
+  String get closedreport => 'Closed';
 
   @override
   String get closedreports => '已关闭';

@@ -1109,7 +1109,16 @@ class AppLocalizationsJa extends AppLocalizations {
   String get vacation => '休暇';
 
   @override
+  String get vacationdays => 'Vacation days';
+
+  @override
   String get openreport => '開く';
+
+  @override
+  String get openreports => 'Open Reports';
+
+  @override
+  String get closedreport => 'Closed';
 
   @override
   String get closedreports => '閉じた';

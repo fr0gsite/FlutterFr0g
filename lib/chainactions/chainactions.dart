@@ -40,6 +40,11 @@ class Chainactions {
   String permission = "";
   int fetchlimituploads = 400;
   int fetchlimittags = 60;
+  
+  // Upload Cache
+  static final Map<String, Upload> _uploadCache = {};
+  static final Map<String, DateTime> _uploadCacheTimestamps = {};
+  static const Duration _cacheValidityDuration = Duration(minutes: 30);
 
   void setusernameandpermission(String username, String permission) {
     this.username = username;
@@ -777,6 +782,66 @@ class Chainactions {
     Upload temp = Upload.fromJson(response[0]);
 
     return temp;
+  }
+
+  /// Cached version of getupload that stores uploads for 30 minutes
+  Future<Upload> cachedgetupload(String uploadid) async {
+    final now = DateTime.now();
+    
+    // Check if we have a cached version that's still valid
+    if (_uploadCache.containsKey(uploadid) && _uploadCacheTimestamps.containsKey(uploadid)) {
+      final cacheTime = _uploadCacheTimestamps[uploadid]!;
+      final timeDifference = now.difference(cacheTime);
+      
+      if (timeDifference < _cacheValidityDuration) {
+        debugPrint("Using cached Upload data for ID $uploadid (cached ${timeDifference.inMinutes} minutes ago)");
+        return _uploadCache[uploadid]!;
+      } else {
+        debugPrint("Cache expired for Upload ID $uploadid (${timeDifference.inMinutes} minutes old), fetching fresh data");
+      }
+    } else {
+      debugPrint("No cached data found for Upload ID $uploadid, fetching fresh data");
+    }
+    
+    // Fetch fresh data
+    final upload = await getupload(uploadid);
+    
+    // Store in cache
+    _uploadCache[uploadid] = upload;
+    _uploadCacheTimestamps[uploadid] = now;
+    
+    debugPrint("Cached Upload data for ID $uploadid");
+    return upload;
+  }
+
+  /// Clear upload cache (useful for testing or manual refresh)
+  static void clearUploadCache() {
+    _uploadCache.clear();
+    _uploadCacheTimestamps.clear();
+    debugPrint("Upload cache cleared");
+  }
+
+  /// Get cache statistics
+  static Map<String, dynamic> getUploadCacheStats() {
+    final now = DateTime.now();
+    int validEntries = 0;
+    int expiredEntries = 0;
+    
+    for (final timestamp in _uploadCacheTimestamps.values) {
+      final age = now.difference(timestamp);
+      if (age < _cacheValidityDuration) {
+        validEntries++;
+      } else {
+        expiredEntries++;
+      }
+    }
+    
+    return {
+      'totalEntries': _uploadCache.length,
+      'validEntries': validEntries,
+      'expiredEntries': expiredEntries,
+      'cacheValidityMinutes': _cacheValidityDuration.inMinutes,
+    };
   }
 
   Future<List<Upload>> getnewuploads() async {

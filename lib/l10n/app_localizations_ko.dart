@@ -1106,7 +1106,16 @@ class AppLocalizationsKo extends AppLocalizations {
   String get vacation => '휴가';
 
   @override
+  String get vacationdays => 'Vacation days';
+
+  @override
   String get openreport => '열기';
+
+  @override
+  String get openreports => 'Open Reports';
+
+  @override
+  String get closedreport => 'Closed';
 
   @override
   String get closedreports => '닫힌';

@@ -1149,10 +1149,19 @@ class AppLocalizationsDe extends AppLocalizations {
   String get vacation => 'Urlaub';
 
   @override
+  String get vacationdays => 'Vacation days';
+
+  @override
   String get openreport => 'Offen';
 
   @override
-  String get closedreports => 'Geschlossen';
+  String get openreports => 'Offene Meldungen';
+
+  @override
+  String get closedreport => 'Geschlossen';
+
+  @override
+  String get closedreports => 'Geschlossene Meldungen';
 
   @override
   String get applyasatruster => 'Als Truster bewerben';

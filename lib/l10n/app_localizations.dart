@@ -2288,16 +2288,34 @@ abstract class AppLocalizations {
   /// **'Vacation'**
   String get vacation;
 
+  /// No description provided for @vacationdays.
+  ///
+  /// In en, this message translates to:
+  /// **'Vacation days'**
+  String get vacationdays;
+
   /// No description provided for @openreport.
   ///
   /// In en, this message translates to:
   /// **'Open'**
   String get openreport;
 
-  /// No description provided for @closedreports.
+  /// No description provided for @openreports.
+  ///
+  /// In en, this message translates to:
+  /// **'Open Reports'**
+  String get openreports;
+
+  /// No description provided for @closedreport.
   ///
   /// In en, this message translates to:
   /// **'Closed'**
+  String get closedreport;
+
+  /// No description provided for @closedreports.
+  ///
+  /// In en, this message translates to:
+  /// **'Closed Reports'**
   String get closedreports;
 
   /// No description provided for @applyasatruster.
