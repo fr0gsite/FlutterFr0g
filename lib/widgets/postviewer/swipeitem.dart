@@ -4,6 +4,8 @@ import 'package:fr0gsite/config.dart';
 import 'package:fr0gsite/datatypes/globalstatus.dart';
 import 'package:fr0gsite/datatypes/postviewerstatus.dart';
 import 'package:fr0gsite/datatypes/upload.dart';
+import 'package:fr0gsite/datatypes/networkstatus.dart';
+import 'package:fr0gsite/datatypes/ipfsnode.dart';
 import 'package:fr0gsite/ipfsactions.dart';
 import 'package:fr0gsite/widgets/infoscreens/loadingpleasewaitscreen.dart';
 import 'package:fr0gsite/widgets/infoscreens/sorryscreen.dart';
@@ -45,7 +47,6 @@ class _SwipeItemState extends State<SwipeItem> {
               builder: (context, snapshotmetadata) {
                 if (snapshotmetadata.connectionState == ConnectionState.done) {
                   if (snapshotmetadata.data.toString() == "hasdata") {
-                    Uint8List data = Provider.of<PostviewerStatus>(context, listen: false).getcurrentupload().data;
 
                     if (widget.upload.uploadipfshashfiletyp == "mp4") {
                       if (AppConfig.plattformwithvideosupport.contains(Provider.of<GlobalStatus>(context, listen: false).platform)) {
@@ -56,7 +57,7 @@ class _SwipeItemState extends State<SwipeItem> {
                       }
 
                       if (!videocontroller.value.isInitialized) {
-                        initvideoplayer = initializePlayer(data);
+                        initvideoplayer = initializePlayer();
                       }
 
                       return FutureBuilder(
@@ -90,6 +91,7 @@ class _SwipeItemState extends State<SwipeItem> {
                           },
                         );
                     }
+                    Uint8List data = Provider.of<PostviewerStatus>(context, listen: false).getcurrentupload().data;
                     return Stack(
                       children: [
                         Blur(
@@ -147,12 +149,13 @@ class _SwipeItemState extends State<SwipeItem> {
   }
 
   Future<Object> fetchcontentdata() async {
-    Upload currentupload = Provider.of<PostviewerStatus>(context, listen: false)
-        .getcurrentupload();
+    Upload currentupload =
+        Provider.of<PostviewerStatus>(context, listen: false).getcurrentupload();
     if (currentupload.uploadid == widget.upload.uploadid) {
-      if (!currentupload.havedata()) {
-        Uint8List response = await IPFSActions.fetchipfsdata(
-            context, currentupload.uploadipfshash);
+      if (widget.upload.uploadipfshashfiletyp != "mp4" &&
+          !currentupload.havedata()) {
+        Uint8List response =
+            await IPFSActions.fetchipfsdata(context, currentupload.uploadipfshash);
         if (mounted) {
           Provider.of<PostviewerStatus>(context, listen: false)
               .setdata(response, currentupload.uploadid);
@@ -164,7 +167,7 @@ class _SwipeItemState extends State<SwipeItem> {
     }
   }
 
-  Future<bool> initializePlayer(Uint8List data) async {
+  Future<bool> initializePlayer() async {
     debugPrint("initializePlayer function");
     if (videocontroller.value.isInitialized) {
       debugPrint("initializePlayer: Already initialized");
@@ -172,16 +175,20 @@ class _SwipeItemState extends State<SwipeItem> {
     }
 
     try {
-      videocontroller = VideoPlayerController.networkUrl(
-        Uri.parse('data:video/mp4;base64,${base64Encode(data)}'),
-      );
+      IPFSNode node =
+          Provider.of<NetworkStatus>(context, listen: false).chooseIPFSNode();
+      final url =
+          "${node.protokoll}://${node.address}:${node.port}${node.path}${widget.upload.uploadipfshash}";
+
+      videocontroller = VideoPlayerController.networkUrl(Uri.parse(url));
 
       await videocontroller.setLooping(true);
       await videocontroller.initialize();
-      if(mounted){
-        await videocontroller.setVolume(Provider.of<PostviewerStatus>(context, listen: false).soundvolume);
-        if(Provider.of<PostviewerStatus>(context, listen: false).isPlaying){
-        await videocontroller.play();
+      if (mounted) {
+        await videocontroller.setVolume(
+            Provider.of<PostviewerStatus>(context, listen: false).soundvolume);
+        if (Provider.of<PostviewerStatus>(context, listen: false).isPlaying) {
+          await videocontroller.play();
         }
       }
       return true;
