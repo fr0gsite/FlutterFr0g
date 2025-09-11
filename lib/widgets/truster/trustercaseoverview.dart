@@ -153,7 +153,7 @@ class ReportsTable extends StatefulWidget {
 class _ReportsTableState extends State<ReportsTable> {
   // Sorting
   int _sortColumnIndex = 0;
-  bool _sortAscending = true;
+  bool _sortAscending = false;
   
   // Filter
   Set<int> _selectedStatuses = <int>{0, 2}; // 0 = Open, 2 = Urgent
