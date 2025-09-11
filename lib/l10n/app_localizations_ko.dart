@@ -1106,16 +1106,16 @@ class AppLocalizationsKo extends AppLocalizations {
   String get vacation => '휴가';
 
   @override
-  String get vacationdays => 'Vacation days';
+  String get vacationdays => '휴가 일수';
 
   @override
   String get openreport => '열기';
 
   @override
-  String get openreports => 'Open Reports';
+  String get openreports => '열린 신고';
 
   @override
-  String get closedreport => 'Closed';
+  String get closedreport => '닫힘';
 
   @override
   String get closedreports => '닫힌';
@@ -1199,15 +1199,15 @@ class AppLocalizationsKo extends AppLocalizations {
   String get timeleft => '남은 시간';
 
   @override
-  String get youhavevoted => 'You have voted';
+  String get youhavevoted => '투표했습니다';
 
   @override
-  String get reporttext => 'Text to Report';
+  String get reporttext => '신고 텍스트';
 
   @override
-  String get noreporttext => 'This Report have no text';
+  String get noreporttext => '이 신고에는 텍스트가 없습니다';
 
   @override
   String get youarenotassignedtothisreport =>
-      'You are not assigned to this report';
+      '이 신고에 할당되지 않았습니다';
 }

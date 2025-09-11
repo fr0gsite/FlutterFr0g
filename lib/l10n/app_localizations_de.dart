@@ -1149,7 +1149,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get vacation => 'Urlaub';
 
   @override
-  String get vacationdays => 'Vacation days';
+  String get vacationdays => 'Urlaubstage';
 
   @override
   String get openreport => 'Offen';
@@ -1242,15 +1242,15 @@ class AppLocalizationsDe extends AppLocalizations {
   String get timeleft => 'Übrige Zeit';
 
   @override
-  String get youhavevoted => 'You have voted';
+  String get youhavevoted => 'Du hast abgestimmt';
 
   @override
-  String get reporttext => 'Text to Report';
+  String get reporttext => 'Text zur Meldung';
 
   @override
-  String get noreporttext => 'This Report have no text';
+  String get noreporttext => 'Diese Meldung hat keinen Text';
 
   @override
   String get youarenotassignedtothisreport =>
-      'You are not assigned to this report';
+      'Du bist dieser Meldung nicht zugewiesen';
 }

@@ -1151,16 +1151,16 @@ class AppLocalizationsIt extends AppLocalizations {
   String get vacation => 'Vacanza';
 
   @override
-  String get vacationdays => 'Vacation days';
+  String get vacationdays => 'Giorni di vacanza';
 
   @override
   String get openreport => 'Apri';
 
   @override
-  String get openreports => 'Open Reports';
+  String get openreports => 'Segnalazioni aperte';
 
   @override
-  String get closedreport => 'Closed';
+  String get closedreport => 'Chiuso';
 
   @override
   String get closedreports => 'Chiuso';
@@ -1244,15 +1244,15 @@ class AppLocalizationsIt extends AppLocalizations {
   String get timeleft => 'Tempo rimasto';
 
   @override
-  String get youhavevoted => 'You have voted';
+  String get youhavevoted => 'Hai votato';
 
   @override
-  String get reporttext => 'Text to Report';
+  String get reporttext => 'Testo della segnalazione';
 
   @override
-  String get noreporttext => 'This Report have no text';
+  String get noreporttext => 'Questa segnalazione non ha testo';
 
   @override
   String get youarenotassignedtothisreport =>
-      'You are not assigned to this report';
+      'Non sei assegnato a questa segnalazione';
 }

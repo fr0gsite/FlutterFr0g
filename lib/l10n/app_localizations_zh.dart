@@ -1101,16 +1101,16 @@ class AppLocalizationsZh extends AppLocalizations {
   String get vacation => '休假';
 
   @override
-  String get vacationdays => 'Vacation days';
+  String get vacationdays => '假期天数';
 
   @override
   String get openreport => '打开';
 
   @override
-  String get openreports => 'Open Reports';
+  String get openreports => '打开的报告';
 
   @override
-  String get closedreport => 'Closed';
+  String get closedreport => '已关闭';
 
   @override
   String get closedreports => '已关闭';
@@ -1194,15 +1194,15 @@ class AppLocalizationsZh extends AppLocalizations {
   String get timeleft => '剩余时间';
 
   @override
-  String get youhavevoted => 'You have voted';
+  String get youhavevoted => '你已投票';
 
   @override
-  String get reporttext => 'Text to Report';
+  String get reporttext => '报告文本';
 
   @override
-  String get noreporttext => 'This Report have no text';
+  String get noreporttext => '此报告没有文本';
 
   @override
   String get youarenotassignedtothisreport =>
-      'You are not assigned to this report';
+      '你未被分配到此报告';
 }

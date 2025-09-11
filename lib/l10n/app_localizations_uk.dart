@@ -1145,16 +1145,16 @@ class AppLocalizationsUk extends AppLocalizations {
   String get vacation => 'У відпустці';
 
   @override
-  String get vacationdays => 'Vacation days';
+  String get vacationdays => 'Дні відпустки';
 
   @override
   String get openreport => 'Відкрити';
 
   @override
-  String get openreports => 'Open Reports';
+  String get openreports => 'Відкриті звіти';
 
   @override
-  String get closedreport => 'Closed';
+  String get closedreport => 'Закрито';
 
   @override
   String get closedreports => 'Закриті';
@@ -1238,15 +1238,15 @@ class AppLocalizationsUk extends AppLocalizations {
   String get timeleft => 'Залишив час';
 
   @override
-  String get youhavevoted => 'You have voted';
+  String get youhavevoted => 'Ви проголосували';
 
   @override
-  String get reporttext => 'Text to Report';
+  String get reporttext => 'Текст звіту';
 
   @override
-  String get noreporttext => 'This Report have no text';
+  String get noreporttext => 'У цього звіту немає тексту';
 
   @override
   String get youarenotassignedtothisreport =>
-      'You are not assigned to this report';
+      'Вас не призначено до цього звіту';
 }
