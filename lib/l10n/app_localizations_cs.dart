@@ -1133,16 +1133,16 @@ class AppLocalizationsCs extends AppLocalizations {
   String get vacation => 'Dovolená';
 
   @override
-  String get vacationdays => 'Vacation days';
+  String get vacationdays => 'Dny dovolené';
 
   @override
   String get openreport => 'Otevřít';
 
   @override
-  String get openreports => 'Open Reports';
+  String get openreports => 'Otevřená hlášení';
 
   @override
-  String get closedreport => 'Closed';
+  String get closedreport => 'Uzavřeno';
 
   @override
   String get closedreports => 'Uzavřená hlášení';
@@ -1226,15 +1226,15 @@ class AppLocalizationsCs extends AppLocalizations {
   String get timeleft => 'Čas zbývá';
 
   @override
-  String get youhavevoted => 'You have voted';
+  String get youhavevoted => 'Hlasovali jste';
 
   @override
-  String get reporttext => 'Text to Report';
+  String get reporttext => 'Text hlášení';
 
   @override
-  String get noreporttext => 'This Report have no text';
+  String get noreporttext => 'Toto hlášení neobsahuje text';
 
   @override
   String get youarenotassignedtothisreport =>
-      'You are not assigned to this report';
+      'K tomuto hlášení nejste přiřazeni';
 }

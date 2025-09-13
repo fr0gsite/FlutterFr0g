@@ -1140,16 +1140,16 @@ class AppLocalizationsHi extends AppLocalizations {
   String get vacation => 'छुट्टी';
 
   @override
-  String get vacationdays => 'Vacation days';
+  String get vacationdays => 'छुट्टी के दिन';
 
   @override
   String get openreport => 'खुला';
 
   @override
-  String get openreports => 'Open Reports';
+  String get openreports => 'खुली रिपोर्टें';
 
   @override
-  String get closedreport => 'Closed';
+  String get closedreport => 'बंद';
 
   @override
   String get closedreports => 'बंद';
@@ -1233,15 +1233,15 @@ class AppLocalizationsHi extends AppLocalizations {
   String get timeleft => 'शेष समय';
 
   @override
-  String get youhavevoted => 'You have voted';
+  String get youhavevoted => 'आपने वोट किया है';
 
   @override
-  String get reporttext => 'Text to Report';
+  String get reporttext => 'रिपोर्ट का पाठ';
 
   @override
-  String get noreporttext => 'This Report have no text';
+  String get noreporttext => 'इस रिपोर्ट में कोई पाठ नहीं है';
 
   @override
   String get youarenotassignedtothisreport =>
-      'You are not assigned to this report';
+      'आपको इस रिपोर्ट के लिए असाइन नहीं किया गया है';
 }

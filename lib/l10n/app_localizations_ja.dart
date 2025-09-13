@@ -1109,16 +1109,16 @@ class AppLocalizationsJa extends AppLocalizations {
   String get vacation => '休暇';
 
   @override
-  String get vacationdays => 'Vacation days';
+  String get vacationdays => '休暇日数';
 
   @override
   String get openreport => '開く';
 
   @override
-  String get openreports => 'Open Reports';
+  String get openreports => '未処理の報告';
 
   @override
-  String get closedreport => 'Closed';
+  String get closedreport => 'クローズ';
 
   @override
   String get closedreports => '閉じた';
@@ -1202,15 +1202,15 @@ class AppLocalizationsJa extends AppLocalizations {
   String get timeleft => '残り時間';
 
   @override
-  String get youhavevoted => 'You have voted';
+  String get youhavevoted => 'あなたは投票しました';
 
   @override
-  String get reporttext => 'Text to Report';
+  String get reporttext => '報告のテキスト';
 
   @override
-  String get noreporttext => 'This Report have no text';
+  String get noreporttext => 'この報告にはテキストがありません';
 
   @override
   String get youarenotassignedtothisreport =>
-      'You are not assigned to this report';
+      'あなたはこの報告に割り当てられていません';
 }

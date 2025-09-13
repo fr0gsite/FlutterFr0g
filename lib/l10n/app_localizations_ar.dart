@@ -1130,16 +1130,16 @@ class AppLocalizationsAr extends AppLocalizations {
   String get vacation => 'عطلة';
 
   @override
-  String get vacationdays => 'Vacation days';
+  String get vacationdays => 'أيام الإجازة';
 
   @override
   String get openreport => 'مفتوح';
 
   @override
-  String get openreports => 'Open Reports';
+  String get openreports => 'التقارير المفتوحة';
 
   @override
-  String get closedreport => 'Closed';
+  String get closedreport => 'مغلق';
 
   @override
   String get closedreports => 'مغلق';
@@ -1223,15 +1223,15 @@ class AppLocalizationsAr extends AppLocalizations {
   String get timeleft => 'الوقت المتبقي';
 
   @override
-  String get youhavevoted => 'You have voted';
+  String get youhavevoted => 'لقد قمت بالتصويت';
 
   @override
-  String get reporttext => 'Text to Report';
+  String get reporttext => 'نص التقرير';
 
   @override
-  String get noreporttext => 'This Report have no text';
+  String get noreporttext => 'هذا التقرير ليس به نص';
 
   @override
   String get youarenotassignedtothisreport =>
-      'You are not assigned to this report';
+      'لم يتم تعيينك لهذا التقرير';
 }
