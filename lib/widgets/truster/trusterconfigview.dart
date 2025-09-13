@@ -17,7 +17,7 @@ class StatusOverview extends StatefulWidget {
 class _StatusOverviewState extends State<StatusOverview> {
   bool dorefresh = true;
   late Future<RewardCalc> getRewardToken;
-  late Future<List<Truster>> getTrusterInfo;
+  late Future<Truster> getTrusterInfo;
 
   @override
   void initState() {
@@ -31,7 +31,7 @@ class _StatusOverviewState extends State<StatusOverview> {
       getRewardToken = Chainactions().getrewardtokeninfo(
         globalStatus.username,
       );
-      getTrusterInfo = Chainactions().gettrusters();
+      getTrusterInfo = Chainactions().gettruster(globalStatus.username);
       dorefresh = false;
     }
 
@@ -114,10 +114,7 @@ class _StatusOverviewState extends State<StatusOverview> {
                       } else if (snapshot.hasError) {
                         return _buildInfoRow('Truster Info', 'Error', isError: true);
                       } else {
-                        Truster? truster = snapshot.data!.firstWhere(
-                          (t) => t.trustername == globalStatus.username,
-                          orElse: () => Truster.dummy(),
-                        );
+                        Truster? truster = snapshot.data!;
                         return Column(
                           children: [
                             _buildInfoRow("Karma", '${truster.karma}'),
