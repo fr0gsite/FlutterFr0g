@@ -3,6 +3,7 @@ import 'package:fr0gsite/chainactions/chainactions.dart';
 import 'package:fr0gsite/datatypes/favoritetag.dart';
 import 'package:fr0gsite/datatypes/globalstatus.dart';
 import 'package:fr0gsite/l10n/app_localizations.dart';
+import 'package:fr0gsite/widgets/home/tagbutton.dart';
 import 'package:provider/provider.dart';
 
 import '../infoscreens/pleaselogin.dart';
@@ -70,18 +71,10 @@ class _FavoriteTagsViewState extends State<FavoriteTagsView> {
                         width: 15,
                       ),
                       // Text button. Go to globaltag page
-                      TextButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/globaltag/${userfavoriteTags[index].globaltagid}',
-                              arguments: userfavoriteTags[index].globaltagid);
-                        },
-                        child: Text(
-                          userfavoriteTags[index].globaltagname,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                          ),
-                        ),
+                      TagButton(
+                        text: userfavoriteTags[index].globaltagname,
+                        globalTagId: userfavoriteTags[index].globaltagid,
+                        width: null,
                       ),
                     ],
                   ),

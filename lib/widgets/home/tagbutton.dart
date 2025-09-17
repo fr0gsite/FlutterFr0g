@@ -3,46 +3,85 @@ import 'package:flutter/material.dart';
 import 'package:fr0gsite/config.dart';
 import 'package:fr0gsite/widgets/home/octagonborder.dart';
 
-class TagButton extends StatefulWidget {
-  const TagButton({super.key, required this.text, required this.globaltagid});
+class TagButton extends StatelessWidget {
+  const TagButton({
+    super.key,
+    required this.text,
+    this.globalTagId,
+    this.onPressed,
+    this.arguments,
+    this.width = 150,
+    this.height = 35,
+    this.tooltipThreshold = 17,
+    this.textStyle,
+    this.contentPadding = const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+  });
 
   final String text;
-  final BigInt globaltagid;
-
-  @override
-  State<TagButton> createState() => TagButtonState();
-}
-
-class TagButtonState extends State<TagButton> {
-  double tagwidth = 150;
+  final Object? globalTagId;
+  final VoidCallback? onPressed;
+  final Object? arguments;
+  final double? width;
+  final double? height;
+  final int tooltipThreshold;
+  final TextStyle? textStyle;
+  final EdgeInsetsGeometry contentPadding;
 
   @override
   Widget build(BuildContext context) {
-    return Tooltip(
-      message: widget.text.length > 17 ? widget.text : '',
-      child: MaterialButton(
-        onPressed: () {
-          debugPrint('Show Globaltag ${widget.text} ');
-          Navigator.pushNamed(context, '/globaltag/${widget.globaltagid}',
-              arguments: {'text': widget.text, 'globaltagid': widget.globaltagid});
-        },
-        shape: const OctagonBorder(),
-        color: AppColor.tagcolor,
+    final bool shouldShowTooltip =
+        tooltipThreshold >= 0 && text.length > tooltipThreshold;
+
+    Widget button = Material(
+      shape: const OctagonBorder(),
+      color: AppColor.tagcolor,
+      clipBehavior: Clip.antiAlias,
+      child: InkWell(
+        customBorder: const OctagonBorder(),
+        onTap: _hasTapHandler ? () => _handleTap(context) : null,
         hoverColor: Colors.blue,
-        child: SizedBox(
-          width: tagwidth,
-          height: 35,
-          child: Align(
-            alignment: Alignment.center,
-            child: Text(
-              widget.text,
-              textAlign: TextAlign.center,
-              overflow: TextOverflow.ellipsis,
-              style: const TextStyle(color: Colors.white),
-            ),
+        child: Container(
+          padding: contentPadding,
+          alignment: Alignment.center,
+          constraints: BoxConstraints.tightFor(
+            width: width,
+            height: height,
+          ),
+          child: Text(
+            text,
+            textAlign: TextAlign.center,
+            overflow: TextOverflow.ellipsis,
+            style: textStyle ?? const TextStyle(color: Colors.white),
           ),
         ),
       ),
     );
+
+    if (shouldShowTooltip) {
+      button = Tooltip(
+        message: text,
+        child: button,
+      );
+    }
+
+    return button;
+  }
+
+  bool get _hasTapHandler => onPressed != null || globalTagId != null;
+
+  void _handleTap(BuildContext context) {
+    if (onPressed != null) {
+      onPressed!();
+      return;
+    }
+
+    if (globalTagId != null) {
+      final String routeId = globalTagId.toString();
+      Navigator.pushNamed(
+        context,
+        '/globaltag/$routeId',
+        arguments: arguments ?? {'text': text, 'globaltagid': globalTagId},
+      );
+    }
   }
 }

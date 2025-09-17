@@ -68,7 +68,7 @@ class _PopulartagsState extends State<Populartags> {
                                     padding: const EdgeInsets.all(8),
                                     child: TagButton(
                                         text: taglist[index * 2].text,
-                                        globaltagid: taglist[index * 2]
+                                        globalTagId: taglist[index * 2]
                                             .globaltagid),
                                   ),
                                   if (index * 2 + 1 < snapshot.data!.length)
@@ -76,7 +76,7 @@ class _PopulartagsState extends State<Populartags> {
                                       padding: const EdgeInsets.all(8.0),
                                       child: TagButton(
                                           text: taglist[index * 2 + 1].text,
-                                          globaltagid: taglist[index * 2 + 1]
+                                          globalTagId: taglist[index * 2 + 1]
                                               .globaltagid),
                                     ),
                                 ],
