@@ -61,7 +61,8 @@ class _GlobalTagTopBarState extends State<GlobalTagTopBar> {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: TagButton(
-                                  text: globaltag.text, globaltagid: globaltag.globaltagid),
+                                  text: globaltag.text,
+                                  globalTagId: globaltag.globaltagid),
                             ),
                             Tooltip(
                               message: AppLocalizations.of(context)!.addtofavorite,
