@@ -70,6 +70,7 @@ class _PopulartagsState extends State<Populartags> {
                                         text: taglist[index * 2].text,
                                         globaltagid: taglist[index * 2]
                                             .globaltagid,
+                                        width: tagwidth,
                                         heroTag:
                                             'globaltag-${taglist[index * 2].globaltagid}'),
                                   ),
@@ -80,6 +81,7 @@ class _PopulartagsState extends State<Populartags> {
                                           text: taglist[index * 2 + 1].text,
                                           globaltagid: taglist[index * 2 + 1]
                                               .globaltagid,
+                                          width: tagwidth,
                                           heroTag:
                                               'globaltag-${taglist[index * 2 + 1].globaltagid}'),
                                     ),

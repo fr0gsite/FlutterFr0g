@@ -12,6 +12,7 @@ import 'package:fr0gsite/datatypes/upload.dart';
 import 'package:fr0gsite/globalnotifications.dart';
 import 'package:fr0gsite/nameconverter.dart';
 import 'package:fr0gsite/widgets/cube/cube.dart';
+import 'package:fr0gsite/widgets/home/tagbutton.dart';
 import 'package:fr0gsite/l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
@@ -231,22 +232,12 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                   ),
                 ),
                 const SizedBox(height: 12),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                  decoration: BoxDecoration(
-                    color: Colors.blue.withAlpha((0.3 * 255).toInt()),
-                    borderRadius: BorderRadius.circular(16),
-                    border: Border.all(color: Colors.blue, width: 1),
-                  ),
-                  child: Text(
-                    tag.text,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
+                TagButton(
+                  text: tag.text,
+                  globaltagid: tag.globaltagid,
+                  height: 40,
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  heroTag: 'report-tag-${tag.globaltagid}',
                 ),
               ],
             ),

@@ -1,8 +1,8 @@
 import 'package:fr0gsite/chainactions/chainactions.dart';
-import 'package:fr0gsite/config.dart';
 import 'package:fr0gsite/datatypes/globalstatus.dart';
 import 'package:fr0gsite/widgets/login/login.dart';
 import 'package:fr0gsite/widgets/postviewer/commentandtagbutton.dart';
+import 'package:fr0gsite/widgets/home/tagbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -23,31 +23,18 @@ class Tagelement extends StatefulWidget {
 class _TagelementState extends State<Tagelement> {
   @override
   Widget build(BuildContext context) {
+    final BigInt globalTagId = BigInt.parse(widget.globaltagid);
     return Row(children: [
       commentandtagbutton(widget.globuptagid, Icons.add_circle_outline_sharp,
           "Upvote", upvotetag, false, 0, Colors.green, Colors.orange),
       commentandtagbutton(widget.globuptagid, Icons.do_not_disturb_on_outlined,
           "Downvote", downvotetag, false, 0, Colors.red, Colors.orange),
       const SizedBox(width: 5),
-      TextButton(
-        onPressed: () {
-          Navigator.pushNamed(context, '/globaltag/${widget.globaltagid}',
-              arguments: {
-                'text': widget.tagtext,
-                'globaltagid': widget.globaltagid
-              });
-        },
-        style: ButtonStyle(
-          backgroundColor: WidgetStateProperty.all<Color>(AppColor.tagcolor),
-          overlayColor: WidgetStateColor.resolveWith((states) => Colors.blue),
-          shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-              RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                  side: const BorderSide(color: Colors.black))),
-        ),
-        child:
-            Text(widget.tagtext, style: const TextStyle(color: Colors.white)),
-      )
+      TagButton(
+        text: widget.tagtext,
+        globaltagid: globalTagId,
+        heroTag: 'globaltag-${widget.globaltagid}',
+      ),
     ]);
   }
 
