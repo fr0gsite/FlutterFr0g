@@ -64,6 +64,16 @@ class _SoundBarState extends State<SoundBar> {
                 max: 1,
                 min: 0,
                 rtl: true,
+                tooltip: FlutterSliderTooltip(
+                  format: (String value) {
+                    final parsedValue = double.tryParse(value);
+                    if (parsedValue == null) {
+                      return value;
+                    }
+                    final percentValue = (parsedValue * 100).round();
+                    return '$percentValue %';
+                  },
+                ),
                 trackBar: FlutterSliderTrackBar(
                   activeTrackBarHeight: 15,
                   inactiveTrackBarHeight: 15,
