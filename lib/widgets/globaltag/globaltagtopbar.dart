@@ -30,6 +30,10 @@ class _GlobalTagTopBarState extends State<GlobalTagTopBar> {
   void initState() {
     super.initState();
     globaltag.text = widget.tagtext;
+    if (widget.globaltagid.isNotEmpty) {
+      globaltag.globaltagid =
+          BigInt.tryParse(widget.globaltagid) ?? globaltag.globaltagid;
+    }
     futuregetglobaltag = getglobaltag();
     checkifuserhasfavoritedtag();
   }
@@ -61,7 +65,9 @@ class _GlobalTagTopBarState extends State<GlobalTagTopBar> {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: TagButton(
-                                  text: globaltag.text, globaltagid: globaltag.globaltagid),
+                                  text: globaltag.text,
+                                  globaltagid: globaltag.globaltagid,
+                                  heroTag: 'globaltag-${widget.globaltagid}'),
                             ),
                             Tooltip(
                               message: AppLocalizations.of(context)!.addtofavorite,
