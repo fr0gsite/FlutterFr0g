@@ -69,7 +69,9 @@ class _PopulartagsState extends State<Populartags> {
                                     child: TagButton(
                                         text: taglist[index * 2].text,
                                         globaltagid: taglist[index * 2]
-                                            .globaltagid),
+                                            .globaltagid,
+                                        heroTag:
+                                            'globaltag-${taglist[index * 2].globaltagid}'),
                                   ),
                                   if (index * 2 + 1 < snapshot.data!.length)
                                     Padding(
@@ -77,7 +79,9 @@ class _PopulartagsState extends State<Populartags> {
                                       child: TagButton(
                                           text: taglist[index * 2 + 1].text,
                                           globaltagid: taglist[index * 2 + 1]
-                                              .globaltagid),
+                                              .globaltagid,
+                                          heroTag:
+                                              'globaltag-${taglist[index * 2 + 1].globaltagid}'),
                                     ),
                                 ],
                               ),
