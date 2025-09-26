@@ -77,52 +77,103 @@ class _CommentWidgetState extends State<CommentWidget> {
           title: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    commentandtagbutton(
-                        widget.comment.commentId.toString(),
-                        Icons.add_circle_outline_sharp,
-                        "Upvote",
-                        upvotecomment,
-                        isliked,
-                        0,
-                        Colors.green,
-                        Colors.orange),
-                    commentandtagbutton(
-                        widget.comment.commentId.toString(),
-                        Icons.do_not_disturb_on_outlined,
-                        "Downvote",
-                        downvotecomment,
-                        isdisliked,
-                        0,
-                        Colors.red,
-                        Colors.orange),
-                    commentandtagbutton(
-                        widget.comment.commentId.toString(),
-                        Icons.favorite,
-                        isfavorited ? AppLocalizations.of(context)!.discard : AppLocalizations.of(context)!.favoritize,
-                        favoritecomment,
-                        isfavorited,
-                        0,
-                        Colors.yellow,
-                        Colors.orange),
-                    TextButton(
-                      child: Text(widget.comment.author,
-                          style: const TextStyle(
-                              fontSize: 16, color: Colors.white)),
-                      onPressed: () {
-                        //Open user profile
-                        Navigator.pushReplacementNamed(context,
-                            '/profile/${widget.comment.author}',
-                            arguments: {'accountname': widget.comment.author});
-                      },
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: [
+                          commentandtagbutton(
+                              widget.comment.commentId.toString(),
+                              Icons.add_circle_outline_sharp,
+                              "Upvote",
+                              upvotecomment,
+                              isliked,
+                              0,
+                              Colors.green,
+                              Colors.orange),
+                          commentandtagbutton(
+                              widget.comment.commentId.toString(),
+                              Icons.do_not_disturb_on_outlined,
+                              "Downvote",
+                              downvotecomment,
+                              isdisliked,
+                              0,
+                              Colors.red,
+                              Colors.orange),
+                          commentandtagbutton(
+                              widget.comment.commentId.toString(),
+                              Icons.favorite,
+                              isfavorited ? AppLocalizations.of(context)!.discard : AppLocalizations.of(context)!.favoritize,
+                              favoritecomment,
+                              isfavorited,
+                              0,
+                              Colors.yellow,
+                              Colors.orange),
+                        ],
+                      ),
                     ),
-                    TimeDifferenceWidget(
-                        dateTimeString: widget.comment.creationTime.toString()),
-                  ],
-                ),
+                  ),
+                  const SizedBox(width: 8),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      TextButton(
+                        child: Text(widget.comment.author,
+                            style: const TextStyle(
+                                fontSize: 16, color: Colors.white)),
+                        onPressed: () {
+                          //Open user profile
+                          Navigator.pushReplacementNamed(context,
+                              '/profile/${widget.comment.author}',
+                              arguments: {'accountname': widget.comment.author});
+                        },
+                      ),
+                      const SizedBox(width: 8),
+                      TimeDifferenceWidget(
+                          dateTimeString:
+                              widget.comment.creationTime.toString()),
+                      const SizedBox(width: 4),
+                      IconButton(
+                        tooltip: AppLocalizations.of(context)!.reply,
+                        onPressed: () {
+                          if (Provider.of<GlobalStatus>(context, listen: false)
+                              .isLoggedin) {
+                            debugPrint(
+                                "Create replay to ${widget.comment.author}");
+                            writecomment(context, widget.comment);
+                          } else {
+                            {
+                              showDialog(
+                                  context: context,
+                                  builder: ((context) {
+                                    return const Login();
+                                  }));
+                            }
+                          }
+                        },
+                        icon: const Icon(Icons.reply, color: Colors.white),
+                      ),
+                      IconButton(
+                        tooltip: AppLocalizations.of(context)!.report,
+                        onPressed: () {
+                          debugPrint(
+                              "Report comment from ${widget.comment.author}");
+                          showDialog(
+                            context: context,
+                            builder: ((context) => Report(
+                                  id: widget.comment.commentId.toInt(),
+                                  type: 2,
+                                )),
+                          );
+                        },
+                        icon: const Icon(Icons.report, color: Colors.white),
+                      ),
+                    ],
+                  ),
+                ],
               ),
               const Divider(
                 height: 10,
@@ -132,82 +183,16 @@ class _CommentWidgetState extends State<CommentWidget> {
                   ),
             ],
           ),
-          subtitle: Padding(
-            padding: const EdgeInsets.only(
-              top: 8,
-            ),
-            child: Row(
-              children: [
-                SizedBox(
-                  height: 30,
-                  child: FloatingActionButton.extended(
-                    heroTag: null,
-                    onPressed: () {
-                      if (Provider.of<GlobalStatus>(context, listen: false)
-                          .isLoggedin) {
-                        debugPrint("Create replay to ${widget.comment.author}");
-                        writecomment(context, widget.comment);
-                      } else {
-                        {
-                          showDialog(
-                              context: context,
-                              builder: ((context) {
-                                return const Login();
-                              }));
-                        }
-                      }
-                    },
-                    hoverColor: Colors.blue,
-                    backgroundColor: Colors.blue.withAlpha((0.3 * 255).toInt()),
-                    label: Text(AppLocalizations.of(context)!.reply,
+          subtitle: subComments.isNotEmpty && !expansionState
+              ? Padding(
+                  padding: const EdgeInsets.only(top: 8),
+                  child: Align(
+                    alignment: Alignment.centerRight,
+                    child: AutoSizeText("${subComments.length} Replies",
                         style: const TextStyle(color: Colors.white)),
-                    icon: const Icon(Icons.reply, color: Colors.white),
-                    shape: ShapeBorder.lerp(
-                        RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10)),
-                        RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10)),
-                        0.5),
                   ),
-                ),
-                SizedBox(
-                  height: 30,
-                  child: FloatingActionButton.extended(
-                    heroTag: null,
-                    onPressed: () {
-                      debugPrint(
-                          "Report comment from ${widget.comment.author}");
-                      showDialog(
-                        context: context,
-                        builder: ((context) => Report(
-                              id: widget.comment.commentId.toInt(),
-                              type: 2,
-                            )),
-                      );
-                    },
-                    hoverColor: Colors.red,
-                    backgroundColor: Colors.red.withAlpha((0.3 * 255).toInt()),
-                    label: Text(AppLocalizations.of(context)!.report,
-                        style: const TextStyle(color: Colors.white)),
-                    icon: const Icon(Icons.report, color: Colors.white),
-                    shape: ShapeBorder.lerp(
-                        RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10)),
-                        RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10)),
-                        0.5),
-                  ),
-                ),
-                const Spacer(),
-                subComments.isNotEmpty
-                    ? expansionState
-                        ? Container()
-                        : AutoSizeText("${subComments.length} Replies",
-                            style: const TextStyle(color: Colors.white))
-                    : Container()
-              ],
-            ),
-          ),
+                )
+              : null,
           children: subComments
               .map(
                 (subComment) => CommentWidget(
