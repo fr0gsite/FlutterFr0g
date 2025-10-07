@@ -156,7 +156,7 @@ class _ReportsTableState extends State<ReportsTable> {
   bool _sortAscending = false;
   
   // Filter
-  Set<int> _selectedStatuses = <int>{0, 2}; // 0 = Open, 2 = Urgent
+  final Set<int> _selectedStatuses = <int>{0, 2}; // 0 = Open, 2 = Urgent
   
   // Data Cache
   List<Report>? _cachedReports;

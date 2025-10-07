@@ -455,7 +455,7 @@ class _StakeorUnstakeState extends State<StakeorUnstake> {
                           });
                         },
                         activeTrackColor: activeColor,
-                        activeColor: activeColor,
+                        activeThumbColor: activeColor,
                       ),
                     ],
                   ),
@@ -524,7 +524,7 @@ class _StakeorUnstakeState extends State<StakeorUnstake> {
                                     });
                                   },
                                   activeTrackColor: activeColor,
-                                  activeColor: activeColor,
+                                  activeThumbColor: activeColor,
                                 ),
                               ),
                             ]),

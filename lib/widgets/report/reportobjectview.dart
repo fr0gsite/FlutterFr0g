@@ -56,7 +56,7 @@ class _ReportObjectViewState extends State<ReportObjectView> {
           icon: const Icon(Icons.arrow_drop_down, color: Colors.white),
           iconSize: 24,
           isDense: false,
-          value: Provider.of<ReportStatus>(context).selectedrule < 0
+          initialValue: Provider.of<ReportStatus>(context).selectedrule < 0
               ? null
               : rules.firstWhere(
                   (element) =>

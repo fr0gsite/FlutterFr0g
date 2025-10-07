@@ -1,4 +1,4 @@
-import 'package:fr0gsite/datatypes/AppLanguage.dart';
+import 'package:fr0gsite/datatypes/appLanguage.dart';
 import 'package:fr0gsite/datatypes/game.dart';
 import 'package:fr0gsite/datatypes/ipfsnode.dart';
 import 'package:fr0gsite/datatypes/ipfsuploadnode.dart';

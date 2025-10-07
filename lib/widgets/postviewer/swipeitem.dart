@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:blur/blur.dart';
 import 'package:fr0gsite/config.dart';
 import 'package:fr0gsite/datatypes/globalstatus.dart';

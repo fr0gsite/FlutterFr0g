@@ -385,7 +385,7 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                             border: Border.all(color: Colors.white.withAlpha((0.3 * 255).toInt()), width: 1),
                           ),
                           child: Text(
-                            "${_getContentTypeText(report.type, context)} ${contentAuthor}",
+                            "${_getContentTypeText(report.type, context)} $contentAuthor",
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
