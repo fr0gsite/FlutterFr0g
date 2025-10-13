@@ -20,7 +20,7 @@ dependencies:
   path_provider: ^2.0.11 #No Web support
 
   #Accessbility
-  google_fonts: ^6.3.0
+  google_fonts: ^6.3.2
   share_plus: ^11.0.0
   cupertino_icons: ^1.0.2
   url_launcher: ^6.3.2
