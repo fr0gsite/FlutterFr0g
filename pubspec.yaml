@@ -24,7 +24,7 @@ dependencies:
   share_plus: ^11.0.0
   cupertino_icons: ^1.0.2
   url_launcher: ^6.3.2
-  mobile_scanner: ^7.0.1
+  mobile_scanner: ^7.1.2
   #font_awesome_flutter: ^9.1.0
   #share_plus: ^7.0.2 #Share content to other apps
   #auto_size_text: ^3.0.0 #Auto size text to fit in container https://pub.dev/packages/auto_size_text
