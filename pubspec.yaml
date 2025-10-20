@@ -16,12 +16,12 @@ dependencies:
 
   #Storage
   shared_preferences: ^2.5.3
-  flutter_secure_storage: ^9.0.0
+  flutter_secure_storage: ^10.0.0-beta.4
   path_provider: ^2.0.11 #No Web support
 
   #Accessbility
   google_fonts: ^6.3.2
-  share_plus: ^11.0.0
+  share_plus: ^12.0.1
   cupertino_icons: ^1.0.2
   url_launcher: ^6.3.2
   mobile_scanner: ^7.1.2
@@ -45,7 +45,7 @@ dependencies:
   another_xlider: ^3.0.1 #for audio adjustment in postviewer
   action_slider: ^0.7.0
   fl_chart: ^1.1.1
-  country_flags: ^3.0.0
+  country_flags: ^4.1.0
   #easy_stepper: ^0.8.3
   easy_stepper:
     git:
@@ -74,7 +74,7 @@ dependencies:
   fluro: ^2.0.5
   pointycastle: ^3.9.1
   universal_html: ^2.2.3
-  package_info_plus: ^8.3.0 #Querying information about the application package
+  package_info_plus: ^9.0.0 #Querying information about the application package
   #flutter_bloc: ^8.1.2
   http: ^1.5.0
   url_strategy: ^0.3.0

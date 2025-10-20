@@ -8,6 +8,8 @@ import 'package:fr0gsite/datatypes/blockchainnode.dart';
 import 'package:flutter/material.dart';
 import 'package:fr0gsite/l10n/app_localizations.dart';
 
+
+
 class AppColor {
   static const Color nicewhite = Color.fromARGB(255, 230, 230, 230);
   //static const Color niceblack = Color(0xFF060716);
@@ -154,12 +156,32 @@ class AppConfig {
   static const String secureStorageusername = "username";
   static const String secureStorageUserConfig = "userconfig";
 
-  // Debug login credentials
-  // Provide values here if you want the app to automatically
-  // log in while running in debug mode.
-  static const String debugUsername = "user1"; // e.g. "testuser"
-  static const String debugPKey = "5KFBoCQJoVA2cUF3uSwyrxfJ5KuuZqsC4oRS6Rju8mNYkCmJJeH"; // private key of debug account
-  static const String debugPermission = "active";
+  static String get debugUsername {
+    try {
+      // ignore: undefined_identifier
+      return DebugConfig.debugUsername;
+    } catch (e) {
+      return ""; // Fallback
+    }
+  }
+  
+  static String get debugPKey {
+    try {
+      // ignore: undefined_identifier
+      return DebugConfig.debugPKey;
+    } catch (e) {
+      return ""; // Fallback
+    }
+  }
+  
+  static String get debugPermission {
+    try {
+      // ignore: undefined_identifier
+      return DebugConfig.debugPermission;
+    } catch (e) {
+      return "";
+    }
+  }
 
   static const connectioncheckinterval = 60; //in seconds
   static int refreshuserfavoriteupload = 15; //in minutes
