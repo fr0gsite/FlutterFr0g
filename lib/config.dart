@@ -1,3 +1,4 @@
+import 'package:fr0gsite/config_debug.dart';
 import 'package:fr0gsite/datatypes/appLanguage.dart';
 import 'package:fr0gsite/datatypes/game.dart';
 import 'package:fr0gsite/datatypes/ipfsnode.dart';
@@ -158,7 +159,6 @@ class AppConfig {
 
   static String get debugUsername {
     try {
-      // ignore: undefined_identifier
       return DebugConfig.debugUsername;
     } catch (e) {
       return ""; // Fallback
@@ -167,7 +167,6 @@ class AppConfig {
   
   static String get debugPKey {
     try {
-      // ignore: undefined_identifier
       return DebugConfig.debugPKey;
     } catch (e) {
       return ""; // Fallback
@@ -176,7 +175,6 @@ class AppConfig {
   
   static String get debugPermission {
     try {
-      // ignore: undefined_identifier
       return DebugConfig.debugPermission;
     } catch (e) {
       return "";
