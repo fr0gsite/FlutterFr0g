@@ -1,5 +1,3 @@
-# 🐸 Fr0g.site Flutter App
-
 <p align="center">
   <img src="assets/frogwebp/84.webp" alt="Fr0gsite mascot" width="200"/>
 </p>
@@ -22,6 +20,8 @@
   <a href="https://t.me/fr0gsite"><img src="https://img.shields.io/badge/💬_Telegram-Community-blue.svg?style=for-the-badge&logo=telegram" alt="Telegram"></a>
   <a href="https://doc.fr0g.site/"><img src="https://img.shields.io/badge/📖_Documentation-Read_Docs-blue.svg?style=for-the-badge" alt="Documentation"></a>
 </p>
+
+# 🐸 Fr0g.site Flutter App
 
 ## 🎯 About the Project
 
