@@ -80,7 +80,7 @@ dependencies:
   url_strategy: ^0.3.0
   blur: ^4.0.2
   qr_flutter: ^4.1.0
-  audioplayers: ^6.0.0
+  audioplayers: ^6.5.1
   #universal_io: ^2.2.0
   #qr_code_scanner: ^1.0.1
   #geolocator 9.0.2 #Get user location for language selection
