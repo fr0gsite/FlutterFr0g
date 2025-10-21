@@ -1,4 +1,3 @@
-import 'package:fr0gsite/config_debug.dart';
 import 'package:fr0gsite/datatypes/appLanguage.dart';
 import 'package:fr0gsite/datatypes/game.dart';
 import 'package:fr0gsite/datatypes/ipfsnode.dart';
@@ -157,29 +156,10 @@ class AppConfig {
   static const String secureStorageusername = "username";
   static const String secureStorageUserConfig = "userconfig";
 
-  static String get debugUsername {
-    try {
-      return DebugConfig.debugUsername;
-    } catch (e) {
-      return ""; // Fallback
-    }
-  }
-  
-  static String get debugPKey {
-    try {
-      return DebugConfig.debugPKey;
-    } catch (e) {
-      return ""; // Fallback
-    }
-  }
-  
-  static String get debugPermission {
-    try {
-      return DebugConfig.debugPermission;
-    } catch (e) {
-      return "";
-    }
-  }
+  static const debugUsername = String.fromEnvironment("debugUsername", defaultValue: "");
+  static const debugPKey = String.fromEnvironment("debugPKey", defaultValue: "");
+  static const debugPermission = String.fromEnvironment("debugPermission", defaultValue: "");
+
 
   static const connectioncheckinterval = 60; //in seconds
   static int refreshuserfavoriteupload = 15; //in minutes
