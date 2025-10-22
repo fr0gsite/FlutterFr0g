@@ -122,7 +122,7 @@ class AppConfig {
 
   static List<Blockchainnode> blockchainnodeurls = [
     Blockchainnode(
-        1, "Genesis Node", "testnet.fr0g.site", "8443", "https", "v1"),
+        1, "Genesis Node", "localhost", "8443", "http", "v1"),
   ];
 
   static List<IPFSUploadNode> ipfsuploadnodes = [

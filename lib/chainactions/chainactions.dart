@@ -43,6 +43,21 @@ class Chainactions {
   
   // Upload Cache
   static final Map<String, Upload> _uploadCache = {};
+  
+  List<dynamic> validateTableRowsResponse(dynamic response, String context) {
+    if (response == null) {
+      debugPrint("$context: Response is null");
+      return <dynamic>[];
+    }
+    
+    if (response is! List) {
+      debugPrint("$context: Response is not a list: ${response.runtimeType}");
+      debugPrint("$context: Response content: $response");
+      return <dynamic>[];
+    }
+    
+    return response;
+  }
   static final Map<String, DateTime> _uploadCacheTimestamps = {};
   static const Duration _cacheValidityDuration = Duration(minutes: 30);
 
@@ -358,27 +373,48 @@ class Chainactions {
       String globaluploadid, int limit) async {
     debugPrint(
         "Requesting Uploads for global tag $globaluploadid. Limit: $limit");
-    var response = await geteosclient().getTableRows(
-        AppConfig.maincontract, globaluploadid, 'withthistag',
-        limit: limit, lower: "0", reverse: true, json: true);
-    debugPrint("Received Uploads with this tag. Length: ${response.length}");
+    
+    try {
+      dynamic rawResponse = await geteosclient().getTableRows(
+          AppConfig.maincontract, globaluploadid, 'withthistag',
+          limit: limit, lower: "0", reverse: true, json: true);
+      
+      List<dynamic> response = validateTableRowsResponse(rawResponse, "getuploadsforglobaltag");
+      
+      debugPrint("Received Uploads with this tag. Length: ${response.length}");
 
-    List<WiththisTag> withthistaglist =
-        response.map((json) => WiththisTag.fromJson(json)).toList();
-    List<Future> futures = [];
-    List<Upload> uploadlist = [];
+      if (response.isEmpty) {
+        debugPrint("No uploads found for tag $globaluploadid");
+        return <Upload>[];
+      }
 
-    for (int i = 0; i < withthistaglist.length; i++) {
-      var future =
-          getupload(withthistaglist[i].uploadid.toString()).then((value) {
-        uploadlist.add(value);
-      });
-      futures.add(future);
+      List<WiththisTag> withthistaglist = [];
+      for (var json in response) {
+        try {
+          withthistaglist.add(WiththisTag.fromJson(json));
+        } catch (e) {
+          debugPrint("Error parsing WiththisTag: $e");
+        }
+      }
+      
+      List<Future> futures = [];
+      List<Upload> uploadlist = [];
+
+      for (int i = 0; i < withthistaglist.length; i++) {
+        var future =
+            getupload(withthistaglist[i].uploadid.toString()).then((value) {
+          uploadlist.add(value);
+        });
+        futures.add(future);
+      }
+      await Future.wait(futures);
+      debugPrint("Received all Upload Metadata");
+
+      return uploadlist;
+    } catch (e) {
+      debugPrint("Error in getuploadsforglobaltag: $e");
+      return <Upload>[];
     }
-    await Future.wait(futures);
-    debugPrint("Received all Upload Metadata");
-
-    return uploadlist;
   }
 
   Future<List<Upload>> getuploadsforglobaltagupperthan(
@@ -1319,14 +1355,36 @@ class Chainactions {
   Future<List<ProducerInfo>> getproducerlist() async {
     debugPrint("Requesting producer info");
     List<ProducerInfo> producerinfo = [];
-    var response = await geteosclient()
-        .getTableRows(AppConfig.blockchainsystemcontract,AppConfig.blockchainsystemcontract, 'producers', limit: 300, json: true);
+    
     try {
-      for (var index = 0; index < response.length; index++) {
-        producerinfo.add(ProducerInfo.fromJson(response[index]));
+      dynamic rawResponse = await geteosclient()
+          .getTableRows(AppConfig.blockchainsystemcontract,AppConfig.blockchainsystemcontract, 'producers', limit: 300, json: true);
+      
+      List<dynamic> response = validateTableRowsResponse(rawResponse, "getproducerlist");
+      
+      if (response.isEmpty) {
+        debugPrint("Producer list is empty");
+        return producerinfo;
       }
+      
+      debugPrint("Found ${response.length} producers");
+      
+      for (var index = 0; index < response.length; index++) {
+        try {
+          if (response[index] != null) {
+            producerinfo.add(ProducerInfo.fromJson(response[index]));
+          }
+        } catch (e) {
+          debugPrint("Error parsing producer at index $index: $e");
+          debugPrint("Producer data: ${response[index]}");
+        }
+      }
+      
+      debugPrint("Successfully parsed ${producerinfo.length} producers");
+      
     } catch (e) {
       debugPrint("Error while fetching producer info: $e");
+      debugPrint("Stack trace: ${StackTrace.current}");
       producerinfo = [];
     }
     return producerinfo;

@@ -78,47 +78,7 @@ flutter build apk
    flutter doctor  # Checks the installation
    ```
 
-3. **Debug Configuration (optional):**
-   ```bash
-   # Create config_debug.dart for automatic login during debugging
-   cp lib/config_debug.dart.example lib/config_debug.dart
-   # Edit the file with your test credentials
-   ```
-
-### Platform-specific Builds
-
-```bash
-# Web (recommended for development)
-flutter build web
-flutter run -d chrome
-
-# Android
-flutter build apk --release
-flutter build appbundle --release
-
-# iOS (macOS only)
-flutter build ios --release
-
-# Desktop
-flutter build windows
-flutter build macos
-flutter build linux
-```
-
 ## 💻 Usage & Examples
-
-### Basic Navigation
-
-```dart
-// Main configuration in lib/config.dart
-const selfurl = "https://fr0g.site";
-const githuburl = "https://github.com/fr0gsite";
-
-// Blockchain connection
-List<Blockchainnode> blockchainnodeurls = [
-  Blockchainnode(1, "Genesis Node", "testnet.fr0g.site", "8443", "https", "v1"),
-];
-```
 
 ### Internationalization
 
