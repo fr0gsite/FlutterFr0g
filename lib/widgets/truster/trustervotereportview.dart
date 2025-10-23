@@ -538,7 +538,7 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                   ),
                 ),
                 onPressed: _uservoted ? null : () async {
-                  await _handleVote(context, report, -1);
+                  await _handleVote(context, report, 0);
                 },
                 child: Text(AppLocalizations.of(context)!.violation),
               ),
@@ -914,19 +914,16 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
       bool result = await ca.trustervote(report.reportid.toString(), vote);
       if (result) {
         Globalnotifications.shownotification(context, "title", "message", "success");
-        // Aktualisiere die futureReportVotes für sofortige Progressbar-Aktualisierung
         setState(() {
           futureReportVotes = Chainactions().getreportvotes(widget.report.reportid.toString());
         });
       } else {
-        // Bei Fehler _uservoted zurücksetzen
         setState(() {
           _uservoted = false;
         });
       }
     } catch (error) {
       debugPrint("Error voting: $error");
-      // Bei Fehler _uservoted zurücksetzen
       setState(() {
         _uservoted = false;
       });
