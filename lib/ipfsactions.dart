@@ -12,8 +12,11 @@ class IPFSActions {
   static Future<Uint8List> fetchipfsdata(BuildContext context, ipfshashToMediafile) async {
     debugPrint("Request IPFS Media with Hash: $ipfshashToMediafile");
 
+    // Extract providers at the beginning to avoid using context across async gaps
+    final blacklist = Provider.of<BlacklistStatus>(context, listen: false);
+    final networkStatus = Provider.of<NetworkStatus>(context, listen: false);
+
     // Check blacklist
-    var blacklist = Provider.of<BlacklistStatus>(context, listen: false);
     await blacklist.ensure();
     if (blacklist.isBlacklisted(ipfshashToMediafile)) {
       debugPrint("IPFS hash $ipfshashToMediafile is blacklisted");
@@ -41,12 +44,10 @@ class IPFSActions {
 
     //Choose IPFS Node
     const int timeoutinseconds = 10;
-    IPFSNode choosenIPFSnode =
-        Provider.of<NetworkStatus>(context, listen: false).chooseIPFSNode();
+    IPFSNode choosenIPFSnode = networkStatus.chooseIPFSNode();
     int numoftries = 0;
     while (numoftries < 5) {
-      choosenIPFSnode =
-          Provider.of<NetworkStatus>(context, listen: false).chooseIPFSNode();
+      choosenIPFSnode = networkStatus.chooseIPFSNode();
       late http.Response response;
       DateTime start = DateTime.now();
       if (choosenIPFSnode.methode == "GET") {
@@ -60,24 +61,24 @@ class IPFSActions {
             debugPrint(
                 "Timeout Failed to receive IPFS Media with Hash: $ipfshashToMediafile");
             //Choose next IPFS Node
-            Provider.of<NetworkStatus>(context, listen: false).requestfromIPFS(
+            networkStatus.requestfromIPFS(
                 choosenIPFSnode, false, timeoutinseconds * 1000);
             //return http.Response("Timeout", 408);
             throw Exception("Timeout");
           });
         } catch (e) {
-          Provider.of<NetworkStatus>(context, listen: false)
+          networkStatus
               .requestfromIPFS(choosenIPFSnode, false, timeoutinseconds * 1000);
           //Choose next IPFS Node and try again
           numoftries++;
-          choosenIPFSnode = Provider.of<NetworkStatus>(context, listen: false)
+          choosenIPFSnode = networkStatus
               .chooseIPFSNode();
           continue;
         }
       }
       DateTime end = DateTime.now();
       if (response.statusCode == 200) {
-        Provider.of<NetworkStatus>(context, listen: false).requestfromIPFS(
+        networkStatus.requestfromIPFS(
             choosenIPFSnode, true, end.difference(start).inMilliseconds);
         debugPrint("Received IPFS Media with Hash: $ipfshashToMediafile");
         var byteresponse = response.bodyBytes;
@@ -93,7 +94,7 @@ class IPFSActions {
       } else {
         debugPrint(
             "Failed to receive IPFS Media with Hash: $ipfshashToMediafile");
-        Provider.of<NetworkStatus>(context, listen: false).requestfromIPFS(
+        networkStatus.requestfromIPFS(
             choosenIPFSnode, false, end.difference(start).inMilliseconds);
         return Uint8List.fromList([]);
       }
