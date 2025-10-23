@@ -82,6 +82,9 @@ class _WalletConfirmTransactionState extends State<WalletConfirmTransaction> {
                     action: (controller) async {
                       controller.loading();
 
+                      // Extract providers early to avoid context usage across async gaps
+                      final globalStatus = Provider.of<GlobalStatus>(context, listen: false);
+                      
                       double parsedamount = double.parse(widget.amount);
 
                       String amountinformat =
@@ -89,20 +92,16 @@ class _WalletConfirmTransactionState extends State<WalletConfirmTransaction> {
 
                       Chainactions()
                         ..setusernameandpermission(
-                            Provider.of<GlobalStatus>(context, listen: false)
-                                .username,
-                            Provider.of<GlobalStatus>(context, listen: false)
-                                .permission)
+                            globalStatus.username,
+                            globalStatus.permission)
                         ..sendtoken(
-                                Provider.of<GlobalStatus>(context,
-                                        listen: false)
-                                    .username,
+                                globalStatus.username,
                                 widget.sendtoaccount,
                                 amountinformat,
                                 widget.memo)
                             .then((value) {
                           if (value) {
-                            if (Provider.of<GlobalStatus>(context,listen: false).audionotifications) {
+                            if (globalStatus.audionotifications) {
                             AudioPlayer audioPlayer = AudioPlayer();
                             audioPlayer.play(
                                   AssetSource("sounds/cash2.m4a"),
@@ -110,17 +109,21 @@ class _WalletConfirmTransactionState extends State<WalletConfirmTransaction> {
                                   mode: PlayerMode.lowLatency);
                             }
                             
-                            setState(() {
-                              backgroundcolorslider = Colors.green;
-                            });
+                            if (mounted) {
+                              setState(() {
+                                backgroundcolorslider = Colors.green;
+                              });
+                            }
 
                             controller.success();
 
                             Timer(const Duration(seconds: 1), () {
-                              Navigator.pop(context);
-                              Timer(const Duration(seconds: 1), () {
-                                widget.callback();
-                              });
+                              if (mounted) {
+                                Navigator.pop(context);
+                                Timer(const Duration(seconds: 1), () {
+                                  widget.callback();
+                                });
+                              }
                             });
                           } else {
                             controller.failure();
