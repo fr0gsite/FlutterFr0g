@@ -125,37 +125,32 @@ class _CustomConnectionIPFSState extends State<CustomConnectionIPFS> {
                   // Radio Buttons for Protokoll HTTP or HTTPS
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      children: [
-                        Radio(
-                          value: Protocol.http,
-                          groupValue: choosenprotocoll,
-                          onChanged: (value) {
-                            setState(() {
-                              choosenprotocoll = value;
-                              updateexample();
-                            });
-                          },
-                        ),
-                        const Text(
-                          "http",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        Radio(
-                          value: Protocol.https,
-                          groupValue: choosenprotocoll,
-                          onChanged: (value) {
-                            setState(() {
-                              choosenprotocoll = value;
-                              updateexample();
-                            });
-                          },
-                        ),
-                        const Text(
-                          "https",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ],
+                    child: RadioGroup<Protocol>(
+                      groupValue: choosenprotocoll,
+                      onChanged: (value) {
+                        setState(() {
+                          choosenprotocoll = value;
+                          updateexample();
+                        });
+                      },
+                      child: Row(
+                        children: [
+                          Radio<Protocol>(
+                            value: Protocol.http,
+                          ),
+                          const Text(
+                            "http",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          Radio<Protocol>(
+                            value: Protocol.https,
+                          ),
+                          const Text(
+                            "https",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   Padding(
@@ -210,35 +205,31 @@ class _CustomConnectionIPFSState extends State<CustomConnectionIPFS> {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      children: [
-                        Radio(
-                          value: Method.get,
-                          groupValue: choosenmethode,
-                          onChanged: (value) {
-                            setState(() {
-                              choosenmethode = value;
-                            });
-                          },
-                        ),
-                        const Text(
-                          "GET",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        Radio(
-                          value: Method.post,
-                          groupValue: choosenmethode,
-                          onChanged: (value) {
-                            setState(() {
-                              choosenmethode = value;
-                            });
-                          },
-                        ),
-                        const Text(
-                          "POST",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ],
+                    child: RadioGroup<Method>(
+                      groupValue: choosenmethode,
+                      onChanged: (value) {
+                        setState(() {
+                          choosenmethode = value;
+                        });
+                      },
+                      child: Row(
+                        children: [
+                          Radio<Method>(
+                            value: Method.get,
+                          ),
+                          const Text(
+                            "GET",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          Radio<Method>(
+                            value: Method.post,
+                          ),
+                          const Text(
+                            "POST",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
 
