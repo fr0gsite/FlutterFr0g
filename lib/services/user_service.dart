@@ -43,7 +43,7 @@ class UserService extends ChainActionsBase {
       return await client.getAccount(username);
     } catch (error) {
       debugPrint("Error getting account info: $error");
-      throw error;
+      rethrow;
     }
   }
 
