@@ -110,10 +110,8 @@ class Uploadstatus extends ChangeNotifier {
         testedipfsthumb &&
         acceptedfirst &&
         acceptedsecond) {
-      String username =
-          Provider.of<GlobalStatus>(context, listen: false).username;
-      String permission =
-          Provider.of<GlobalStatus>(context, listen: false).permission;
+      String username =Provider.of<GlobalStatus>(context, listen: false).username;
+      String permission =Provider.of<GlobalStatus>(context, listen: false).permission;
 
       ContentFlag flag = selectedflag;
       String languageiso639 = getlanguage(selectedlanguage);
@@ -121,10 +119,9 @@ class Uploadstatus extends ChangeNotifier {
       final navigator = Navigator.of(context);
       final scaffoldContext = context;
 
-      Chainactions()
-        .setusernameandpermission(username, permission);
+      Chainactions chain = Chainactions()..setusernameandpermission(username, permission);
 
-      final value = await Chainactions().adduploadaction(
+      final value = await chain.adduploadaction(
         username,
         textfieldipfshash.text,
         textfieldipfsthumb.text,
