@@ -571,7 +571,23 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
           ),
         ],
       ) : _userisassignttoreport 
-          ? Center(child: Text(AppLocalizations.of(context)!.youhavevoted)) 
+          ? Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Colors.green.withAlpha((0.2 * 255).toInt()),
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(color: Colors.green, width: 1),
+                ),
+                child: Center(
+                  child: Text(
+                  AppLocalizations.of(context)!.youhavevoted,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  ),
+                ),
+                )
           : Center(child: Text(AppLocalizations.of(context)!.youarenotassignedtothisreport)),
     );
   }
@@ -764,23 +780,51 @@ class _TrusterVoteReportViewState extends State<TrusterVoteReportView> {
                 ),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(3),
-                  child: Row(
+                  child: Stack(
                     children: [
-                      if (violationVotes > 0)
-                        Expanded(
-                          flex: violationVotes,
-                          child: Container(color: Colors.red),
+                      // Hauptbalken mit den Stimmen
+                      Row(
+                        children: [
+                          if (violationVotes > 0)
+                            Expanded(
+                              flex: violationVotes,
+                              child: Container(color: Colors.red),
+                            ),
+                          if (pendingVotes > 0)
+                            Expanded(
+                              flex: pendingVotes,
+                              child: Container(color: Colors.grey),
+                            ),
+                          if (inOrderVotes > 0)
+                            Expanded(
+                              flex: inOrderVotes,
+                              child: Container(color: Colors.green),
+                            ),
+                        ],
+                      ),
+                      // Center bar
+                      Positioned(
+                        left: 0,
+                        right: 0,
+                        top: 0,
+                        bottom: 0,
+                        child: Center(
+                          child: Container(
+                            width: 10,
+                            height: 8,
+                            decoration: BoxDecoration(
+                              color: Colors.red.withAlpha((0.8 * 255).toInt()),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.red.withAlpha((255).toInt()),
+                                  blurRadius: 8,
+                                  spreadRadius: 5,
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
-                      if (pendingVotes > 0)
-                        Expanded(
-                          flex: pendingVotes,
-                          child: Container(color: Colors.grey),
-                        ),
-                      if (inOrderVotes > 0)
-                        Expanded(
-                          flex: inOrderVotes,
-                          child: Container(color: Colors.green),
-                        ),
+                      ),
                     ],
                   ),
                 ),
