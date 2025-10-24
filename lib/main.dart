@@ -8,6 +8,7 @@ import 'package:fr0gsite/datatypes/blackliststatus.dart';
 import 'package:fr0gsite/datatypes/walletstatus.dart';
 import 'package:fr0gsite/l10n/app_localizations.dart';
 import 'package:fr0gsite/localstorage.dart';
+import 'package:fr0gsite/widgets/common/animated_frog_logo.dart';
 import 'package:fr0gsite/widgets/infoscreens/informations.dart';
 import 'package:fr0gsite/widgets/status/status.dart';
 import 'package:fr0gsite/widgets/resources/resourceviewer.dart';
@@ -251,10 +252,7 @@ class StartPoint extends State<Fr0gsiteApp> {
                 crossAxisAlignment: WrapCrossAlignment.center,
                 children: [
                   IconButton(
-                    icon: Image.asset(
-                      "assets/images/logo_g.png",
-                      width: 50,
-                    ),
+                    icon: const AnimatedFrogLogo(width: 50, height: 50),
                     onPressed: () {
                       Navigator.pushNamed(context, '/home');
                     },
