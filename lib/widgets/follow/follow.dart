@@ -30,8 +30,10 @@ class _FollowState extends State<Follow> with TickerProviderStateMixin {
 
   bool isPlaying = false;
 
-  late Animation<double> animation =
-      Tween<double>(begin: 0.0, end: 1.0).animate(controller);
+  late Animation<double> animation = Tween<double>(
+    begin: 0.0,
+    end: 1.0,
+  ).animate(controller);
   late AnimationController controller = AnimationController(
     vsync: this,
     duration: const Duration(milliseconds: 600),
@@ -48,24 +50,42 @@ class _FollowState extends State<Follow> with TickerProviderStateMixin {
     if (Provider.of<FollowStatus>(context, listen: false).pressanimation) {
       Timer(const Duration(seconds: 4), () {
         if (mounted) {
-          setState(
-            () {
-              Provider.of<FollowStatus>(context, listen: false)
-                  .switchoffpressanimation();
-            },
-          );
+          setState(() {
+            Provider.of<FollowStatus>(
+              context,
+              listen: false,
+            ).switchoffpressanimation();
+          });
         }
       });
     }
 
     if (Provider.of<GlobalStatus>(context, listen: false).isLoggedin) {
       getsubscriptions = getfollower(
-          Provider.of<GlobalStatus>(context, listen: false).username);
+        Provider.of<GlobalStatus>(context, listen: false).username,
+      );
     } else {
       getsubscriptions = Future.value(true);
     }
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {});
+    // Check screen width and auto-expand sidebar on wide screens
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (MediaQuery.of(context).size.width > 640) {
+        setState(() {
+          _isExpanded = true;
+          listwidth = maxwidth;
+          isPlaying = true;
+          controller.forward();
+          Provider.of<FollowStatus>(context, listen: false).expandedfollowlist =
+              true;
+          // Disable press animation for wide screens
+          Provider.of<FollowStatus>(
+            context,
+            listen: false,
+          ).switchoffpressanimation();
+        });
+      }
+    });
   }
 
   final GlobalKey<AnimatedListState> _listKey = GlobalKey<AnimatedListState>();
@@ -77,134 +97,161 @@ class _FollowState extends State<Follow> with TickerProviderStateMixin {
       color: AppColor.nicegrey,
       child: Consumer<GlobalStatus>(
         builder: (context, userstatus, child) {
-          return Row(children: <Widget>[
-            AnimatedContainer(
-              duration: const Duration(milliseconds: 300),
-              width: listwidth,
-              child: Consumer<FollowStatus>(
+          return Row(
+            children: <Widget>[
+              AnimatedContainer(
+                duration: MediaQuery.of(context).size.width > 640
+                    ? Duration.zero
+                    : const Duration(milliseconds: 300),
+                width: listwidth,
+                child: Consumer<FollowStatus>(
                   builder: (context, followstatus, child) {
-                return Stack(
-                  children: [
-                    Column(
-                      children: <Widget>[
-                        Container(
-                          color: AppColor.nicegrey,
-                          child: IconButton(
-                            color: AppColor.nicewhite,
-                            iconSize: 50,
-                            icon: AnimatedIcon(
-                              progress: animation,
-                              icon: AnimatedIcons.view_list,
-                              size: 40,
-                            ),
-                            onPressed: () {
-                              setState(
-                                () {
-                                  isPlaying = !isPlaying;
-                                  isPlaying
-                                      ? controller.forward()
-                                      : controller.reverse();
-                                  _isExpanded = !_isExpanded;
-                                  listwidth = _isExpanded ? maxwidth : minwidth;
-                                  if (followstatus.expandedfollowlist) {
-                                    followstatus.toggleexpandedfollowlist();
-                                  } else {
-                                    Future.delayed(
+                    return Stack(
+                      children: [
+                        Column(
+                          children: <Widget>[
+                            Container(
+                              color: AppColor.nicegrey,
+                              child: IconButton(
+                                color: AppColor.nicewhite,
+                                iconSize: 50,
+                                icon: AnimatedIcon(
+                                  progress: animation,
+                                  icon: AnimatedIcons.view_list,
+                                  size: 40,
+                                ),
+                                onPressed: () {
+                                  // Disable toggle functionality on wide screens
+                                  if (MediaQuery.of(context).size.width > 640) {
+                                    return;
+                                  }
+
+                                  setState(() {
+                                    isPlaying = !isPlaying;
+                                    isPlaying
+                                        ? controller.forward()
+                                        : controller.reverse();
+                                    _isExpanded = !_isExpanded;
+                                    listwidth = _isExpanded
+                                        ? maxwidth
+                                        : minwidth;
+                                    if (followstatus.expandedfollowlist) {
+                                      followstatus.toggleexpandedfollowlist();
+                                    } else {
+                                      Future.delayed(
                                         const Duration(milliseconds: 300),
                                         () => followstatus
-                                            .toggleexpandedfollowlist());
-                                  }
+                                            .toggleexpandedfollowlist(),
+                                      );
+                                    }
+                                  });
                                 },
-                              );
-                            },
-                          ),
-                        ),
-                        Expanded(
-                          child: Container(
-                            color: AppColor.niceblack,
-                            child: FutureBuilder(
-                              future: getsubscriptions,
-                              builder: (context, snapshot) {
-                                if (snapshot.hasData) {
-                                  if (listitems.isEmpty) {
-                                    return Center(
-                                        child: Column(
-                                      children: [
-                                        Lottie.asset('assets/lottie/empty.json',
-                                            height: 200, width: 200),
-                                        Text(AppLocalizations.of(context)!
-                                            .usernotfound),
-                                      ],
-                                    ));
-                                  } else {
-                                    return AnimatedList(
-
-                                      key: _listKey,
-                                      initialItemCount: listitems.length,
-                                      itemBuilder: (context, index, animation) {
-
-                                        return SlideTransition(
-                                          position: Tween<Offset>(
-                                            begin: const Offset(1, 0),
-                                            end: const Offset(0, 0),
-                                          ).animate(animation),
-                                          child: listitems[index],
-                                        );
-                                      },
-                                    );
-                                  }
-                                } else {
-                                  return const Center(
-                                      child: CircularProgressIndicator(color:Colors.white));
-                                }
-                              },
+                              ),
                             ),
-                          ),
+                            Expanded(
+                              child: Container(
+                                color: AppColor.niceblack,
+                                child: FutureBuilder(
+                                  future: getsubscriptions,
+                                  builder: (context, snapshot) {
+                                    if (snapshot.hasData) {
+                                      if (listitems.isEmpty) {
+                                        return Center(
+                                          child: Column(
+                                            children: [
+                                              Lottie.asset(
+                                                'assets/lottie/empty.json',
+                                                height: 200,
+                                                width: 200,
+                                              ),
+                                              Text(
+                                                AppLocalizations.of(
+                                                  context,
+                                                )!.usernotfound,
+                                              ),
+                                            ],
+                                          ),
+                                        );
+                                      } else {
+                                        return AnimatedList(
+                                          key: _listKey,
+                                          initialItemCount: listitems.length,
+                                          itemBuilder:
+                                              (context, index, animation) {
+                                                return SlideTransition(
+                                                  position: Tween<Offset>(
+                                                    begin: const Offset(1, 0),
+                                                    end: const Offset(0, 0),
+                                                  ).animate(animation),
+                                                  child: listitems[index],
+                                                );
+                                              },
+                                        );
+                                      }
+                                    } else {
+                                      return const Center(
+                                        child: CircularProgressIndicator(
+                                          color: Colors.white,
+                                        ),
+                                      );
+                                    }
+                                  },
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
+                        followstatus.pressanimation &&
+                                MediaQuery.of(context).size.width <= 640
+                            ? Lottie.asset(
+                                'assets/lottie/press.json',
+                                width: 100,
+                                height: 100,
+                                repeat: false,
+                              )
+                            : Container(),
                       ],
-                    ),
-                    followstatus.pressanimation
-                        ? Lottie.asset('assets/lottie/press.json',
-                            width: 100, height: 100, repeat: false)
-                        : Container(),
-                  ],
-                );
-              }),
-            ),
-            Stack(
-              children: [
-                Container(color: AppColor.nicewhite, width: 10),
-              ],
-            ),
+                    );
+                  },
+                ),
+              ),
+              Stack(
+                children: [Container(color: AppColor.nicewhite, width: 10)],
+              ),
 
-            //////////////// RIGHT SIDE //////////////////
-            Expanded(
-              child: _isExpanded && MediaQuery.of(context).size.width < AppConfig.thresholdValueForMobileLayout
-                  ? Container()
-                  : !userstatus.isLoggedin
-                      ? const Pleaselogin()
-                      : FutureBuilder(
-                          future: getsubscriptions,
-                          builder: (context, snapshot) {
-                            if (snapshot.hasData) {
-                              List<String> showuserlist = [];
-                              for (var item in listitems) {
-                                if (item.isselected) {
-                                  showuserlist.add(item.username);
-                                }
+              //////////////// RIGHT SIDE //////////////////
+              Expanded(
+                child:
+                    _isExpanded &&
+                        MediaQuery.of(context).size.width <
+                            AppConfig.thresholdValueForMobileLayout
+                    ? Container()
+                    : !userstatus.isLoggedin
+                    ? const Pleaselogin()
+                    : FutureBuilder(
+                        future: getsubscriptions,
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            List<String> showuserlist = [];
+                            for (var item in listitems) {
+                              if (item.isselected) {
+                                showuserlist.add(item.username);
                               }
-
-                              return FollowCubeList(
-                                userlist: showuserlist,
-                              );
-                            } else {
-                              return const Center(
-                                  child: CircularProgressIndicator(color:Colors.white));
                             }
-                          },
-                        ),
-            )
-          ]);
+
+                            return FollowCubeList(userlist: showuserlist);
+                          } else {
+                            return const Center(
+                              child: CircularProgressIndicator(
+                                color: Colors.white,
+                              ),
+                            );
+                          }
+                        },
+                      ),
+              ),
+            ],
+          );
         },
       ),
     );
@@ -214,16 +261,17 @@ class _FollowState extends State<Follow> with TickerProviderStateMixin {
     debugPrint("followlistitemcallback: $username $isselected");
     debugPrint("active list: ${listitems.toString()}");
     if (delete) {
-
       debugPrint("active list: delete $delete");
       //Delete from list
-      int index =
-          listitems.indexWhere((element) => element.username == username);
+      int index = listitems.indexWhere(
+        (element) => element.username == username,
+      );
 
       debugPrint("active list:  index $index");
       if (index != -1) {
-
-        debugPrint("active list:  _listKey.currentState  ${_listKey.currentState}");
+        debugPrint(
+          "active list:  _listKey.currentState  ${_listKey.currentState}",
+        );
         _listKey.currentState!.removeItem(
           index,
           (context, animation) => SlideTransition(
@@ -234,7 +282,6 @@ class _FollowState extends State<Follow> with TickerProviderStateMixin {
           ),
         );
         setState(() {
-
           debugPrint("active list:  listitems b4  ${listitems.length}");
 
           listitems.removeAt(index);
@@ -254,13 +301,15 @@ class _FollowState extends State<Follow> with TickerProviderStateMixin {
   }
 
   Future<bool> getfollower(String pUsername) async {
-    List<Usersubscription> subscription =
-        await Chainactions().getusersubscriptions(pUsername);
+    List<Usersubscription> subscription = await Chainactions()
+        .getusersubscriptions(pUsername);
     for (var i = 0; i < subscription.length; i++) {
-      listitems.add(Followlistitem(
-        username: subscription[i].username,
-        callback: followlistitemcallback,
-      ));
+      listitems.add(
+        Followlistitem(
+          username: subscription[i].username,
+          callback: followlistitemcallback,
+        ),
+      );
 
       // Set the first follower as selected by default
       if (i == 0) {
@@ -284,8 +333,10 @@ class _FollowState extends State<Follow> with TickerProviderStateMixin {
   }
 
   Future<List<Upload>> getuploadforuser(String username) async {
-    List<Upload> uploads =
-        await Chainactions().getuploadsfromuser(username, 60);
+    List<Upload> uploads = await Chainactions().getuploadsfromuser(
+      username,
+      60,
+    );
 
     return uploads;
   }

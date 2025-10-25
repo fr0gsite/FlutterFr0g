@@ -27,7 +27,7 @@ class _ImpressumViewState extends State<ImpressumView> {
     } catch (_) {
       try {
         _content =
-            await rootBundle.loadString('assets/impressum.template.txt');
+            await rootBundle.loadString('assets/impressum.txt');
       } catch (_) {
         if (!mounted) return;
         _content = AppLocalizations.of(context)!.impressumloadfailed;
@@ -57,7 +57,7 @@ class _ImpressumViewState extends State<ImpressumView> {
               shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(20.0)),
                 side: BorderSide(
-                    color: Colors.white, width: 6, strokeAlign: 4.0),
+                    color: Colors.white, width: 6, strokeAlign: 0.0),
               ),
               child: Scaffold(
                 backgroundColor: Colors.transparent,

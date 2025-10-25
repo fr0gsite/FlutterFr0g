@@ -68,7 +68,7 @@ class _AnimatedFrogLogoState extends State<AnimatedFrogLogo>
       builder: (context, child) {
         return Transform.rotate(
           angle: _swayAnimation.value,
-          child: Container(
+          child: SizedBox(
             width: widget.width,
             height: widget.height,
             child: _buildCurrentFrog(),

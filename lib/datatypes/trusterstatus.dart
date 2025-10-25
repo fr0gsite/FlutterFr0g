@@ -5,12 +5,20 @@ import 'package:fr0gsite/chainactions/chainactions.dart';
 import 'package:fr0gsite/datatypes/report.dart';
 
 class TrusterStatus with ChangeNotifier {
-
   List<Report> reports = [];
   DateTime lastReportList = DateTime.now();
   Timer? timer;
+  bool _isTimerRunning = false;
 
   void startTrusterStatus() {
+    // Ensure only one timer instance runs (singleton pattern)
+    if (_isTimerRunning) {
+      //Truster status timer already running, skipping start
+      return;
+    }
+
+    // Starting truster status refresh timer
+    _isTimerRunning = true;
     refreshReports();
     timer = Timer.periodic(const Duration(minutes: 2), (timer) {
       refreshReports();
@@ -18,8 +26,18 @@ class TrusterStatus with ChangeNotifier {
   }
 
   void stopTrusterStatus() {
-    timer?.cancel();
-    timer = null;
+    if (timer != null) {
+      timer?.cancel();
+      timer = null;
+      _isTimerRunning = false;
+    }
+  }
+
+  bool get isTimerRunning => _isTimerRunning;
+
+  void restartTrusterStatus() {
+    stopTrusterStatus();
+    startTrusterStatus();
   }
 
   void addReport(Report report) {
@@ -50,5 +68,11 @@ class TrusterStatus with ChangeNotifier {
   Future<void> refreshReports() async {
     reports = await getReportsAsync();
     lastReportList = DateTime.now();
+  }
+
+  @override
+  void dispose() {
+    stopTrusterStatus();
+    super.dispose();
   }
 }
