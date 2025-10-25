@@ -35,6 +35,14 @@ Fr0g.site is a **decentralized, open-source community platform** based on blockc
 - 🗳️ **Community Governance**: Self-management through Trusters and Block Producers
 - 🌐 **Multilingual**: 14 languages supported
 
+## 🎬 Demo
+
+<p align="center">
+  <a href="https://fr0g.site">
+    <img src="assets/demo.gif" alt="Fr0g.site App Demo" width="800"/>
+  </a>
+</p>
+
 ## 🚀 Quick Start (30 seconds)
 
 ```bash
@@ -51,6 +59,8 @@ flutter run -d chrome
 # Alternative: Build APK for Android
 flutter build apk
 ```
+
+
 
 **Prerequisites:**
 - Flutter 3.35.5+
