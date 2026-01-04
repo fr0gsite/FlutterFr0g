@@ -43,10 +43,10 @@ class _ListItemState extends State<ListItem> {
           UploadOrderTemplate uploadorder =
               Provider.of<GridStatus>(context, listen: false).getSerach();
           uploadorder.setcurrentuploadid(widget.upload.uploadid);
-          Navigator.pushNamed(context, '/postviewer/${widget.upload.uploadid}',
+          Navigator.pushNamed(context, '/${AppConfig.postviewerurlpath}/${widget.upload.uploadid}',
               arguments: uploadorder);
         } catch (e) {
-          Navigator.pushNamed(context, '/postviewer/${widget.upload.uploadid}',
+          Navigator.pushNamed(context, '/${AppConfig.postviewerurlpath}/${widget.upload.uploadid}',
               arguments: widget.upload);
         }
       },

@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:math';
 import 'dart:typed_data';
 
+import 'package:fr0gsite/config.dart';
 import 'package:fr0gsite/datatypes/gridstatus.dart';
 import 'package:fr0gsite/datatypes/upload.dart';
 import 'package:fr0gsite/datatypes/uploadordertemplate.dart';
@@ -106,11 +107,11 @@ class CubeState extends State<Cube> {
                 uploadorder.setcurrentuploadid(
                     widget.upload.uploadid);
                 Navigator.pushNamed(context,
-                    '/postviewer/${widget.upload.uploadid}',
+                    '/${AppConfig.postviewerurlpath}/${widget.upload.uploadid}',
                     arguments: uploadorder);
               } catch (e) {
                 Navigator.pushNamed(context,
-                    '/postviewer/${widget.upload.uploadid}',
+                    '/${AppConfig.postviewerurlpath}/${widget.upload.uploadid}',
                     arguments: widget.upload);
               }
 

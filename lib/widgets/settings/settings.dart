@@ -63,7 +63,7 @@ class Settings extends StatelessWidget {
                       if (userstatus.isLoggedin) {
                         Navigator.pushNamed(
                           context,
-                          '/profile/${userstatus.username}',
+                          '/${AppConfig.profileurlpath}/${userstatus.username}',
                         );
                       } else {
                         showDialog(

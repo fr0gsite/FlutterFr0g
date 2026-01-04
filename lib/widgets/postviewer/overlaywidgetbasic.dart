@@ -225,7 +225,7 @@ Widget shareButton(BuildContext context) {
           Upload uploadtoshare =
               Provider.of<PostviewerStatus>(context, listen: false)
                   .getcurrentupload();
-          String posturl = "$postviewerurl/${uploadtoshare.uploadid}";
+          String posturl = "${AppConfig.postviewerurl}/${uploadtoshare.uploadid}";
           //Check if file is downloaded completely
           debugPrint("data: ${uploadtoshare.data}");
           if (uploadtoshare.data.length < 1000) {

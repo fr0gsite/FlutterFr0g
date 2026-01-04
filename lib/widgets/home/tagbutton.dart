@@ -27,7 +27,7 @@ class TagButtonState extends State<TagButton> {
     Widget button = MaterialButton(
       onPressed: () {
         debugPrint('Show Globaltag ${widget.text} ');
-        Navigator.pushNamed(context, '/globaltag/${widget.globaltagid}',
+        Navigator.pushNamed(context, '/${AppConfig.globaltagurlpath}/${widget.globaltagid}',
             arguments: {'text': widget.text, 'globaltagid': widget.globaltagid});
       },
       shape: const OctagonBorder(),

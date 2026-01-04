@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fr0gsite/chainactions/chainactions.dart';
+import 'package:fr0gsite/config.dart';
 import 'package:fr0gsite/datatypes/favoritetag.dart';
 import 'package:fr0gsite/datatypes/globalstatus.dart';
 import 'package:fr0gsite/l10n/app_localizations.dart';
@@ -72,7 +73,7 @@ class _FavoriteTagsViewState extends State<FavoriteTagsView> {
                       // Text button. Go to globaltag page
                       TextButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, '/globaltag/${userfavoriteTags[index].globaltagid}',
+                          Navigator.pushNamed(context, '/${AppConfig.globaltagurlpath}/${userfavoriteTags[index].globaltagid}',
                               arguments: userfavoriteTags[index].globaltagid);
                         },
                         child: Text(

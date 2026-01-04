@@ -1,3 +1,4 @@
+import 'package:fr0gsite/config.dart';
 import 'package:fr0gsite/widgets/globaltag/globaltag.dart';
 import 'package:fr0gsite/widgets/infoscreens/informations.dart';
 import 'package:fr0gsite/widgets/infoscreens/notfoundpage.dart';
@@ -41,10 +42,10 @@ class Mainrouter {
           );
 
   static void setupRouter() {
-    router.define('/postviewer/:id',
+    router.define('/${AppConfig.postviewerurlpath}/:id',
         handler: _handlerpostview, transitionType: TransitionType.fadeIn);
 
-    router.define('/globaltag/:globaltagid',
+    router.define('/${AppConfig.globaltagurlpath}/:globaltagid',
         handler: _handlerglobaltag, transitionType: TransitionType.fadeIn);
 
     router.define('/', handler: _defaultHandler);
@@ -58,7 +59,7 @@ class Mainrouter {
 
     router.define('/informations', handler: _informationPage);
 
-    router.define('/profile/:username',
+    router.define('/${AppConfig.profileurlpath}/:username',
         handler: _profile, transitionType: TransitionType.none);
   }
 }

@@ -102,7 +102,7 @@ class _FollowlistitemState extends State<Followlistitem> {
                           onPressed: () => {
                             Navigator.pushNamed(
                               context,
-                              "/profile/${widget.username}",
+                              "/${AppConfig.profileurlpath}/${widget.username}",
                               arguments: widget.username,
                             ),
                           },

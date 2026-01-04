@@ -25,7 +25,7 @@ class _LoginButtonState extends State<LoginButton> {
                       WidgetStateProperty.all<Color>(AppColor.nicewhite),
                 ),
                 onPressed: () {
-                    Navigator.pushNamed(context, "/profile/${userstatus.username}");
+                    Navigator.pushNamed(context, "/${AppConfig.profileurlpath}/${userstatus.username}");
                 },
                 child: Text(userstatus.username)),
             //ResourceViewerTopBar(cpu: true, ram: false, net: true, act: true),

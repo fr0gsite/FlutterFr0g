@@ -31,7 +31,7 @@ class _TagelementState extends State<Tagelement> {
       const SizedBox(width: 5),
       TextButton(
         onPressed: () {
-          Navigator.pushNamed(context, '/globaltag/${widget.globaltagid}',
+          Navigator.pushNamed(context, '/${AppConfig.globaltagurlpath}/${widget.globaltagid}',
               arguments: {
                 'text': widget.tagtext,
                 'globaltagid': widget.globaltagid

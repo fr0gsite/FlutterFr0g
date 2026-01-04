@@ -76,7 +76,7 @@ class _PostViewerTopBarState extends State<PostViewerTopBar> {
                       Provider.of<PostviewerStatus>(context, listen: false)
                           .pause();
                       Navigator.pushNamed(context,
-                          '/profile/${postviewerstatus.getcurrentupload().autor}',
+                          '/${AppConfig.profileurlpath}/${postviewerstatus.getcurrentupload().autor}',
                           arguments: {
                             'accountname':
                                 postviewerstatus.getcurrentupload().autor

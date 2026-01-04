@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fr0gsite/chainactions/chainactions.dart';
+import 'package:fr0gsite/config.dart';
 import 'package:fr0gsite/datatypes/comment.dart';
 import 'package:fr0gsite/datatypes/globalstatus.dart';
 import 'package:fr0gsite/datatypes/upload.dart';
@@ -64,7 +65,7 @@ class _FavoriteCommentsViewState extends State<FavoriteCommentsView> {
                 children: [
                   GestureDetector(
                   onTap: () {
-                    Navigator.pushNamed(context, '/postviewer/${favoriteComments![index].uploadid}', arguments: {
+                    Navigator.pushNamed(context, '/${AppConfig.postviewerurlpath}/${favoriteComments![index].uploadid}', arguments: {
                     'postId': favoriteComments![index].uploadid,
                     });
                   },

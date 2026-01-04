@@ -128,7 +128,7 @@ class _WalletSendState extends State<WalletSend> {
                     if (context.mounted) {
 
                       Navigator.pushNamed(context,
-                          "/profile/${sendtotextcontroller.text}",
+                          "/${AppConfig.profileurlpath}/${sendtotextcontroller.text}",
                           arguments: sendtotextcontroller.text);
                     }
                   } catch (e) {

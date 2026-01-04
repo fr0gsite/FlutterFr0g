@@ -78,7 +78,6 @@ const textsize = 30.0;
 const minimumscreenwidthforcommentsidebar = 1200.0;
 
 const selfurl = "https://fr0g.site";
-const postviewerurl = "$selfurl/postviewer";
 const githuburl = "https://github.com/fr0gsite";
 const signupurl = "https://create.fr0g.site";
 const whitepaperurl = "https://doc.fr0g.site/whitepaper";
@@ -107,6 +106,11 @@ class AppConfig {
   static const int systemtokendecimalafterdot = 4;
   static const int thresholdValueForMobileLayout = 640;
   static const int maxtrusterlist = 600;
+
+  static const postviewerurl = "$selfurl/$postviewerurlpath";
+  static const postviewerurlpath = "p";
+  static const globaltagurlpath = "g";
+  static const profileurlpath = "u";
   
   static const chainid =
       "530d11d73d401999b533e0ef5ab1f4f3d2fcd436df7050850671733915fbd721";

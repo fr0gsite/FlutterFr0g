@@ -143,7 +143,7 @@ class _ResourceViewerState extends State<ResourceViewer> {
                     iconSize: iconsize,
                     onPressed: () {
                       Navigator.pushNamed(
-                          context, "/profile/${searchcontroller.text}",
+                          context, "/${AppConfig.profileurlpath}/${searchcontroller.text}",
                           arguments: searchcontroller.text);
                     },
                   ),
