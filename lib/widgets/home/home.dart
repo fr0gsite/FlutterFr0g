@@ -60,7 +60,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
               );
             }),
             SizedBox(
-              height: 1000,
+              height: MediaQuery.of(context).size.height,
               child: Container(
                 color: AppColor.nicegrey,
                 child: Listener(
