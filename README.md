@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <strong>Open-source, decentralized, self-managed community platform</strong><br/>
+  <strong>Open-source, decentralized, self managing social-media platform</strong><br/>
   <strong>Freedom of speech for everyone</strong>
 </p>
 
@@ -25,7 +25,7 @@
 
 ## 🎯 About the Project
 
-Fr0g.site is a **decentralized, open-source community platform** based on blockchain technology and IPFS. The Flutter app enables users to share, comment on, and rate content - all without central control or censorship.
+Fr0g.site is based on blockchain technology and IPFS. The Flutter app enables users to share, comment on, and rate content - all without central control or censorship.
 
 **Key Features:**
 - 🔗 **Decentralized**: Based on blockchain and IPFS
