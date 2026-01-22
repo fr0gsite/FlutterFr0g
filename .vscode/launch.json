@@ -7,8 +7,7 @@
         {
             "name": "fr0gsite",
             "request": "launch",
-            "type": "dart",
-            "toolArgs": ["--dart-define-from-file=env.debug.json"]
+            "type": "dart"
         },
         {
             "name": "fr0gsite (profile mode)",
